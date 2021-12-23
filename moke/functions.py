@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 19 22:20:52 2021
 
-@author: Aleks
-"""
 import numpy as np
-import udkm.tools.tools as tools
-h = tools.tools()
+import udkm.tools.helpers as h
+
+teststring = "Successfully loaded udkm.moke.functions"
 
 # initialize some useful functions
 t0         =  0    # Estimated value of t0

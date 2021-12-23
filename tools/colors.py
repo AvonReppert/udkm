@@ -7,6 +7,9 @@ Created on Sun Dec 19 21:29:02 2021
 
 import matplotlib 
 
+
+teststring = "Successfully loaded udkm.tools.colors"
+
 # Freuqently used colors 
 blue1    = '#0048ccff'
 red1     = '#dc1700ff'
