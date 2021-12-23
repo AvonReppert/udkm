@@ -17,10 +17,10 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='udkm',
-    version='0.0.1',
+    version='0.1.0',
     packages=find_packages(),
     url='https://github.com/AleksUDKM/udkm',  # Optional
-    install_requires=['numpy', 'matplotlib', 'os',],  # Optional
+    install_requires=['numpy', 'matplotlib', 'os'],  # Optional
     license='',
     author='Alexander von Reppert',
     author_email='reppert@uni-potsdam.de',
