@@ -4,11 +4,10 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup,find_packages
 # To use a consistent encoding
 from codecs import open
 from os     import path
-import re
 
 here = path.abspath(path.dirname(__file__))
 
@@ -19,8 +18,8 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='udkm',
     version='0.0.1',
-    packages=['udkm'],
-    url='https://github.com/AleksUDKM/udkm.git',  # Optional
+    packages=find_packages(),
+    url='https://github.com/AleksUDKM/udkm',  # Optional
     install_requires=['numpy', 'matplotlib', 'os',],  # Optional
     license='',
     author='Alexander von Reppert',
@@ -29,3 +28,6 @@ setup(
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
 )
+
+
+
