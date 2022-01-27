@@ -6,7 +6,7 @@ import udkm.tools.helpers as h
 teststring = "Successfully loaded udkm.moke.functions"
 
 # initialize some useful functions
-t0         =  0    # Estimated value of t0
+t0          =  0    # Estimated value of t0
 data_path   = "data/"
 export_path = "results/"
 
