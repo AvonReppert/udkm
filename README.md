@@ -22,7 +22,11 @@ library for the X-ray diffraction setup using the Plasma X-ray source
 This allows you to have editable source file that you can add to the pyhton search path. 
 
 1. install git that is available from ```https://git-scm.com/downloads```
-2. run Git and initialize your name and e-mail adress via 
+2. run git and initialize your name and e-mail adress via:
+  ``` 
+  git config --global user.name "John Doe"
+  git config --global user.email johndoe@example.com
+  ```
 3. go to folder where you want to store the code repository and type ```cmd```
 4. clone the repsoitory via ```git clone https://github.com/AleksUDKM/udkm.git```
 5. add it to your search path of your pyhton distribution
