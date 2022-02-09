@@ -27,9 +27,12 @@ This allows you to have editable source file that you can add to the pyhton sear
   git config --global user.name "John Doe"
   git config --global user.email johndoe@example.com
   ```
-3. go to folder where you want to store the code repository and type ```cmd```
-4. clone the repsoitory via ```git clone https://github.com/AleksUDKM/udkm.git```
-5. add it to your search path of your pyhton distribution
+3. go to folder where you want to store the code repository for example ```C:\Users\Aleks\Documents\Code``` 
+4. open a console by typing  ```cmd``` into your explorer line
+5. clone the repsoitory via ```git clone https://github.com/AleksUDKM/udkm.git```
+6. add the repository to your search path of your python distribution 
+   in Spyder I have ```C:\Users\Aleks\Documents\Code\udkm``` in the PYTHONPATH manager  
+7. Klick the synchronize button and restart Spyder to be sure that the changes are applied
 
 To see if your installation works try:
 ```
@@ -50,9 +53,10 @@ To contribute code to the repository you need a GitHub account.
 Once you have that let me know and then I will add you as contributor. 
 For testing purposes I recommend modifications of the "udkm/tools/testing" file
 
-1. check that you have no conflicts and the most recent version via ``` git status``` 
-2. get the most recent version of the repository via ``` git pull ```
-3. modify the code on your local machine and test that it works. 
-4. once you are satisfied you can add your changes to the repository by  ```git add * ```
-5. commit your changes via ```git commit -m  "short description of the commit" ```
-6. push your commits into the online repository via ```git push``` 
+1. open a command window in the directory of the repository (for example: ```C:\Users\Aleks\Documents\Code\udkm``` )
+2. check that you have no conflicts by typing ``` git status``` 
+3. get the most recent version of the repository via ``` git pull ```
+4. modify the code on your local machine and test that it works. 
+5. once you are satisfied you can add your changes to the repository by  ```git add * ```
+6. commit your changes via ```git commit -m  "short description of the commit" ```
+7. push your commits into the online repository via ```git push``` 
