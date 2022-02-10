@@ -137,6 +137,28 @@ def degrees(radians):
     degrees = 180/np.pi*radians
     return(degrees)
 
+def finderA(array,key):
+    """This little function returns the index of the array where the array value is closest to the key   
+        
+    Parameters
+    ----------
+    array : 1D numpy array 
+            numpy array with values
+    key :   float value
+            The value that one looks for in the array
+
+    Returns
+    ------
+    index :     integer 
+                index of the array value closest to the key    
+       
+    Example
+    ------- 
+    >>> index = finderA(np.array([1,2,3]),3)
+    will return 2"""
+    index = (np.abs(array-key)).argmin()
+    return index
+
 def relChange(dataArray,fixpoint):
         """returns relative change of a measured quantity relative to a given value
         

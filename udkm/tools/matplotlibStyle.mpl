@@ -55,6 +55,7 @@ axes.labelcolor : black
 axes.edgecolor  : black
 xtick.color 	: black
 ytick.color 	: black
+axes.facecolor  : white
 
 lines.linewidth      : 2
 lines.markersize     : 2
