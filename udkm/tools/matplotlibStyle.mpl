@@ -31,8 +31,8 @@ xtick.minor.width: 0.5
 ytick.minor.width: 0.5
 
 
-xtick.direction: out
-ytick.direction: out
+xtick.direction: in
+ytick.direction: in
 
 xtick.top : True
 ytick.right : True

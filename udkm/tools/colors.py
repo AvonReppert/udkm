@@ -64,7 +64,7 @@ def make_colormap(seq):
 
 
 
-def fireice(self):
+def fireice():
     """Returns a self defined analog of the colormap fireice"""
     cdict = {'red':    ((0.0,  0.75, 0.75),
                 (1/6,  0, 0),
