@@ -61,4 +61,6 @@ lines.linewidth      : 2
 lines.markersize     : 2
 lines.markeredgewidth: 3
 
-
+grid.color: 'grey'
+grid.linestyle: :
+grid.linewidth: 0.5
