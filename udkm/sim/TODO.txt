@@ -1,0 +1,7 @@
+Im Beispielskript gucken welche Funktionen notwendig sind und die Verallgemeinern
+
+Überlegen ob die Materialien als Klasse initialisiert werden sollten
+
+Weitere Materialien Hinzufügen
+
+

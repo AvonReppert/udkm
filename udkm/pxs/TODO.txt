@@ -1,0 +1,11 @@
+Führe Funktionen von RSM und RSS zusammen (zum Teil gleiches Resultat aber unterschiedliche Funktionen)
+
+Entscheiden ob Fit Funktionen bei Tools super einfach bleiben und hier zusammengefügt werden oder ob in Tools alles drinsteht für das bestimmen der Peak Parameter
+
+Entscheiden welche Funktionen von "Stuff" nach "Tools" ausgelagert werden
+
+Optimieren der Funktionen
+
+Implementieren des Mappings auf mehreren Kernen parallel
+
+Schreiben Funktion zum Einlesen der tif Bilder und neuse ROI setzen und dann wie aus LabView exportieren

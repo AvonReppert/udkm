@@ -1,0 +1,4 @@
+%ID	Date	Time	T (K)	F(mJ/cm²)	Peak(0 - AB; 1 - BC) Detector distance(m)	Double-Pulse(0 - first; 1 - second; 2 both)	Wavelength(nm)
+%%%%%%%%% PM Single-pulse Excitation %%%%%%%%%
+jjjjmmddhhmmss	jjjjmmdd	hhmmss	100	1.11	0	0.111	800	0% 111.1mW 1111x1111µm comment 
+jjjjmmddhhmmss	jjjjmmdd	hhmmss	100	1.11	1	0.111	400	0% 111.1mW 1111x1111µm comment

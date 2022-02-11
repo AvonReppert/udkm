@@ -1,0 +1,12 @@
+Aufräumen und sortieren "colors"
+
+Funktion schreiben, die die Farben und Colormaps aus "colors" darstellt
+
+Basic + Advanced Fit Funktionen überlegen und das richtige Maß an Einstellungsmöglichkeiten finden
+
+Überlegen welche Funktionen sind allgemein genug für "helpers" und welche Funktionen sind für die anderen Ordner geeignet
+
+welche Spezifikationen braucht "matplotlibStyle"
+
+Überlegen welche Plotkonzepte immer wieder gebraucht werden und entsprechende Funktionen mit dem richtigen Maß an Einstellungsmöglichkeiten schreiben
+

@@ -5,14 +5,37 @@ Created on Sun Dec 19 21:29:02 2021
 @author: Aleks
 """
 
-import numpy as np
-import os    as os
+import numpy      as np
+import os         as os
+import zipfile    as zipfile
+
 
 teststring = "Successfully loaded udkm.tools.helpers"
 
     
 PXSwl   = 1.5418           #Cu K-alpha Wavelength in [Ang]
 PXSk    = 2*np.pi/PXSwl    #absolute value of the incident k-vector in [1/Ang]
+
+def finderA(array,key):
+    """This little function returns the index of the array where the array value is closest to the key   
+        
+    Parameters
+    ----------
+    array : 1D numpy array 
+            numpy array with values
+    key :   float value
+            The value that one looks for in the array
+    Returns
+    ------
+    index :     integer 
+                index of the array value closest to the key    
+       
+    Example
+    ------- 
+    >>> index = finderA(np.array([1,2,3]),3)
+    will return 2"""
+    index = (np.abs(array-key)).argmin()
+    return index
 
 def radians(degrees):
     """ 
@@ -59,6 +82,101 @@ def degrees(radians):
     degrees = 180/np.pi*radians
     return(degrees)
 
+def calcMoments(xAxis,yValues):
+    """ calculates the Center of Mass, standard Deviation and Integral of a given Distribution
+    
+    Parameters
+    ----------
+        xAxis : 1D numpy array 
+            numpy array containing the x Axis
+        yValues : 1D numpy array
+            numpy array containing the according y Values
+        
+    Returns
+    ------
+    in that order
+        COM : float
+            xValue of the Center of Mass of the data
+            
+        STD : float
+            xValue for the standard deviation of the data around the center of mass
+            
+        integral : 
+            integral of the data
+            
+    Example
+    ------- 
+        >>> COM,std,integral = calcMoments([1,2,3],[1,1,1])
+            sould give a COM of 2, a std of 1 and an integral of 3 """
+
+    COM     = np.average(xAxis,axis=0,weights=yValues)
+    STD     = np.sqrt(np.average((xAxis-COM)**2, weights=yValues)) 
+    delta   = calcGridBoxes(xAxis)[0]
+    integral = np.sum(yValues*delta)
+    return COM,STD,integral
+
+def calcGridBoxes(grid):
+     """ calculates the size of a grid cell and the left and right boundaries of each gridcell in a monotonous but
+     possibly nonlinear grid
+    
+    Parameters
+    ----------
+        vector : 1D numpy array 
+                 numpy array containing a monotonous grid with points
+    Returns
+    ------
+    in that order
+        delta : 1D numpy array of same length as vector
+                the distance to the left and right neighbor devided by 2
+        l : 1D numpy array of same length as vector
+            left boundaries of the grid cell
+        r : 1D numpy array of same length as vector
+            right boundaries of the grid cell        
+    Example
+    ------- 
+        >>> delta,right,left = calcGridBoxes([0,1,2,4])
+            (array([ 1. ,  1. ,  1.5,  2. ]),
+             array([-0.5,  0.5,  1.5,  3. ]),
+             array([ 0.5,  1.5,  3. ,  5. ]))"""
+
+     delta = np.zeros(len(grid)) 
+     r =  np.zeros(len(grid)) 
+     l =  np.zeros(len(grid)) 
+     for n in range(len(grid)):
+         if (n == 0):                           
+             delta[n] = grid[n+1] -grid[n]
+             l[n] = grid[n]-delta[n]/2
+             r[n] = np.mean([grid[n],grid[n+1]])
+         elif n == (len(grid)-1):
+             delta[n] = grid[n] - grid[n-1]                
+             l[n] = np.mean([grid[n],grid[n-1]])
+             r[n] = grid[n] +delta[n]/2
+         else:
+             l[n] = np.mean([grid[n],grid[n-1]])
+             r[n] = np.mean([grid[n],grid[n+1]])
+             delta[n] = np.abs(r[n]-l[n])
+     return delta,l,r
+
+def relChange(dataArray,fixpoint):
+        """returns relative change of a measured quantity relative to a given value
+        
+        Parameters
+        ----------
+        dataArray : 1D numpy array
+            Array containing the data 
+        
+        fixpoint : float
+            Quantity to which the relative change is calculated   
+        
+        Returns
+        ------
+            relChangeArray : 1D numpy array with same length as dataArray
+            contains (dataArray-fixpoint)/fixpoint
+        Example
+        ------- 
+            >>> change = relChange(cAxisDy,cAxisDy[T==300])"""
+        relChangeArray = (dataArray-fixpoint)/fixpoint        
+        return(relChangeArray)
 
 def setROI1D(xAxis,values,xMin,xMax):
     """ selects a rectangular region of intrest ROI from a 2D Matrix based on the 
@@ -506,3 +624,16 @@ def timestring(time):
         for i in range(np.size(time)):
             result[i] = (6-len(str(int(time[i]))))*'0'+str(int(time[i]))
     return result
+
+
+def imagestring(time):
+    """ Returns a timestring made of 5 digits for the inserted time adding leading zeros if necessary. works also with arrays."""
+
+    if np.size(time) == 1:
+        time = int(time)
+        result = (5-len(str(time)))*'0'+str(time)
+    else:
+        result = np.zeros(np.size(time))
+        for i in range(np.size(time)):
+            result[i] = (5-len(str(int(time[i]))))*'0'+str(int(time[i]))
+    return result 

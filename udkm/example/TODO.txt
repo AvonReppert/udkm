@@ -1,0 +1,8 @@
+Zu diskutierende Überlegungen:
+Was muss man einrichten wenn man eine neue Messung anlegt
+Wie soll die finale Struktur sein (wo sollen Bilder hingespeichert werden etc)
+--> Beispielskripte entsprechend anlegen
+
+	Vorschlag UXRD PXS:
+	Einrichten der Ordner "RawData" und "ReferenceData" mit mindestens einem Refrence Data File gemäß des Beispiels im pxs Ordner
+	Das skript erzeugt dann folgende neue Ordner: "exportedResults" und "exportedRockingCurves" mit den jeweiligen Unterordnern "OverviewGraphics". In den Overviewgraphics sind die zeitabhängigen relativen Änderungen der Peakgrößen für die verschiedenen Messungen bzw. die zeitabhängigen Rocking Kurven als 2DPlot gezeigt. In den jeweiligen Ordnern befinden sich dann die transienten Änderungen bzw. die zeitaufgelösten Rocking Kurven für jede Messung abgespeichert mit dem identifier als Namen. Wenn an die Rockingcurve ein Modell gefittet wurde, dann soll das Skirpt einen Unterordner im der Messung entsprechenden Ordner in "RawData" einen Ordner "fitGraphics" erstellen in dem für jeden Delay die Rocking Kurve, der Fit, und die Bestandteile des Modells einzeln als Abbildung gespeichert werden können. Für die weitere Analyse der Messdaten wie vergleichende Darstellungen mehrere Messungen können weitere PythonSkripte in dem Ordner im entsprechenden "Samples" Ordner liegen. 

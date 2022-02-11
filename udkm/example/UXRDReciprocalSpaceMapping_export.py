@@ -1,48 +1,43 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 22 16:09:31 2019
+
+@author: Maximilian Mattern
+"""
+
+import helpers
+h = helpers.helpers()
 
 import numpy as np
-import udkm.tools.helpers as h
+import matplotlib.pyplot as plt
+import matplotlib
 
-teststring = "Successfully loaded udkm.pxs.rsm"
+from tqdm import tqdm  #progress bar
+import multiprocessing as mp 
 
+import matplotlib.colors as mcolors
+import matplotlib.path as mplPath
+import matplotlib.patches as patches
+from matplotlib.collections import PatchCollection
 
-## detector related
-pixelsize   = 0.172*1e-3 # Detector pixelsize of the Pilatus in m
-centerpixel = -1       #initializes the centerpixel with a negative value. Once it is set it stays the same
-detectorDistance = -2  #initializes the sample detector distance  with a negative value. Once it is set it stays the same
-
-## Normalization detector related
-crystalOffset = 0.0197   #Crystal Offset of the Crystal Normalization detector in [V]
-crystalThreshold = 0.003 #Measurements where the Crystal Voltage is below this Value are discarded
-        
-## Source related
-wl      = 1.5418           #Cu K-alpha Wavelength in Angstroem
-k       = 2*np.pi/wl  #absolute value of the incident k-vector in [1/Ang]
-convergenceXRays = h.radians(0.3) #Convergence of the Optics used in our Plasma X-Ray source setup in [rad]      
-        
-## Calculation Related
-existsRefList   = False
-existsPathList  = False
-qzBGcalculated  = False
-
-def loadParameters(sampleName):
-    """ Load the Parameter list into the object. Oversamplingz is the factor 
-    that tells how many times the number of omega datapoints are used to sample the qz-Axis. Usually oversamplingx
-    should be set to the same value as oversamplingz. 1/oversamplingx is the factor by which the qx axis stepnumber
-    is multiplied"""
-    sampleName = sampleName        
-    parameterListFileName = 'ReferenceData/ParameterStatic' + sampleName + '.txt'          # File Name of the Parameter File
-    paramList = np.genfromtxt(parameterListFileName, delimiter='\t',comments = "%")    # Loading the Parameter File
-    length = len(paramList)       # Number of Measurements   
-    IDs  = paramList[:,0]              
-    date = paramList[:,1]         # Date of the measurement
-    time = paramList[:,2]         # Time of the measurement
-    TA = 300*np.ones(len(paramList))          # Temperature read from sensor A near the expander             
-    TB = 300*np.ones(len(paramList))           # Temperature read from sensor B near the sample
-    F  = np.zeros(length)          # Excitation Fluence here initializied as 0
-    delay = np.nan*np.ones(length)  # Delay of the Rocking curve here initialized as nan
-    identifier = h.timeStamp(date,time) # Unique Identifier of each measurement as seconds since 1970
+def make_colormap(seq):
+    """Return a LinearSegmentedColormap
+    seq: a sequence of floats and RGB-tuples. The floats should be increasing
+    and in the interval (0,1)."""
     
-    
+    seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
+    cdict = {'red': [], 'green': [], 'blue': []}
+    for i, item in enumerate(seq):
+        if isinstance(item, float):
+            r1, g1, b1 = seq[i - 1]
+            r2, g2, b2 = seq[i + 1]
+            cdict['red'].append([item, r1, r2])
+            cdict['green'].append([item, g1, g2])
+            cdict['blue'].append([item, b1, b2])
+    return mcolors.LinearSegmentedColormap('CustomMap', cdict)
+rvb = make_colormap([(16/256,73/256,113/256), (1,1,1) ,0.5, (1,1,1), (180/256,16/256,22/256)])
+#%%
+
 def ReadParameter(sample_name,number):
     """This function returns the parameters of the 'number'. measuerement saved
     in the reference file 'Reference'sample_name''.
@@ -679,4 +674,81 @@ def PrepareRockingCurveFile(sampleName,number,qAxis):
     Write1DArrayToFileWithoutLineBreak(rockingCurveFile,[-1,-1,-1])
     Write1DArrayToFile(rockingCurveFile,qAxis)
     return rockingCurveFile
- 
+#%%
+''' PXS properties influencing the transformation to reciprocal space '''    
+pixelsize        = 0.172*1e-3
+k                = h.PXSk
+convergenceXRays = h.radians(0.3)
+crystalOffset    = 0.017514
+crystalThreshold = 0.01
+centerpixel      = -1
+#distance = 1.477
+
+''' Choosing the measurement and time zero '''
+number   = 6
+t0       = 0
+log_plot = True
+
+''' Choosing the omega loop, delay loop and delay '''
+w = 0
+l = 0 
+t = 0
+
+
+''' Choosing the part of reciprocal space for the rocking curve '''
+qzMax = 4.0
+qzMin = 4.25
+qxMax = 0.05
+qxMin = -0.05
+
+'''Data Evaluation Routine'''
+# Read in the Raw RSMs for each loop and delay
+fullRSMList, uniqueOmega, uniqueDelays, omegaLoopsMeasured, delayLoopMeasured = LoadRSMTimeresolved('FeRh',number,crystalOffset,crystalThreshold,t0) 
+# Plot the Raw RSM (pixel-omega-space) of the RSM[omega loop][delay loop][delay]
+PlotRSMRaw('FeRh',number,fullRSMList[t][l][w],uniqueOmega,log_plot) 
+# Determine the sample-detector distance in meter from the reference file
+distance = ReadParameter('FeRh',number)[5]
+# Transform the Raw RSM into the qx-qz-space with normalization of the intensity density with Jacobian matrix
+RSMQList, deltaTheta = CalcRSMQList('FeRh',number,fullRSMList[t][l][w],uniqueOmega,distance,pixelsize,centerpixel,k,convergenceXRays)
+# Calculate an area in reciprocal space corresponding to the omega bins and the delta theta acceptance of the detector pixels
+pathList = CalcPathList('FeRh',RSMQList,deltaTheta,k)
+# Plot the intensity sorted in the area in reciprocal space of the pathlist. 
+PlotList('FeRh',RSMQList,pathList)
+
+# Create the orthogonal grid in qx-qz space
+qzGrid, qxGrid, qzBins, qxBins, qzDelta, qxDelta = createQGrid(uniqueOmega,range(len(fullRSMList[w][l][t][:,0])),qzMin,qzMax,qxMin,qxMax,4,1)
+
+# Calculate for every point in the QGrid the intensity according to the polygon where it is in
+refQGridList = CalcQGridList(qzGrid,qxGrid,pathList,RSMQList)
+# Sort the intensity list to a two-dimensional representation
+refRSMQ = SortListToRSMQ(qxGrid,qzGrid,refQGridList)
+# Plot the RSM with the intensity sorted into orthogonal bins
+plotRSMQ('FeRh',number,refRSMQ,qzBins,qxBins,uniqueDelays[t])
+
+#%%
+
+rockingCurveFile = PrepareRockingCurveFile('FeRh',number,qzGrid)
+for t in range(len(uniqueDelays)):
+    RSMQmean = np.zeros((len(refRSMQ[:,0]),len(refRSMQ[0,:])))
+    for w in range(int(omegaLoopsMeasured[t])):
+        counter = 0
+        for l in range(int(delayLoopMeasured[t])):
+            print('doing step w= ' + str(w+1)+'/'+ str(int(omegaLoopsMeasured[t])) + ' l= '+ str(l+1) + '/' + str(int(delayLoopMeasured[t])) + ' t = ' + str(t+1) +'/' + str(len(uniqueDelays)))
+            QGridList = SortRSMRawToQGridList(refQGridList,fullRSMList[t][l][w],deltaTheta,convergenceXRays,range(len(fullRSMList[0][0][0][:,0])),uniqueOmega)
+            RSMQ = SortListToRSMQ(qxGrid,qzGrid,QGridList)
+            RSMQmean = RSMQmean + RSMQ
+            #plotRSMQ('FeRh',number,RSMQ,qzBins,qxBins,uniqueDelays[t])
+            rockingCurve = GetRockingCurveRSMQ(RSMQ,'z',qzDelta,qxDelta,qzMax-qzMin,qxMax-qxMin)
+            Write1DArrayToFileWithoutLineBreak(rockingCurveFile,[uniqueDelays[t],l,w])            
+            Write1DArrayToFile(rockingCurveFile,rockingCurve)
+            #plt.plot(qzGrid,rockingCurve,label=str(uniqueDelays[t]))
+            counter = counter +1
+    h.makeFolder('ExportedRSM/' + GetLabel('FeRh',number)[2])
+    RSMQmeanF = RSMQmean/counter
+    RSMQExport        = np.zeros((len(RSMQmeanF[:,0])+2,len(RSMQmeanF[0,:])+2))
+    RSMQExport[1:,0]  = qxBins
+    RSMQExport[0,1:]  = qzBins
+    RSMQExport[2:,2:] = RSMQmeanF
+    np.savetxt('ExportedRSM/' + GetLabel('FeRh',number)[2] + '/RSMQ_'  + str(int(10*uniqueDelays[t])) + 'ps.dat',RSMQExport,header='qx bins and qz bins',comments='#',delimiter='\t')
+    
+rockingCurveFile.close()
