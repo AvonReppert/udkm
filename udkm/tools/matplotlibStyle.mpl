@@ -31,8 +31,8 @@ xtick.minor.width: 0.5
 ytick.minor.width: 0.5
 
 
-xtick.direction: out
-ytick.direction: out
+xtick.direction: in
+ytick.direction: in
 
 xtick.top : True
 ytick.right : True
@@ -55,6 +55,7 @@ axes.labelcolor : black
 axes.edgecolor  : black
 xtick.color 	: black
 ytick.color 	: black
+axes.facecolor  : white
 
 lines.linewidth      : 2
 lines.markersize     : 2
