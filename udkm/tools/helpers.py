@@ -12,8 +12,7 @@ import zipfile    as zipfile
 teststring = "Successfully loaded udkm.tools.helpers"
 
     
-PXSwl   = 1.5418           #Cu K-alpha Wavelength in [Ang]
-PXSk    = 2*np.pi/PXSwl    #absolute value of the incident k-vector in [1/Ang]
+
 
 
 def calcMoments(xAxis,yValues):
