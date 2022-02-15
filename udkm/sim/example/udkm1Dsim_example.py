@@ -33,7 +33,7 @@ Pt = Pt_111_1TM.Pt_111_1TM()
 # Initialization of the sample
 sample_name = 'FeRhP16c'
 layers      = ['Pt','FeRh','W','MgO']
-sample_dic  = {'Pt':Pt,'FeRh':FeRh,'W':W,'MgO':MgO}
+sample_dict = {'Pt':Pt,'FeRh':FeRh,'W':W,'MgO':MgO}
 properties  = {'Pt':{'C' :Pt.prop['heat_capacity']},
                'FeRh':{'C' :FeRh.prop['heat_capacity']},
                'W':{'C' :W.prop['heat_capacity']},
@@ -46,7 +46,7 @@ peak_list    = ['FeRh']
 
 #Simulated Excitation Conditions
 peak_meas    = 'FeRh'
-fluenz_sim   = [fluence_list[0]]*u.mJ/u.cm**2
+fluence_sim  = [fluence_list[0]]*u.mJ/u.cm**2
 puls_width   = [0]*u.ps
 pump_delay   = [0]*u.ps
 multi_abs    = False
@@ -70,7 +70,7 @@ calc_stress_map = False
 export_maps     = False
 sim_name        = r'test'
 
-export_name = peak_meas + 'peak_T' + str(init_temp) + 'K_F' + str(int(10*fluenz_sim[0].magnitude)) + 'mJ_' + sim_name
+export_name = peak_meas + 'peak_T' + str(init_temp) + 'K_F' + str(int(10*fluence_sim[0].magnitude)) + 'mJ_' + sim_name
 
 plotting_sim    = [False,True,True,False]
 color_list      = ['red','black','gray','blue']
@@ -83,15 +83,15 @@ data_list       = [0,0,0,0]
 
 for l in range(len(layers)):
     prop_uni_cell = {}
-    prop_uni_cell['a_axis']         = sample_dic[layers[l]].prop['a_axis']
-    prop_uni_cell['b_axis']         = sample_dic[layers[l]].prop['b_axis']
-    prop_uni_cell['sound_vel']      = sample_dic[layers[l]].prop['sound_vel']
-    prop_uni_cell['lin_therm_exp']  = sample_dic[layers[l]].prop['lin_therm_exp']
-    prop_uni_cell['heat_capacity']  = sample_dic[layers[l]].prop['heat_capacity']
-    prop_uni_cell['therm_cond']     = heat_cond_fac[l]*sample_dic[layers[l]].prop['therm_cond']
-    prop_uni_cell['opt_pen_depth']  = sample_dic[layers[l]].prop['opt_pen_depth']
-    prop_uni_cell['opt_ref_index']  = sample_dic[layers[l]].prop['opt_ref_index']
-    properties[layers[l]]['unit_cell'] = sample_dic[layers[l]].createUnitCell(layers[l],sample_dic[layers[l]].prop['c_axis'],prop_uni_cell)
+    prop_uni_cell['a_axis']         = sample_dict[layers[l]].prop['a_axis']
+    prop_uni_cell['b_axis']         = sample_dict[layers[l]].prop['b_axis']
+    prop_uni_cell['sound_vel']      = sample_dict[layers[l]].prop['sound_vel']
+    prop_uni_cell['lin_therm_exp']  = sample_dict[layers[l]].prop['lin_therm_exp']
+    prop_uni_cell['heat_capacity']  = sample_dict[layers[l]].prop['heat_capacity']
+    prop_uni_cell['therm_cond']     = heat_cond_fac[l]*sample_dict[layers[l]].prop['therm_cond']
+    prop_uni_cell['opt_pen_depth']  = sample_dict[layers[l]].prop['opt_pen_depth']
+    prop_uni_cell['opt_ref_index']  = sample_dict[layers[l]].prop['opt_ref_index']
+    properties[layers[l]]['unit_cell'] = sample_dict[layers[l]].createUnitCell(layers[l],sample_dict[layers[l]].prop['c_axis'],prop_uni_cell)
 
 S = ud.Structure(sample_name)
 for l in range(len(layers)):
@@ -117,7 +117,7 @@ for l in range(len(layers)):
 #%% Get the absorption
    
 h = ud.Heat(S, True)
-h.excitation = {'fluence':fluenz_sim,'delay_pump':pump_delay,'pulse_width': puls_width,'multilayer_absorption':multi_abs,'wavelength':800*u.nm,'theta':angle_list[peak_list.index(peak_meas)]}
+h.excitation = {'fluence':fluence_sim,'delay_pump':pump_delay,'pulse_width': puls_width,'multilayer_absorption':multi_abs,'wavelength':800*u.nm,'theta':angle_list[peak_list.index(peak_meas)]}
 
 dAdzLB        = h.get_Lambert_Beer_absorption_profile()
 dAdz, _, _, _ = h.get_multilayers_absorption_profile()
@@ -182,7 +182,7 @@ plt.tight_layout()
 plt.show()
 
 if calc_stress_map:
-    stress_map  = shel.CalcStressFromTempMap(sample_dic,properties,layers,temp_map)
+    stress_map  = shel.CalcStressFromTempMap(sample_dict,properties,layers,temp_map)
 
     plt.figure(figsize=[6, 5])
     plt.subplot(1, 1, 1)
