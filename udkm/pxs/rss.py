@@ -181,7 +181,7 @@ def QzAxisOneAngle(sampleName,number,omegaR,intensities):
     pixelAxis             = np.arange(0,np.size(intensities[0,:]),1)
     centerpixel           = int(np.max(pixelAxis)/2)
     DistancePilatusSample = ReadParameter(sampleName,number)[5]*1000
-    DeltaTheta            = PixelDimension/DistancePilatusSample
+    DeltaTheta            = np.arctan(PixelDimension/DistancePilatusSample)
     thetaAxis             = omegaR + DeltaTheta*(pixelAxis - centerpixel) 
     qzAxis                = k*(np.sin(thetaAxis) + np.sin(omegaR))
     return thetaAxis, qzAxis

@@ -44,8 +44,10 @@ t_ticks1 = [0,20,40,60,80]
 t_ticks2 = [500,1000,1500]
 
 #%%
-''' Read In the data and return the omega axis (radians), delays (including various loops) and the crystal-normed intensity as function of omega and pixels for all delays '''
-omega, delays, intensity = ReadDataOneAngle(ref_file,number,bad_loops,crystal_off,crystal_tresh,t0,delay_first)
+''' Read In the data and return the omega axis (radians), delays (including various loops)
+and the crystal-normed intensity as function of omega and pixels for all delays '''
+omega, delays, intensity = ReadDataOneAngle(ref_file,number,bad_loops,
+                                            crystal_off,crystal_tresh,t0,delay_first)
 
 ''' Transformation from omega-pixel space in the reciprocal space '''
 thetaAxis, qzAxis = QzAxisOneAngle(ref_file,number,omega,intensity)
