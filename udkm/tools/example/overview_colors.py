@@ -61,9 +61,9 @@ plot_color_gradients('gold', cmap_list)
 
 """ bipolar lists """
 cmap_list = [colors.cmap_blue_red_1, colors.cmap_blue_red_2, colors.cmap_blue_red_3, colors.cmap_blue_red_4,
-             colors.cmap_red_blue_1, colors.cmap_red_blue_2
+             colors.cmap_blue_red_5,colors.cmap_red_blue_1, colors.cmap_red_blue_2
              ]
 name_list = ["blue_red_1", "blue_red_2", "blue_red_3", "blue_red_4",
-             "red_blue_1", "red_blue_1"
+             "blue_red_5","red_blue_1", "red_blue_1"
              ]
 plot_color_gradients('bipolar', cmap_list)
