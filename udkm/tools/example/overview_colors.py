@@ -45,8 +45,9 @@ name_list = ["cmap_1", "cmap_2", "fireice"]
 plot_color_gradients('multicolor', cmap_list)
 
 """ blue lists """
-cmap_list = [colors.cmap_blue_1, colors.cmap_blue_2, colors.cmap_blue_3, colors.cmap_blue_4]
-name_list = ["blue_1", "blue_2", "blue_3", "blue_4"]
+cmap_list = [colors.cmap_blue_1, colors.cmap_blue_2, colors.cmap_blue_3,
+             colors.cmap_blue_4, colors.cmap_blue_5]
+name_list = ["blue_1", "blue_2", "blue_3", "blue_4", "blue_5"]
 plot_color_gradients('blue', cmap_list)
 
 """ red lists """
