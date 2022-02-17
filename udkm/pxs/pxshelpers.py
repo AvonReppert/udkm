@@ -64,9 +64,9 @@ def read_param(ref_file,number):
     time = (6-len(time))*'0'+time
     temperature  = param_list[number,3]
     fluence      = param_list[number,4]
-    peak_number  = param_list[number,5] 
-    distance     = param_list[number,6] 
-    double_pulse = param_list[number,7] 
+    distance     = param_list[number,5] 
+    peak_number  = param_list[number,6] 
+    double_pulse = param_list[number,7]
     wavelength   = param_list[number,8]
     return date, time, temperature, fluence, distance, peak_number, double_pulse, wavelength 
 

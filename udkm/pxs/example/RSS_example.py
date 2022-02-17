@@ -53,6 +53,8 @@ rocking_curves = pxs.get_rocking_rss(ref_file,measure,omega,centerpixel,delays,i
 
 pxs.plot_rocking_overview(ref_file,measure,rocking_curves,qz_borders,delay_steps)
 
+#%%
+
 com, std, integral, unique_delays, ref_fit, intensity_peak, qz_roi = pxs.get_moments_back(rocking_curves,qz_borders,bool_substrate_back,[])
 
 center_fit, width_fit, area_fit = pxs.get_fit_values(ref_file,measure,intensity_peak,qz_roi,unique_delays,ref_fit,bool_plot_fit)
