@@ -1,6 +1,7 @@
 teststring = "Successfully loaded udkm.tools.constants"
 
 H_PLANCK	= 6.62607015e-34
+H_BAR	    = 1.0546e-34
 EV			= 1.602176634e-19
 C_0			= 299792458
 K_B			= 1.380649e-23
