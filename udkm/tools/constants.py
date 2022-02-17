@@ -9,3 +9,4 @@ EPS_0		= 8.8541878128e-12
 U_ATOM      = 1.660540e-27 #kg
 AVOGADRO    = 6.022142e23 #1/mol
 M_ELEC      = 9.10938188e-31 #kg
+GAMMA_MAG   = 28e12 #Hz/T
