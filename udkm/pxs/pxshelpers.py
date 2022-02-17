@@ -56,14 +56,17 @@ def read_param(ref_file,number):
     >>>  0.666 = read_param('Overview',0)[4]
     """   
     param_list  = np.genfromtxt(r'ReferenceData/'+str(ref_file)+'.txt', comments='#')
-    date        = str(int(param_list[number,1]))
-    date        = (6-len(date))*'0'+date
-    time        = str(int(param_list[number,2]))
-    time        = (6-len(time))*'0'+time
-    temperature = param_list[number,3]
-    fluence     = param_list[number,4]
-    distance    = param_list[number,6] 
-    return date, time, temperature, fluence, distance
+    date = str(int(param_list[number,1]))
+    date = (6-len(date))*'0'+date
+    time = str(int(param_list[number,2]))
+    time = (6-len(time))*'0'+time
+    temperature  = param_list[number,3]
+    fluence      = param_list[number,4]
+    peak_number  = param_list[number,5] 
+    distance     = param_list[number,6] 
+    double_pulse = param_list[number,7] 
+    wavelength   = param_list[number,8]
+    return date, time, temperature, fluence, distance, peak_number, double_pulse, wavelength 
 
 def get_label(ref_file,number):
     """This function create a plot title, a saving path and a saving name for the 'number'.
@@ -327,7 +330,7 @@ def plot_rocking_overview(ref_file,number,rocking,qz_range,delay_steps):
     
     plotted = ax1.pcolormesh(X,Y,np.transpose(intensity/np.max(intensity)),
                              norm=matplotlib.colors.LogNorm(vmin = 0.006, vmax = 1),
-                             shading='auto',cmap = color.rvb)
+                             shading='auto',cmap = color.cmap_blue_red_5)
     ax1.axis([delays.min(), delay_steps[1], qz_axis.min(), qz_axis.max()])
     ax1.set_xticks(np.arange(delays.min(),delay_steps[1],delay_steps[0]))
     ax1.set_xlabel('delay (ps)', fontsize = 11)
@@ -340,7 +343,7 @@ def plot_rocking_overview(ref_file,number,rocking,qz_range,delay_steps):
     
     plotted = ax2.pcolormesh(X,Y,np.transpose(intensity/np.max(intensity)),
                              norm=matplotlib.colors.LogNorm(vmin = 0.006, vmax = 1),
-                             shading='auto',cmap = color.rvb)
+                             shading='auto',cmap = color.cmap_blue_red_5)
     ax2.axis([delay_steps[1], delays.max(), qz_axis.min(), qz_axis.max()])
     ax2.set_xticks(np.arange(delay_steps[1],delays.max(),delay_steps[2]))
     ax2.yaxis.set_ticks_position('right')
@@ -599,7 +602,7 @@ def plot_peak_fit(ref_file,number,qz_roi,fit,ref_fit,delay):
    
     ax1.plot(qz_roi,fit.data,'s',markersize=4,color='black',label = "data")
     ax1.plot(qz_roi,ref_fit.best_fit,'-',color = "grey",lw = 2,label = "Fit t<0")
-    ax1.plot(qz_roi,fit.best_fit,'-',lw = 2,color=color.rvb(0.99),label = "Best Fit")
+    ax1.plot(qz_roi,fit.best_fit,'-',lw = 2,color=color.cmap_blue_red_5(0.99),label = "Best Fit")
         
     ax1.set_xlabel(r"$q_{\mathrm{z}}$" + r" ($\AA^{-1}$)",fontsize = 11)        
     ax1.set_ylabel("X-Ray Intensity",fontsize = 11) 
@@ -652,7 +655,7 @@ def get_peak_dynamic(ref_file,number,unique_delays,com,std,integral,center_fit,w
     com_relative      = -1 * hel.relChange(com,np.mean(com[select_before_t0]))
     std_relative      = hel.relChange(std,np.mean(std[select_before_t0]))
     integral_relative = hel.relChange(integral,np.mean(integral[select_before_t0]))
-    center_relative   = hel.relChange(center_fit,np.mean(center_fit[select_before_t0]))
+    center_relative   = -1 * hel.relChange(center_fit,np.mean(center_fit[select_before_t0]))
     width_relative    = hel.relChange(width_fit,np.mean(width_fit[select_before_t0]))
     area_relative     = hel.relChange(area_fit,np.mean(area_fit[select_before_t0]))
     
@@ -660,21 +663,21 @@ def get_peak_dynamic(ref_file,number,unique_delays,com,std,integral,center_fit,w
     transient_results[:,0] = read_param(ref_file,number)[2]*np.ones(len(unique_delays))
     transient_results[:,1] = read_param(ref_file,number)[2]*np.ones(len(unique_delays))
     transient_results[:,2] = unique_delays
-    transient_results[:,3] = com_relative
-    transient_results[:,4] = std_relative
-    transient_results[:,5] = integral_relative
-    transient_results[:,6] = center_relative
-    transient_results[:,7] = width_relative
-    transient_results[:,8] = area_relative
+    transient_results[:,3] = 1e3*com_relative
+    transient_results[:,4] = 1e2*std_relative
+    transient_results[:,5] = 1e2*integral_relative
+    transient_results[:,6] = 1e3*center_relative
+    transient_results[:,7] = 1e2*width_relative
+    transient_results[:,8] = 1e2*area_relative
     
     hel.makeFolder('exportedResults')
     np.savetxt('exportedResults/' + get_label(ref_file,number)[2]+'.dat',transient_results,
-               header='0T(K)  1F(mJ/cm²)  2delay(ps)  3strainCOM  4STDrelative  5Integralrelative  ' 
-               + '6strainFit  7widthFit  8areaFit')
+               header='0T(K)  1F(mJ/cm²)  2delay(ps)  3strainCOM(permille)  4STDrelative(%)  5Integralrelative(%)  ' 
+               + '6strainFit(permille)  7widthFit(%)  8areaFit(%)')
     
     return  transient_results
 
-def PlotTransientResults(ref_file,number,transient_results,delay_steps):
+def plot_transient_results(ref_file,number,transient_results,delay_steps):
     unique_delays     = transient_results[:,2]
     strain_com        = transient_results[:,3]
     strain_fit        = transient_results[:,6]
@@ -692,38 +695,38 @@ def PlotTransientResults(ref_file,number,transient_results,delay_steps):
     ax5 = plt.subplot(gs[4])
     ax6 = plt.subplot(gs[5])
     
-    ax1.plot(unique_delays,strain_com*1e3,'s-',color = 'gray',label= "COM (Dy)",linewidth = 2)
-    ax1.plot(unique_delays,strain_fit*1e3,'o-',color = 'black',label= "Fit (Dy)",linewidth = 2)
-    ax2.plot(unique_delays,strain_com*1e3,'s-',color = 'gray',label= "COM (Dy)",linewidth = 2)
-    ax2.plot(unique_delays,strain_fit*1e3,'o-',color = 'black',label= "Fit (Dy)",linewidth = 2)
-    ax1.set_ylim(strain_fit.min() - 0.2*(strain_fit.max()-strain_fit.min()),
-                 strain_fit.max() + 0.2*(strain_fit.max()-strain_fit.min()))
-    ax2.set_ylim(strain_fit.min() - 0.2*(strain_fit.max()-strain_fit.min()),
-                 strain_fit.max() + 0.2*(strain_fit.max()-strain_fit.min()))
+    ax1.plot(unique_delays,strain_com,'s-',color = 'gray',label= "COM (Dy)",linewidth = 2)
+    ax1.plot(unique_delays,strain_fit,'o-',color = 'black',label= "Fit (Dy)",linewidth = 2)
+    ax2.plot(unique_delays,strain_com,'s-',color = 'gray',label= "COM (Dy)",linewidth = 2)
+    ax2.plot(unique_delays,strain_fit,'o-',color = 'black',label= "Fit (Dy)",linewidth = 2)
+    ax1.set_ylim(strain_fit.min() - 0.1*(strain_fit.max()-strain_fit.min()),
+                 strain_fit.max() + 0.1*(strain_fit.max()-strain_fit.min()))
+    ax2.set_ylim(strain_fit.min() - 0.1*(strain_fit.max()-strain_fit.min()),
+                 strain_fit.max() + 0.1*(strain_fit.max()-strain_fit.min()))
     ax2.legend(loc = 0,fontsize = 13)
     ax1.set_ylabel('strain ($10^{-3}$)',fontsize=16)
     ax1.yaxis.set_label_coords(-0.07, 0.5)
     
-    ax3.plot(unique_delays,std_relative*1e2,'-o',color = 'gray',label ="width COM",linewidth = 2)
-    ax3.plot(unique_delays,width_relative*1e2,'-o',color = 'black',label ="width Fit",linewidth = 2)
-    ax4.plot(unique_delays,std_relative*1e2,'-o',color = 'gray',label ="width COM",linewidth = 2)
-    ax4.plot(unique_delays,width_relative*1e2,'-o',color = 'black',label ="width Fit",linewidth = 2)
-    ax1.set_ylim(width_relative.min() - 0.2*(width_relative.max()-width_relative.min()),
-                 width_relative.max() + 0.2*(width_relative.max()-width_relative.min()))
-    ax2.set_ylim(width_relative.min() - 0.2*(width_relative.max()-width_relative.min()),
-                 width_relative.max() + 0.2*(width_relative.max()-width_relative.min()))
+    ax3.plot(unique_delays,std_relative,'-o',color = 'gray',label ="width COM",linewidth = 2)
+    ax3.plot(unique_delays,width_relative,'-o',color = 'black',label ="width Fit",linewidth = 2)
+    ax4.plot(unique_delays,std_relative,'-o',color = 'gray',label ="width COM",linewidth = 2)
+    ax4.plot(unique_delays,width_relative,'-o',color = 'black',label ="width Fit",linewidth = 2)
+    ax3.set_ylim(width_relative.min() - 0.1*(width_relative.max()-width_relative.min()),
+                 width_relative.max() + 0.1*(width_relative.max()-width_relative.min()))
+    ax4.set_ylim(width_relative.min() - 0.1*(width_relative.max()-width_relative.min()),
+                 width_relative.max() + 0.1*(width_relative.max()-width_relative.min()))
     ax4.legend(loc = 0,fontsize = 13)
     ax3.set_ylabel('width change ($10^{-2}$)',fontsize=16)
     ax3.yaxis.set_label_coords(-0.07, 0.5)
     
-    ax5.plot(unique_delays,integral_relative*1e2,'-s',color = 'gray',label ="Area COM",linewidth = 2) 
-    ax5.plot(unique_delays,area_relative*1e2,'-s',color = 'black',label ="Area Fit",linewidth = 2)    
-    ax6.plot(unique_delays,integral_relative*1e2,'-s',color = 'gray',label ="Area COM",linewidth = 2)
-    ax6.plot(unique_delays,area_relative*1e2,'-s',color = 'black',label ="Area Fit",linewidth = 2)
-    ax1.set_ylim(area_relative.min() - 0.2*(area_relative.max()-area_relative.min()),
-                 area_relative.max() + 0.2*(area_relative.max()-area_relative.min()))
-    ax2.set_ylim(area_relative.min() - 0.2*(area_relative.max()-area_relative.min()),
-                 area_relative.max() + 0.2*(area_relative.max()-area_relative.min()))
+    ax5.plot(unique_delays,integral_relative,'-s',color = 'gray',label ="Area COM",linewidth = 2) 
+    ax5.plot(unique_delays,area_relative,'-s',color = 'black',label ="Area Fit",linewidth = 2)    
+    ax6.plot(unique_delays,integral_relative,'-s',color = 'gray',label ="Area COM",linewidth = 2)
+    ax6.plot(unique_delays,area_relative,'-s',color = 'black',label ="Area Fit",linewidth = 2)
+    ax5.set_ylim(area_relative.min() - 0.1*(area_relative.max()-area_relative.min()),
+                 area_relative.max() + 0.1*(area_relative.max()-area_relative.min()))
+    ax6.set_ylim(area_relative.min() - 0.1*(area_relative.max()-area_relative.min()),
+                 area_relative.max() + 0.1*(area_relative.max()-area_relative.min()))
     ax6.legend(loc = 0,fontsize = 13)
     ax5.set_ylabel('amplitude change ($10^{-2}$)',fontsize=16)
     ax5.yaxis.set_label_coords(-0.07, 0.5)
@@ -754,7 +757,7 @@ def PlotTransientResults(ref_file,number,transient_results,delay_steps):
         ax.tick_params(axis='both', which='major', labelsize=12)
         ax.set_xlim(delay_steps[1],unique_delays.max())
         
-    ax5.set_xlabel(r"Pump-probe delay t (ps)",fontsize = 16)
+    ax5.set_xlabel(r"pump-probe delay t (ps)",fontsize = 16)
     ax5.xaxis.set_label_coords(0.75, -0.1)
     
     plt.text(0.25, 1.16, get_label(ref_file,number)[0] + str(read_param(ref_file,number)[3]) + 'K     ' + str(read_param(ref_file,number)[3]) + 'mJ/cm2' , fontsize = 16, ha='left', va='center', transform=ax1.transAxes)     

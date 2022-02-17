@@ -1,0 +1,21 @@
+FeRh
+
+Date Time: 23.11.2021 18:30:37
+
+Delay Vector: -10:1:80,82:2:160
+Delay Loop: 50
+Delay Order: Triangle
+Theta Vector: 28.2
+Theta Loop: 1
+Theta Order: Triangle
+2 Theta Correction: 0.850000
+Inner Parameter: Theta
+Exposure Time: 6.000000s
+Calibration: 0.000000	0.000000	4952930.000000	-107977.000000
+
+
+File Name: 183037
+Tmp Path: P:\PilatusTheta2Theta\20211123\183037
+Data Path: C:\Users\Labor\Documents\Measurements\PilatusTheta2Theta\20211123\183037
+
+ROI: (2, 36); (483, 166)

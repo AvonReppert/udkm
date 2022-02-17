@@ -5,88 +5,56 @@ This is an example skript for the data analysis in RSS mode at the pxs.
 -- Further Description --
 
 """
-
 import udkm.pxs.pxshelpers as pxs
 import numpy as np
 import matplotlib.pyplot as plt
-import numpy.ma as ma
-import lmfit as lm
-import matplotlib
-import matplotlib.gridspec as gridspec
-from matplotlib.ticker import ScalarFormatter
-
-
 
 #%%
-ref_file      = 'DyOverview'
-number        = 2
-bad_loops     = []
-crystal_off   = 0.0211595
-crystal_tresh = 0.01
-t0            = 0
-delay_first   = True
-bad_pixels    = []
+'''Here, you can choose the measurement and get relevant parameters 
+to choose suitable analysis method parameters in the following.
+'''
+ref_file = 'Reference'
+measure  = 1
+peak     = pxs.read_param(ref_file, measure)[5]
 
-qzMinCOM = 2.15
-qzMaxCOM = 2.27
-qzMinFit = 2.05
-qzMaxFit = 2.37
-peak_order = 1
+'''Here, you can exclude bad loops and pixels from the further analysis.
+Furthermore, the threshold may exclude scans with very low x-ray intensity.
+'''
+bad_loops   = []
+bad_pixels  = []
+crystal_off = 0.0211595
+treshold    = 0.01
+time_zero   = 0
 
-t_split = 100
-plot_logy = False
-plot_fit = False
-save_plot_fit = False
-t_lim  = [-10,100,2000]
-width_ratio = [2,1]
-ylim = [-0.5,7.2,-10,100,-40,10]
-t_ticks1 = [0,20,40,60,80]
-t_ticks2 = [500,1000,1500]
+'''Here, you should decide for a suiatble analysis method from the implemented
+possible methods and give parameters for the data analysis like the relevant qz 
+region of the Bragg peak and wether or not the shoulder of a substrate Bragg peak
+should be taken into account during analysis.
+'''
+bool_substrate_back = False 
+centerpixel = 244 
+if peak == 0:
+    qz_borders = [4.08, 4.24]
+else:
+    qz_borders = [3.7, 4.05]
+
+'''Here, you should give plot parameters.'''
+delay_steps   = [10,40,40]
+bool_plot_fit = False
 
 #%%
-''' Read In the data and return the omega axis (radians), delays (including various loops)
-and the crystal-normed intensity as function of omega and pixels for all delays '''
-omega, delays, intensity = ReadDataOneAngle(ref_file,number,bad_loops,
-                                            crystal_off,crystal_tresh,t0,delay_first)
+'''In this part the data analysis takes place.'''
 
-''' Transformation from omega-pixel space in the reciprocal space '''
-thetaAxis, qzAxis = QzAxisOneAngle(ref_file,number,omega,intensity)
+omega, omega_deg, delays, intensity = pxs.read_data_rss(ref_file,measure,bad_loops,bad_pixels,crystal_off,treshold,time_zero)
 
-''' Get the rocking curves for the unique delays including bad pixels with first column = delays and first row = qz axis'''
-rockingCurve = GetRockingCurvesOneAngle(ref_file,number,omega,delays,intensity,bad_pixels)
+rocking_curves = pxs.get_rocking_rss(ref_file,measure,omega,centerpixel,delays,intensity)
 
-''' Plot the time-resolved rocking curves as lines '''
-PlotRockingCurve1DUXRD(ref_file,number,rockingCurve,plot_logy)
+pxs.plot_rocking_overview(ref_file,measure,rocking_curves,qz_borders,delay_steps)
 
-''' Plot the time-resolved rocking curves as map '''
-PlotRockingCurve2DUXRD(ref_file,number,rockingCurve,t_split)
+com, std, integral, unique_delays, ref_fit, intensity_peak, qz_roi = pxs.get_moments_back(rocking_curves,qz_borders,bool_substrate_back,[])
 
-''' Calculate the moments of the rocking curves for each delay '''
-''' This includes a background correction of COM by a refernece Gaussian Fit with background '''
-COMt, STDt, Integralt, FitRef, uniqueDelays = GetMoments(rockingCurve,qzMinCOM,qzMaxCOM)
+center_fit, width_fit, area_fit = pxs.get_fit_values(ref_file,measure,intensity_peak,qz_roi,unique_delays,ref_fit,bool_plot_fit)
 
-''' Get the Gaussian (with background) fit of the peak '''
-centerFit,  widthFit, areaFit, uniqueDelays = getFitvalues(ref_file,number,rockingCurve,qzMinFit,qzMaxFit,FitRef,plot_fit,plot_logy,save_plot_fit)
+transient_results = pxs.get_peak_dynamic(ref_file,measure,unique_delays,com,std,integral,center_fit,width_fit,area_fit)
 
-''' Calculate the relative change of the moments of the peak as function of the delay '''
-strainCOM, STDrelative, Integralrelative = getPeakDynamic(uniqueDelays,COMt,STDt,Integralt,peak_order)
-
-''' Calculate the relative change of the fit values of the peak as function of the delay '''
-strainFit, widthFitrelative, areaFitrelative = getPeakDynamic(uniqueDelays,centerFit,widthFit,areaFit,peak_order)
-
-''' Summarize it to a array '''
-exportedResults = np.zeros((len(uniqueDelays),7))
-exportedResults[:,0] = uniqueDelays
-exportedResults[:,1] = strainCOM
-exportedResults[:,2] = STDrelative
-exportedResults[:,3] = Integralrelative
-exportedResults[:,4] = strainFit
-exportedResults[:,5] = widthFitrelative
-exportedResults[:,6] = areaFitrelative
-
-''' Save the transient changes of teh peak properties '''
-exportPeakDynamic(ref_file,number,uniqueDelays,strainFit,widthFitrelative,areaFitrelative,strainCOM,STDrelative,Integralrelative)
-#%%
-''' Plot the transient change of all quantities '''
-PlotTransientResults(ref_file,number,exportedResults,t_lim,width_ratio,ylim,t_ticks1,t_ticks2)
-
+pxs.plot_transient_results(ref_file,measure,transient_results,delay_steps)
