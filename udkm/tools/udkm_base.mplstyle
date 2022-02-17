@@ -14,6 +14,7 @@ axes.labelsize : 10
 axes.labelcolor : black
 axes.edgecolor : black
 axes.facecolor : white
+axes.prop_cycle: cycler('color', ['0048ccff', 'ffa500ff', 'dc1700ff', '4b4b4bff', 'aaccffff', 'ffd700ff', 'fe8585ff', 'bfbfbfff', '002f5eff', 'd2691eff'])
 
 
 legend.frameon : False
