@@ -13,9 +13,11 @@ import matplotlib.pyplot as plt
 '''Here, you can choose the measurement and get relevant parameters 
 to choose suitable analysis method parameters in the following.
 '''
-ref_file = 'Reference'
-measure  = 1
-peak     = pxs.read_param(ref_file, measure)[5]
+ref_file  = 'Reference'
+measure   = 1
+peak      = pxs.read_param(ref_file, measure)[5]
+refresh   = False
+data_path = 'test'
 
 '''Here, you can exclude bad loops and pixels from the further analysis.
 Furthermore, the threshold may exclude scans with very low x-ray intensity.
@@ -45,7 +47,7 @@ bool_plot_fit = False
 #%%
 '''In this part the data analysis takes place.'''
 
-omega, omega_deg, delays, intensity = pxs.read_data_rss(ref_file,measure,bad_loops,bad_pixels,crystal_off,treshold,time_zero)
+omega, omega_deg, delays, intensity = pxs.read_data_rss(ref_file,measure,bad_loops,bad_pixels,crystal_off,treshold,time_zero,refresh,data_path)
 
 rocking_curves = pxs.get_rocking_rss(ref_file,measure,omega,centerpixel,delays,intensity)
 

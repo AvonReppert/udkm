@@ -16,6 +16,8 @@ import lmfit as lm
 import matplotlib
 import matplotlib.gridspec as gridspec
 from matplotlib.ticker import ScalarFormatter
+import shutil
+import os
 
 PXS_WL      = 1.5418           # Cu K-alpha wavelength in [Ang]
 PXS_K       = 2*np.pi/PXS_WL   # absolute value of the incident k-vector in [1/Ang]
@@ -102,7 +104,7 @@ def get_label(ref_file,number):
     file_name  = read_param(ref_file,number)[0] + read_param(ref_file,number)[1]
     return plot_title, save_path, file_name
 
-def read_data_rss(ref_file,number,bad_loops,bad_pixels,crystal_off,threshold,t_0):
+def read_data_rss(ref_file,number,bad_loops,bad_pixels,crystal_off,threshold,t_0,bool_refresh_data,data_path):
     """This function imports the x-ray intensity as function of the detector pixel for the 'number'.
     single angle measurement listed in 'ref_file'. The function returns the measurement angle, the 
     delays in respect to temporal overlapp given by 't_0' and the normed intensity on the crystal
@@ -147,6 +149,14 @@ def read_data_rss(ref_file,number,bad_loops,bad_pixels,crystal_off,threshold,t_0
     
     """
     print(get_label(ref_file,number)[0] + str(read_param(ref_file,number)[4])+ 'm' )
+    
+    if bool_refresh_data:
+        hel.makeFolder('RawData/' + get_label(ref_file,number)[1])
+        shutil.copyfile(data_path + get_label(ref_file,number)[1] + '/parameters' + str(read_param(ref_file, number)[1]) + '.txt',
+                        'RawData/' + get_label(ref_file,number)[1] + '/parameters' + str(read_param(ref_file, number)[1]) + '.txt')   
+        shutil.copyfile(data_path + get_label(ref_file,number)[1] + '/scans' + str(read_param(ref_file, number)[1]) + '.txt',
+                        'RawData/' + get_label(ref_file,number)[1] + '/scans' + str(read_param(ref_file, number)[1]) + '.txt')
+    
     data_raw  = np.genfromtxt('RawData/' + str(get_label(ref_file,number)[1]) + '/scans' + str(read_param(ref_file,number)[1]) + '.dat', comments = '%')
     data_raw = data_raw[data_raw[:,4] - crystal_off > threshold,:]
     print('Based on crystal threshold ' + str(sum(data_raw[:,4] - crystal_off < threshold)) + ' scans are excluded.')
