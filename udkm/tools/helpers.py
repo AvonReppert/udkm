@@ -17,7 +17,7 @@ def calcMoments(xAxis, yValues):
 
     Parameters
     ----------
-        xAxis : 1D numpy array 
+        xAxis : 1D numpy array
             numpy array containing the x Axis
         yValues : 1D numpy array
             numpy array containing the according y Values
@@ -31,11 +31,11 @@ def calcMoments(xAxis, yValues):
         STD : float
             xValue for the standard deviation of the data around the center of mass
 
-        integral : 
+        integral :
             integral of the data
 
     Example
-    ------- 
+    -------
         >>> COM,std,integral = calcMoments([1,2,3],[1,1,1])
             sould give a COM of 2, a std of 1 and an integral of 3 """
 
@@ -52,7 +52,7 @@ def calcGridBoxes(grid):
 
    Parameters
    ----------
-       vector : 1D numpy array 
+       vector : 1D numpy array
                 numpy array containing a monotonous grid with points
    Returns
    ------
@@ -62,9 +62,9 @@ def calcGridBoxes(grid):
        l : 1D numpy array of same length as vector
            left boundaries of the grid cell
        r : 1D numpy array of same length as vector
-           right boundaries of the grid cell        
+           right boundaries of the grid cell
    Example
-   ------- 
+   -------
        >>> delta,right,left = calcGridBoxes([0,1,2,4])
            (array([ 1. ,  1. ,  1.5,  2. ]),
             array([-0.5,  0.5,  1.5,  3. ]),
@@ -90,7 +90,7 @@ def calcGridBoxes(grid):
 
 
 def radians(degrees):
-    """ 
+    """
     Convert degrees to radians
 
     Parameters
@@ -113,7 +113,7 @@ def radians(degrees):
 
 
 def degrees(radians):
-    """ 
+    """
     Converts radians to degrees
 
     Parameters
@@ -137,21 +137,21 @@ def degrees(radians):
 
 
 def finderA(array, key):
-    """This little function returns the index of the array where the array value is closest to the key   
+    """This little function returns the index of the array where the array value is closest to the key
 
     Parameters
     ----------
-    array : 1D numpy array 
+    array : 1D numpy array
             numpy array with values
     key :   float value
             The value that one looks for in the array
     Returns
     ------
-    index :     integer 
-                index of the array value closest to the key    
+    index :     integer
+                index of the array value closest to the key
 
     Example
-    ------- 
+    -------
     >>> index = finderA(np.array([1,2,3]),3)
     will return 2"""
     index = (np.abs(array-key)).argmin()
@@ -164,30 +164,30 @@ def relChange(dataArray, fixpoint):
     Parameters
     ----------
     dataArray : 1D numpy array
-        Array containing the data 
+        Array containing the data
 
     fixpoint : float
-        Quantity to which the relative change is calculated   
+        Quantity to which the relative change is calculated
 
     Returns
     ------
         relChangeArray : 1D numpy array with same length as dataArray
         contains (dataArray-fixpoint)/fixpoint
     Example
-    ------- 
+    -------
         >>> change = relChange(cAxisDy,cAxisDy[T==300])"""
     relChangeArray = (dataArray-fixpoint)/fixpoint
     return(relChangeArray)
 
 
 def setROI1D(xAxis, values, xMin, xMax):
-    """ selects a rectangular region of intrest ROI from a 2D Matrix based on the 
-    passed boundaries xMin,xMax, yMin and yMax. x stands for the columns of the 
+    """ selects a rectangular region of intrest ROI from a 2D Matrix based on the
+    passed boundaries xMin,xMax, yMin and yMax. x stands for the columns of the
     Matrix, y for the rows
 
     Parameters
     ----------
-        xAxis: 1D numpy arrays 
+        xAxis: 1D numpy arrays
             numpy array containing the x grid
         Values : 1D numpy array same length as xAxis
 
@@ -202,7 +202,7 @@ def setROI1D(xAxis, values, xMin, xMax):
 
 
     Example
-    ------- 
+    -------
         >>> qzCut,ROI = setROIMatrix(qzGrid,RockingQz,2.1,2.2)"""
 
     selectX = np.logical_and(xAxis >= xMin, xAxis <= xMax)
@@ -212,13 +212,13 @@ def setROI1D(xAxis, values, xMin, xMax):
 
 
 def setROI2D(xAxis, yAxis, Matrix, xMin, xMax, yMin, yMax):
-    """ selects a rectangular region of intrest ROI from a 2D Matrix based on the 
-    passed boundaries xMin,xMax, yMin and yMax. x stands for the columns of the 
+    """ selects a rectangular region of intrest ROI from a 2D Matrix based on the
+    passed boundaries xMin,xMax, yMin and yMax. x stands for the columns of the
     Matrix, y for the rows
 
     Parameters
     ----------
-        xAxis, yAxis : 1D numpy arrays 
+        xAxis, yAxis : 1D numpy arrays
             numpy arrays containing the x and y grid respectively
         Matrix : 2D numpy array
             2D array with the shape (len(yAxis),len(xAxis))
@@ -240,7 +240,7 @@ def setROI2D(xAxis, yAxis, Matrix, xMin, xMax, yMin, yMax):
             array containing the sum of ROI over the x direction
 
     Example
-    ------- 
+    -------
         >>> qzCut,qxCut,ROI,xIntegral,yIntegral = setROIMatrix(qzGrid,qxGrid,RSMQ,2.1,2.2,-0.5,0.5)"""
 
     selectX = np.logical_and(xAxis >= xMin, xAxis <= xMax)
@@ -256,14 +256,14 @@ def setROI2D(xAxis, yAxis, Matrix, xMin, xMax, yMin, yMax):
 
 
 def regridArray(Array, Column, Grid, RemoveColumns):
-    """ 
-    This function returns a new version of a numpy Array where data are 
+    """
+    This function returns a new version of a numpy Array where data are
     averaged within boxes of a given grid. The new array contains the average
     value of the datapoints within each gridbox. A list of Columns that are removed
     in the new array or left untouched should be provided. If the datapoints coincide
-    with the gridpoints this function reduces to a simple average. 
+    with the gridpoints this function reduces to a simple average.
     Columns with the corresponding standard deviations are appended as columns
-    to the end of the array in the same order as the average value columns. 
+    to the end of the array in the same order as the average value columns.
 
     Parameters
     ----------
@@ -280,15 +280,15 @@ def regridArray(Array, Column, Grid, RemoveColumns):
     Returns
     ------
     result : numpy Array
-        a numpy array that contains the regridded Array with specified columns untouched and removed. 
-        The end of the array contains the standard deviation vectors. 
+        a numpy array that contains the regridded Array with specified columns untouched and removed.
+        The end of the array contains the standard deviation vectors.
 
     Example
     -------
 
     >>> AllDataAveraged =regridArray(AllDataNormalized,0,TimeGrid,[0,2,5,6])
 
-    This returns a numpy array that is regridded according to column 1 and the specified TimeGrid. 
+    This returns a numpy array that is regridded according to column 1 and the specified TimeGrid.
     Columns 0,2,5 and 6 are removed in the output. Only columns 1,3 and 4 remain and they will be column
     0,1,2 of the new array. Column 3,4 and 5 five will contain the standard deviation of the values in column
     0,1,2 respectively.
@@ -321,7 +321,7 @@ def smooth(x, window_len, window):
     smooth the data using a window with requested size.
 
     This method is based on the convolution of a scaled window with the signal.
-    The signal is prepared by introducing reflected copies of the signal 
+    The signal is prepared by introducing reflected copies of the signal
     (with the window size) in both ends so that transient parts are minimized
     in the begining and end part of the output signal.
 
@@ -331,23 +331,23 @@ def smooth(x, window_len, window):
             the input signal numpy array
     window_len : odd integer
                   the dimension of the smoothing window
-    window :    string 
+    window :    string
                 the type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'
-                flat window will produce a moving average smoothing. 
+                flat window will produce a moving average smoothing.
 
     Returns
     ------
-    result : numpy Array of the smoothed signal      
+    result : numpy Array of the smoothed signal
 
     Example
-    ------- 
+    -------
     >>> t=linspace(-2,2,0.1)
     >>> x=sin(t)+randn(len(t))*0.1
-    >>> y=smooth(x)   
+    >>> y=smooth(x)
 
-    see also:      
+    see also:
     numpy.hanning, numpy.hamming, numpy.bartlett, numpy.blackman, numpy.convolve
-    scipy.signal.lfilter  
+    scipy.signal.lfilter
     the window parameter could be the window itself as an array instead of a string """
     if x.ndim != 1:
         raise (ValueError, "smooth only accepts 1 dimension arrays.")
@@ -371,9 +371,9 @@ def smooth(x, window_len, window):
 
 
 def writeListToFile(FileName, Header, List):
-    """ 
-    This procedure writes a 2D Array or List to a unopened file. 
-    rows are written as lines. The elements are separated by tabs. Rows are 
+    """
+    This procedure writes a 2D Array or List to a unopened file.
+    rows are written as lines. The elements are separated by tabs. Rows are
     separated by linebreaks. The first line is preceded by a #
     Parameters
     ----------
@@ -388,11 +388,11 @@ def writeListToFile(FileName, Header, List):
     -------
     >>> h.WriteListToFile("test.dat","temp \t x0 \t sigma", np.array([[170, 12.3, 1.34],[ 180, 11.53, 1.4]]))
 
-    Creates a new file and writes the full list in your file (plus header)    
+    Creates a new file and writes the full list in your file (plus header)
     The created file looks like:
 
         # temp   x0  sigma
-        170     12.3    1.34 
+        170     12.3    1.34
         180     11.53    1.4
 
     """
@@ -404,21 +404,21 @@ def writeListToFile(FileName, Header, List):
 
 
 def writeSingleLineToFile(FileName, Header, Line):
-    """ 
-    This procedure writes a List or a 1D-numpy array as single line to a file 
+    """
+    This procedure writes a List or a 1D-numpy array as single line to a file
     Parameters
     ----------
     Filename : string
-            relative (or absolute) path to the file to which the line will written 
+            relative (or absolute) path to the file to which the line will written
     Header : string
-            First line of the datafile that will be written. It is preceded by a '#'        
+            First line of the datafile that will be written. It is preceded by a '#'
     Line : list, 1D-numpy-array
             the elements of the line will be appended to the specified file columns
     Example
     -------
     >>> writeSingleLineToFile('test.dat',' Number [ ]\t  Fitresults ', [1,1.2, 12, 14, "a"])
 
-    Creates a file that will look like:: 
+    Creates a file that will look like::
     # Number [ ]    Fitresults
     1   1.2     12  14  a
     """
@@ -431,7 +431,7 @@ def writeSingleLineToFile(FileName, Header, Line):
 
 def writeColumnsToFile(Filename, Header, *data):
     """
-    This procedure writes an arbitrary number of 1D arrays into a single file as columns with the specified header as first line. 
+    This procedure writes an arbitrary number of 1D arrays into a single file as columns with the specified header as first line.
     Tabs are used as separation sign
     Parameters
     ----------
@@ -439,21 +439,21 @@ def writeColumnsToFile(Filename, Header, *data):
     Path to the filename where the file will be stored
     Header : string
     First line of the datafile that will be written
-    data : 1D arrays separated by ","  
+    data : 1D arrays separated by ","
        1D arrays of the same length that will be written to the file as columns
     Example
     -------
     >>> a=np.ones(4)
     >>> b=np.zeros(4)
-    >>> c=np.ones(4) 
+    >>> c=np.ones(4)
     >>> WriteColumnsToFile('EraseMe.txt','Time \t FirstPeak \t SecondPeak',a,b,c)
     Will write the following content to the file 'EraseMe.txt' ::
 
     # Time  FirstPeak   SecondPeak
-    1.0     0.0    1.0 
-    1.0     0.0    1.0 
-    1.0     0.0    1.0 
-    1.0     0.0    1.0 
+    1.0     0.0    1.0
+    1.0     0.0    1.0
+    1.0     0.0    1.0
+    1.0     0.0    1.0
     """
     f = open(Filename, 'w')
     f.write('# ')
@@ -468,15 +468,15 @@ def writeColumnsToFile(Filename, Header, *data):
 
 
 def write1DArrayToFile(f, Array):
-    """ 
-     This procedure writes a 1D Array or List to an already opened file with the 
+    """
+     This procedure writes a 1D Array or List to an already opened file with the
      identifier f as a line. The elements are separated by tabs.
     Parameters
     ----------
-    f : file identifier 
+    f : file identifier
        file identifier of the already opened file
     Array : 1D-numpy-Array or List
-    Data Line 
+    Data Line
 
     Example
     -------
@@ -502,16 +502,16 @@ def write1DArrayToFile(f, Array):
 
 
 def write2DArrayToFile(f, Array):
-    """ 
-     This procedure writes a 2D Array or List to an already opened file with 
-     the identifier f. The elements are separated by tabs and new rows are 
+    """
+     This procedure writes a 2D Array or List to an already opened file with
+     the identifier f. The elements are separated by tabs and new rows are
      indicated by line breaks.
     Parameters
     ----------
-    f : file identifier 
+    f : file identifier
        file identifier of the already opened file
     Array : 2D-numpy-Array or List
-    Data Line 
+    Data Line
 
     Example
     -------
@@ -539,11 +539,11 @@ def write2DArrayToFile(f, Array):
 
 def appendSingleLineToFile(FileName, Line):
     """
-    This procedure appends a List or a numpy array as single line to a file 
+    This procedure appends a List or a numpy array as single line to a file
     Parameters
     ----------
     Filename : string
-            relative (or absolute) path to the file to which the line will be appended 
+            relative (or absolute) path to the file to which the line will be appended
     Line : list, 1D-numpy-array
             the elements of the line will be appended to the specified file columns
     Example
@@ -551,19 +551,19 @@ def appendSingleLineToFile(FileName, Line):
     Suppose you have the file List.dat that looks like::
 
         # Time  FirstPeak   SecondPeak
-        1.0     0.0    1.0 
-        1.0     0.0    1.0 
+        1.0     0.0    1.0
+        1.0     0.0    1.0
 
-    and you call:    
+    and you call:
 
     >>> appendSingleLineToFile([1,2,3.2],'List.dat')
 
-    then it will look like:: 
+    then it will look like::
 
         # Time  FirstPeak   SecondPeak
-        1.0     0.0    1.0 
-        1.0     0.0    1.0 
-        1       2      3.2 
+        1.0     0.0    1.0
+        1.0     0.0    1.0
+        1       2      3.2
 
     """
 
@@ -574,7 +574,7 @@ def appendSingleLineToFile(FileName, Line):
 
 def unzip(Archive, Target):
     """
-    This procedure unzips a specified archive "Archive.zip" and stores its contents to the specified to the folder "target". It only acts if a folder named "Target" does not already exist. 
+    This procedure unzips a specified archive "Archive.zip" and stores its contents to the specified to the folder "target". It only acts if a folder named "Target" does not already exist.
     Parameters
     ----------
     Archive : string
@@ -582,13 +582,13 @@ def unzip(Archive, Target):
     Target : string
             Path to the folder into which the contents of archive will be unpacked
 
-    Example        
+    Example
     -------
     >>> unzip("a","b")
     Extracts the contents of the archive archive "a" + ".zip" to a folder "b" if
-    b does not alread exist. 
+    b does not alread exist.
     >>> unzip("a","a")
-    Extracts an archive into the same locaction of the file and keeps "a" as the 
+    Extracts an archive into the same locaction of the file and keeps "a" as the
     name of the target folder if the folder a does not already exist.
     """
     if (os.path.isdir(Target) == False):
@@ -598,7 +598,7 @@ def unzip(Archive, Target):
 
 def makeFolder(PathToFolder):
     """
-    This procedure creates an empty folder if the target Folder does not already exist. 
+    This procedure creates an empty folder if the target Folder does not already exist.
     Parameters
     ----------
     PathToFolder : string
@@ -607,7 +607,7 @@ def makeFolder(PathToFolder):
     Example
     -------
     >>> makeFolder("SubFolder/NewFolderName")
-    Creates a new folder with the name "NewFolder" in the directory "SubFolder" 
+    Creates a new folder with the name "NewFolder" in the directory "SubFolder"
     relative to the working path but only if this folder does not already exist.
     """
     if not os.path.exists(PathToFolder):
@@ -638,3 +638,46 @@ def imagestring(time):
         for i in range(np.size(time)):
             result[i] = (5-len(str(int(time[i]))))*'0'+str(int(time[i]))
     return result
+
+
+def myFFT(xData, yData):
+    """ Returns FFT of the yData and frequency  axis"""
+    N = len(xData)
+
+    if N != len(yData):
+        print('X-axis and 1st dimension of the data matrix do not have identical size!')
+        return
+
+    dx = np.mean(np.diff(xData))
+    if N % 2 == 0:
+        NN = N
+    else:
+        NN = N-1
+        print('Last data point omitted!')
+
+    FFTsize = NN/2+1
+    FTdata = 2*np.fft.rfft(yData[0:NN])/NN
+    FTxAxis = 0.5/dx*np.linspace(0, 1, int(FFTsize))
+    return FTxAxis, FTdata
+
+
+def myiFFT(xData, yData):
+    N = len(xData)
+
+    if N != len(yData):
+        print('X-axis and 1st dimension of the data matrix do not have identical size!')
+        return
+
+    dx = np.mean(np.diff(xData))
+
+    if N % 2 == 0:
+        NN = N
+    else:
+        NN = N-1
+        print('Last data point omitted.')
+
+    iFFTsize = NN
+    ispectrum = NN*np.fft.irfft(yData[0:NN])
+    iFTdata = ispectrum[:int(iFFTsize)]
+    xAxis = 0.5/dx*np.linspace(0, 1, int(iFFTsize))
+    return xAxis, iFTdata
