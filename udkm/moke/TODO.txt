@@ -1,0 +1,13 @@
+ToDo - MOKE:
+
+- Beispiel für Auswertung von Hysterese
+	- Kalibration des Magneten
+	- Plotten der Hysterese 
+- Beispiel für Auswertung von zeitaufgelöstem Datensatz mit Polschuhen
+	- B-series plot
+	- F-series plot
+	- Reflektivität und MOKE plot
+- Beispiel für Auswertung von Datensatz mit rotierendem Magneten
+	- Rotation series
+	- Plots von Rohdaten, Colormaps, FFT und Meta Analyse
+- Strahlprofilanalyse und Fluenzberechnung

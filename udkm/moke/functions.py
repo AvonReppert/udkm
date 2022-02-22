@@ -11,7 +11,7 @@ data_path = "data/"
 export_path = "results/"
 
 
-def load_data(date, time, voltage, col_to_plot):
+def load_data(data_path, date, time, voltage, col_to_plot):
     file = data_path+str(date)+"_"+h.timestring(time)+"/Fluence/-1.0/"+str(voltage)+"/overviewData.txt"
     data = np.genfromtxt(file, comments="#")
     return(data[:, 0], data[:, col_to_plot])
@@ -30,12 +30,12 @@ def load_data_B(data_path, date, time, angle, col_to_plot):
 
 
 def load_data_reflectivity(data_path, date, time, voltage, col_to_plot):
-    file = data_path+str(date)+"_"+h.timestring(time)+"/Fluence/-1.0/"+str(voltage)+"/dataBplus.txt"
+    file = data_path+str(date)+"_"+h.timestring(time)+"/Fluence/-1.0/"+str(voltage)+"/overviewData.txt"
     data = np.genfromtxt(file, comments="#")
     return(data[:, 0], data[:, col_to_plot])
 
 
-def load_data_hysteresis(date, time, name):
+def load_data_hysteresis(data_path, date, time, name):
     file = data_path+str(date)+"_"+h.timestring(time)+"/Fluence/Static/"+name+"_NoLaser.txt"
     data = np.genfromtxt(file, comments="#")
     return(data[:, 0], data[:, 1], data[:, 2])
