@@ -705,10 +705,10 @@ def plot_transient_results(ref_file,number,transient_results,delay_steps):
     ax5 = plt.subplot(gs[4])
     ax6 = plt.subplot(gs[5])
     
-    ax1.plot(unique_delays,strain_com,'s-',color = 'gray',label= "COM (Dy)",linewidth = 2)
-    ax1.plot(unique_delays,strain_fit,'o-',color = 'black',label= "Fit (Dy)",linewidth = 2)
-    ax2.plot(unique_delays,strain_com,'s-',color = 'gray',label= "COM (Dy)",linewidth = 2)
-    ax2.plot(unique_delays,strain_fit,'o-',color = 'black',label= "Fit (Dy)",linewidth = 2)
+    ax1.plot(unique_delays,strain_com,'s-',label= "COM (Dy)",linewidth = 2)
+    ax1.plot(unique_delays,strain_fit,'o-',label= "Fit (Dy)",linewidth = 2)
+    ax2.plot(unique_delays,strain_com,'s-',label= "COM (Dy)",linewidth = 2)
+    ax2.plot(unique_delays,strain_fit,'o-',label= "Fit (Dy)",linewidth = 2)
     ax1.set_ylim(strain_fit.min() - 0.1*(strain_fit.max()-strain_fit.min()),
                  strain_fit.max() + 0.1*(strain_fit.max()-strain_fit.min()))
     ax2.set_ylim(strain_fit.min() - 0.1*(strain_fit.max()-strain_fit.min()),
@@ -717,10 +717,10 @@ def plot_transient_results(ref_file,number,transient_results,delay_steps):
     ax1.set_ylabel('strain ($10^{-3}$)',fontsize=16)
     ax1.yaxis.set_label_coords(-0.07, 0.5)
     
-    ax3.plot(unique_delays,std_relative,'-o',color = 'gray',label ="width COM",linewidth = 2)
-    ax3.plot(unique_delays,width_relative,'-o',color = 'black',label ="width Fit",linewidth = 2)
-    ax4.plot(unique_delays,std_relative,'-o',color = 'gray',label ="width COM",linewidth = 2)
-    ax4.plot(unique_delays,width_relative,'-o',color = 'black',label ="width Fit",linewidth = 2)
+    ax3.plot(unique_delays,std_relative,'-o',label ="width COM",linewidth = 2)
+    ax3.plot(unique_delays,width_relative,'-o',label ="width Fit",linewidth = 2)
+    ax4.plot(unique_delays,std_relative,'-o',label ="width COM",linewidth = 2)
+    ax4.plot(unique_delays,width_relative,'-o',label ="width Fit",linewidth = 2)
     ax3.set_ylim(width_relative.min() - 0.1*(width_relative.max()-width_relative.min()),
                  width_relative.max() + 0.1*(width_relative.max()-width_relative.min()))
     ax4.set_ylim(width_relative.min() - 0.1*(width_relative.max()-width_relative.min()),
@@ -729,10 +729,10 @@ def plot_transient_results(ref_file,number,transient_results,delay_steps):
     ax3.set_ylabel('width change ($10^{-2}$)',fontsize=16)
     ax3.yaxis.set_label_coords(-0.07, 0.5)
     
-    ax5.plot(unique_delays,integral_relative,'-s',color = 'gray',label ="Area COM",linewidth = 2) 
-    ax5.plot(unique_delays,area_relative,'-s',color = 'black',label ="Area Fit",linewidth = 2)    
-    ax6.plot(unique_delays,integral_relative,'-s',color = 'gray',label ="Area COM",linewidth = 2)
-    ax6.plot(unique_delays,area_relative,'-s',color = 'black',label ="Area Fit",linewidth = 2)
+    ax5.plot(unique_delays,integral_relative,'-s',label ="Area COM",linewidth = 2) 
+    ax5.plot(unique_delays,area_relative,'-s',label ="Area Fit",linewidth = 2)    
+    ax6.plot(unique_delays,integral_relative,'-s',label ="Area COM",linewidth = 2)
+    ax6.plot(unique_delays,area_relative,'-s',label ="Area Fit",linewidth = 2)
     ax5.set_ylim(area_relative.min() - 0.1*(area_relative.max()-area_relative.min()),
                  area_relative.max() + 0.1*(area_relative.max()-area_relative.min()))
     ax6.set_ylim(area_relative.min() - 0.1*(area_relative.max()-area_relative.min()),

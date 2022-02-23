@@ -8,13 +8,15 @@ This is an example skript for the data analysis in RSS mode at the pxs.
 import udkm.pxs.pxshelpers as pxs
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+plt.style.use("udkm_base")
 
 #%%
 '''Here, you can choose the measurement and get relevant parameters 
 to choose suitable analysis method parameters in the following.
 '''
 ref_file  = 'Reference'
-measure   = 1
+measure   = 0
 peak      = pxs.read_param(ref_file, measure)[5]
 refresh   = False
 data_path = 'test'
@@ -50,6 +52,16 @@ bool_plot_fit = False
 omega, omega_deg, delays, intensity = pxs.read_data_rss(ref_file,measure,bad_loops,bad_pixels,crystal_off,treshold,time_zero,refresh,data_path)
 
 rocking_curves = pxs.get_rocking_rss(ref_file,measure,omega,centerpixel,delays,intensity)
+
+plt.figure()
+plt.plot(rocking_curves[0,1:],np.mean(rocking_curves[2:,1:][np.unique(delays)<0,:],0),'o-',label='t0')
+plt.plot(rocking_curves[0,1:],rocking_curves[10,1:],label='one')
+plt.plot(rocking_curves[0,1:],rocking_curves[20,1:],label='second')
+plt.plot(rocking_curves[0,1:],rocking_curves[40,1:],label='third')
+plt.xlabel(r'$q_z \; \left( \AA^{-1} \right)$')
+plt.ylabel(r'intensity a.u.')
+plt.legend(loc=1)
+plt.show()
 
 pxs.plot_rocking_overview(ref_file,measure,rocking_curves,qz_borders,delay_steps)
 
