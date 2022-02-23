@@ -202,8 +202,8 @@ cmap_blue_red_4 = make_colormap([hex_to_rgb(blue_1), hex_to_rgb(blue_2), 1/5,
                                  hex_to_rgb(red_2), hex_to_rgb(red_1)
                                  ])
 
-cmap_blue_red_5 = make_colormap([(16/256,73/256,113/256), (1,1,1) ,0.5, (1,1,1),
-                                 (180/256,16/256,22/256)
+cmap_blue_red_5 = make_colormap([(16/256, 73/256, 113/256), (1, 1, 1), 0.5, (1, 1, 1),
+                                 (180/256, 16/256, 22/256)
                                  ])
 
 cmap_red_blue_1 = make_colormap([hex_to_rgb(red_1), hex_to_rgb(red_2), 1/3,
