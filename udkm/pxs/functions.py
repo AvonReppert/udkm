@@ -46,26 +46,35 @@ def get_scan_parameter(ref_file, number):
         excitation fluence in [mJ/cm2], 'time_zero': delay of pump-probe overlap in [ps],
         'distance': distance between sample and detector in [m].
         Optinal keys are: 'power': laser power in [mW], 'spot_size_x': FWHM of laser spot
-        along x-direction in [np.array([µ])m], 'spot_size_y': FWHM of laser spot along
-        y-direction in [np.array([µ])m], 'peak': measured Bragg peak of sample coded by
+        along x-direction in [mum], 'spot_size_y': FWHM of laser spot along
+        y-direction in [mum], 'peak': measured Bragg peak of sample coded by
         an integer, 'magnetic_field': applied magnetic field in [T], 'wavelength': excitation
         wavelength in [nm], 'double_pulse': first, second or both excitation pulses coded
         by an integer, 'z_pos': z-position on the sample in [mm], 'y_pos': y-position on the
-        sample in [mm], 'pulse_length': length of the pump-pulse in [ps], 'collinear_exc':
+        sample in [mm], 'pulse_length': length of the pump-pulse in [ps], 'colinear_exc':
         coded wether or not pump and probe are collinear with an integer.
 
     Example
     -------
-    >>> get_scan_parameter('reference.txt', 0) = {'number': 0,
+    >>> get_scan_parameter('reference.txt', 1) = {'number': 1,
                                                   'identifier': 20211123174703,
                                                   'date': '20211123',
                                                   'time': '183037',
                                                   'temperature': 300,
                                                   'fluence': 8.0,
-                                                  'distance': 0.7,
-                                                  'peak_number': 1,
+                                                  'time_zero': 0.7,
+                                                  'distance': 0,
+                                                  'power': 110,
+                                                  'spot_size_x': 960,
+                                                  'spot_size_y': 960,
                                                   'double_pulse': 0,
-                                                  'wavelength': 800,
+                                                  'pulse_length': 0.1,
+                                                  'wavelength': 0,
+                                                  'colinear_exc': 800,
+                                                  'peak_number': 1,
+                                                  'magnetic_field': 0.0,
+                                                  'z_pos': -4.52,
+                                                  'y_pos': 2.25,
                                                  }
 
     '''
