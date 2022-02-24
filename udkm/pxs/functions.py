@@ -13,26 +13,70 @@ import matplotlib.pyplot as plt
 import lmfit as lm
 import matplotlib.gridspec as gridspec
 import shutil
-
+import pandas as pd
 
 PXS_WL = 1.5418             # Cu K-alpha wavelength in [Ang]
 PXS_K = 2*np.pi/PXS_WL      # absolute value of the incident k-vector in [1/Ang]
-CRYSTAL_OFFSET = 0.0211595  # offset of crystal diode in [V]
 PIXELSIZE = 0.172e-3        # size of pilaus pixel in [m]
 
 
 def get_scan_parameter(ref_file, number):
-    param_list = np.genfromtxt(r'ReferenceData/'+str(ref_file)+'.txt', comments='#')
-    scan_dict = {}
-    scan_dict['number'] = number
-    scan_dict['date'] = tools.timestring(int(param_list[number, 1]))
-    scan_dict['time'] = tools.timestring(int(param_list[number, 2]))
-    scan_dict['temperature'] = int(param_list[number, 3])
-    scan_dict['fluence'] = param_list[number, 4]
-    scan_dict['distance'] = param_list[number, 5]
-    scan_dict['peak_number'] = int(param_list[number, 6])
-    scan_dict['double_pulse'] = int(param_list[number, 7])
-    scan_dict['wavelength'] = param_list[number, 8]
+    '''This function writes the measurement parameters of the 'number'. measurement
+    from the reference file 'ref_file' into a dictionary and returns it. Necessary
+    entrys of the reference file are: 'identifier': combination of date and time,
+    'date': date of measurement, 'time': time of measurement, 'temperature': start
+    temperature in [K], 'fluence' - incident excitation fluence in [mJ/cm2],
+    'time_zero': delay of pump-probe overlap in [ps], 'distance': distance between
+    sample and detector in [m].
+
+
+    Parameters
+    ----------
+    ref_file : str
+        File name of the reference file storing information about measurement.
+    number : int
+        The number of the measurement equivalent to row in the reference file.
+
+    Returns
+    -------
+    scan_dict : dictionary
+        Contains the parameters of the measurement. Mandatory keys are: 'identifier':
+        combination of date and time,'date': date of measurement, 'time': time of
+        measurement, 'temperature': start temperature in [K], 'fluence' - incident
+        excitation fluence in [mJ/cm2], 'time_zero': delay of pump-probe overlap in [ps],
+        'distance': distance between sample and detector in [m].
+        Optinal keys are: 'power': laser power in [mW], 'spot_size_x': FWHM of laser spot
+        along x-direction in [np.array([µ])m], 'spot_size_y': FWHM of laser spot along
+        y-direction in [np.array([µ])m], 'peak': measured Bragg peak of sample coded by
+        an integer, 'magnetic_field': applied magnetic field in [T], 'wavelength': excitation
+        wavelength in [nm], 'double_pulse': first, second or both excitation pulses coded
+        by an integer, 'z_pos': z-position on the sample in [mm], 'y_pos': y-position on the
+        sample in [mm], 'pulse_length': length of the pump-pulse in [ps], 'collinear_exc':
+        coded wether or not pump and probe are collinear with an integer.
+
+    Example
+    -------
+    >>> get_scan_parameter('reference.txt', 0) = {'number': 0,
+                                                  'identifier': 20211123174703,
+                                                  'date': '20211123',
+                                                  'time': '183037',
+                                                  'temperature': 300,
+                                                  'fluence': 8.0,
+                                                  'distance': 0.7,
+                                                  'peak_number': 1,
+                                                  'double_pulse': 0,
+                                                  'wavelength': 800,
+                                                 }
+
+    '''
+    parameters = pd.read_csv(r'ReferenceData/'+str(ref_file)+'.txt', delimiter="\t", header=0, comment="#")
+    header = list(parameters.columns.values)
+    scan_dict = {'number': number}
+    for i, entry in enumerate(header):
+        if entry == 'date' or entry == 'time':
+            scan_dict[entry] = tools.timestring(int(parameters[entry][number]))
+        else:
+            scan_dict[entry] = parameters[entry][number]
     return scan_dict
 
 
@@ -43,7 +87,7 @@ def get_analysis_parameter(scan_dict):
     eval_dict['save_path'] = scan_dict['date'] + '/' + scan_dict['time']
     eval_dict['file_name'] = scan_dict['date'] + scan_dict['time']
     eval_dict['time_zero'] = 0
-    eval_dict['center_pixel'] = 244
+    eval_dict['centerpixel'] = 244
     return eval_dict
 
 
