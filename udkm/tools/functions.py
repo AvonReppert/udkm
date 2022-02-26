@@ -12,7 +12,7 @@ import zipfile as zipfile
 teststring = "Successfully loaded udkm.tools.functions"
 
 
-def calcMoments(x_axis, y_values):
+def calc_moments(x_axis, y_values):
     """ calculates the Center of Mass, standard Deviation and Integral of a given Distribution
 
     Parameters

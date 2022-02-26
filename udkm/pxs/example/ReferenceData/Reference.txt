@@ -1,4 +1,4 @@
 identifier	date	time	temperature	fluence	distance	time_zero	power	spot_size_x	spot_size_y	double_pulse	pulse_length	colinear_exc	wavelength	peak_number	magnetic_field	z_pos	y_pos
-# ID | date | time | T (K) | F(mJ/cm²) | distance(m) | t0(ps) | power(mW) | size_x(mum) | size_y(mum) | double_pulse(0-first; 1-second; 2 both) | puls_length(ps) | colinear_excitation(0-no, 1-yes) | wavelength(nm) | peak(0-W; 1-FeRh) | B_field(T) |z_pos(mm) | y_pos(mm)		
+# ID | date | time | T(K) | F(mJ/cm²) | distance(m) | t0(ps) | power(mW) | size_x(mum) | size_y(mum) | double_pulse(0-first; 1-second; 2 both) | puls_length(ps) | colinear_excitation(0-no, 1-yes) | wavelength(nm) | peak(0-W; 1-FeRh) | B_field(T) |z_pos(mm) | y_pos(mm)		
 20211123174703	20211123	174703	300	8.0	0.700	0.0	110	960	960	0	0.1	0	800	0	0.0	-4.52	2.25# with phase transition
 20211123174703	20211123	183037	300	8.0	0.700	0.0	110	960	960	0	0.1	0	800	1	0.0	-4.52	2.25# with phase transition
