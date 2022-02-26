@@ -25,12 +25,12 @@ import udkm.pxs.functions as pxs
 # %%
 '''In this part the measurement parameters of the 'measure'. measurement
 of the reference file 'ref_file' that contains all measurements are written
-into teh dictionarys 'measurement' and 'export'.
+into the dictionarys 'measurement' and 'export'.
 '''
 ref_file = 'Reference'
-measure = 1
+number = 1
 
-measurement = pxs.get_scan_parameter(ref_file, measure)
+measurement = pxs.get_scan_parameter(ref_file, number)
 export = pxs.get_export_parameter(measurement)
 # %%
 '''In this section you should write all analyse parameters into 'measurement'
@@ -55,20 +55,18 @@ Optinal keys are:
 'bool_plot2D_rocking_semilogy': (boolean) should the transient 2D rocking cruve plot be with
 logarithmic norm (default: True).
 '''
-measurement['crystal_offset'] = 0.0211595  # could be also default value
-measurement['crystal_threshold'] = 0.01  # could be also default value
-if measurement['peak_number'] == 0:
+
+if measurement['peak'] == 'FeRh':
     measurement['qz_border'] = [4.08, 4.24]
     measurement['com_border'] = [4.1, 4.22]
 else:
     measurement['qz_border'] = [3.7, 4.05]
     measurement['com_border'] = [3.75, 4.0]
+measurement['crystal_offset'] = 0.0211595  # could be also default value
+measurement['crystal_threshold'] = 0.05  # could be also default value
 
-
-measurement['bool_substrate_back'] = False
 export['delay_steps'] = [10, 40, 40]
 export['bool_plot_fit'] = False
-measurement['bool_double_peak'] = False
 
 
 # %%
@@ -80,7 +78,7 @@ scan = pxs.get_rocking_rss(scan, export)
 
 pxs.plot_rocking_overview(scan, export)
 
-scan = pxs.get_background(scan, export)
+scan = pxs.get_background(scan)
 
 scan = pxs.get_peak_dynamics(scan, export)
 
