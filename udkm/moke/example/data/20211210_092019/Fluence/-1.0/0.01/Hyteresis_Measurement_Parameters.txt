@@ -1,0 +1,10 @@
+Voltage: 0.01 V
+Loops: 10 
+Measurementpoints: 240 
+Set Fluenz: -1.0 
+TimeZero: 50.0 
+Pump-Angle: 0.0 
+Samplename: Co 20 Hehn reflectivity 15mW 
+Start 	 Stop 	 Stepwidth ps
+200    1200    1
+1200    3000    3

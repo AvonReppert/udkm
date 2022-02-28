@@ -1,0 +1,10 @@
+Voltage: 0.01 V
+Loops: 8 
+Measurementpoints: 300 
+Set Fluenz: -1.0 
+TimeZero: 50.0 
+Pump-Angle: 0.0 
+Samplename: Ni20 MBI 10mW reflectivity 
+Start 	 Stop 	 Stepwidth ps
+200    1200    1
+1200    3000    3
