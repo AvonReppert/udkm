@@ -1,0 +1,15 @@
+Voltage: 5.0 V
+Loops: 12 
+Measurementpoints: 180 
+Set Fluenz: -1.0 
+TimeZero: 50.0 
+Pump-Angle: 0.0 
+Samplename: NiCuPt_indirect_15mW_MOKE 
+Start 	 Stop 	 Stepwidth ps
+200    280    1
+280    360    0.5
+360    560    1
+560    5000     4
+StartPoint: 0.1 ps
+Amplitude: 5 ps
+@StageDelay3    0    .    0

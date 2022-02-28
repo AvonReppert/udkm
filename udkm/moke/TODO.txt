@@ -1,5 +1,8 @@
 ToDo - MOKE:
 
+- Simple Example
+	- Fluenz von Parameters ausrechnen
+	- Magnetfeld aus Kalibration lesen
 - Beispiel für Auswertung von Hysterese
 	- Kalibration des Magneten
 	- Plotten der Hysterese 

@@ -1,0 +1,7 @@
+date	time	voltage	fwhmx	fwhmy	power	sample
+#0date	1time	2voltage(V)	3fwhmx(µm)	4fwhmy(µm)	5power(mW)	6name
+20211119	092027	5.0	400	10	NiCuPt
+20211210	234455	0.01	400	400	10	Ni 20 MBI
+20211209	143819	0.01	400	400	10	Ni 20 Hehn
+20211210	092019	0.01	400	400	10	Co 20 Hehn
+20211210	210924	0.01	400	400	10	CoFeB 20 Hehn
