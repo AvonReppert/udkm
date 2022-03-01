@@ -12,6 +12,39 @@ import zipfile as zipfile
 teststring = "Successfully loaded udkm.tools.functions"
 
 
+def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
+    """returns the fluence         
+    Parameters
+    ----------
+    power : float 
+        incident power in mW 
+    fwhm_x : float 
+        Full Width at Half Maximum of the (gaussian) pump beam in x-direction in microns
+    fwhm_y : float 
+        Full Width at Half Maximum of the (gaussian) pump beam in y-direction in microns
+    angle : float 
+        angle of incidence of the pump beam in degree relative to surface normal
+    rep_rate : float 
+        repetition rate of the used laser
+
+    Returns
+    ------
+        fluence : float
+          calculated fluence in mJ/cm^2
+
+    Example
+    ------ 
+        >>> calc_fluence(50,500*1e-4,400*1e-4,45,1000) """
+    # Umrechung von Grad in Bogenmaß
+    angle_rad = np.radians(angle)
+    # Berechnung der Fluenz
+    x0 = fwhm_x/(2*np.sqrt(np.log(2)))*1e-4
+    y0 = fwhm_y/(2*np.sqrt(np.log(2)))*1e-4
+    area = np.pi*x0*y0
+    fluence = power*np.cos(angle_rad)/(rep_rate*area)  # in mJ/cm^2
+    return np.round(fluence, 2)
+
+
 def calc_moments(x_axis, y_values):
     """ calculates the Center of Mass, standard Deviation and Integral of a given Distribution
 
