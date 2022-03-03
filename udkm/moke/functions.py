@@ -94,6 +94,7 @@ def load_overview_data(params):
     scan["sample"] = params["sample"]
     scan["voltage"] = params["voltage"]
     scan["id"] = params["id"]
+    scan["scan_path"] = params["scan_path"]
 
     if params["bool_t0_shift"]:
 
@@ -111,6 +112,12 @@ def load_overview_data(params):
 
     scan["fluence"] = tools.calc_fluence(params["power"], params["fwhm_x"], params["fwhm_y"],
                                          params["pump_angle"], params["rep_rate"])
+
+    title_text = scan["sample"] + "   " + scan["date"]+" "+scan["time"] + "  " + \
+        str(np.round(scan["fluence"], 1)) + r"$\mathrm{\,\frac{mJ}{\,cm^2}}$" + "  " + \
+        str(scan["voltage"]) + r"$\,$V"
+
+    scan["title_text"] = params["title_text"] = title_text
 
     return scan
 
@@ -151,11 +158,6 @@ def plot_overview(scan, **params):
     ax1.xaxis.set_ticks_position('top')
     ax2.set_xticklabels([])
 
-    title_text = scan["sample"] + "   " + scan["date"]+" "+scan["time"] + "  " + \
-        str(np.round(scan["fluence"], 1)) + r"$\mathrm{\,\frac{mJ}{\,cm^2}}$" + "  " + \
-        str(scan["voltage"]) + r"$\,$V"
-
-    scan["title_text"] = params["title_text"] = title_text
     ax1.set_title(scan["title_text"], pad=13)
 
     if "bool_save_plot" in params:
@@ -163,8 +165,8 @@ def plot_overview(scan, **params):
             plt.savefig(params["plot_path"] + scan["id"] + ".png", dpi=150)
 
 
-def save_scan(scan, params):
-    pickle.dump(scan, open(params["scan_path"] + params["id"] + ".pickle", "wb"))
+def save_scan(scan):
+    pickle.dump(scan, open(scan["scan_path"] + scan["id"] + ".pickle", "wb"))
 
 
 def load_scan(date, time, path):
