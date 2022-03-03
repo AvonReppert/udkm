@@ -56,11 +56,12 @@ def load_overview_data(params):
 
 
 params = moke.get_scan_parameter(parameter_file_name, line)
-params["bool_t0_shift"] = False
+params["bool_t0_shift"] = True
 params["bool_save_plot"] = True
 params["t0_column_name"] = "moke"
 params["plot_path"] = "plot_overview//"
 params["scan_path"] = "scan_export//"
+params["t_max"] = 1000
 scan = moke.load_overview_data(params)
 
 # if "fluence" in params:

@@ -91,6 +91,9 @@ def load_overview_data(params):
 
     scan["date"] = params["date"]
     scan["time"] = params["time"]
+    scan["sample"] = params["sample"]
+    scan["voltage"] = params["voltage"]
+    scan["id"] = params["id"]
 
     if params["bool_t0_shift"]:
 
@@ -112,7 +115,7 @@ def load_overview_data(params):
     return scan
 
 
-def plot_overview(scan, params):
+def plot_overview(scan, **params):
 
     plt.figure(figsize=(5.2, 5.2/0.68))
     gs = gridspec.GridSpec(3, 1, wspace=0, hspace=0)
@@ -148,15 +151,16 @@ def plot_overview(scan, params):
     ax1.xaxis.set_ticks_position('top')
     ax2.set_xticklabels([])
 
-    title_text = params["sample"] + "   " + params["date"]+" "+params["time"] + "  " + \
+    title_text = scan["sample"] + "   " + scan["date"]+" "+scan["time"] + "  " + \
         str(np.round(scan["fluence"], 1)) + r"$\mathrm{\,\frac{mJ}{\,cm^2}}$" + "  " + \
-        str(params["voltage"]) + r"$\,$V"
+        str(scan["voltage"]) + r"$\,$V"
 
     scan["title_text"] = params["title_text"] = title_text
     ax1.set_title(scan["title_text"], pad=13)
 
-    if params["bool_save_plot"]:
-        plt.savefig(params["plot_path"] + params["id"] + ".png", dpi=150)
+    if "bool_save_plot" in params:
+        if params["bool_save_plot"]:
+            plt.savefig(params["plot_path"] + scan["id"] + ".png", dpi=150)
 
 
 def save_scan(scan, params):
