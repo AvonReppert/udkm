@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 28 09:58:07 2022
-
-@author: Aleks
-"""
 import udkm.moke.functions as moke
-
 
 parameter_file_name = "parameters/parameters_example_1.txt"
 
@@ -22,10 +15,10 @@ params["scan_path"] = "scan_export//"
 
 scan = moke.load_overview_data(params)
 
-moke.plot_overview(scan)
+moke.plot_overview(scan,**params)
 
 # Save scan dictionary into a pickle file.
 moke.save_scan(scan)
 # Load a scan from a pickle file
-scan1 = moke.load_scan(20211119, 92027, "scan_export/")
-moke.plot_overview(scan1, **params)
+scan1 = moke.load_scan("20211119", "092027", "scan_export/")
+moke.plot_overview(scan1, t_max = 2000)
