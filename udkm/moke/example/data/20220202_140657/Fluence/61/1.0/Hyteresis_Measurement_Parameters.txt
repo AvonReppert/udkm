@@ -1,0 +1,12 @@
+Voltage: 1.0 V
+Loops: 10 
+Measurementpoints: 180 
+Set Fluenz: 61 
+TimeZero: 300.0 
+Pump-Angle: 0.0 
+Samplename: PtCuNi (6961) 7.5mJ/cm² 
+Start 	 Stop 	 Stepwidth ps
+290    310    2
+310    367    0.5
+367    1367    2
+1367    1600    5
