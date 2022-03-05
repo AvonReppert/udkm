@@ -1,0 +1,3 @@
+date	time	voltage	fwhm_x	fwhm_y	power	sample
+#0date	1time	2voltage(V)	3fwhmx(µm)	4fwhmy(µm)	5power(mW)	6name
+20220202	140657	5.0	573	487	24	PtCuNi
