@@ -62,7 +62,6 @@ def get_scan_parameter(parameter_file_name, line):
 
     # set default parameters
     params["bool_t0_shift"] = False
-    params["bool_save_plot"] = True
     params["t0_column_name"] = "moke"
 
     params["pump_angle"] = 0
@@ -159,10 +158,6 @@ def plot_overview(scan, **params):
     ax2.set_xticklabels([])
 
     ax1.set_title(scan["title_text"], pad=13)
-
-    if "bool_save_plot" in params:
-        if params["bool_save_plot"]:
-            plt.savefig(params["plot_path"] + scan["id"] + ".png", dpi=150)
 
 
 def save_scan(scan):
