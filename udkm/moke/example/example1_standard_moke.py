@@ -2,7 +2,7 @@ import udkm.moke.functions as moke
 import matplotlib.pyplot as plt
 parameter_file_name = "parameters/parameters_example_1.txt"
 
-line = 1
+line = 0
 
 params = moke.get_scan_parameter(parameter_file_name, line)
 params["bool_t0_shift"] = True
