@@ -4,10 +4,10 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
 
-from setuptools import setup,find_packages
+from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
-from os     import path
+from os import path
 
 here = path.abspath(path.dirname(__file__))
 
@@ -20,7 +20,7 @@ setup(
     version='0.1.0',
     packages=find_packages(),
     url='https://github.com/AleksUDKM/udkm',  # Optional
-    install_requires=['numpy', 'matplotlib'],  # Optional
+    install_requires=['numpy', 'matplotlib', 'os', 'pandas'],  # Optional
     license='',
     author='Alexander von Reppert',
     author_email='reppert@uni-potsdam.de',
@@ -28,6 +28,3 @@ setup(
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
 )
-
-
-

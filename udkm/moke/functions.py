@@ -163,7 +163,7 @@ def load_overview_data(params):
             t0_index = tools.find(differences, np.max(differences))
             t0 = scan["raw_delay"][:-1][t0_index]
             scan["t0"] = t0
-            print("t0 = " + str(scan["t0"]) + " ps")
+            print("t0 = " + str(np.round(scan["t0"],2)) + " ps")
             scan["delay"] = scan["raw_delay"]-t0
 
     scan["fluence"] = tools.calc_fluence(params["power"], params["fwhm_x"], params["fwhm_y"],
