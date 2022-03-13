@@ -4,6 +4,7 @@ import numpy as np
 import os as os
 import pandas as pd
 import udkm.tools.functions as tools
+import matplotlib
 
 
 import udkm.tools.colors as colors
@@ -18,7 +19,7 @@ t0 = 0    # Estimated value of t0
 data_path = "data/"
 export_path = "results/"
 
-
+''' Some legacy functions
 def load_data(data_path, date, time, voltage, col_to_plot):
     file = data_path+str(date)+"_"+tools.timestring(time)+"/Fluence/-1.0/"+str(voltage)+"/overviewData.txt"
     data = np.genfromtxt(file, comments="#")
@@ -47,6 +48,7 @@ def load_data_hysteresis(data_path, date, time, name):
     file = data_path+str(date)+"_"+tools.timestring(time)+"/Fluence/Static/"+name+"_NoLaser.txt"
     data = np.genfromtxt(file, comments="#")
     return(data[:, 0], data[:, 1], data[:, 2])
+'''
 
 
 def get_scan_parameter(parameter_file_name, line):
@@ -122,9 +124,11 @@ def load_scan(date, time, path):
     return pickle.load(open(path_string, "rb"))
 
 
-def load_overview_data(params):
-    params["raw_data_directory"] = "data\\"
-    params["overview_data_directory"] = "data_overview\\"
+def load_data(params):
+    if not("raw_data_directory" in params):
+        params["raw_data_directory"] = "data\\"
+    if not("overview_data_directory" in params):
+        params["overview_data_directory"] = "data_overview\\"
 
     overview_file = params["overview_data_directory"] + "overview_data_"+params["date"] + "_" +\
         params["time"] + "_" + str(params["fluence"]) + "_" + str(params["voltage"]) + ".txt"
@@ -163,7 +167,7 @@ def load_overview_data(params):
             t0_index = tools.find(differences, np.max(differences))
             t0 = scan["raw_delay"][:-1][t0_index]
             scan["t0"] = t0
-            print("t0 = " + str(np.round(scan["t0"],2)) + " ps")
+            print("t0 = " + str(np.round(scan["t0"], 2)) + " ps")
             scan["delay"] = scan["raw_delay"]-t0
 
     scan["fluence"] = tools.calc_fluence(params["power"], params["fwhm_x"], params["fwhm_y"],
@@ -175,6 +179,36 @@ def load_overview_data(params):
 
     scan["title_text"] = params["title_text"] = title_text
     return scan
+
+
+def sort_rotation_series(series):
+    series["angles"][series["angles"] > 360] = series["angles"][series["angles"] > 360] - 360
+    series["angles"][series["angles"] < 0] = series["angles"][series["angles"] < 0] + 360
+
+    sorting_indices = list(np.argsort(series["angles"]))
+    series["angles"] = series["angles"][np.argsort(series["angles"])]
+    for raw_list in [series["delay_list"], series["signal_list"], series["label_list"]]:
+        raw_list[:] = [raw_list[i] for i in sorting_indices]
+
+
+def get_measurements(params):
+    measurement_list = []
+    current_directory = os.getcwd()
+    os.chdir(params["raw_data_directory"])
+    data_directory = params["date"] + "_" + params["time"]
+    filename = "AllData_Reduced.txt"
+    for root, _, files in os.walk(data_directory):
+        for file in files:
+            if file == filename:
+                path_combined = os.path.join(root, file)
+                path = root.split("\\")
+                print(path)
+                if len(path) >= 4:
+                    measurement_list.append([path[0].split("_")[0], path[0].split("_")[1], path[2],
+                                             path[3], params["sample"]])
+                    print(path_combined)
+    os.chdir(current_directory)
+    return measurement_list
 
 
 def export_raw_data(params):
@@ -193,19 +227,8 @@ def export_raw_data(params):
                  result_overview_path, result_loopwise_path]:
         tools.make_folder(path)
 
-    parameter_list = []
-    data_directory = params["raw_data_directory"] + params["date"] + "_" + params["time"]
-    filename = "AllData_Reduced.txt"
-    for root, _, files in os.walk(data_directory):
-        for file in files:
-            if file == filename:
-                path_combined = os.path.join(root, file)
-                path = root.split("\\")
-                print(path)
-                if len(path) > 4:
-                    parameter_list.append([path[1].split("_")[0], path[1].split("_")[1], path[3],
-                                           path[4], params["sample"]])
-                    print(path_combined)
+    measurement_list = get_measurements(params)
+    data_directory = params["date"] + "_" + params["time"]
 
     # col_index = 0
     col_diff_signal = 1
@@ -216,16 +239,16 @@ def export_raw_data(params):
     col_delay = 6
     col_loop = 7
     col_voltage = 8
-    print(parameter_list)
-    for line, pars in enumerate(parameter_list):
-        print("Exporting measurement " + str(line + 1) + " / " + str(len(parameter_list)))
+    print(measurement_list)
+    for line, pars in enumerate(measurement_list):
+        print("Exporting measurement " + str(line + 1) + " / " + str(len(measurement_list)))
         print(pars)
         datepath = pars[0] + "_" + pars[1]
         result_file_name = datepath + "_" + pars[2] + "_" + pars[3]
         path = data_directory + "\\Fluence\\" + pars[2] + "\\" + pars[3] + "\\"
         title = pars[4] + "  " + datepath + "    " + pars[2] + "   " + str(pars[3]) + " V"
 
-        data_in = np.genfromtxt(path + "AllData_Reduced.txt", skip_header=1)
+        data_in = np.genfromtxt(params["raw_data_directory"] + path + "AllData_Reduced.txt", skip_header=1)
         data_raw = data_in[np.isfinite(data_in[:, 1]), :]
 
         #
@@ -375,3 +398,127 @@ def export_raw_data(params):
 
             plt.savefig(plot_loopwise_path + 'loopwise_' + result_file_name + ".png", dpi=150)
             plt.show()
+
+
+def load_rotation_series(params):
+    measurement_list = get_measurements(params)
+    params["fluence"] = measurement_list[0][2]
+    params["voltage"] = measurement_list[0][3]
+
+    scan = load_data(params)
+    n_measurements = len(measurement_list)
+
+    series = scan
+    series["angles"] = np.zeros(n_measurements)
+    series["signal_list"] = []
+    series["delay_list"] = []
+    series["label_list"] = []
+
+    for i, parameters in enumerate(measurement_list):
+        angle = float(measurement_list[i][2])-params["angle_offset"]
+        while angle < 0:
+            angle += 360
+        while angle > 360:
+            angle -= 360
+
+        series["angles"][i] = angle
+        params["fluence"] = measurement_list[i][2]
+        params["voltage"] = measurement_list[i][3]
+        scan = load_data(params)
+        if params["regrid_scan"]:
+            delay_regridded, signal_regridded, _, _ = tools.regrid_measurement(scan["delay"], scan["sum"]
+                                                                               - np.mean(scan["sum"]
+                                                                                         [scan["delay"] < -1]),
+                                                                               params["t_grid_new"])
+            series["delay_list"].append(delay_regridded)
+            series["signal_list"].append(signal_regridded)
+        else:
+            series["delay_list"].append(scan["delay"])
+            series["signal_list"].append(scan[params["col_to_plot"]] -
+                                         np.mean(scan[params["col_to_plot"]][scan["delay"] < -1]))
+        series["label_list"].append(str(int(angle)) + r"$^\circ$")
+    return series
+
+
+def fft_series(series, fft_params):
+    time_grid_fft = np.arange(fft_params["t_start"], fft_params["t_end"], fft_params["t_step"])
+    delay = series["delay_list"][0]
+
+    extension = 5000
+    series["frequency_list"] = []
+    series["fft_list"] = []
+
+    for i, signal in enumerate(series["signal_list"]):
+        signal_extended = np.append(signal, np.ones(extension)*signal[-1])
+        delay_extended = np.append(delay, np.linspace(delay[-1], 10000, extension+1)[1:])
+        interpolated_signal = np.interp(time_grid_fft, delay_extended, signal_extended)
+
+        frequency, fft_result = tools.fft(time_grid_fft, interpolated_signal)
+
+        series["frequency_list"].append(frequency*1000)
+        series["fft_list"].append(fft_result*fft_params["fft_factor"])
+    return series
+
+
+def plot_rotation_series(series, plot_params):
+    w_space = 0.068   # the amount of width reserved for blank space between subplots
+    h_space = 0.1   # the amount of height reserved for white space between subplots
+    axlabel_fontsize = 10
+    ticklabel_fontSize = 8
+
+    c_map = colors.cmap_blue_red_3
+
+    f = plt.figure(figsize=[5.2, 5.2])
+    gs = gridspec.GridSpec(1, 2, wspace=w_space, hspace=h_space)
+    ax1 = plt.subplot(gs[0, 0])
+    ax2 = plt.subplot(gs[0, 1])
+
+    X, Y = np.meshgrid(series["delay_list"][0], series["angles"])
+    plotted_1 = ax1.pcolormesh(X, Y, np.array(series["signal_list"])*plot_params["factor"], cmap=c_map, shading='auto',
+                               vmin=plot_params["signal_min"], vmax=plot_params["signal_max"])
+    X, Y = np.meshgrid(series["frequency_list"][0], series["angles"])
+    plotted_2 = ax2.pcolormesh(X, Y, np.array(np.abs(series["fft_list"])), cmap=c_map, shading='auto',
+                               norm=matplotlib.colors.LogNorm(vmin=plot_params["fft_min"], vmax=plot_params["fft_max"]))
+
+    for ax in [ax1]:
+        ax.set_yticks([0, 45, 90, 135, 180, 225, 270, 315, 360])
+        ax.set_xticks([0, 100, 200, 300, 400, 500])
+        if "t_min" in plot_params:
+            ax.set_xlim([plot_params["t_min"], plot_params["t_max"]])
+        if "angle_min" in plot_params:
+            ax.set_ylim(plot_params["angle_min"], plot_params["angle_max"])
+        ax.tick_params(axis='both', which='major', labelsize=ticklabel_fontSize)
+
+    for ax in [ax2]:
+        ax.set_yticks([0, 45, 90, 135, 180, 225, 270, 315, 360])
+        ax.set_yticklabels(["", "", "", "", "", "", "", "", ""])
+        if "f_min" in plot_params:
+            ax.set_xlim([plot_params["f_min"], plot_params["f_max"]])
+        if "angle_min" in plot_params:
+            ax.set_ylim(plot_params["angle_min"], plot_params["angle_max"])
+        ax.yaxis.tick_right()
+        ax.tick_params(axis='both', which='major', labelsize=ticklabel_fontSize)
+
+    ax1.set_ylabel(r'$\phi$ ($\,^\circ$)', fontsize=axlabel_fontsize)
+    ax1.set_xlabel('delay (ps)', fontsize=axlabel_fontsize)
+    ax2.set_xlabel('frequency (GHz)', fontsize=axlabel_fontsize)
+
+    cb_ax1 = f.add_axes([0.125, 0.89, 0.37, 0.02])
+    cbar_1 = plt.colorbar(plotted_1, cax=cb_ax1, orientation='horizontal')
+    cbar_1.set_label(label='MOKE (arb. units)', rotation=0, fontsize=axlabel_fontsize)
+
+    cbar_1.ax.tick_params('both', length=5, width=0.5, which='major', direction='in')
+    plt.getp(cbar_1.ax, 'xmajorticklabels')
+    cbar_1.ax.tick_params(labelsize=8, direction='in')
+    cb_ax1.xaxis.set_ticks_position("top")
+    cb_ax1.xaxis.set_label_position("top")
+
+    cb_ax2 = f.add_axes([0.53, 0.89, 0.37, 0.02])
+    cbar_2 = plt.colorbar(plotted_2, cax=cb_ax2, orientation='horizontal')
+    cbar_2.set_label(label='fft amplitude (arb. units)', fontsize=axlabel_fontsize)
+    cbar_2.ax.tick_params('both', length=5, width=0.5, which='major', direction='in')
+    plt.getp(cbar_2.ax, 'xmajorticklabels')
+    cbar_2.ax.tick_params(labelsize=8, direction='in')
+    cb_ax2.xaxis.set_ticks_position("top")
+    cb_ax2.xaxis.set_label_position("top")
+    return ax1, ax2

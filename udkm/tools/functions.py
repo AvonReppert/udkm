@@ -12,19 +12,40 @@ import zipfile as zipfile
 teststring = "Successfully loaded udkm.tools.functions"
 
 
+def fft(x_data, y_data):
+    """ returns fft of the y_data and frequency  axis"""
+    length = len(x_data)
+
+    if length != len(y_data):
+        print('x-axis and first dimension of the data matrix do not have identical size!')
+        return
+
+    dx = np.mean(np.diff(x_data))
+    if length % 2 == 0:
+        length_2 = length
+    else:
+        length_2 = length-1
+        print('last data point omitted!')
+
+    fft_size = length_2/2+1
+    ft_data = np.abs(2*np.fft.rfft(y_data[0:length_2])/length_2)
+    ft_x_axis = 0.5/dx*np.linspace(0, 1, int(fft_size))
+    return ft_x_axis, ft_data
+
+
 def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
-    """returns the fluence         
+    """returns the fluence
     Parameters
     ----------
-    power : float 
-        incident power in mW 
-    fwhm_x : float 
+    power : float
+        incident power in mW
+    fwhm_x : float
         Full Width at Half Maximum of the (gaussian) pump beam in x-direction in microns
-    fwhm_y : float 
+    fwhm_y : float
         Full Width at Half Maximum of the (gaussian) pump beam in y-direction in microns
-    angle : float 
+    angle : float
         angle of incidence of the pump beam in degree relative to surface normal
-    rep_rate : float 
+    rep_rate : float
         repetition rate of the used laser
 
     Returns
@@ -33,7 +54,7 @@ def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
           calculated fluence in mJ/cm^2
 
     Example
-    ------ 
+    ------
         >>> calc_fluence(50,500*1e-4,400*1e-4,45,1000) """
     # Umrechung von Grad in Bogenmaß
     angle_rad = np.radians(angle)
@@ -239,6 +260,18 @@ def set_roi_2d(x_axis, y_axis, matrix, x_min, x_max, y_min, y_max):
     x_integral = np.sum(roi, 0)
     y_integral = np.sum(roi, 1)
     return x_roi, y_roi, roi, x_integral, y_integral
+
+
+def regrid_measurement(x, y, x_grid):
+    signal_matrix = np.zeros((len(x), 2))
+    signal_matrix[:, 0] = x
+    signal_matrix[:, 1] = y
+    signal_matrix_regridded = regrid_array(signal_matrix, 0, x_grid, [])
+    x_regridded = signal_matrix_regridded[:, 0]
+    y_regridded = signal_matrix_regridded[:, 1]
+    std_x = signal_matrix_regridded[:, 2]
+    std_y = signal_matrix_regridded[:, 3]
+    return x_regridded, y_regridded, std_x, std_y
 
 
 def regrid_array(array, column, grid, remove_columns):
