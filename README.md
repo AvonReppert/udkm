@@ -68,7 +68,7 @@ To add it to the preinstalled matplotlib styles follow these steps:
 
 1. Look for the function path of matplotlib using
 ```
-import matplolitb
+import matplotlib
 matplotlib.matplotlib_fname()
 ```
 2. There you will find a folder called ```stylelib``` to which you copy the file ```udkm_base.mplstyle``` 
