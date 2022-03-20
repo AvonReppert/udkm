@@ -7,7 +7,7 @@ Created on Sun Dec 19 21:29:02 2021
 import numpy as np
 import os as os
 import zipfile as zipfile
-
+import pickle as pickle
 
 teststring = "Successfully loaded udkm.tools.functions"
 
@@ -588,6 +588,14 @@ def append_single_line_to_file(file_name, line):
     f = open(file_name, 'a')
     write_1d_array_to_file(f, line)
     f.close
+
+
+def save_dictionary(dictionary, file_name):
+    pickle.dump(dictionary, open(file_name, "wb"))
+
+
+def load_dictionary(file_name):
+    return pickle.load(open(file_name, "rb"))
 
 
 def unzip(archive, target):
