@@ -146,10 +146,9 @@ def subtract_linear_background(scan, threshold, direction="up"):
                                                            + scan["offset_rotation"])
     scan["rotation_down_corrected"] = scan["rotation_down"] - (scan["slope_rotation"]*scan["unique_field"]
                                                                + scan["offset_rotation"])
-
-    scan["rotation_up_corrected"] = scan["rotation_up_corrected"] - np.mean(scan["rotation_up_corrected"])
-    scan["rotation_down_corrected"] = scan["rotation_down_corrected"] - \
-        np.mean(scan["rotation_down_corrected"])
+    offset_1 = (np.mean(scan["rotation_up_corrected"]) + np.mean(scan["rotation_down_corrected"]))/2
+    scan["rotation_up_corrected"] = scan["rotation_up_corrected"] - offset_1
+    scan["rotation_down_corrected"] = scan["rotation_down_corrected"] - offset_1
 
     scan["ellipticity_up_corrected"] = scan["ellipticity_up"] - (scan["slope_ellipticity"]*scan["unique_field"]
                                                                  + scan["offset_ellipticity"])
@@ -157,11 +156,11 @@ def subtract_linear_background(scan, threshold, direction="up"):
     scan["ellipticity_down_corrected"] = scan["ellipticity_down"] - (scan["slope_ellipticity"]*scan["unique_field"]
                                                                      + scan["offset_ellipticity"])
 
-    scan["ellipticity_up_corrected"] = scan["ellipticity_up_corrected"] - \
-        np.mean(scan["ellipticity_up_corrected"])
+    offset_2 = (np.mean(scan["ellipticity_up_corrected"]) + np.mean(scan["ellipticity_down_corrected"]))/2
 
-    scan["ellipticity_down_corrected"] = scan["ellipticity_down_corrected"] - \
-        np.mean(scan["ellipticity_down_corrected"])
+    scan["ellipticity_up_corrected"] = scan["ellipticity_up_corrected"] - offset_2
+
+    scan["ellipticity_down_corrected"] = scan["ellipticity_down_corrected"] - offset_2
 
     return scan
 
@@ -176,14 +175,17 @@ def plot_data_corrected(scan, plot_ellipticity=True):
     ax1.set_xlabel(r"applied field $\mu_\mathrm{0}H_\mathrm{ext}$ (mT)")
     ax1.set_ylabel(r"polarization rotation $\theta_\mathrm{s}$ (min)", color=colors.blue_1)
 
+    axis_list = []
+    axis_list.append(ax1)
+
     if plot_ellipticity:
         ax2 = ax1.twinx()
         ax2.plot(scan["unique_field"], scan["ellipticity_up_corrected"], color=colors.red_1, label="ellipticity_up")
         ax2.plot(scan["unique_field"], scan["ellipticity_down_corrected"], color=colors.red_2, label="ellipticity_down")
         ax2.set_ylabel(r"ellipticity change $\varepsilon_\mathrm{s}$ (min)", color=colors.red_1)
-
+        axis_list.append(ax2)
     plt.title(scan["title"] + "     corrected data")
     ax1.grid("on")
     # ax1.legend(loc = 5)
     # ax2.legend(loc = 6)
-    return ax1, ax2
+    return axis_list
