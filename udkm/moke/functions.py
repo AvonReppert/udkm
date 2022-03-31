@@ -69,6 +69,7 @@ def get_scan_parameter(parameter_file_name, line):
     params["pump_angle"] = 0
     params["rep_rate"] = 1000
     params["id"] = params["date"] + "_" + params["time"]
+    params["measurements"] = len(param_file[entry])
 
     if not('fluence') in header:
         params['fluence'] = -1.0
@@ -135,11 +136,11 @@ def load_data(params):
 
     if os.path.isfile(overview_file):
         print("read in overview data")
-        data = np.genfromtxt(overview_file, comments="#")
+        data = np.genfromtxt(overview_file, comments="#", skip_footer=1)
     else:
         print("exporting data to overview file")
         export_raw_data(params)
-        data = np.genfromtxt(overview_file, comments="#")
+        data = np.genfromtxt(overview_file, comments="#", skip_footer=1)
 
     scan = {}
     scan["raw_delay"] = data[:, 0]
@@ -267,8 +268,9 @@ def export_raw_data(params):
             s_field_up = data_raw[:, col_voltage] > 0
             s_field_down = data_raw[:, col_voltage] <= 0
             if np.sum(s_field_up) == 0 or np.sum(s_field_down) == 0:
-                s_field_up = data_raw[:, col_voltage] > np.mean(data_raw[:, col_voltage])
-                s_field_down = data_raw[:, col_voltage] <= np.mean(data_raw[:, col_voltage])
+                s_field_up = s_field_down = np.ones(len(data_raw[:, col_chopper])) > 0
+                # s_field_up = data_raw[:, col_voltage] > np.mean(data_raw[:, col_voltage])
+                # s_field_down = #data_raw[:, col_voltage] <= np.mean(data_raw[:, col_voltage])
 
             for array in [data_avg_field_up, data_avg_field_down, data_avg_result,
                           data_loop_field_down, data_loop_field_up]:
@@ -425,6 +427,7 @@ def load_rotation_series(params):
         params["fluence"] = measurement_list[i][2]
         params["voltage"] = measurement_list[i][3]
         scan = load_data(params)
+
         if params["regrid_scan"]:
             delay_regridded, signal_regridded, _, _ = tools.regrid_measurement(scan["delay"], scan["sum"]
                                                                                - np.mean(scan["sum"]
