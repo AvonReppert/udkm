@@ -3,6 +3,7 @@
 import numpy as np
 import os as os
 import pandas as pd
+import lmfit as lm
 import udkm.tools.functions as tools
 import matplotlib
 
@@ -10,6 +11,8 @@ import matplotlib
 import udkm.tools.colors as colors
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from matplotlib.patches import Rectangle
 import pickle
 
 teststring = "Successfully loaded udkm.moke.functions"
@@ -525,3 +528,213 @@ def plot_rotation_series(series, plot_params):
     cb_ax2.xaxis.set_ticks_position("top")
     cb_ax2.xaxis.set_label_position("top")
     return ax1, ax2
+
+
+def analyze_beamprofile(parameters):
+    scan = {}
+    scan["date"] = parameters["date"]
+    scan["time"] = parameters["time"]
+    scan["filename"] = scan["date"] + "_" + scan["time"] + "_image.txt"
+    scan["path"] = parameters["data_directory"] + "\\" + scan["date"] + "\\"
+
+    scan["rep_rate"] = 1000
+    scan["angle"] = 0
+
+    scan["data"] = np.genfromtxt(scan["path"]+scan["filename"])
+    scan["pixel_x"] = np.arange(0, np.shape(scan["data"])[1]+1, 1)
+    scan["pixel_y"] = np.arange(0, np.shape(scan["data"])[0]+1, 1)
+
+    pixelsize_x = 5.2  # µm per pixel
+    pixelsize_y = 5.2  # µm per pixel
+    scan["distances_x"] = scan["pixel_x"]*pixelsize_x  # pixel in µm
+    scan["distances_y"] = scan["pixel_y"]*pixelsize_y  # pixel in µm
+
+    # %% #Overview Plot to define the ROI
+    scan["x_min"] = 0
+    scan["x_max"] = len(scan["pixel_x"])*pixelsize_x
+
+    scan["y_min"] = 0
+    scan["y_max"] = len(scan["pixel_y"])*pixelsize_y
+
+    X, Y = np.meshgrid(scan["distances_x"], scan["distances_y"])
+
+    plt.figure(1, figsize=(5.2, 5.2*scan["x_max"]/scan["y_max"]))
+    if parameters["plot_logarithmic"]:
+        pl = plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(),
+                            norm=matplotlib.colors.LogNorm(vmin=1, vmax=np.max(scan["data"])))
+    else:
+        pl = plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
+    plt.axis([0, X.max(), 0, Y.max()])
+    plt.xlabel(r'x ($\mathrm{\mu{}}$m)')
+    plt.ylabel(r'y ($\mathrm{\mu{}}$m)')
+    plt.title(scan["date"] + "  " + scan["time"])
+    cb = plt.colorbar()
+    cb.ax.set_title('$I$ (cts)')
+
+    entry_list = ["x_min", "x_max", "y_min", "y_max", "power", "rep_rate"]
+    for entry in entry_list:
+        if entry in parameters:
+            scan[entry] = parameters[entry]
+
+    scan["x_roi"], scan["y_roi"], scan["data_roi"], scan["x_integral"], scan["y_integral"] = tools.set_roi_2d(
+        scan["distances_x"][1:], scan["distances_y"][1:], scan["data"], scan["x_min"], scan["x_max"],
+        scan["y_min"], scan["y_max"])
+
+    scan["distance_x_cut"] = scan["x_roi"]-scan["x_min"]
+    scan["distance_y_cut"] = scan["y_roi"]-scan["y_min"]
+
+    X, Y = np.meshgrid(scan["distance_x_cut"], scan["distance_y_cut"])
+
+    dX = scan["x_max"]-scan["x_min"]
+    dY = scan["y_max"]-scan["y_min"]
+
+    imax_y = tools.find(scan["y_integral"], np.max(scan["y_integral"]))
+    slice_y = scan["data_roi"][imax_y, :]
+
+    imax_x = tools.find(scan["x_integral"], np.max(scan["x_integral"]))
+    slice_x = scan["data_roi"][:, imax_x]
+
+    # %% Fitting the resulting Parameters
+    model = lm.models.GaussianModel() + lm.models.LinearModel()
+    parsX = lm.Parameters()
+    parsY = lm.Parameters()
+
+    com_x, std_x, Ix = tools.calc_moments(scan["distance_x_cut"], scan["x_integral"])
+    com_y, std_y, Iy = tools.calc_moments(scan["distance_y_cut"], scan["y_integral"])
+    # Here you can set the initial values and possible boundaries on the fitting parameters
+    # Name       Value                 Vary     Min                   Max
+
+    parsX.add_many(('center',    com_x,    True),
+                   ('sigma',     std_x,     True),
+                   ('amplitude', 200,     True),
+                   ('slope',     0,    False),
+                   ('intercept', 0, True))
+
+    # Name       Value                 Vary     Min                   Max
+    parsY.add_many(('center',    com_y,    True),
+                   ('sigma',    std_y,     True),
+                   ('amplitude', 200,     True),
+                   ('slope',     0,   False),
+                   ('intercept', 0, True))
+
+    # Fitting takes place here
+    result_x = model.fit(scan["x_integral"]/np.max(scan["x_integral"]), parsX, x=scan["distance_x_cut"])
+    result_y = model.fit(scan["y_integral"]/np.max(scan["y_integral"]), parsY, x=scan["distance_y_cut"])
+
+    result_x_slice = model.fit(slice_x/np.max(slice_x), parsX, x=scan["distance_y_cut"])
+    result_y_slice = model.fit(slice_y/np.max(slice_y), parsY, x=scan["x_roi"]-scan["x_min"])
+
+    # Writing the results into the peaks dictionary takes place here
+    scan["fwhm_x"] = 2.35482*result_x.values["sigma"]  # in micron
+    scan["fwhm_y"] = 2.35482*result_y.values["sigma"]  # in micron
+
+    scan["fwhm_x_slice"] = 2.35482*result_x_slice.values["sigma"]  # in micron
+    scan["fwhm_y_slice"] = 2.35482*result_y_slice.values["sigma"]  # in micron
+
+    # x0 = scan["fwhm_x"]/np.sqrt(np.log(2))   # Definition according to excel-sheet
+    # y0 = scan["fwhm_y"]/np.sqrt(np.log(2))   # in micron
+
+    scan["fluence"] = tools.calc_fluence(scan["power"], scan["fwhm_x"], scan["fwhm_y"], 0, scan["rep_rate"])
+    print("power_in  = " + str(np.round(scan["power"])) + "mW (without chopper)\n->  F at " +
+          str(int(scan["angle"]))+"° = " + str(np.round(scan["fluence"])) + "mJ/cm^2")
+
+    integral_result_text = str(
+        int(round(scan["fwhm_x"]))) + r'$\,\mathrm{\mu{}}$m' + " x " + str(int(round(scan["fwhm_y"]))) + r'$\,\mathrm{\mu{}}$m'
+    slice_result_text = str(int(round(scan["fwhm_x_slice"]))) + \
+        r'$\,\mathrm{\mu{}}$m' + " x " + str(int(round(scan["fwhm_y_slice"]))) + r'$\,\mathrm{\mu{}}$m'
+
+    # %% Plotting the results in the ROI
+
+    plt.figure(2, figsize=(5.2, 5.2), linewidth=2)
+    gs = gridspec.GridSpec(2, 2,
+                           width_ratios=[3, 1],
+                           height_ratios=[1, 3],
+                           wspace=0.0, hspace=0.0)
+
+    ax1 = plt.subplot(gs[0])
+    ax2 = plt.subplot(gs[1])
+    ax3 = plt.subplot(gs[2])
+    ax4 = plt.subplot(gs[3])
+
+    # (ax1) Horizontal Profile ##
+    ax1.xaxis.tick_top()
+    ax1.xaxis.set_label_position("top")
+
+    ax1.plot(scan["distance_x_cut"], scan["x_integral"]/np.max(scan["x_integral"]),
+             '-', color=colors.grey_3, lw=2, label='integral')
+    ax1.plot(scan["distance_x_cut"], result_x.best_fit, '-',
+             color=colors.grey_1, lw=1, label="fit " + integral_result_text)
+    ax1.plot(scan["distance_x_cut"], slice_y/np.max(slice_y), '-', color=colors.blue_2, lw=1, label='slice')
+    ax1.plot(scan["distance_x_cut"], result_y_slice.best_fit, '--',
+             color=colors.blue_1, lw=1, label="fit" + slice_result_text)
+
+    ax1.set_ylabel('I (a.u.)')
+    ax1.set_xlabel(r'x ($\mathrm{\mu{}}$m)')
+    ax1.set_ylim([0, 1.05])
+    ax1.set_yticks(np.arange(0.25, 1.25, .25))
+
+    # (ax 3) Colormap of the Profile #############
+    if parameters["plot_logarithmic"]:
+        pl = ax3.pcolormesh(X, Y, scan["data_roi"], cmap=colors.fireice(),
+                            norm=matplotlib.colors.LogNorm(vmin=1, vmax=np.max(scan["data_roi"])))
+    else:
+        pl = ax3.pcolormesh(X, Y, scan["data_roi"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
+
+    ax3.axis([0, scan["x_max"]-scan["x_min"], 0, scan["y_max"]-scan["y_min"]])
+    ax3.set_xlabel(r'x ($\mathrm{\mu{}}$m)')
+    ax3.set_ylabel(r'y ($\mathrm{\mu{}}$m)')
+
+    ax3.axvline(x=scan["distance_x_cut"][imax_x], ls="--", color=colors.blue_1, lw=0.5)
+    ax3.axhline(y=scan["distance_y_cut"][imax_y], ls="--", color=colors.blue_1, lw=0.5)
+
+    # colorbar placement #############
+    axins3 = inset_axes(ax3,
+                        width="60%",  # width = 10% of parent_bbox width
+                        height="3%",  # height : 50%                   )
+                        loc=4)
+    ax3.add_patch(Rectangle((0.35, 0.018), 0.65, 0.18, edgecolor="none",
+                  facecolor="white", alpha=0.75, transform=ax3.transAxes))
+    cbar = plt.colorbar(pl, cax=axins3, orientation="horizontal")
+    cbar.ax.tick_params(labelsize=8)
+
+    cbar.ax.set_title('$I$ (cts)', fontsize=8)
+
+    axins3.xaxis.set_ticks_position("top")
+    axins3.xaxis.set_label_position("top")
+    cl = plt.getp(cbar.ax, 'xmajorticklabels')
+
+    plt.setp(cl, color="black")
+
+    ax2.axis('off')
+
+    # Plot 4) Bottom Right Vertical Profile
+
+    ax4.plot(scan["y_integral"]/np.max(scan["y_integral"]), scan["distance_y_cut"],
+             '-', color=colors.grey_3, lw=2, label='integral')
+    ax4.plot(result_y.best_fit, scan["distance_y_cut"], '-',
+             color=colors.grey_1, lw=1, label="fit " + integral_result_text)
+    ax4.plot(slice_x/np.max(slice_x), scan["distance_y_cut"], '-', color=colors.blue_2, lw=1, label='slice')
+    ax4.plot(result_x_slice.best_fit, scan["distance_y_cut"],  '--',
+             color=colors.blue_1, lw=1, label="fit " + slice_result_text)
+
+    ax4.set_ylabel(r'y ($\mathrm{\mu{}}$m)')
+    ax4.set_xlabel('I (a.u.)')
+    ax4.yaxis.tick_right()
+    ax4.yaxis.set_label_position("right")
+    ax4.legend(loc=(0.05, 1.05), frameon=False, fontsize=8)
+
+    ax4.set_ylim(0, 1.05)
+    ax4.set_ylim(0, dY)
+
+    ax4.set_xticks([0, 1])
+    ax1.set_yticks([0, 1])
+
+    ax1.set_xlim([0, dX])
+    ax4.set_ylim([0, dY])
+
+    # %%
+    print(str(int(round(scan["fwhm_x"]))) + " x " + str(int(round(scan["fwhm_y"]))) + str(" integral FWHM in microns"))
+    print(str(int(round(scan["fwhm_x_slice"]))) + " x " +
+          str(int(round(scan["fwhm_y_slice"]))) + str(" slice FWHM in microns"))
+
+    return scan
