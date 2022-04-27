@@ -360,9 +360,9 @@ def export_raw_data(params):
                     data_loop_field_down[i, loop + 1] = np.mean(data_raw[s_field_down_pumped, column]) - \
                         np.mean(data_raw[s_field_down_not_pumped, column])
             tools.write_list_to_file(result_loopwise_path + "field_up_" + result_file_name + ".txt",
-                                     u"time (ps)\t data plus loopwise", data_loop_field_up)
+                                     "time (ps)    data plus loopwise", data_loop_field_up)
             tools.write_list_to_file(result_loopwise_path + "field_down_" + result_file_name + ".txt",
-                                     u"time (ps)\t data minus loopwise", data_loop_field_down)
+                                     "time (ps)    data minus loopwise", data_loop_field_down)
 
             # Plot data loopwise
             c_map = colors.cmap_1

@@ -5,6 +5,7 @@ a collection of python commands for data analysis in udkm group
 general functions and definitions for data analysis, which includes:
 - ```helpers```: general data analysis routines
 - ```colors``` : frequently used colors and colormaps
+- ```plot```: frequently used plot layouts
 - ```constants```: frequently used constants
 - ```testing```: a sandbox file for testing git
 
