@@ -1,6 +1,6 @@
 import udkm.moke.functions as moke
 import matplotlib.pyplot as plt
-plt.style.use("C:/Users/aleks/Documents/Code/udkm/udkm/tools/udkm_base.mplstyle")
+# plt.style.use("C:/Users/aleks/Documents/Code/udkm/udkm/tools/udkm_base.mplstyle")
 parameter_file_name = "parameters/parameters_example_1.txt"
 
 line = 0

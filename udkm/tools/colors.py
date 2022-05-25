@@ -90,6 +90,8 @@ def fireice():
 
 
 """ general multicolor colormaps """
+
+
 cmap_1 = make_colormap([hex_to_rgb(blue_2), hex_to_rgb(blue_1), 0.2,
                         hex_to_rgb(blue_1), hex_to_rgb(orange_1), 0.5,
                         hex_to_rgb(orange_1), hex_to_rgb(red_1)
@@ -100,6 +102,10 @@ cmap_2 = make_colormap([hex_to_rgb(yellow), hex_to_rgb(red_1), 0.1,
                         hex_to_rgb(orange_1), hex_to_rgb(blue_1), 0.8,
                         hex_to_rgb(blue_1), hex_to_rgb(blue_2)
                         ])
+
+cmap_3 = make_colormap([(170/256, 204/256, 255/256), (0/256, 72/256, 204/256), 0.2,
+                        (0/256, 72/256, 204/256), (220/256, 23/256, 0/256), 0.5,
+                        (220/256, 23/256, 0/256), (255/256, 215/256, 0/256)])
 
 
 """ blue colormaps """

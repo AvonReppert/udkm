@@ -6,8 +6,10 @@ Created on Sun Dec 19 21:29:02 2021
 
 import numpy as np
 import os as os
-import zipfile as zipfile
+import pandas as pd
 import pickle as pickle
+import shutil
+import zipfile as zipfile
 
 teststring = "Successfully loaded udkm.tools.functions"
 
@@ -667,3 +669,70 @@ def imagestring(time):
         for i in range(np.size(time)):
             result[i] = (5-len(str(int(time[i]))))*'0'+str(int(time[i]))
     return result
+
+
+def copy_files(files, target_directory):
+    """
+    Copy files from list to a directory.
+
+    Parameters
+    ----------
+    files : list of strings
+            list of file names
+    target_directory : string
+                       name of destination folder
+    """
+    if os.path.isdir(target_directory):
+        for f in files:
+            shutil.copy(f, target_directory)
+    else:
+        print("Warning: destination folder " + target_directory + " does not " +
+              "exist. Please create it first.")
+
+
+def get_files(data_directory, pattern=''):
+    """
+    Getting all files in the directory and subdirectories matching some pattern ('.txt' for example)
+
+    Parameters
+    ----------
+    data_directory : string
+                     name of folder that will be searched through
+    pattern: string
+             string that should be substring of relevant filenames
+
+    Returns
+    ------
+    filenames : list of strings
+                list of file names
+    """
+    filenames = []
+    for path, _, files in os.walk(data_directory):
+        for name in files:
+            if pattern in name:
+                filenames.append(os.path.join(path, name))
+    return filenames
+
+
+def reduce_file_size(filename, decimals, filename_suffix='_compressed'):
+    """
+    Reduce number of decimal places for all entries in a data file. If filename_suffix equals ''
+    the existing file will be overwritten.
+
+    Parameters
+    ----------
+    filename : string
+               name of file that will be read
+    decimals: integer
+              number of decimal places
+    filename_suffix: string
+                     string that will be added at the end of the original filename before saving
+    """
+
+    data = pd.read_csv(filename, sep=" ", header=None)
+    data = data.round(decimals)
+    if decimals == 0:
+        data = data.astype(int)
+    splitted_filename = filename.split('.')
+    new_filename = splitted_filename[0] + filename_suffix + '.' + splitted_filename[1]
+    data.to_csv(new_filename, sep=" ", index=False, header=False)

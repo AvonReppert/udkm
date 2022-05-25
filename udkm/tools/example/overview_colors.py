@@ -40,8 +40,8 @@ def plot_color_gradients(category, cmap_list):
 
 
 """ multicolor lists """
-cmap_list = [colors.cmap_1, colors.cmap_2, colors.fireice()]
-name_list = ["cmap_1", "cmap_2", "fireice"]
+cmap_list = [colors.cmap_1, colors.cmap_2, colors.cmap_3, colors.fireice()]
+name_list = ["cmap_1", "cmap_2", "cmap_3", "fireice"]
 plot_color_gradients('multicolor', cmap_list)
 
 """ blue lists """
@@ -62,9 +62,9 @@ plot_color_gradients('gold', cmap_list)
 
 """ bipolar lists """
 cmap_list = [colors.cmap_blue_red_1, colors.cmap_blue_red_2, colors.cmap_blue_red_3, colors.cmap_blue_red_4,
-             colors.cmap_blue_red_5,colors.cmap_red_blue_1, colors.cmap_red_blue_2
+             colors.cmap_blue_red_5, colors.cmap_red_blue_1, colors.cmap_red_blue_2
              ]
 name_list = ["blue_red_1", "blue_red_2", "blue_red_3", "blue_red_4",
-             "blue_red_5","red_blue_1", "red_blue_1"
+             "blue_red_5", "red_blue_1", "red_blue_2"
              ]
 plot_color_gradients('bipolar', cmap_list)
