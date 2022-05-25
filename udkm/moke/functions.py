@@ -453,6 +453,8 @@ def fft_series(series, fft_params):
 
     for i, signal in enumerate(series["signal_list"]):
         signal_extended = np.append(signal, np.ones(extension)*signal[-1])
+
+        extension = len(signal_extended)-len(delay)
         delay_extended = np.append(delay, np.linspace(delay[-1], 10000, extension+1)[1:])
         interpolated_signal = np.interp(time_grid_fft, delay_extended, signal_extended)
 
