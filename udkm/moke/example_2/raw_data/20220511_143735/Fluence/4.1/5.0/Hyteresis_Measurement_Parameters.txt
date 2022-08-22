@@ -1,0 +1,11 @@
+Voltage: 5.0 V
+Loops: 5 
+Measurementpoints: 400 
+Set Fluenz:  4.1 
+TimeZero: 250.0 
+Pump-Angle: 0.0 
+Samplename: FeRh 65mW test 
+Start 	 Stop 	 Stepwidth ps
+190    214    1
+215    225     0.5
+227    2500    2
