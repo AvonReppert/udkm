@@ -1,9 +1,20 @@
-Template for the Read the Docs tutorial
-=======================================
+.. udkm documentation master file, created by
+   sphinx-quickstart on Mon Aug 22 14:31:11 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+Welcome to udkm's documentation!
+================================
 
-Read the tutorial here:
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
 
-https://docs.readthedocs.io/en/stable/tutorial/
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
