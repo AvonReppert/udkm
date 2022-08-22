@@ -69,7 +69,7 @@ def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
 
 
 def calc_moments(x_axis, y_values):
-    """ calculates the Center of Mass, standard Deviation and Integral of a given Distribution
+    """ calculates the center of mass, standard deviation and integral of a given distribution
 
     Parameters
     ----------
@@ -491,6 +491,7 @@ def write_1d_array_to_file(f, array):
     """
      This procedure writes a 1D array or list to an already opened file with the
      identifier f as a line. The elements are separated by tabs.
+
     Parameters
     ----------
     f : file identifier
@@ -511,7 +512,8 @@ def write_1d_array_to_file(f, array):
 
     1   2   3
 
-    to the file "test.dat"
+    to the file 'test.dat'
+
     """
 
     for i in range(0, len(array)):
@@ -526,6 +528,7 @@ def write_2d_array_to_file(f, array):
      This procedure writes a 2D array or list to an already opened file with
      the identifier f. The elements are separated by tabs and new rows are
      indicated by line breaks.
+
     Parameters
     ----------
     f : file identifier
@@ -547,8 +550,10 @@ def write_2d_array_to_file(f, array):
     1   2   3
     4   5   6
 
-    to the file "test.dat"
+    to the file 'test.dat'
+
     """
+
     for i in range(0, len(array)):
         for j in range(0, len(array[i, :])):
             if j != (len(array[i, :]) - 1):
@@ -559,7 +564,8 @@ def write_2d_array_to_file(f, array):
 
 def append_single_line_to_file(file_name, line):
     """
-    This procedure appends a list or a numpy array as single line to a file
+     This procedure appends a list or a numpy array as single line to a file
+
     Parameters
     ----------
     file_name : string
@@ -627,7 +633,8 @@ def unzip(archive, target):
 
 def make_folder(path_to_folder):
     """
-    This procedure creates an empty folder if the target Folder does not already exist.
+    creates an empty folder if the target folder does not already exist
+
     Parameters
     ----------
     path_to_folder : string

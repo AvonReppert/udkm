@@ -1,0 +1,9 @@
+sphinx==4.3
+ipykernel
+ipywidgets
+IProgress
+autodocsumm
+sphinx-book-theme
+sphinx_design
+sphinx_copybutton
+myst_nb
