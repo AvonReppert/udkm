@@ -52,7 +52,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
-    'myst_parser',
     'sphinx.ext.viewcode',
     'sphinx_copybutton',
     'sphinx_design',
@@ -65,7 +64,7 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-source_suffix = ['.rst', '.md']
+source_suffix = ['.rst']
 
 # jupyter_execute_notebooks = "auto"
 # execution_excludepatterns = ['*.ipynb']
