@@ -90,7 +90,29 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/AleksUDKM/udkm">
+   github project page
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../pxs.html">
+   pxs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../moke.html">
+   moke
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../tools.html">
+   tools
+  </a>
+ </li>
+</ul>
+
     </div>
 </nav></div>
         <div class="bd-sidebar__bottom">
@@ -194,7 +216,7 @@ title="Fullscreen mode"
 <span class="n">teststring</span> <span class="o">=</span> <span class="s2">&quot;Successfully loaded udkm.tools.functions&quot;</span>
 
 
-<div class="viewcode-block" id="fft"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.fft">[docs]</a><span class="k">def</span> <span class="nf">fft</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">):</span>
+<div class="viewcode-block" id="fft"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.fft">[docs]</a><span class="k">def</span> <span class="nf">fft</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; returns fft of the y_data and frequency  axis&quot;&quot;&quot;</span>
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
 
@@ -215,7 +237,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">ft_x_axis</span><span class="p">,</span> <span class="n">ft_data</span></div>
 
 
-<div class="viewcode-block" id="calc_fluence"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.calc_fluence">[docs]</a><span class="k">def</span> <span class="nf">calc_fluence</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">fwhm_x</span><span class="p">,</span> <span class="n">fwhm_y</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">rep_rate</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_fluence"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.calc_fluence">[docs]</a><span class="k">def</span> <span class="nf">calc_fluence</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">fwhm_x</span><span class="p">,</span> <span class="n">fwhm_y</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">rep_rate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;returns the fluence</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -248,7 +270,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fluence</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="calc_moments"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.calc_moments">[docs]</a><span class="k">def</span> <span class="nf">calc_moments</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_values</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_moments"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.calc_moments">[docs]</a><span class="k">def</span> <span class="nf">calc_moments</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; calculates the center of mass, standard deviation and integral of a given distribution</span>
 
 <span class="sd">    Parameters</span>
@@ -282,7 +304,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">com</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">integral</span></div>
 
 
-<div class="viewcode-block" id="calc_grid_boxes"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.calc_grid_boxes">[docs]</a><span class="k">def</span> <span class="nf">calc_grid_boxes</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_grid_boxes"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.calc_grid_boxes">[docs]</a><span class="k">def</span> <span class="nf">calc_grid_boxes</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; calculates the size of a grid cell and the left and right boundaries of each gridcell</span>
 <span class="sd">    in a monotonous but possibly nonlinear grid</span>
 
@@ -325,7 +347,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">delta</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span></div>
 
 
-<div class="viewcode-block" id="find"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.find">[docs]</a><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="find"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.find">[docs]</a><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This little function returns the index of the array where the array value is closest to the key</span>
 
 <span class="sd">    Parameters</span>
@@ -347,7 +369,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">index</span></div>
 
 
-<div class="viewcode-block" id="rel_change"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.rel_change">[docs]</a><span class="k">def</span> <span class="nf">rel_change</span><span class="p">(</span><span class="n">data_array</span><span class="p">,</span> <span class="n">fixpoint</span><span class="p">):</span>
+<div class="viewcode-block" id="rel_change"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.rel_change">[docs]</a><span class="k">def</span> <span class="nf">rel_change</span><span class="p">(</span><span class="n">data_array</span><span class="p">,</span> <span class="n">fixpoint</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;returns relative change of a measured quantity relative to a given value</span>
 
 <span class="sd">    Parameters</span>
@@ -369,7 +391,7 @@ title="Fullscreen mode"
     <span class="k">return</span><span class="p">(</span><span class="n">rel_change_array</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="set_roi_1d"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.set_roi_1d">[docs]</a><span class="k">def</span> <span class="nf">set_roi_1d</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">):</span>
+<div class="viewcode-block" id="set_roi_1d"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.set_roi_1d">[docs]</a><span class="k">def</span> <span class="nf">set_roi_1d</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; selects a rectangular region of intrest roi from a 2D matrix based on the</span>
 <span class="sd">    passed boundaries x_min,x_max, y_min and y_max. x stands for the columns of the</span>
 <span class="sd">    matrix, y for the rows</span>
@@ -400,7 +422,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">x_roi</span><span class="p">,</span> <span class="n">roi</span></div>
 
 
-<div class="viewcode-block" id="set_roi_2d"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.set_roi_2d">[docs]</a><span class="k">def</span> <span class="nf">set_roi_2d</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">):</span>
+<div class="viewcode-block" id="set_roi_2d"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.set_roi_2d">[docs]</a><span class="k">def</span> <span class="nf">set_roi_2d</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; selects a rectangular region of intrest roi from a 2D matrix based on the</span>
 <span class="sd">    passed boundaries x_min,x_max, y_min and y_max. x stands for the columns of the</span>
 <span class="sd">    matrix, y for the rows</span>
@@ -456,7 +478,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">x_regridded</span><span class="p">,</span> <span class="n">y_regridded</span><span class="p">,</span> <span class="n">std_x</span><span class="p">,</span> <span class="n">std_y</span>
 
 
-<div class="viewcode-block" id="regrid_array"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.regrid_array">[docs]</a><span class="k">def</span> <span class="nf">regrid_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">remove_columns</span><span class="p">):</span>
+<div class="viewcode-block" id="regrid_array"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.regrid_array">[docs]</a><span class="k">def</span> <span class="nf">regrid_array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">remove_columns</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function returns a new version of a numpy array where data are</span>
 <span class="sd">    averaged within boxes of a given grid. The new array contains the average</span>
@@ -515,7 +537,7 @@ title="Fullscreen mode"
     <span class="k">return</span><span class="p">(</span><span class="n">array_new</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="smooth"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.smooth">[docs]</a><span class="k">def</span> <span class="nf">smooth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window_len</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+<div class="viewcode-block" id="smooth"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.smooth">[docs]</a><span class="k">def</span> <span class="nf">smooth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">window_len</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    smooth the data using a window with requested size.</span>
 
@@ -569,7 +591,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">window_len</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">window_len</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span></div>
 
 
-<div class="viewcode-block" id="write_list_to_file"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.write_list_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_list_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+<div class="viewcode-block" id="write_list_to_file"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.write_list_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_list_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This procedure writes a 2D array or list to an unopened file.</span>
 <span class="sd">    rows are written as lines. The elements are separated by tabs.</span>
@@ -602,7 +624,7 @@ title="Fullscreen mode"
     <span class="n">f</span><span class="o">.</span><span class="n">close</span></div>
 
 
-<div class="viewcode-block" id="write_single_line_to_file"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.write_single_line_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_single_line_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+<div class="viewcode-block" id="write_single_line_to_file"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.write_single_line_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_single_line_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This procedure writes a list or a 1D-numpy array as single line to a file</span>
 <span class="sd">    Parameters</span>
@@ -628,7 +650,7 @@ title="Fullscreen mode"
     <span class="n">f</span><span class="o">.</span><span class="n">close</span></div>
 
 
-<div class="viewcode-block" id="write_columns_to_file"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.write_columns_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_columns_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="write_columns_to_file"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.write_columns_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_columns_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This procedure writes an arbitrary number of 1D arrays into a single file as columns with</span>
 <span class="sd">    the specified header as first line.</span>
@@ -667,7 +689,7 @@ title="Fullscreen mode"
     <span class="n">f</span><span class="o">.</span><span class="n">close</span></div>
 
 
-<div class="viewcode-block" id="write_1d_array_to_file"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.write_1d_array_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_1d_array_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+<div class="viewcode-block" id="write_1d_array_to_file"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.write_1d_array_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_1d_array_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">     This procedure writes a 1D array or list to an already opened file with the</span>
 <span class="sd">     identifier f as a line. The elements are separated by tabs.</span>
@@ -703,7 +725,7 @@ title="Fullscreen mode"
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="write_2d_array_to_file"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.write_2d_array_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_2d_array_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
+<div class="viewcode-block" id="write_2d_array_to_file"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.write_2d_array_to_file">[docs]</a><span class="k">def</span> <span class="nf">write_2d_array_to_file</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">     This procedure writes a 2D array or list to an already opened file with</span>
 <span class="sd">     the identifier f. The elements are separated by tabs and new rows are</span>
@@ -742,7 +764,7 @@ title="Fullscreen mode"
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="append_single_line_to_file"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.append_single_line_to_file">[docs]</a><span class="k">def</span> <span class="nf">append_single_line_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+<div class="viewcode-block" id="append_single_line_to_file"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.append_single_line_to_file">[docs]</a><span class="k">def</span> <span class="nf">append_single_line_to_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">     This procedure appends a list or a numpy array as single line to a file</span>
 
@@ -786,7 +808,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="unzip"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.unzip">[docs]</a><span class="k">def</span> <span class="nf">unzip</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<div class="viewcode-block" id="unzip"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.unzip">[docs]</a><span class="k">def</span> <span class="nf">unzip</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This procedure unzips a specified archive &quot;archive.zip&quot; and stores its contents</span>
 <span class="sd">    to the specified to the folder &quot;target&quot;. It only acts if a folder named &quot;target&quot; does not already exist.</span>
@@ -811,7 +833,7 @@ title="Fullscreen mode"
         <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="make_folder"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.make_folder">[docs]</a><span class="k">def</span> <span class="nf">make_folder</span><span class="p">(</span><span class="n">path_to_folder</span><span class="p">):</span>
+<div class="viewcode-block" id="make_folder"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.make_folder">[docs]</a><span class="k">def</span> <span class="nf">make_folder</span><span class="p">(</span><span class="n">path_to_folder</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    creates an empty folder if the target folder does not already exist</span>
 
@@ -830,7 +852,7 @@ title="Fullscreen mode"
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_to_folder</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="timestring"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.timestring">[docs]</a><span class="k">def</span> <span class="nf">timestring</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+<div class="viewcode-block" id="timestring"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.timestring">[docs]</a><span class="k">def</span> <span class="nf">timestring</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Returns a timestring made of 6 digits for the inserted time adding leading zeros if necessary.</span>
 <span class="sd">    works also with arrays.&quot;&quot;&quot;</span>
 
@@ -844,7 +866,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">result</span></div>
 
 
-<div class="viewcode-block" id="imagestring"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.imagestring">[docs]</a><span class="k">def</span> <span class="nf">imagestring</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+<div class="viewcode-block" id="imagestring"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.imagestring">[docs]</a><span class="k">def</span> <span class="nf">imagestring</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Returns a timestring made of 5 digits for the inserted time adding leading zeros if necessary.</span>
 <span class="sd">    works also with arrays.&quot;&quot;&quot;</span>
 
@@ -858,7 +880,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">result</span></div>
 
 
-<div class="viewcode-block" id="copy_files"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.copy_files">[docs]</a><span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">target_directory</span><span class="p">):</span>
+<div class="viewcode-block" id="copy_files"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.copy_files">[docs]</a><span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">target_directory</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Copy files from list to a directory.</span>
 
@@ -877,7 +899,7 @@ title="Fullscreen mode"
               <span class="s2">&quot;exist. Please create it first.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_files"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.get_files">[docs]</a><span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">data_directory</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_files"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.get_files">[docs]</a><span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">data_directory</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Getting all files in the directory and subdirectories matching some pattern (&#39;.txt&#39; for example)</span>
 
@@ -901,7 +923,7 @@ title="Fullscreen mode"
     <span class="k">return</span> <span class="n">filenames</span></div>
 
 
-<div class="viewcode-block" id="reduce_file_size"><a class="viewcode-back" href="../../../source/tools.html#udkm.tools.functions.reduce_file_size">[docs]</a><span class="k">def</span> <span class="nf">reduce_file_size</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">decimals</span><span class="p">,</span> <span class="n">filename_suffix</span><span class="o">=</span><span class="s1">&#39;_compressed&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="reduce_file_size"><a class="viewcode-back" href="../../../tools.html#udkm.tools.functions.reduce_file_size">[docs]</a><span class="k">def</span> <span class="nf">reduce_file_size</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">decimals</span><span class="p">,</span> <span class="n">filename_suffix</span><span class="o">=</span><span class="s1">&#39;_compressed&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reduce number of decimal places for all entries in a data file. If filename_suffix equals &#39;&#39;</span>
 <span class="sd">    the existing file will be overwritten.</span>

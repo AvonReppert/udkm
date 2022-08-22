@@ -1,7 +1,7 @@
-``tools``
+``moke``
 ===========
 
-.. automodule:: udkm.tools.functions
+.. automodule:: udkm.moke.functions_2
     :show-inheritance:
     :members:    
     :inherited-members:

@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>udkm.moke.functions_2 &#8212; udkm 0.1</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">udkm 0.1</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/AleksUDKM/udkm">
+   github project page
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../pxs.html">
+   pxs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../moke.html">
+   moke
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../tools.html">
+   tools
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <h1>Source code for udkm.moke.functions_2</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span> <span class="k">as</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">lmfit</span> <span class="k">as</span> <span class="nn">lm</span>
+<span class="kn">import</span> <span class="nn">udkm.tools.functions</span> <span class="k">as</span> <span class="nn">tools</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+
+<span class="kn">import</span> <span class="nn">udkm.tools.colors</span> <span class="k">as</span> <span class="nn">colors</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1.inset_locator</span> <span class="kn">import</span> <span class="n">inset_axes</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+
+<div class="viewcode-block" id="get_scan_parameter"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.get_scan_parameter">[docs]</a><span class="k">def</span> <span class="nf">get_scan_parameter</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function creates a dictionary from the information of a measurement noted in a reference file named</span>
+<span class="sd">    &#39;ref_file_name&#39; in the folder &#39;reference_data&#39;. Information that are not stated in the reference file are</span>
+<span class="sd">    set by default. The reference file contains at least the &#39;date&#39;, &#39;time&#39; and &#39;power&#39; of the measurement.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ref_file_name : str</span>
+<span class="sd">        File name of the reference file storing information about measurement.</span>
+<span class="sd">    line : int</span>
+<span class="sd">        The number of the measurement equivalent to line in the reference file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    params : dictionary</span>
+<span class="sd">        Contains the parameters of the measurement. Always given keys are: &#39;date&#39;: date of measurement,</span>
+<span class="sd">        &#39;time&#39;: time of measurement and  &#39;power&#39;: laser power without chopper [mW]. If not given the function</span>
+<span class="sd">        set default values for: &#39;time_zero&#39;: delay of pump-probe overlap in [ps] - 0, &#39;temperature&#39;: start</span>
+<span class="sd">        temperature of measurement [K] - 300, &#39;pump_angle&#39;: angle between surface normal and pump beam [deg]</span>
+<span class="sd">        - 0, &#39;field_angle&#39;: angle of teh external field in respect to surface normal [deg] - 0, double_pulse&#39;:</span>
+<span class="sd">        first (0), second (1) or both pulses (2) in double pulse experiment - 0, &#39;frontside&#39;: whether (1) or not (0)</span>
+<span class="sd">        the excitation happens at the surface - 1, &#39;field&#39;: external magnetic field strength [mT] - -1,</span>
+<span class="sd">        &#39;fwhm_x&#39;: horizontal pump width [müm] - 1000, &#39;fwhm_y&#39;: vertical pump width [müm] - 1000,</span>
+<span class="sd">        &#39;wavelength&#39;: wavelength of pumppulse [nm] - 800, &#39;pulse_length&#39;: duration of pump pulse [fs] - 120 and</span>
+<span class="sd">        &#39;fluence&#39;: excitation density calculated from &#39;power&#39;, &#39;fwhm_x&#39; and &#39;fwhm_y&#39; in top-hat approximation [mJ/cm2].</span>
+<span class="sd">        Furthermore, information of the data structure are setted by default but could be wrong and should be</span>
+<span class="sd">        given in the reference_file: &#39;rotation&#39;: value of rotable stage (power or field angle) - -1 and &#39;voltage&#39;:</span>
+<span class="sd">        voltage of the electromagnet [V] - 5.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; get_scan_parameter(&#39;reference.txt&#39;, 1) = {&#39;date&#39;: &#39;20220813&#39;,</span>
+<span class="sd">                                                  &#39;time&#39;: &#39;181818&#39;,</span>
+<span class="sd">                                                  &#39;id&#39;: 20220813_181818</span>
+<span class="sd">                                                  &#39;rotation&#39;: -1.0,</span>
+<span class="sd">                                                  &#39;voltage&#39;: 5.0,</span>
+<span class="sd">                                                  &#39;power&#39;: 50,</span>
+<span class="sd">                                                  &#39;fwhm_x&#39;: 1100,</span>
+<span class="sd">                                                  &#39;fwhm_y&#39;: 1100,</span>
+<span class="sd">                                                  &#39;temperature&#39;: 300,</span>
+<span class="sd">                                                  &#39;field&#39;: 525,</span>
+<span class="sd">                                                  &#39;pump_angle&#39;: 0,</span>
+<span class="sd">                                                  &#39;field_angle&#39;: 0,</span>
+<span class="sd">                                                  &#39;time_zero&#39;: 0,</span>
+<span class="sd">                                                  &#39;double_pulse&#39;: 0,</span>
+<span class="sd">                                                  &#39;frontside&#39;: 0,</span>
+<span class="sd">                                                  &#39;wavelength&#39;: 800,</span>
+<span class="sd">                                                  &#39;pulse_length&#39;: 120,</span>
+<span class="sd">                                                  &#39;fluence&#39;: 5.32}</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;line&#39;</span><span class="p">:</span> <span class="n">line</span><span class="p">}</span>
+    <span class="n">param_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;reference_data/&#39;</span> <span class="o">+</span> <span class="n">ref_file_name</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">param_file</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">entry</span> <span class="o">==</span> <span class="s1">&#39;date&#39;</span> <span class="ow">or</span> <span class="n">entry</span> <span class="o">==</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">timestring</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">param_file</span><span class="p">[</span><span class="n">entry</span><span class="p">][</span><span class="n">line</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span> <span class="o">=</span> <span class="n">param_file</span><span class="p">[</span><span class="n">entry</span><span class="p">][</span><span class="n">line</span><span class="p">]</span>
+
+    <span class="c1"># set default parameters</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;rep_rate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;rotation&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;voltage&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;fwhm_x&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;fwhm_x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;fwhm_y&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;fwhm_y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;temperature&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;pump_angle&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pump_angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;field_angle&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;field_angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;time_zero&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;time_zero&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;double_pulse&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;double_pulse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;frontside&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;frontside&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;wavelength&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">800</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;pulse_length&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pulse_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">120</span>
+
+    <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="s1">&#39;fluence&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;fluence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">calc_fluence</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;power&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;fwhm_x&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;fwhm_y&quot;</span><span class="p">],</span>
+                                               <span class="n">params</span><span class="p">[</span><span class="s2">&quot;pump_angle&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;rep_rate&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">params</span></div>
+
+
+<div class="viewcode-block" id="set_analysis_params"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.set_analysis_params">[docs]</a><span class="k">def</span> <span class="nf">set_analysis_params</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function creates a dictionary of the analysis parameters, which can be changed in the main script. The</span>
+<span class="sd">    dictionary contains the relevant folder names and the &#39;sample_name&#39;. Furthermore, it is possible to force a</span>
+<span class="sd">    recalculation of the loop averages, to exclude &#39;bad_loops&#39;, to manuelly sort the raw data into field up and</span>
+<span class="sd">    field down and to calculate time zero from the measurement results as delay of larges change. Additionally, there</span>
+<span class="sd">    is teh option to copy the raw data from the measurement folder into the respective sample folder in the main script.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sample_name : str</span>
+<span class="sd">        Name of the sample used for the title of the generated plots.</span>
+<span class="sd">    import_path : str</span>
+<span class="sd">        Folder path of the raw data in the measurement folder. If given the raw data is copied to the samples folder.</span>
+<span class="sd">    column_calc_t0 : str</span>
+<span class="sd">        Results &#39;moke&#39; or &#39;sum&#39; which is used to caculate time zero. If given it is caculated and printed.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    analysis_params : dictionary</span>
+<span class="sd">        Contains the parameters of the analysis with their default values, which could be adapted in the main script.</span>
+<span class="sd">        Always given keys are: &#39;data_folder&#39;: folder of measured data - raw_data, &#39;export_folder&#39;: folder of final</span>
+<span class="sd">        analysis results - exported_results, &#39;export_dict_folder&#39;: folder of the exported dictionarys containing</span>
+<span class="sd">        analysis results and measurement parameters - exported_analysis, &#39;sample_name&#39;: name of the sample,</span>
+<span class="sd">        &#39;force_recalc&#39;: if there are already exported analysis results, should it be again calculated - False,</span>
+<span class="sd">        &#39;bad_field&#39;: is there a problem with the separation into field up and field down - False, &#39;bad_loops&#39;: list of</span>
+<span class="sd">        list containing the excluded loops in the final average as analysis result - [[]].</span>
+<span class="sd">        Optinal key stated in the parameters of the function: &#39;import_path&#39;: path from which the measurement results</span>
+<span class="sd">        should be copied to &#39;data_folder&#39;. If this input parameter is given, the &#39;bool_import_data&#39; is set True and the</span>
+<span class="sd">        data is copied. &#39;column_calc_t0&#39;: which data is used for time zero determination &#39;moke&#39; or &#39;sum&#39; - &#39;moke&#39;.</span>
+<span class="sd">        If this input parameter is given, the &#39;bool_calc_t0&#39;: is set True and the calculated t0 as maximum slope is</span>
+<span class="sd">        printed and can be copied to the reference file.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; set_analysis_params(&#39;P28b&#39;) = {&#39;data_folder&#39;: &#39;raw_data&#39;,</span>
+<span class="sd">                                       &#39;export_folder&#39;: &#39;exported_results&#39;,</span>
+<span class="sd">                                       &#39;export_dict_folder&#39;: &#39;exported_analysis&#39;</span>
+<span class="sd">                                       &#39;sample_name&#39;: &#39;P28b&#39;,</span>
+<span class="sd">                                       &#39;force_recalc&#39;: False,</span>
+<span class="sd">                                       &#39;bad_field&#39;: False,</span>
+<span class="sd">                                       &#39;bad_loops&#39;: [[]],</span>
+<span class="sd">                                       &#39;bool_calc_t0&#39;: False,</span>
+<span class="sd">                                       &#39;bool_import_data&#39;: False}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">analysis_params</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;data_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;raw_data&#39;</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;export_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;exported_results&#39;</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;export_dict_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;exported_analysis&#39;</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;sample_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_name</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;force_recalc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bad_field&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bad_loops&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[]]</span>
+
+    <span class="k">if</span> <span class="s1">&#39;import_path&#39;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;import_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;import_path&#39;</span><span class="p">]</span>
+        <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bool_import_data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bool_import_data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="s1">&#39;column_calc_t0&#39;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;column_calc_t0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;column_calc_t0&#39;</span><span class="p">]</span>
+        <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bool_calc_t0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bool_calc_t0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">analysis_params</span></div>
+
+
+<div class="viewcode-block" id="get_export_information"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.get_export_information">[docs]</a><span class="k">def</span> <span class="nf">get_export_information</span><span class="p">(</span><span class="n">scan_params</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function creates a dictionary containing export information like plot title, export folder and file name,</span>
+<span class="sd">    which consist of the &#39;date&#39;, &#39;time&#39;, &#39;rotation&#39; and &#39;voltage&#39; of the measurement.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scan_params : dictionary</span>
+<span class="sd">        Containing the information of the measurement imported from the reference file.</span>
+<span class="sd">    analysis_params : dictionary</span>
+<span class="sd">        Set and potentially adjusted analysis paramaters including the &#39;sample_name&#39;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    export_params : dictionary</span>
+<span class="sd">        Contains the parameters for export and plot the measurement results that consist of the information of the</span>
+<span class="sd">        measurement: &#39;data_path&#39;: folder structure of the loctaion of the raw data given by &#39;date&#39;, &#39;time&#39;, &#39;rotation&#39;</span>
+<span class="sd">        and &#39;voltage&#39;, &#39;identification&#39;: same information but separated with whitespace used for printing the progress,</span>
+<span class="sd">        &#39;file_name&#39;: name of the exported overview file consiisting of the same information separated by underline,</span>
+<span class="sd">        &#39;plot_title&#39;: additionally contains teh sample name and is used astitle for each plot for identification.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; get_export_information(scan, analysis) = {&#39;data_path&#39;: &#39;20220818_181818/Fluence/-1.0/5.0&#39;,</span>
+<span class="sd">                                                  &#39;identification&#39;: &#39;20220818 181818 -1.0 5.0&#39;,</span>
+<span class="sd">                                                  &#39;file_name&#39;: &#39;20200818_181818_-1.0_5.0&#39;</span>
+<span class="sd">                                                  &#39;plot_title&#39;: &#39;P28b  20220818  181818  -1.0  5.0V&#39;}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">export_params</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="s1">&#39;/Fluence/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">])</span>
+    <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;identification&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">])</span>
+    <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">])</span>
+    <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;plot_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;sample_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;V&#39;</span>
+    <span class="k">return</span> <span class="n">export_params</span></div>
+
+
+<div class="viewcode-block" id="load_scan"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.load_scan">[docs]</a><span class="k">def</span> <span class="nf">load_scan</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function creates a dictionary containing the parameters of the measurement and the loopwise averaged and</span>
+<span class="sd">    analysed measurement results given by the voltage change for each field direction and their difference and sum.</span>
+<span class="sd">    If these measurements are not already exported or &#39;force_recalc&#39; is set True these results are created from the</span>
+<span class="sd">    &#39;raw_data&#39; by the function &#39;export_raw_data&#39; that also creates a loopwise plot and enables the possibility to</span>
+<span class="sd">    exclude &#39;bad_loops&#39;. If given in &#39;analysis_params&#39; created by the function &#39;set_analysis_params&#39; it is possible to</span>
+<span class="sd">    automatically copy the raw data from the measurement folder to the respective sample folder.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ref_file_name : str</span>
+<span class="sd">        File name of the reference file storing information about measurement.</span>
+<span class="sd">    analysis_params : dictionary</span>
+<span class="sd">        Set and potentially adjusted analysis paramaters including &#39;force_recalc&#39; and &#39;bad_loops&#39;.</span>
+<span class="sd">    line : int</span>
+<span class="sd">        The number of the measurement equivalent to line in the reference file.</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scan : dictionary</span>
+<span class="sd">        Contains the final measurement results and the parameters of the measurement stated in the reference file.</span>
+<span class="sd">        Always given keys are: &#39;date&#39;: date of measurement, &#39;time&#39;: time of measurement and  &#39;power&#39;: laser power</span>
+<span class="sd">        without chopper [mW]. If not given the function set default values for: &#39;time_zero&#39;: delay of pump-probe</span>
+<span class="sd">        overlap in [ps] - 0, &#39;temperature&#39;: start temperature of measurement [K] - 300, &#39;pump_angle&#39;: angle between</span>
+<span class="sd">        surface normal and pump beam [deg] - 0, &#39;field_angle&#39;: angle of teh external field in respect to surface normal</span>
+<span class="sd">        [deg] - 0, double_pulse&#39;: first (0), second (1) or both pulses (2) in double pulse experiment - 0, &#39;frontside&#39;:</span>
+<span class="sd">        whether (1) or not (0) the excitation happens at the surface - 1, &#39;field&#39;: external magnetic field strength</span>
+<span class="sd">        [mT] - -1, &#39;fwhm_x&#39;: horizontal pump width [müm] - 1000, &#39;fwhm_y&#39;: vertical pump width [müm] - 1000,</span>
+<span class="sd">        &#39;wavelength&#39;: wavelength of pumppulse [nm] - 800, &#39;pulse_length&#39;: duration of pump pulse [fs] - 120 and</span>
+<span class="sd">        &#39;fluence&#39;: excitation density calculated from &#39;power&#39;, &#39;fwhm_x&#39; and &#39;fwhm_y&#39; in top-hat approximation [mJ/cm2].</span>
+<span class="sd">        Furthermore, information of the data structure are setted by default but could be wrong and should be</span>
+<span class="sd">        given in the reference_file: &#39;rotation&#39;: value of rotable stage (power or field angle) - -1 and &#39;voltage&#39;:</span>
+<span class="sd">        voltage of the electromagnet [V] - 5. Keys for the measurement results: &#39;raw_delay&#39;: delay axis as measured</span>
+<span class="sd">        without time zero correction, &#39;delay&#39;: delays with time zero correction in reference file, &#39;sum&#39;: sum of the</span>
+<span class="sd">        voltage change for opposite field directions, &#39;moke&#39;: difference of the voltage change for opposite field</span>
+<span class="sd">        directions, &#39;field_up&#39;: voltage change for field up and &#39;field_down&#39;: voltage change of field down.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; load_scan(&#39;reference.txt&#39;, analysis, 1) = {&#39;date&#39;: &#39;20220813&#39;,</span>
+<span class="sd">                                                   &#39;time&#39;: &#39;181818&#39;,</span>
+<span class="sd">                                                   &#39;id&#39;: &#39;20220813_181818&#39;,</span>
+<span class="sd">                                                   &#39;rotation&#39;: -1.0,</span>
+<span class="sd">                                                   &#39;voltage&#39;: 5.0,</span>
+<span class="sd">                                                   &#39;power&#39;: 50,</span>
+<span class="sd">                                                   &#39;fwhm_x&#39;: 1100,</span>
+<span class="sd">                                                   &#39;fwhm_y&#39;: 1100,</span>
+<span class="sd">                                                   &#39;temperature&#39;: 300,</span>
+<span class="sd">                                                   &#39;field&#39;: 525,</span>
+<span class="sd">                                                   &#39;pump_angle&#39;: 0,</span>
+<span class="sd">                                                   &#39;field_angle&#39;: 0,</span>
+<span class="sd">                                                   &#39;time_zero&#39;: 0,</span>
+<span class="sd">                                                   &#39;double_pulse&#39;: 0,</span>
+<span class="sd">                                                   &#39;frontside&#39;: 0,</span>
+<span class="sd">                                                   &#39;wavelength&#39;: 800,</span>
+<span class="sd">                                                   &#39;pulse_length&#39;: 120,</span>
+<span class="sd">                                                   &#39;fluence&#39;: 5.32,</span>
+<span class="sd">                                                   &#39;raw_delay&#39;: np.array([110,112,114]),</span>
+<span class="sd">                                                   &#39;delay&#39;: np.array([-2,0,2]),</span>
+<span class="sd">                                                   &#39;sum&#39;: np.array([0,0.02,-0.02]),</span>
+<span class="sd">                                                   &#39;moke&#39;: np.array([0,0.2,0.4]),</span>
+<span class="sd">                                                   &#39;field_up&#39;: np.array([0,0.11,0.19]),</span>
+<span class="sd">                                                   &#39;field_down&#39;: np.array([0,-0.09,-0.21])}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">scan_params</span> <span class="o">=</span> <span class="n">get_scan_parameter</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+    <span class="n">export_params</span> <span class="o">=</span> <span class="n">get_export_information</span><span class="p">(</span><span class="n">scan_params</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bool_import_data&#39;</span><span class="p">]:</span>
+        <span class="n">tools</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;data_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">])</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;import_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span>
+                        <span class="s1">&#39;/AllData_Reduced.txt&#39;</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;data_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span>
+                        <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/AllData_Reduced.txt&#39;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;import_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span>
+                        <span class="s1">&#39;/MOKE_Average.txt&#39;</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;data_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span>
+                        <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/MOKE_Average.txt&#39;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;import_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span>
+                        <span class="s1">&#39;/Hyteresis_Measurement_Parameters.txt&#39;</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;data_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span>
+                        <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/Hyteresis_Measurement_Parameters.txt&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;copy raw data from &#39;</span> <span class="o">+</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;import_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; ...&#39;</span><span class="p">)</span>
+
+    <span class="n">tools</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;export_folder&#39;</span><span class="p">])</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;export_dict_folder&#39;</span><span class="p">])</span>
+
+    <span class="n">overview_file</span> <span class="o">=</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;export_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/overview_data_&#39;</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span>\
+        <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;voltage&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">overview_file</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;force_recalc&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Read in exported results of &#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;identification&#39;</span><span class="p">])</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">overview_file</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">skip_footer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calculate and export the final results.&#39;</span><span class="p">)</span>
+        <span class="n">export_raw_data</span><span class="p">(</span><span class="n">scan_params</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">,</span> <span class="n">export_params</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">overview_file</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">skip_footer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time Zero is: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time_zero&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;ps.&#39;</span><span class="p">)</span>
+    <span class="n">scan</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">scan_params</span><span class="p">:</span>
+        <span class="n">scan</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">scan_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">scan</span><span class="p">[</span><span class="s1">&#39;raw_delay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time_zero&#39;</span><span class="p">]</span>
+    <span class="n">scan</span><span class="p">[</span><span class="s1">&#39;delay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">scan</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">scan</span><span class="p">[</span><span class="s1">&#39;moke&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">scan</span><span class="p">[</span><span class="s1">&#39;field_up&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">scan</span><span class="p">[</span><span class="s1">&#39;field_down&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">scan</span></div>
+
+
+<div class="viewcode-block" id="export_raw_data"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.export_raw_data">[docs]</a><span class="k">def</span> <span class="nf">export_raw_data</span><span class="p">(</span><span class="n">scan_params</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">,</span> <span class="n">export_params</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function reads in the raw data from the &#39;data_path&#39; given by the function &#39;get_export_information&#39;</span>
+<span class="sd">    and plot the loopise voltage change between pumped and unpumped for both field directions as well as their</span>
+<span class="sd">    difference and the respective averages. With &#39;bad_field&#39; it is possible to manually set the field directions</span>
+<span class="sd">    if this infomation is not given by teh raw data file. Afterwards an average excluding &#39;bad_loops&#39; is calculated</span>
+<span class="sd">    and the delay axis is shifted according to the time zero given in the refernence file. The results are exported</span>
+<span class="sd">    in an overview file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scan_params : dictionary</span>
+<span class="sd">        Parameters of the measurement used to shift the delay axis.</span>
+<span class="sd">    analysis_params : dictionary</span>
+<span class="sd">        Set and potentially adjusted analysis paramaters including &#39;bool_calc_t0&#39; and &#39;bad_loops&#39;.</span>
+<span class="sd">    export_params : dictionary</span>
+<span class="sd">        Folder names and plot title to export and save teh generated results.</span>
+<span class="sd">    line : int</span>
+<span class="sd">        Number of the measurement in reference file is used as entry of the &#39;bad_loops&#39; list. For single</span>
+<span class="sd">        measurement and single &#39;bad_loops&#39; entry this list is used to exclude bad loops.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; export_raw_data(scan_params, {&#39;bad_loops&#39;: [[1]], ...}, export_params, 3)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">tools</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="s1">&#39;plot_loopwise&#39;</span><span class="p">)</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="s1">&#39;plot_overview&#39;</span><span class="p">)</span>
+    <span class="n">tools</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="s1">&#39;data_loopwise&#39;</span><span class="p">)</span>
+
+    <span class="c1"># col_index = 0</span>
+    <span class="n">col_diff_signal</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># col_diode_a = 2</span>
+    <span class="c1"># col_diode_b = 3</span>
+    <span class="c1"># col_reference = 4</span>
+    <span class="n">col_chopper</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">col_delay</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">col_loop</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">col_voltage</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;analyze measurement &#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;identification&#39;</span><span class="p">])</span>
+    <span class="n">data_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;data_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;data_path&#39;</span><span class="p">]</span> <span class="o">+</span>
+                            <span class="s1">&#39;/AllData_Reduced.txt&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data_raw</span> <span class="o">=</span> <span class="n">data_in</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">data_in</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">:]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_raw</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">unique_delays</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_delay</span><span class="p">])</span>
+        <span class="n">loops</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_loop</span><span class="p">]))</span>
+        <span class="n">data_avg_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">),</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">data_loop_field_up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">),</span> <span class="n">loops</span><span class="p">))</span>
+        <span class="n">data_loop_field_down</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">),</span> <span class="n">loops</span><span class="p">))</span>
+
+        <span class="n">s_pumped</span> <span class="o">=</span> <span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_chopper</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="n">s_not_pumped</span> <span class="o">=</span> <span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_chopper</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">s_field_up</span> <span class="o">=</span> <span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_voltage</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">s_field_down</span> <span class="o">=</span> <span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_voltage</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bad_field&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Magnetic field is manually sorted.&#39;</span><span class="p">)</span>
+            <span class="n">n_all_delays</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_loop</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+            <span class="n">field_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_loop</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">field_array</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">loop</span><span class="o">*</span><span class="n">n_all_delays</span><span class="p">)):</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_all_delays</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">loop</span><span class="o">*</span><span class="n">n_all_delays</span><span class="p">))]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">s_field_up</span> <span class="o">=</span> <span class="n">field_array</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="n">s_field_down</span> <span class="o">=</span> <span class="n">field_array</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">array</span> <span class="ow">in</span> <span class="p">[</span><span class="n">data_avg_result</span><span class="p">,</span> <span class="n">data_loop_field_down</span><span class="p">,</span> <span class="n">data_loop_field_up</span><span class="p">]:</span>
+            <span class="n">array</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">unique_delays</span> <span class="o">-</span> <span class="n">scan_params</span><span class="p">[</span><span class="s1">&#39;time_zero&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">s_loop</span> <span class="o">=</span> <span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_loop</span><span class="p">]</span> <span class="o">==</span> <span class="n">loop</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">):</span>
+                <span class="n">s_delay</span> <span class="o">=</span> <span class="n">data_raw</span><span class="p">[:,</span> <span class="n">col_delay</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span>
+                <span class="n">s_field_up_pumped</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_loop</span> <span class="o">&amp;</span> <span class="n">s_field_up</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_pumped</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_delay</span>
+                <span class="n">s_field_up_not_pumped</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_loop</span> <span class="o">&amp;</span> <span class="n">s_field_up</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_not_pumped</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_delay</span>
+                <span class="n">s_field_down_pumped</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_loop</span> <span class="o">&amp;</span> <span class="n">s_field_down</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_pumped</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_delay</span>
+                <span class="n">s_field_down_not_pumped</span> <span class="o">=</span> <span class="p">((</span><span class="n">s_loop</span> <span class="o">&amp;</span> <span class="n">s_field_down</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_not_pumped</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">s_delay</span>
+
+                <span class="n">data_loop_field_up</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[</span><span class="n">s_field_up_pumped</span><span class="p">,</span> <span class="n">col_diff_signal</span><span class="p">])</span> <span class="o">-</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[</span><span class="n">s_field_up_not_pumped</span><span class="p">,</span> <span class="n">col_diff_signal</span><span class="p">])</span>
+                <span class="n">data_loop_field_down</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[</span><span class="n">s_field_down_pumped</span><span class="p">,</span> <span class="n">col_diff_signal</span><span class="p">])</span> <span class="o">-</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_raw</span><span class="p">[</span><span class="n">s_field_down_not_pumped</span><span class="p">,</span> <span class="n">col_diff_signal</span><span class="p">])</span>
+        <span class="n">tools</span><span class="o">.</span><span class="n">write_list_to_file</span><span class="p">(</span><span class="s1">&#39;data_loopwise/field_up_&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;time (ps)    data plus loopwise&#39;</span><span class="p">,</span> <span class="n">data_loop_field_up</span><span class="p">)</span>
+        <span class="n">tools</span><span class="o">.</span><span class="n">write_list_to_file</span><span class="p">(</span><span class="s1">&#39;data_loopwise/field_down_&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;time (ps)    data minus loopwise&#39;</span><span class="p">,</span> <span class="n">data_loop_field_down</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">):</span>
+            <span class="n">s_delay</span> <span class="o">=</span> <span class="n">unique_delays</span> <span class="o">==</span> <span class="n">t</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bad_loops&#39;</span><span class="p">]):</span>
+                <span class="n">bad_loops</span> <span class="o">=</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bad_loops&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">good_loops</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">loop</span><span class="o">+</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bad_loops</span><span class="p">:</span>
+                        <span class="n">good_loops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loop</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bad_loops</span> <span class="o">=</span> <span class="n">analysis_params</span><span class="p">[</span><span class="s1">&#39;bad_loops&#39;</span><span class="p">][</span><span class="n">line</span><span class="p">]</span>
+                <span class="n">good_loops</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">loop</span><span class="o">+</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bad_loops</span><span class="p">:</span>
+                        <span class="n">good_loops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loop</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">data_avg_result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[</span><span class="n">s_delay</span><span class="p">,</span> <span class="n">good_loops</span><span class="p">])</span> <span class="o">+</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[</span><span class="n">s_delay</span><span class="p">,</span> <span class="n">good_loops</span><span class="p">])</span>
+            <span class="n">data_avg_result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[</span><span class="n">s_delay</span><span class="p">,</span> <span class="n">good_loops</span><span class="p">])</span> <span class="o">-</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[</span><span class="n">s_delay</span><span class="p">,</span> <span class="n">good_loops</span><span class="p">])</span>
+            <span class="n">data_avg_result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[</span><span class="n">s_delay</span><span class="p">,</span> <span class="n">good_loops</span><span class="p">])</span>
+            <span class="n">data_avg_result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[</span><span class="n">s_delay</span><span class="p">,</span> <span class="n">good_loops</span><span class="p">])</span>
+
+        <span class="n">tools</span><span class="o">.</span><span class="n">write_list_to_file</span><span class="p">(</span><span class="s1">&#39;exported_results/overview_data_&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span>
+                                 <span class="sa">u</span><span class="s1">&#39;time (ps)</span><span class="se">\t</span><span class="s1"> sum signal (V)</span><span class="se">\t</span><span class="s1"> MOKE (V)</span><span class="se">\t</span><span class="s1"> field up signal (V)&#39;</span>
+                                 <span class="o">+</span> <span class="s1">&#39; </span><span class="se">\t</span><span class="s1"> field down signal (V)&#39;</span><span class="p">,</span> <span class="n">data_avg_result</span><span class="p">)</span>
+
+        <span class="c1"># Plot data loopwise</span>
+        <span class="n">c_map</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">cmap_1</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.2</span><span class="p">,</span> <span class="mf">5.2</span> <span class="o">/</span> <span class="mf">0.68</span><span class="p">))</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loops</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="n">c_map</span><span class="p">(</span><span class="n">loop</span> <span class="o">/</span> <span class="n">loops</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_loop_field_down</span><span class="p">[:,</span> <span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                     <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c_map</span><span class="p">(</span><span class="n">loop</span> <span class="o">/</span> <span class="n">loops</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+                     <span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_loop_field_down</span><span class="p">[:,</span> <span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                     <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c_map</span><span class="p">(</span><span class="n">loop</span> <span class="o">/</span> <span class="n">loops</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">loop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">grey_1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;avg&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">grey_1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;avg.&quot;</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_up</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_loop_field_down</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">grey_1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;avg.&quot;</span><span class="p">)</span>
+
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;field up  signal </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{S_{+}} (\mathrm</span><span class="si">{V}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;field down signal </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; $\mathrm{S_{-}} (\mathrm</span><span class="si">{V}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;MOKE signal </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{S_{+}\,\,-\,\, S_{-}}$ ($\,\mathrm</span><span class="si">{V}</span><span class="s1">$)&#39;</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time (ps)&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">]:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">handlelength</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspacing</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">unique_delays</span><span class="p">)))</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;plot_title&#39;</span><span class="p">],</span> <span class="n">pad</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;plot_loopwise/loopwise_&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_overview"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.plot_overview">[docs]</a><span class="k">def</span> <span class="nf">plot_overview</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function plots and saves the exported results in the dictionary &#39;scan&#39; for a certain measurement in the</span>
+<span class="sd">    line. of the reference file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ref_file_name : str</span>
+<span class="sd">        Name of the reference file containing the measurement parameters.</span>
+<span class="sd">    scan : dictionary</span>
+<span class="sd">        Contating the paramerts and teh result sof teh measurement that are finally plotted.</span>
+<span class="sd">    analysis_params : dictionary</span>
+<span class="sd">        Contains the parameters of the data analysis including the &#39;sample_name&#39;</span>
+<span class="sd">    line : int</span>
+<span class="sd">        Number of the measurement in reference file.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; plot_overview(&#39;reference-txt&#39;, scan, analysis_params, 3)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">scan_params</span> <span class="o">=</span> <span class="n">get_scan_parameter</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+    <span class="n">export_params</span> <span class="o">=</span> <span class="n">get_export_information</span><span class="p">(</span><span class="n">scan_params</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plot the overview over the exported results...&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="o">/</span><span class="mf">0.68</span><span class="p">))</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="s2">&quot;delay&quot;</span><span class="p">],</span> <span class="n">scan</span><span class="p">[</span><span class="s2">&quot;field_up&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;field_up&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">red_1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="s2">&quot;delay&quot;</span><span class="p">],</span> <span class="n">scan</span><span class="p">[</span><span class="s2">&quot;field_down&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;field_down&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">blue_1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="s2">&quot;delay&quot;</span><span class="p">],</span> <span class="n">scan</span><span class="p">[</span><span class="s2">&quot;sum&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">orange_2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="s2">&quot;delay&quot;</span><span class="p">],</span> <span class="n">scan</span><span class="p">[</span><span class="s2">&quot;moke&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;moke&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">grey_1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;single signal  ($\,\mathrm</span><span class="si">{V}</span><span class="s1">$)&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{S_{+/-}   = I_{+/-}^</span><span class="si">{1}</span><span class="s1"> - I_{+/-}^</span><span class="si">{0}</span><span class="s1">}$ &#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;sum signal  ($\,\mathrm</span><span class="si">{V}</span><span class="s1">$)&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{S_{+}\,\, +\,\, S_{-}}$ &#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;MOKE signal ($\,\mathrm</span><span class="si">{V}</span><span class="s1">$)&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{S_{+} \,\,-\,\, S_{-}}$&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time (ps)&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="s2">&quot;delay&quot;</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="s2">&quot;delay&quot;</span><span class="p">]))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;plot_title&#39;</span><span class="p">],</span> <span class="n">pad</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;plot_overview/overview_&#39;</span> <span class="o">+</span> <span class="n">export_params</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_series"><a class="viewcode-back" href="../../../moke.html#udkm.moke.functions_2.load_series">[docs]</a><span class="k">def</span> <span class="nf">load_series</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This function creates a dictionary containing the parameters of all measurements and their loopwise averaged and</span>
+<span class="sd">    analysed measurement results given by the voltage change for each field direction and their difference and sum.</span>
+<span class="sd">    This function uses the functions &#39;load_scan&#39; and &#39;plot_overview&#39; and iterates over all lines in the reference_file.</span>
+<span class="sd">    If these measurements are not already exported or &#39;force_recalc&#39; is set True these results are created from the</span>
+<span class="sd">    &#39;raw_data&#39; by the function &#39;export_raw_data&#39; that also creates a loopwise plot and enables the possibility to</span>
+<span class="sd">    exclude &#39;bad_loops&#39;. If given in &#39;analysis_params&#39; created by the function &#39;set_analysis_params&#39; it is possible to</span>
+<span class="sd">    automatically copy the raw data from the measurement folder to the respective sample folder.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ref_file_name : str</span>
+<span class="sd">        File name of the reference file storing information about measurement.</span>
+<span class="sd">    analysis_params : dictionary</span>
+<span class="sd">        Set and potentially adjusted analysis paramaters including &#39;force_recalc&#39; and &#39;bad_loops&#39;. &#39;bad_loops&#39; should</span>
+<span class="sd">        be given as list of lists with the same length as the reference file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    scan : dictionary</span>
+<span class="sd">        Contains the final measurement results and the parameters of all measurements as list stated in the reference</span>
+<span class="sd">        file. Always given keys are: &#39;date&#39;: date of measurement, &#39;time&#39;: time of measurement and  &#39;power&#39;: laser power</span>
+<span class="sd">        without chopper [mW]. If not given the function set default values for: &#39;time_zero&#39;: delay of pump-probe</span>
+<span class="sd">        overlap in [ps] - 0, &#39;temperature&#39;: start temperature of measurement [K] - 300, &#39;pump_angle&#39;: angle between</span>
+<span class="sd">        surface normal and pump beam [deg] - 0, &#39;field_angle&#39;: angle of teh external field in respect to surface normal</span>
+<span class="sd">        [deg] - 0, double_pulse&#39;: first (0), second (1) or both pulses (2) in double pulse experiment - 0, &#39;frontside&#39;:</span>
+<span class="sd">        whether (1) or not (0) the excitation happens at the surface - 1, &#39;field&#39;: external magnetic field strength</span>
+<span class="sd">        [mT] - -1, &#39;fwhm_x&#39;: horizontal pump width [müm] - 1000, &#39;fwhm_y&#39;: vertical pump width [müm] - 1000,</span>
+<span class="sd">        &#39;wavelength&#39;: wavelength of pumppulse [nm] - 800, &#39;pulse_length&#39;: duration of pump pulse [fs] - 120 and</span>
+<span class="sd">        &#39;fluence&#39;: excitation density calculated from &#39;power&#39;, &#39;fwhm_x&#39; and &#39;fwhm_y&#39; in top-hat approximation [mJ/cm2].</span>
+<span class="sd">        Furthermore, information of the data structure are setted by default but could be wrong and should be</span>
+<span class="sd">        given in the reference_file: &#39;rotation&#39;: value of rotable stage (power or field angle) - -1 and &#39;voltage&#39;:</span>
+<span class="sd">        voltage of the electromagnet [V] - 5. Keys for the measurement results: &#39;raw_delay&#39;: delay axis as measured</span>
+<span class="sd">        without time zero correction, &#39;delay&#39;: delays with time zero correction in reference file, &#39;sum&#39;: sum of the</span>
+<span class="sd">        voltage change for opposite field directions, &#39;moke&#39;: difference of the voltage change for opposite field</span>
+<span class="sd">        directions, &#39;field_up&#39;: voltage change for field up and &#39;field_down&#39;: voltage change of field down.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; load_series(&#39;reference.txt&#39;, analysis) = {&#39;date&#39;: [&#39;20220813&#39;, 20220813&#39;],</span>
+<span class="sd">                                                   &#39;time&#39;: [&#39;181818&#39;, &#39;191919&#39;],</span>
+<span class="sd">                                                   &#39;id&#39;: [&#39;20220813_181818&#39;, &#39;20220813_191919&#39;],</span>
+<span class="sd">                                                   &#39;rotation&#39;: [-1.0, 0.0],</span>
+<span class="sd">                                                   &#39;voltage&#39;: [5, 5],</span>
+<span class="sd">                                                   &#39;power&#39;: [50, 50],</span>
+<span class="sd">                                                   &#39;fwhm_x&#39;: [1100, 1100],</span>
+<span class="sd">                                                   &#39;fwhm_y&#39;: [1100, 1100],</span>
+<span class="sd">                                                   &#39;temperature&#39;: [300, 300],</span>
+<span class="sd">                                                   &#39;field&#39;: [525, 525],</span>
+<span class="sd">                                                   &#39;pump_angle&#39;: [0, 0],</span>
+<span class="sd">                                                   &#39;field_angle&#39;: [0, 0],</span>
+<span class="sd">                                                   &#39;time_zero&#39;: [0, 0],</span>
+<span class="sd">                                                   &#39;double_pulse&#39;: [0, 0],</span>
+<span class="sd">                                                   &#39;frontside&#39;: [0, 0],</span>
+<span class="sd">                                                   &#39;wavelength&#39;: [800, 800],</span>
+<span class="sd">                                                   &#39;pulse_length&#39;: [120, 120],</span>
+<span class="sd">                                                   &#39;fluence&#39;: [5.32, 5.32],</span>
+<span class="sd">                                                   &#39;raw_delay&#39;: [np.array([110,112,114]), np.array([110,112,114])],</span>
+<span class="sd">                                                   &#39;delay&#39;: [np.array([-2,0,2]), np.array([-2,0,2])],</span>
+<span class="sd">                                                   &#39;sum&#39;: [np.array([0,0.02,-0.02]), np.array([0,-0.02,0.02])],</span>
+<span class="sd">                                                   &#39;moke&#39;: [np.array([0,0.2,0.4]), np.array([0,0.4,0.8])],</span>
+<span class="sd">                                                   &#39;field_up&#39;: [np.array([0,0.11,0.19]), np.array([0,0.19,0.41])],</span>
+<span class="sd">                                                   &#39;field_down&#39;: [np.array([0,-0.09,-0.21]), np.array([0,-0.21,-0.39])]}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ref_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;reference_data/&#39;</span> <span class="o">+</span> <span class="n">ref_file_name</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+    <span class="n">measurements</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ref_file</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+    <span class="n">ref_scan_params</span> <span class="o">=</span> <span class="n">get_scan_parameter</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Initialize the series dictionary...&#39;</span><span class="p">)</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">ref_scan_params</span><span class="p">:</span>
+        <span class="n">series</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">series</span><span class="p">[</span><span class="s1">&#39;raw_delay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">series</span><span class="p">[</span><span class="s1">&#39;delay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">series</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">series</span><span class="p">[</span><span class="s1">&#39;moke&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">series</span><span class="p">[</span><span class="s1">&#39;field_up&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">series</span><span class="p">[</span><span class="s1">&#39;field_down&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Analyze results of all measurements...&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+        <span class="n">scan</span> <span class="o">=</span> <span class="n">load_scan</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="n">plot_overview</span><span class="p">(</span><span class="n">ref_file_name</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">analysis_params</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">series</span><span class="p">:</span>
+            <span class="n">series</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scan</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">series</span></div>
+</pre></div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander von Reppert<br/>
+  
+      &copy; Copyright 2022, Alexander von Reppert.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

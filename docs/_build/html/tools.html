@@ -45,7 +45,7 @@
     <script src="_static/design-tabs.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="udkm" href="index.html" />
+    <link rel="prev" title="moke" href="moke.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -95,7 +95,17 @@
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference external" href="https://github.com/AleksUDKM/udkm">
-   Project Page
+   github project page
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pxs.html">
+   pxs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="moke.html">
+   moke
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -213,12 +223,67 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.functions">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     functions
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.colors">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     colors
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.plot">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     plot
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.fit">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     fit
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -230,6 +295,50 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.functions">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     functions
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.colors">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     colors
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.plot">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     plot
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-udkm.tools.fit">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     fit
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -237,8 +346,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="module-udkm.tools.functions">
-<span id="tools"></span><h1><code class="docutils literal notranslate"><span class="pre">tools</span></code><a class="headerlink" href="#module-udkm.tools.functions" title="Permalink to this headline">#</a></h1>
+  <section id="tools">
+<h1><code class="docutils literal notranslate"><span class="pre">tools</span></code><a class="headerlink" href="#tools" title="Permalink to this headline">#</a></h1>
+<section id="module-udkm.tools.functions">
+<span id="functions"></span><h2><code class="docutils literal notranslate"><span class="pre">functions</span></code><a class="headerlink" href="#module-udkm.tools.functions" title="Permalink to this headline">#</a></h2>
 <p>Created on Sun Dec 19 21:29:02 2021
 &#64;author: Aleks</p>
 <dl class="py function">
@@ -808,6 +919,98 @@ The created file looks like:</p>
 </dd></dl>
 
 </section>
+<section id="module-udkm.tools.colors">
+<span id="colors"></span><h2><code class="docutils literal notranslate"><span class="pre">colors</span></code><a class="headerlink" href="#module-udkm.tools.colors" title="Permalink to this headline">#</a></h2>
+<p>Created on Sun Dec 19 21:29:02 2021
+&#64;author: Aleks</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="udkm.tools.colors.cmap_3">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_3" title="Permalink to this definition">#</a></dt>
+<dd><p>blue colormaps</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="udkm.tools.colors.cmap_blue_5">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_blue_5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_blue_5" title="Permalink to this definition">#</a></dt>
+<dd><p>yellow-orange-red colormaps</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="udkm.tools.colors.cmap_gold_4">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_gold_4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_gold_4" title="Permalink to this definition">#</a></dt>
+<dd><p>red colormaps</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="udkm.tools.colors.cmap_red_4">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_red_4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_red_4" title="Permalink to this definition">#</a></dt>
+<dd><p>bipolar red to blue colormaps</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="udkm.tools.colors.fireice">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">fireice</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#fireice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.fireice" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a self-defined analogue of the colormap fireice</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="udkm.tools.colors.hex_to_rgb">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">hex_to_rgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#hex_to_rgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.hex_to_rgb" title="Permalink to this definition">#</a></dt>
+<dd><p>returns an rgb tuple from a hexadecimal input</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="udkm.tools.colors.make_colormap">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">make_colormap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#make_colormap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.make_colormap" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a LinearSegmentedColormap
+seq: a sequence of floats and RGB-tuples.
+The floats should be increasing and in the interval (0,1).</p>
+</dd></dl>
+
+</section>
+<section id="module-udkm.tools.plot">
+<span id="plot"></span><h2><code class="docutils literal notranslate"><span class="pre">plot</span></code><a class="headerlink" href="#module-udkm.tools.plot" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-udkm.tools.fit">
+<span id="fit"></span><h2><code class="docutils literal notranslate"><span class="pre">fit</span></code><a class="headerlink" href="#module-udkm.tools.fit" title="Permalink to this headline">#</a></h2>
+<p>Created on Thu Feb 10 11:55:33 2022</p>
+<p>&#64;author: matte</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="udkm.tools.fit.GetBackgroundShoulderPeak">
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.fit.</span></span><span class="sig-name descname"><span class="pre">GetBackgroundShoulderPeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzPeakMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzPeakMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsShoulder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsMax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/fit.html#GetBackgroundShoulderPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.fit.GetBackgroundShoulderPeak" title="Permalink to this definition">#</a></dt>
+<dd><p>This function extract the transducer peak from the shoulder of the substrate for better evaluation.
+The peak is between ‘qzPeakMin’ and ‘qzPeakMax’. The substarte peak is given by a Lorentzian profile, whose
+fit is different weigted below and slightly above the transducer Bragg peak.</p>
+<dl class="simple">
+<dt>rockingCurves: 2D array</dt><dd><p>contains the rocking curve for qz(x) and each delay (y1) with peak and background</p>
+</dd>
+<dt>qzPeakMin: float</dt><dd><p>the estimated left border of the transducer peak</p>
+</dd>
+<dt>qzPeakMax: float</dt><dd><p>the estimated right border of the transducer peak</p>
+</dd>
+<dt>t0: float</dt><dd><p>temporal overlapp between pump and probe</p>
+</dd>
+<dt>weightsMin: float</dt><dd><p>weight of small amplitude left of the peak for fitting (high)</p>
+</dd>
+<dt>weightsShoulder: float</dt><dd><p>weight of connection between transducer and substrate for fitting (mean)</p>
+</dd>
+<dt>weightsMax: float</dt><dd><p>weight of point up to maximum of substrate for fitting (small)</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>background: 1D array</dt><dd><p>contains the values of the best Lorentzian fit for all qz of qzAxis</p>
+</dd>
+<dt>fitBackground: 1D array</dt><dd><p>contains the values of the best Lorentzian fit for the fitted points</p>
+</dd>
+<dt>qzBackgrond: 1D array</dt><dd><p>contains the qz values of the fitted points</p>
+</dd>
+<dt>qzShoulder: float</dt><dd><p>describe the qz value of the minimum between the peak maxima (start of fitting)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
 
 
               </div>
@@ -817,11 +1020,11 @@ The created file looks like:</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="moke.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">udkm</p>
+            <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">moke</span></code></p>
         </div>
     </a>
 </div>

@@ -1,30 +1,31 @@
-``tools``
+``pxs``
 ===========
 
-``functions``
--------------
-.. automodule:: udkm.tools.functions
-    :show-inheritance:
-    :members:    
-    :inherited-members:
-
-``colors``
--------------
-.. automodule:: udkm.tools.colors
-    :show-inheritance:
-    :members:    
-    :inherited-members:
-
-``plot``
--------------
-.. automodule:: udkm.tools.plot
+functions
+-----------------
+.. automodule:: udkm.pxs.functions
     :show-inheritance:
     :members:    
     :inherited-members:
 	
-``fit``
--------------
-.. automodule:: udkm.tools.fit
+
+rsm
+-----------------
+.. automodule:: udkm.pxs.rsm
+    :show-inheritance:
+    :members:    
+    :inherited-members:
+
+rss
+-----------------
+.. automodule:: udkm.pxs.rss
+    :show-inheritance:
+    :members:    
+    :inherited-members:
+
+pxshelpers
+-----------------
+.. automodule:: udkm.pxs.pxshelpers
     :show-inheritance:
     :members:    
     :inherited-members:
