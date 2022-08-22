@@ -1,329 +1,97 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>pxs &#8212; udkm 0.1</title>
-    
-  <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pxs &mdash; udkm 0.1</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="moke" href="moke.html" />
-    <link rel="prev" title="Welcome to udkm’s documentation!" href="index.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
+    <link rel="prev" title="Welcome to udkm’s documentation!" href="index.html" /> 
+</head>
 
-    <!-- Google Analytics -->
-    
-  </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">udkm 0.1</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/AleksUDKM/udkm">
-   github project page
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   pxs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="moke.html">
-   moke
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tools.html">
-   tools
-  </a>
- </li>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> udkm
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://github.com/AleksUDKM/udkm">github project page</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">    pxs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.pxs.functions">functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.pxs.rsm">rsm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.pxs.rss">rss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.pxs.pxshelpers">pxshelpers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moke.html">    moke</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">    tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.functions"><code class="docutils literal notranslate"><span class="pre">functions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.colors"><code class="docutils literal notranslate"><span class="pre">colors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.plot"><code class="docutils literal notranslate"><span class="pre">plot</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.fit"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a></li>
+</ul>
+</li>
 </ul>
 
-    </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
         </div>
-    </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/pxs.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.functions">
-   functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.rsm">
-   rsm
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.rss">
-   rss
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.pxshelpers">
-   pxshelpers
-  </a>
- </li>
-</ul>
-
+      </div>
     </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>pxs</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.functions">
-   functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.rsm">
-   rsm
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.rss">
-   rss
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.pxs.pxshelpers">
-   pxshelpers
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">udkm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="docutils literal notranslate"><span class="pre">pxs</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pxs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="pxs">
-<h1><code class="docutils literal notranslate"><span class="pre">pxs</span></code><a class="headerlink" href="#pxs" title="Permalink to this headline">#</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">pxs</span></code><a class="headerlink" href="#pxs" title="Permalink to this headline"></a></h1>
 <section id="module-udkm.pxs.functions">
-<span id="functions"></span><h2>functions<a class="headerlink" href="#module-udkm.pxs.functions" title="Permalink to this headline">#</a></h2>
+<span id="functions"></span><h2>functions<a class="headerlink" href="#module-udkm.pxs.functions" title="Permalink to this headline"></a></h2>
 <p>This skript contains all basic functions used to evaluate pxs x-ray diffraction data.</p>
 <p>– Further information –</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.calc_qx_qz">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">calc_qx_qz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_rad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#calc_qx_qz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.calc_qx_qz" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">calc_qx_qz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_rad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#calc_qx_qz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.calc_qx_qz" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the qx-qz coordinate in reciprocal space for a
 given incident and diffraction angle ‘omega_rad’ and ‘theta_rad’,respectively.</p>
 <dl class="field-list simple">
@@ -350,7 +118,7 @@ given incident and diffraction angle ‘omega_rad’ and ‘theta_rad’,respect
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.calc_theta_value">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">calc_theta_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerpixel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#calc_theta_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.calc_theta_value" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">calc_theta_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerpixel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#calc_theta_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.calc_theta_value" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the corresponding diffraction angle ‘theta’ of a
 ‘pixel’ of the detector in respect to its ‘centerpixel’. The ‘distance’ between
 sample and detector determines the angular space fraction covered by the pixel.</p>
@@ -378,7 +146,7 @@ sample and detector determines the angular space fraction covered by the pixel.<
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.gaussian_back_fit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">gaussian_back_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#gaussian_back_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.gaussian_back_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">gaussian_back_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#gaussian_back_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.gaussian_back_fit" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the fit parameters for a gaussian with linear background model
 as a lm model object for the ‘intensity’ as function of ‘qz_axis’. The start values of
 ‘slope’ and ‘intercept’ are set to zero by default.</p>
@@ -406,7 +174,7 @@ and the best fit (.best_fit) for the further analysis</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.gaussian_fit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">gaussian_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#gaussian_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.gaussian_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">gaussian_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#gaussian_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.gaussian_fit" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the fit parameters for a gaussian peak model as a lm
 model object for the ‘intensity’ as function of ‘qz_axis’.</p>
 <dl class="simple">
@@ -433,7 +201,7 @@ and the best fit (.best_fit) for the further analysis</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.get_background">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_rocking</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_background" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_rocking</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_background" title="Permalink to this definition"></a></dt>
 <dd><p>This function subtracts the scattering background from the averaged rocking curve
 before t0 and thereby extracts the intensity distribution associated with the Bragg peak.
 To avoid negative intensity after subtracting the background fit the minimum is set to zero.</p>
@@ -456,7 +224,7 @@ excitation as reference for time-dependent fit.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.get_export_parameter">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_export_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_export_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_export_parameter" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_export_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_export_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_export_parameter" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates a dictionary that contains parameters for exporting
 the analysis results. This dictionary contains the key words: ‘plot_title’:
 string that contains the measurement number, its date, time, temperature,
@@ -490,7 +258,7 @@ lower and upper limit of plotted normed transient intensity (default: [0.01, 1])
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.get_peak_dynamics">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_peak_dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_back</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_peak_dynamics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_peak_dynamics" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_peak_dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_back</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_peak_dynamics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_peak_dynamics" title="Permalink to this definition"></a></dt>
 <dd><p>This function uses the extracted intensity distribution along qz associated with the Bragg
 peak to determine its time-dependent position, width and amplitude using a fit and a center-of-mass
 analysis. Finally, the transient relative change in respect to the averaged value before excitation
@@ -527,7 +295,7 @@ different measured delay.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.get_rocking_rss">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_rocking_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_rocking_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_rocking_rss" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_rocking_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_rocking_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_rocking_rss" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the intensity distribution along qz from an intensity
 as function of the detector pixel for a certain incident x-ray angle. The resulting
 loop-wise averaged rocking curve as function of the pump-probe delay is appended to
@@ -567,7 +335,7 @@ function of ‘unique_delays’ and the choosen range in qz ‘qz_axis’.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.get_scan_parameter">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_scan_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_scan_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_scan_parameter" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">get_scan_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#get_scan_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.get_scan_parameter" title="Permalink to this definition"></a></dt>
 <dd><p>This function writes the measurement parameters of the ‘number’. measurement
 from the reference file ‘ref_file’ into a dictionary and returns it. Necessary
 entrys of the reference file are: ‘identifier’: combination of date and time,
@@ -627,7 +395,7 @@ wether or not pump and probe were collinear.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.plot_peak_fit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">plot_peak_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#plot_peak_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.plot_peak_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">plot_peak_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#plot_peak_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.plot_peak_fit" title="Permalink to this definition"></a></dt>
 <dd><dl>
 <dt>This function generates a comparison of the rocking curve (intensity(qz)) with</dt><dd><p>the fit of the Bragg peak. The rocking curve and its fit at a certan delay is
 compared with the ‘ref_fit’ of the averaged rocking curve before t0.</p>
@@ -660,7 +428,7 @@ and the best fit (.best_fit) for delays before exciation</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.plot_rocking_overview">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">plot_rocking_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_rock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#plot_rocking_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.plot_rocking_overview" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">plot_rocking_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_rock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#plot_rocking_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.plot_rocking_overview" title="Permalink to this definition"></a></dt>
 <dd><p>This function generates an illustration of the transient loopwise-averaged
 intensity distribution along qz. The three-dimensional figure consists of two
 parts separated by an axes break to visualize both strain waves at small delays
@@ -689,7 +457,7 @@ xtick step second part, ‘plot_title’: main measurmeent parameter as title of
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.plot_transient_results">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">plot_transient_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#plot_transient_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.plot_transient_results" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">plot_transient_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#plot_transient_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.plot_transient_results" title="Permalink to this definition"></a></dt>
 <dd><p>This function generates an illustration of the transient change of the Bragg
 peak properties by the fit and a center-of-mass analysis. The figure consists of
 three panels for teh transient relative change of the peak position along qz, its
@@ -717,7 +485,7 @@ as title of the figure and ‘save_path’: location in the folder structure to 
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.functions.read_data_rss">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">read_data_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#read_data_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.read_data_rss" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.functions.</span></span><span class="sig-name descname"><span class="pre">read_data_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/functions.html#read_data_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.functions.read_data_rss" title="Permalink to this definition"></a></dt>
 <dd><p>This function reads in the raw data (intensity per pixel and omega angle) and
 adds it to the dictionary ‘scan’. This dictionary contains the corresponding
 measurement parameters added by ‘get_scan_parameter’ and the evaluation parameters
@@ -758,10 +526,10 @@ angle in [rad].</p>
 
 </section>
 <section id="module-udkm.pxs.rsm">
-<span id="rsm"></span><h2>rsm<a class="headerlink" href="#module-udkm.pxs.rsm" title="Permalink to this headline">#</a></h2>
+<span id="rsm"></span><h2>rsm<a class="headerlink" href="#module-udkm.pxs.rsm" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.CalcPathList">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CalcPathList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQ_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CalcPathList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CalcPathList" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CalcPathList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQ_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CalcPathList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CalcPathList" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates a list of the qx-qz pixels resulting from the
 omega bins and the delta theta of the pixels. The four corners of the angle bin
 are transformed into qx-qz-space and form an area in reciprocal space.</p>
@@ -785,7 +553,7 @@ are transformed into qx-qz-space and form an area in reciprocal space.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.CalcQGridList">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CalcQGridList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qzGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CalcQGridList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CalcQGridList" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CalcQGridList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qzGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CalcQGridList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CalcQGridList" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates a list of the QGrid, where each point of the QGrid is associated with
 an intensity as in the RSMQList.</p>
 <dl class="field-list simple">
@@ -808,7 +576,7 @@ an intensity as in the RSMQList.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.CalcRSMQList">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CalcRSMQList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSM_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_pixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_XRays</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CalcRSMQList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CalcRSMQList" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CalcRSMQList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSM_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_pixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_XRays</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CalcRSMQList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CalcRSMQList" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the transformation of teh Raw RSM to reciprocal
 space qx-qz. The detector pixels relative to the center pixel are associated
 with a different diffraction angle theta according to the pixel size and the
@@ -845,7 +613,7 @@ Additionally, it contains angle informations and the jacobian matrix</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.CreateMapping">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CreateMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qzList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CreateMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CreateMapping" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">CreateMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qzList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#CreateMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.CreateMapping" title="Permalink to this definition"></a></dt>
 <dd><p>The points of the recipracl grid which are in the polygon of the ‘pathlist’ are associated with
 the intensity from the Raw RSM corresponding to a pixel and an omega angle. THus every point in the
 QGrid gets an associated intensity.</p>
@@ -869,7 +637,7 @@ QGrid gets an associated intensity.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.GetLabel">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">GetLabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#GetLabel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.GetLabel" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">GetLabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#GetLabel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.GetLabel" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the title for plotting the result, the saving path
 and saving name of the data and plots. Therfore the function ‘ReadParameter’ is used.</p>
 <dl class="simple">
@@ -898,7 +666,7 @@ saved figures and data a usefull name</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.LoadRSMTimeresolved">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">LoadRSMTimeresolved</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#LoadRSMTimeresolved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.LoadRSMTimeresolved" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">LoadRSMTimeresolved</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#LoadRSMTimeresolved"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.LoadRSMTimeresolved" title="Permalink to this definition"></a></dt>
 <dd><p>This function imports the raw RSMs from the measurement of the ‘number’. line
 of the reference file of the sample ‘sampleName’ for the different omega loops,
 delay loops and delays. The first dimension of the RSM denotes the detector pixels
@@ -939,7 +707,7 @@ the different delays of the different loops are appended to a list of the struct
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.PlotList">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">PlotList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQ_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#PlotList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.PlotList" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">PlotList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQ_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#PlotList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.PlotList" title="Permalink to this definition"></a></dt>
 <dd><p>This function plots the intensity of the Raw RSM in qx-qz-space distributed
 over the area calculated in the path list. The polygons map the reciprocal space.</p>
 <dl class="simple">
@@ -955,7 +723,7 @@ in reciprocal space and the angles</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.PlotRSMRaw">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">PlotRSMRaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSM_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_plot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#PlotRSMRaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.PlotRSMRaw" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">PlotRSMRaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSM_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_plot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#PlotRSMRaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.PlotRSMRaw" title="Permalink to this definition"></a></dt>
 <dd><p>This function plotted a raw reciprocal space map, i.e. intensity for
 omega angles and detector pixels, whereby the intensity is plotted logarithmic.
 This plot of the ‘RSM_raw’ can be saved in the data folder in ‘Graphics’.</p>
@@ -979,13 +747,13 @@ This plot of the ‘RSM_raw’ can be saved in the data folder in ‘Graphics’
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.PrepareRockingCurveFile">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">PrepareRockingCurveFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qAxis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#PrepareRockingCurveFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.PrepareRockingCurveFile" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">PrepareRockingCurveFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qAxis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#PrepareRockingCurveFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.PrepareRockingCurveFile" title="Permalink to this definition"></a></dt>
 <dd><p>Starts the files where all Rocking-Curves along qz are stored</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.ReadParameter">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">ReadParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#ReadParameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.ReadParameter" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">ReadParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#ReadParameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.ReadParameter" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the parameters of the ‘number’. measuerement saved
 in the reference file ‘Reference’sample_name’’.</p>
 <dl class="simple">
@@ -1015,7 +783,7 @@ in the reference file ‘Reference’sample_name’’.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.SelectSingleRSM">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">SelectSingleRSM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_loop_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_loop_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#SelectSingleRSM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.SelectSingleRSM" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">SelectSingleRSM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_loop_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_loop_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#SelectSingleRSM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.SelectSingleRSM" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates a boolean of the length of the three lists corresponding
 to the first columns of the measurement file from the same length, which give the
 RSM (intensity for every pixel and every measured omega angle) for a
@@ -1046,7 +814,7 @@ single omega loop, delay loop and delay.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.SortListToRSMQ">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">SortListToRSMQ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qxGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">QGridList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#SortListToRSMQ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.SortListToRSMQ" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">SortListToRSMQ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qxGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzGrid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">QGridList</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#SortListToRSMQ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.SortListToRSMQ" title="Permalink to this definition"></a></dt>
 <dd><p>This function generates on the basis of ‘QGrisList’ a two dimensional RSM.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1067,7 +835,7 @@ single omega loop, delay loop and delay.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.SortRSMRawToQGridList">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">SortRSMRawToQGridList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">QGridList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMRaw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltaTheta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergenceXRays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniqueOmega</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#SortRSMRawToQGridList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.SortRSMRawToQGridList" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">SortRSMRawToQGridList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">QGridList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMRaw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltaTheta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergenceXRays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniqueOmega</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#SortRSMRawToQGridList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.SortRSMRawToQGridList" title="Permalink to this definition"></a></dt>
 <dd><p>This function uses ‘QGridList’ and sorts the new intensities from ‘RSMRaw’ into the bins.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1091,7 +859,7 @@ single omega loop, delay loop and delay.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.calcCenterPixel">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">calcCenterPixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RSM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_pixel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#calcCenterPixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.calcCenterPixel" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">calcCenterPixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RSM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_pixel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#calcCenterPixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.calcCenterPixel" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the centerpixel of the measurement, but only if no positive value is manuell
 given. The centerpixel is given by the pixel with the maximum intensity as sum for all omega angles.</p>
 <dl class="field-list simple">
@@ -1116,7 +884,7 @@ given. The centerpixel is given by the pixel with the maximum intensity as sum f
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.calcQzQx">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">calcQzQx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#calcQzQx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.calcQzQx" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">calcQzQx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#calcQzQx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.calcQzQx" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the corresponding values qx and qz for a diffraction geometry of omega, theta and k with qz in out-of-plane direction.
 The calculation is based on equation (4) of  Ultrafast reciprocal-space mapping with a convergent beam , 2013, Journal of Applied Crystallography, 46, 5, 1372-1377.</p>
 <dl class="field-list simple">
@@ -1143,7 +911,7 @@ The calculation is based on equation (4) of  Ultrafast reciprocal-space mapping 
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.createQGrid">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">createQGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unique_omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qx_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qx_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_oversampling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qx_oversampling</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#createQGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.createQGrid" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">createQGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unique_omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qx_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qx_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_oversampling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qx_oversampling</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#createQGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.createQGrid" title="Permalink to this definition"></a></dt>
 <dd><p>This function creates a grid in qx-qz space with bins along both directions.
 The gird along qz is given by the measured omega angles and the number of pixels
 determines the resolution along qx.</p>
@@ -1176,7 +944,7 @@ determines the resolution along qx.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.loadParameters">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">loadParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#loadParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.loadParameters" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">loadParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#loadParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.loadParameters" title="Permalink to this definition"></a></dt>
 <dd><p>Load the Parameter list into the object. Oversamplingz is the factor
 that tells how many times the number of omega datapoints are used to sample the qz-Axis. Usually oversamplingx
 should be set to the same value as oversamplingz. 1/oversamplingx is the factor by which the qx axis stepnumber
@@ -1185,7 +953,7 @@ is multiplied</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rsm.plotRSMQ">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">plotRSMQ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzBins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxBins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#plotRSMQ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.plotRSMQ" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rsm.</span></span><span class="sig-name descname"><span class="pre">plotRSMQ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMQ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzBins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxBins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rsm.html#plotRSMQ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rsm.plotRSMQ" title="Permalink to this definition"></a></dt>
 <dd><p>This function plots the RSM with orthogonal bins.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1203,12 +971,12 @@ is multiplied</p>
 
 </section>
 <section id="module-udkm.pxs.rss">
-<span id="rss"></span><h2>rss<a class="headerlink" href="#module-udkm.pxs.rss" title="Permalink to this headline">#</a></h2>
+<span id="rss"></span><h2>rss<a class="headerlink" href="#module-udkm.pxs.rss" title="Permalink to this headline"></a></h2>
 <p>Created on Thu Feb 10 11:25:23 2022</p>
 <p>&#64;author: matte</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.AdvancedGaussianFit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">AdvancedGaussianFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excludeROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leftBorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rightBorder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#AdvancedGaussianFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.AdvancedGaussianFit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">AdvancedGaussianFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excludeROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leftBorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rightBorder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#AdvancedGaussianFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.AdvancedGaussianFit" title="Permalink to this definition"></a></dt>
 <dd><p>This funtion fits the Intensity as function of an Axis with a Gaussian and
 a linear background. Additionally there is the possibility to exclude a certain region from the fit.</p>
 <dl class="field-list simple">
@@ -1239,7 +1007,7 @@ Parameters: resultFit.values[‘g_sigma’]</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.GaussianBackFit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GaussianBackFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centerStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudeStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopeStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interceptStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IntensityROI</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GaussianBackFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GaussianBackFit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GaussianBackFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centerStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudeStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopeStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interceptStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IntensityROI</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GaussianBackFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GaussianBackFit" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the parameters for a gaussian with linear background modell for the data and axis
 in a region of intrest.</p>
 <dl class="simple">
@@ -1270,7 +1038,7 @@ and the best fit (.best_fit) for the further analysis</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.GaussianFit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GaussianFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centerStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudeStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensityROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variationBool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GaussianFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GaussianFit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GaussianFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centerStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudeStart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensityROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variationBool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GaussianFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GaussianFit" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the parameters for a gaussian for the data and axis in a region of intrest.</p>
 <dl class="simple">
 <dt>centerStart: float</dt><dd><p>start value for the center of gaussian</p>
@@ -1298,7 +1066,7 @@ and the best fit (.best_fit) for the further analysis</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.GetLabel">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetLabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetLabel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetLabel" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetLabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetLabel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetLabel" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the title for plotting the result, the saving path and saving name of the data and plots.
 Therfore the function ‘ReadParameter’ with its returns is used.</p>
 <dl class="simple">
@@ -1326,7 +1094,7 @@ a usefull name</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.GetMoments">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetMoments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetMoments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetMoments" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetMoments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetMoments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetMoments" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the moments of the Bragg Peak (center of mass, standart derivation, integral) for all
 unique delays with the reference fit (gaussian + linear) for all delays before t0.</p>
 <dl class="simple">
@@ -1359,7 +1127,7 @@ and the best fit (.best_fit) for the further analysis for meaan intensity before
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.GetPeakProjection">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetPeakProjection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qxMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetPeakProjection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetPeakProjection" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetPeakProjection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qxMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetPeakProjection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetPeakProjection" title="Permalink to this definition"></a></dt>
 <dd><p>This function reads in a measured RSM and extracts the intensity distribution of an integral and slice trough
 the center of the selected Bragg peak (choosen q_x and q_z range) along q_x and q_z. It is usefull to choose the
 q_x and q_z range equal for RSS factor analysis.</p>
@@ -1397,7 +1165,7 @@ q_x and q_z range equal for RSS factor analysis.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.GetRockingCurvesOneAngle">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetRockingCurvesOneAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omegaR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">badpixels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetRockingCurvesOneAngle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetRockingCurvesOneAngle" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">GetRockingCurvesOneAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omegaR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">badpixels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#GetRockingCurvesOneAngle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.GetRockingCurvesOneAngle" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns rocking curves in dependency of theta and qz for every measured time delay and the
 Intensities for the unique delays are averaged. These rockingccurves are saved as .txt files. The function
 qzAxisOneAngle is used for the calculation of the correspondig axis.</p>
@@ -1428,7 +1196,7 @@ angle theta(y2)</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.PlotPeakWidthOverview">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">PlotPeakWidthOverview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qxAxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxCenter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzAxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzCenter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsmQ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxFitIntegral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzFitIntegral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peakName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#PlotPeakWidthOverview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.PlotPeakWidthOverview" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">PlotPeakWidthOverview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qxAxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxCenter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzAxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzCenter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rsmQ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qxFitIntegral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzFitIntegral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RSMName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peakName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#PlotPeakWidthOverview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.PlotPeakWidthOverview" title="Permalink to this definition"></a></dt>
 <dd><p>This function plots an overview of the RSS factor calculation and the width of the
 Bragg peak along q_x and q_z. To get a feeling of the width ratio from the plotted RSM
 it is advantageous if qxAxis and qzAxis have the same range.</p>
@@ -1457,7 +1225,7 @@ it is advantageous if qxAxis and qzAxis have the same range.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.PlotRockingCurve1DUXRD">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">PlotRockingCurve1DUXRD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotSemilogy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additionalProperty</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#PlotRockingCurve1DUXRD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.PlotRockingCurve1DUXRD" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">PlotRockingCurve1DUXRD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotSemilogy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additionalProperty</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#PlotRockingCurve1DUXRD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.PlotRockingCurve1DUXRD" title="Permalink to this definition"></a></dt>
 <dd><p>This function plot the generated Rocking Curves in 1D for every unique delay to control the flow of the script.</p>
 <dl class="simple">
 <dt>sampleName: string</dt><dd><p>name of the reference datafile</p>
@@ -1479,7 +1247,7 @@ angle theta(y2)</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.QzAxisOneAngle">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">QzAxisOneAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omegaR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#QzAxisOneAngle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.QzAxisOneAngle" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">QzAxisOneAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omegaR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#QzAxisOneAngle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.QzAxisOneAngle" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns an angle and qz axis for the corresponding intensities. The relevant constants are
 the pixel dimension, the wavenumber of the PXS and the distance between the sample and detector. The wavenumber
 and pixel dimension are constant. The centerpixel is determined by the pixel in the middle of detector. The qz
@@ -1507,7 +1275,7 @@ values are calculated by the usual nonlinear transformation with ‘omegaR’ fr
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.ReadDataOneAngle">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">ReadDataOneAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nameFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excludedLoops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystalOffset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delayFirstbool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#ReadDataOneAngle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.ReadDataOneAngle" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">ReadDataOneAngle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nameFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excludedLoops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystalOffset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delayFirstbool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#ReadDataOneAngle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.ReadDataOneAngle" title="Permalink to this definition"></a></dt>
 <dd><p>This function reads the raw data from the single angle measurement and extracts the omega angle
 the delays and the pixel dependent intensities. Bad Loops (‘excludedLoops’) become excluded and
 the intensities above ‘threshold’ become normed by the crystal voltage.</p>
@@ -1542,7 +1310,7 @@ the intensities above ‘threshold’ become normed by the crystal voltage.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.ReadParameter">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">ReadParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#ReadParameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.ReadParameter" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">ReadParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#ReadParameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.ReadParameter" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the parameters of the ‘number’. measuerement saved in the reference file ‘Reference’sampleName’’.</p>
 <dl class="simple">
 <dt>sampleName: string</dt><dd><p>name of the measured sample (named reference file)</p>
@@ -1571,7 +1339,7 @@ the intensities above ‘threshold’ become normed by the crystal voltage.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.exportPeakDynamic">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">exportPeakDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NameFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniqueDelays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strainFit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widthFitrelative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">areaFitrelative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strainCOM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">STDrelative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Integralrelative</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#exportPeakDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.exportPeakDynamic" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">exportPeakDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NameFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniqueDelays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strainFit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widthFitrelative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">areaFitrelative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strainCOM</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">STDrelative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Integralrelative</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#exportPeakDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.exportPeakDynamic" title="Permalink to this definition"></a></dt>
 <dd><p>this function exports the results of the peak dynamic. For every delay the relative change of the moments and fit values
 are saved together with the measuremnt parameters imported with the function readParameter.</p>
 <dl class="simple">
@@ -1601,7 +1369,7 @@ are saved together with the measuremnt parameters imported with the function rea
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.getFitvalues">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">getFitvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NameFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resultFitRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotFitResults</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PlotSemilogy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#getFitvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.getFitvalues" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">getFitvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NameFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resultFitRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotFitResults</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PlotSemilogy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#getFitvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.getFitvalues" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the values of the fit parameters (centerFit,widthFit,areaFit) for every unique delay
 as result of a fit of the rocking curves in the region of intrest. There is the possibility to plot the results
 of the fits for every unique delay.</p>
@@ -1641,7 +1409,7 @@ and the best fit (.best_fit) for the further analysis is the fit before t0</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.getPeakDynamic">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">getPeakDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uniqueDelays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#getPeakDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.getPeakDynamic" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">getPeakDynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uniqueDelays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#getPeakDynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.getPeakDynamic" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculate the relative change of the center, width and area of the Bragg peak relative to
 delays before t0.</p>
 <dl class="simple">
@@ -1672,7 +1440,7 @@ delays before t0.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.rss.plotPeakFit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">plotPeakFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resultFit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resultFitRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PlotSemilogy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SaveFitPlot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#plotPeakFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.plotPeakFit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.rss.</span></span><span class="sig-name descname"><span class="pre">plotPeakFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampleName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resultFit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resultFitRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PlotSemilogy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SaveFitPlot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/rss.html#plotPeakFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.rss.plotPeakFit" title="Permalink to this definition"></a></dt>
 <dd><p>This function plot the intensity depending on qzaxis together with the corresponding fit and the referenz fit
 for delays before t0 together to check the fitting results.</p>
 <dl class="simple">
@@ -1704,12 +1472,12 @@ and the best fit (.best_fit) for the further analysis is the fit before t0</p>
 
 </section>
 <section id="module-udkm.pxs.pxshelpers">
-<span id="pxshelpers"></span><h2>pxshelpers<a class="headerlink" href="#module-udkm.pxs.pxshelpers" title="Permalink to this headline">#</a></h2>
+<span id="pxshelpers"></span><h2>pxshelpers<a class="headerlink" href="#module-udkm.pxs.pxshelpers" title="Permalink to this headline"></a></h2>
 <p>This skript contains all basic functions used to evaluate pxs x-ray diffraction data.</p>
 <p>– Further information –</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.calc_qx_qz">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">calc_qx_qz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_rad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#calc_qx_qz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.calc_qx_qz" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">calc_qx_qz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_rad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#calc_qx_qz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.calc_qx_qz" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the qx-qz coordinate in reciprocal space for a
 given incident and diffraction angle ‘omega_rad’ and ‘theta_rad’,respectively.</p>
 <dl class="field-list simple">
@@ -1736,7 +1504,7 @@ given incident and diffraction angle ‘omega_rad’ and ‘theta_rad’,respect
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.calc_theta_value">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">calc_theta_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerpixel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#calc_theta_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.calc_theta_value" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">calc_theta_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerpixel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#calc_theta_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.calc_theta_value" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculates the corresponding diffraction angle ‘theta’ of a
 ‘pixel’ of the detector in respect to its ‘centerpixel’. The ‘distance’ between
 sample and detector determines the angular space fraction covered by the pixel.</p>
@@ -1764,7 +1532,7 @@ sample and detector determines the angular space fraction covered by the pixel.<
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.gaussian_back_fit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">gaussian_back_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#gaussian_back_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.gaussian_back_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">gaussian_back_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#gaussian_back_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.gaussian_back_fit" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the parameters for a gaussian with linear background modell for the data and axis
 in a region of intrest.</p>
 <dl class="simple">
@@ -1795,7 +1563,7 @@ and the best fit (.best_fit) for the further analysis</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.gaussian_fit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">gaussian_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_roi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity_roi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#gaussian_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.gaussian_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">gaussian_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_roi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity_roi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#gaussian_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.gaussian_fit" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the parameters for a gaussian for the data and axis in a region of intrest.</p>
 <dl class="simple">
 <dt>centerStart: float</dt><dd><p>start value for the center of gaussian</p>
@@ -1823,7 +1591,7 @@ and the best fit (.best_fit) for the further analysis</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.get_fit_values">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_fit_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity_peak</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_roi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool_plot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_fit_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_fit_values" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_fit_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity_peak</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_roi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool_plot</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_fit_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_fit_values" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the values of the fit parameters (centerFit,widthFit,areaFit) for every unique delay
 as result of a fit of the rocking curves in the region of intrest. There is the possibility to plot the results
 of the fits for every unique delay.</p>
@@ -1863,7 +1631,7 @@ and the best fit (.best_fit) for the further analysis is the fit before t0</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.get_label">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_label" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_label" title="Permalink to this definition"></a></dt>
 <dd><p>This function create a plot title, a saving path and a saving name for the ‘number’.
 measurement of the ‘ref_file’ based on the corresponding parameters of the measurement.
 Therefore this function uses the function ‘read_param’.</p>
@@ -1896,7 +1664,7 @@ a usefull name</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.get_moments_back">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_moments_back</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rocking</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool_substrate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_moments_back"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_moments_back" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_moments_back</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rocking</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool_substrate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_moments_back"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_moments_back" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns the moments of the Bragg Peak (center of mass, standart derivation, integral) for all
 unique delays with the reference fit (gaussian + linear) for all delays before t0.</p>
 <dl class="simple">
@@ -1929,7 +1697,7 @@ and the best fit (.best_fit) for the further analysis for meaan intensity before
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.get_peak_dynamic">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_peak_dynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area_fit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_peak_dynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_peak_dynamic" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_peak_dynamic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area_fit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_peak_dynamic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_peak_dynamic" title="Permalink to this definition"></a></dt>
 <dd><p>This function calculate the relative change of the center, width and area of the Bragg peak relative to
 delays before t0.</p>
 <dl class="simple">
@@ -1960,7 +1728,7 @@ delays before t0.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.get_rocking_rss">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_rocking_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerpixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_rocking_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_rocking_rss" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">get_rocking_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerpixel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#get_rocking_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.get_rocking_rss" title="Permalink to this definition"></a></dt>
 <dd><p>This function gets the loopwise averaged intensity per unique delay as
 function of qz coordinates in reciprocal space calculated from ‘omega_rad’,
 ‘distance’ and ‘centerpixel’ using the functions ‘calc_theta_value’ and
@@ -1997,7 +1765,7 @@ in dependency of qz(x1) and theta(x2)</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.plot_peak_fit">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">plot_peak_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_roi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#plot_peak_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.plot_peak_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">plot_peak_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_roi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#plot_peak_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.plot_peak_fit" title="Permalink to this definition"></a></dt>
 <dd><p>This function plot the intensity depending on qzaxis together with the corresponding fit and the referenz fit
 for delays before t0 together to check the fitting results.</p>
 <dl class="simple">
@@ -2029,7 +1797,7 @@ and the best fit (.best_fit) for the further analysis is the fit before t0</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.plot_rocking_overview">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">plot_rocking_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rocking</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_steps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#plot_rocking_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.plot_rocking_overview" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">plot_rocking_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rocking</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qz_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay_steps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#plot_rocking_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.plot_rocking_overview" title="Permalink to this definition"></a></dt>
 <dd><p>This function provides an overview plot of the transient ‘rocking’ curves
 of the ‘number’. measurement in ‘ref_file’ for a given ‘qz_range’ as two-
 dimensional map. The parameter ‘delay_steps’ enables the adjustment of the
@@ -2056,7 +1824,7 @@ in dependency of qz(x1) and theta(x2)</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.read_data_rss">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">read_data_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_loops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_pixels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_off</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool_refresh_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#read_data_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.read_data_rss" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">read_data_rss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_loops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_pixels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal_off</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool_refresh_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#read_data_rss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.read_data_rss" title="Permalink to this definition"></a></dt>
 <dd><p>This function imports the x-ray intensity as function of the detector pixel for the ‘number’.
 single angle measurement listed in ‘ref_file’. The function returns the measurement angle, the
 delays in respect to temporal overlapp given by ‘t_0’ and the normed intensity on the crystal
@@ -2096,7 +1864,7 @@ This function uses the functions ‘get_label’ and ‘read_param’</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.pxs.pxshelpers.read_param">
-<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">read_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#read_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.read_param" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.pxs.pxshelpers.</span></span><span class="sig-name descname"><span class="pre">read_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/pxs/pxshelpers.html#read_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.pxs.pxshelpers.read_param" title="Permalink to this definition"></a></dt>
 <dd><p>This function reads the reference data file ‘ref_file’ and returns all parameters
 of the ‘number’. measurement including ‘date’ and ‘time’ that are used for unique
 reference on the measurement.</p>
@@ -2132,50 +1900,34 @@ reference on the measurement.</p>
 </section>
 
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to udkm’s documentation!</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="moke.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">moke</span></code></p>
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to udkm’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moke.html" class="btn btn-neutral float-right" title="moke" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Alexander von Reppert<br/>
-  
-      &copy; Copyright 2022, Alexander von Reppert.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Alexander von Reppert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
       </div>
-    </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-  </body>
+</body>
 </html>

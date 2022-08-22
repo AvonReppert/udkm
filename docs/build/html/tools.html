@@ -1,360 +1,96 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>tools &#8212; udkm 0.1</title>
-    
-  <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tools &mdash; udkm 0.1</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="moke" href="moke.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
+    <link rel="prev" title="moke" href="moke.html" /> 
+</head>
 
-    <!-- Google Analytics -->
-    
-  </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">udkm 0.1</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/AleksUDKM/udkm">
-   github project page
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pxs.html">
-   pxs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="moke.html">
-   moke
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   tools
-  </a>
- </li>
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> udkm
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://github.com/AleksUDKM/udkm">github project page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pxs.html">    pxs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.functions">functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.rsm">rsm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.rss">rss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.pxshelpers">pxshelpers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moke.html">    moke</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">    tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.tools.functions"><code class="docutils literal notranslate"><span class="pre">functions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.tools.colors"><code class="docutils literal notranslate"><span class="pre">colors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.tools.plot"><code class="docutils literal notranslate"><span class="pre">plot</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-udkm.tools.fit"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a></li>
+</ul>
+</li>
 </ul>
 
-    </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
         </div>
-    </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/tools.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.functions">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     functions
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.colors">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     colors
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.plot">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     plot
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.fit">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     fit
-    </span>
-   </code>
-  </a>
- </li>
-</ul>
-
+      </div>
     </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>tools</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.functions">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     functions
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.colors">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     colors
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.plot">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     plot
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-udkm.tools.fit">
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     fit
-    </span>
-   </code>
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">udkm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="docutils literal notranslate"><span class="pre">tools</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="tools">
-<h1><code class="docutils literal notranslate"><span class="pre">tools</span></code><a class="headerlink" href="#tools" title="Permalink to this headline">#</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">tools</span></code><a class="headerlink" href="#tools" title="Permalink to this headline"></a></h1>
 <section id="module-udkm.tools.functions">
-<span id="functions"></span><h2><code class="docutils literal notranslate"><span class="pre">functions</span></code><a class="headerlink" href="#module-udkm.tools.functions" title="Permalink to this headline">#</a></h2>
+<span id="functions"></span><h2><code class="docutils literal notranslate"><span class="pre">functions</span></code><a class="headerlink" href="#module-udkm.tools.functions" title="Permalink to this headline"></a></h2>
 <p>Created on Sun Dec 19 21:29:02 2021
 &#64;author: Aleks</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.append_single_line_to_file">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">append_single_line_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#append_single_line_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.append_single_line_to_file" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">append_single_line_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#append_single_line_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.append_single_line_to_file" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>This procedure appends a list or a numpy array as single line to a file</p>
 </div></blockquote>
@@ -388,7 +124,7 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.calc_fluence">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">calc_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">power</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#calc_fluence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.calc_fluence" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">calc_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">power</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#calc_fluence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.calc_fluence" title="Permalink to this definition"></a></dt>
 <dd><p>returns the fluence
 :param power: incident power in mW
 :type power: float
@@ -416,7 +152,7 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.calc_grid_boxes">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">calc_grid_boxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#calc_grid_boxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.calc_grid_boxes" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">calc_grid_boxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#calc_grid_boxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.calc_grid_boxes" title="Permalink to this definition"></a></dt>
 <dd><dl class="simple">
 <dt>calculates the size of a grid cell and the left and right boundaries of each gridcell</dt><dd><p>in a monotonous but possibly nonlinear grid</p>
 </dd>
@@ -451,7 +187,7 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.calc_moments">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">calc_moments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#calc_moments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.calc_moments" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">calc_moments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#calc_moments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.calc_moments" title="Permalink to this definition"></a></dt>
 <dd><p>calculates the center of mass, standard deviation and integral of a given distribution</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -484,7 +220,7 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.copy_files">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">copy_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#copy_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.copy_files" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">copy_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#copy_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.copy_files" title="Permalink to this definition"></a></dt>
 <dd><p>Copy files from list to a directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -498,13 +234,13 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.fft">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#fft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.fft" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#fft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.fft" title="Permalink to this definition"></a></dt>
 <dd><p>returns fft of the y_data and frequency  axis</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.find">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.find" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.find" title="Permalink to this definition"></a></dt>
 <dd><p>This little function returns the index of the array where the array value is closest to the key</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -529,7 +265,7 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.get_files">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">get_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#get_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.get_files" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">get_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#get_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.get_files" title="Permalink to this definition"></a></dt>
 <dd><p>Getting all files in the directory and subdirectories matching some pattern (‘.txt’ for example)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -549,14 +285,14 @@ title="Print to PDF"
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.imagestring">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">imagestring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#imagestring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.imagestring" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">imagestring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#imagestring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.imagestring" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a timestring made of 5 digits for the inserted time adding leading zeros if necessary.
 works also with arrays.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.make_folder">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">make_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#make_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.make_folder" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">make_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#make_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.make_folder" title="Permalink to this definition"></a></dt>
 <dd><p>creates an empty folder if the target folder does not already exist</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -576,7 +312,7 @@ works also with arrays.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.reduce_file_size">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">reduce_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_compressed'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#reduce_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.reduce_file_size" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">reduce_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_compressed'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#reduce_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.reduce_file_size" title="Permalink to this definition"></a></dt>
 <dd><p>Reduce number of decimal places for all entries in a data file. If filename_suffix equals ‘’
 the existing file will be overwritten.</p>
 <dl class="field-list simple">
@@ -592,7 +328,7 @@ the existing file will be overwritten.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.regrid_array">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">regrid_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#regrid_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.regrid_array" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">regrid_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#regrid_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.regrid_array" title="Permalink to this definition"></a></dt>
 <dd><p>This function returns a new version of a numpy array where data are
 averaged within boxes of a given grid. The new array contains the average
 value of the datapoints within each gridbox. A list of columns that are removed
@@ -630,7 +366,7 @@ columns 0,2,5 and 6 are removed in the output. Only columns 1,3 and 4 remain and
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.rel_change">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">rel_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#rel_change"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.rel_change" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">rel_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#rel_change"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.rel_change" title="Permalink to this definition"></a></dt>
 <dd><p>returns relative change of a measured quantity relative to a given value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -655,7 +391,7 @@ columns 0,2,5 and 6 are removed in the output. Only columns 1,3 and 4 remain and
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.set_roi_1d">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">set_roi_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#set_roi_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.set_roi_1d" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">set_roi_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#set_roi_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.set_roi_1d" title="Permalink to this definition"></a></dt>
 <dd><p>selects a rectangular region of intrest roi from a 2D matrix based on the
 passed boundaries x_min,x_max, y_min and y_max. x stands for the columns of the
 matrix, y for the rows</p>
@@ -685,7 +421,7 @@ matrix, y for the rows</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.set_roi_2d">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">set_roi_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#set_roi_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.set_roi_2d" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">set_roi_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#set_roi_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.set_roi_2d" title="Permalink to this definition"></a></dt>
 <dd><p>selects a rectangular region of intrest roi from a 2D matrix based on the
 passed boundaries x_min,x_max, y_min and y_max. x stands for the columns of the
 matrix, y for the rows</p>
@@ -725,7 +461,7 @@ matrix, y for the rows</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.smooth">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#smooth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.smooth" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#smooth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.smooth" title="Permalink to this definition"></a></dt>
 <dd><p>smooth the data using a window with requested size.</p>
 <p>This method is based on the convolution of a scaled window with the signal.
 The signal is prepared by introducing reflected copies of the signal
@@ -761,14 +497,14 @@ the window parameter could be the window itself as an array instead of a string<
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.timestring">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">timestring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#timestring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.timestring" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">timestring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#timestring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.timestring" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a timestring made of 6 digits for the inserted time adding leading zeros if necessary.
 works also with arrays.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.unzip">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">unzip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">archive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#unzip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.unzip" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">unzip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">archive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#unzip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.unzip" title="Permalink to this definition"></a></dt>
 <dd><p>This procedure unzips a specified archive “archive.zip” and stores its contents
 to the specified to the folder “target”. It only acts if a folder named “target” does not already exist.
 :param archive: Path to the .zip archive relative to the working directory or absolute
@@ -788,7 +524,7 @@ to the specified to the folder “target”. It only acts if a folder named “t
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.write_1d_array_to_file">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_1d_array_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_1d_array_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_1d_array_to_file" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_1d_array_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_1d_array_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_1d_array_to_file" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>This procedure writes a 1D array or list to an already opened file with the
 identifier f as a line. The elements are separated by tabs.</p>
@@ -817,7 +553,7 @@ identifier f as a line. The elements are separated by tabs.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.write_2d_array_to_file">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_2d_array_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_2d_array_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_2d_array_to_file" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_2d_array_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_2d_array_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_2d_array_to_file" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>This procedure writes a 2D array or list to an already opened file with
 the identifier f. The elements are separated by tabs and new rows are
@@ -847,7 +583,7 @@ indicated by line breaks.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.write_columns_to_file">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_columns_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_columns_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_columns_to_file" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_columns_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_columns_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_columns_to_file" title="Permalink to this definition"></a></dt>
 <dd><p>This procedure writes an arbitrary number of 1D arrays into a single file as columns with
 the specified header as first line.
 Tabs are used as separation sign
@@ -876,7 +612,7 @@ Tabs are used as separation sign
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.write_list_to_file">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_list_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_list_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_list_to_file" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_list_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_list_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_list_to_file" title="Permalink to this definition"></a></dt>
 <dd><p>This procedure writes a 2D array or list to an unopened file.
 rows are written as lines. The elements are separated by tabs.
 Rows are separated by linebreaks. The first line is preceded by a “#”
@@ -901,7 +637,7 @@ The created file looks like:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.functions.write_single_line_to_file">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_single_line_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_single_line_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_single_line_to_file" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.functions.</span></span><span class="sig-name descname"><span class="pre">write_single_line_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/functions.html#write_single_line_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.functions.write_single_line_to_file" title="Permalink to this definition"></a></dt>
 <dd><p>This procedure writes a list or a 1D-numpy array as single line to a file
 :param file_name: relative (or absolute) path to the file to which the line will written
 :type file_name: string
@@ -920,48 +656,48 @@ The created file looks like:</p>
 
 </section>
 <section id="module-udkm.tools.colors">
-<span id="colors"></span><h2><code class="docutils literal notranslate"><span class="pre">colors</span></code><a class="headerlink" href="#module-udkm.tools.colors" title="Permalink to this headline">#</a></h2>
+<span id="colors"></span><h2><code class="docutils literal notranslate"><span class="pre">colors</span></code><a class="headerlink" href="#module-udkm.tools.colors" title="Permalink to this headline"></a></h2>
 <p>Created on Sun Dec 19 21:29:02 2021
 &#64;author: Aleks</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="udkm.tools.colors.cmap_3">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_3" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_3" title="Permalink to this definition"></a></dt>
 <dd><p>blue colormaps</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="udkm.tools.colors.cmap_blue_5">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_blue_5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_blue_5" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_blue_5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_blue_5" title="Permalink to this definition"></a></dt>
 <dd><p>yellow-orange-red colormaps</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="udkm.tools.colors.cmap_gold_4">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_gold_4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_gold_4" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_gold_4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_gold_4" title="Permalink to this definition"></a></dt>
 <dd><p>red colormaps</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="udkm.tools.colors.cmap_red_4">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_red_4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_red_4" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">cmap_red_4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;matplotlib.colors.LinearSegmentedColormap</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#udkm.tools.colors.cmap_red_4" title="Permalink to this definition"></a></dt>
 <dd><p>bipolar red to blue colormaps</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.colors.fireice">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">fireice</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#fireice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.fireice" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">fireice</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#fireice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.fireice" title="Permalink to this definition"></a></dt>
 <dd><p>Returns a self-defined analogue of the colormap fireice</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.colors.hex_to_rgb">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">hex_to_rgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#hex_to_rgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.hex_to_rgb" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">hex_to_rgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#hex_to_rgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.hex_to_rgb" title="Permalink to this definition"></a></dt>
 <dd><p>returns an rgb tuple from a hexadecimal input</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.colors.make_colormap">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">make_colormap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#make_colormap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.make_colormap" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.colors.</span></span><span class="sig-name descname"><span class="pre">make_colormap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/colors.html#make_colormap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.colors.make_colormap" title="Permalink to this definition"></a></dt>
 <dd><p>Return a LinearSegmentedColormap
 seq: a sequence of floats and RGB-tuples.
 The floats should be increasing and in the interval (0,1).</p>
@@ -969,15 +705,15 @@ The floats should be increasing and in the interval (0,1).</p>
 
 </section>
 <section id="module-udkm.tools.plot">
-<span id="plot"></span><h2><code class="docutils literal notranslate"><span class="pre">plot</span></code><a class="headerlink" href="#module-udkm.tools.plot" title="Permalink to this headline">#</a></h2>
+<span id="plot"></span><h2><code class="docutils literal notranslate"><span class="pre">plot</span></code><a class="headerlink" href="#module-udkm.tools.plot" title="Permalink to this headline"></a></h2>
 </section>
 <section id="module-udkm.tools.fit">
-<span id="fit"></span><h2><code class="docutils literal notranslate"><span class="pre">fit</span></code><a class="headerlink" href="#module-udkm.tools.fit" title="Permalink to this headline">#</a></h2>
+<span id="fit"></span><h2><code class="docutils literal notranslate"><span class="pre">fit</span></code><a class="headerlink" href="#module-udkm.tools.fit" title="Permalink to this headline"></a></h2>
 <p>Created on Thu Feb 10 11:55:33 2022</p>
 <p>&#64;author: matte</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.tools.fit.GetBackgroundShoulderPeak">
-<span class="sig-prename descclassname"><span class="pre">udkm.tools.fit.</span></span><span class="sig-name descname"><span class="pre">GetBackgroundShoulderPeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzPeakMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzPeakMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsShoulder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsMax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/fit.html#GetBackgroundShoulderPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.fit.GetBackgroundShoulderPeak" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.tools.fit.</span></span><span class="sig-name descname"><span class="pre">GetBackgroundShoulderPeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rockingCurves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzPeakMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qzPeakMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsShoulder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightsMax</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/tools/fit.html#GetBackgroundShoulderPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.tools.fit.GetBackgroundShoulderPeak" title="Permalink to this definition"></a></dt>
 <dd><p>This function extract the transducer peak from the shoulder of the substrate for better evaluation.
 The peak is between ‘qzPeakMin’ and ‘qzPeakMax’. The substarte peak is given by a Lorentzian profile, whose
 fit is different weigted below and slightly above the transducer Bragg peak.</p>
@@ -1013,43 +749,33 @@ fit is different weigted below and slightly above the transducer Bragg peak.</p>
 </section>
 
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="moke.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">moke</span></code></p>
-        </div>
-    </a>
-</div>
-            </footer>
-        </div>
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moke.html" class="btn btn-neutral float-left" title="moke" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Alexander von Reppert<br/>
-  
-      &copy; Copyright 2022, Alexander von Reppert.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Alexander von Reppert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
       </div>
-    </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-  </body>
+</body>
 </html>
