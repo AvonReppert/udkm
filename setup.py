@@ -32,3 +32,4 @@ setup(
     long_description_content_type='text/markdown',  # Optional (see note above)
 	python_requires='>=3.5',
 )
+
