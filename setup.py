@@ -20,7 +20,7 @@ setup(
     version='0.1.0',
     packages=find_packages(),
     url='https://github.com/AleksUDKM/udkm',  # Optional
-    install_requires=['numpy', 'matplotlib', 'lmfit', 'pandas', 'pickle'],  # Optional
+    install_requires=['numpy', 'matplotlib', 'lmfit', 'pandas'],  # Optional
     extras_require={
         'documentation': ['sphinx', 'nbsphinx', 'sphinxcontrib-napoleon'],
     },
