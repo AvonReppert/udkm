@@ -20,11 +20,15 @@ setup(
     version='0.1.0',
     packages=find_packages(),
     url='https://github.com/AleksUDKM/udkm',  # Optional
-    install_requires=['numpy', 'matplotlib', 'os', 'pandas', 'pickle'],  # Optional
+    install_requires=['numpy', 'matplotlib', 'lmfit', 'pandas', 'pickle'],  # Optional
+    extras_require={
+        'documentation': ['sphinx', 'nbsphinx', 'sphinxcontrib-napoleon'],
+    },
     license='',
     author='Alexander von Reppert',
     author_email='reppert@uni-potsdam.de',
     description='Collection of frequently used functions in udkm group',  # Required
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
+	python_requires='>=3.5',
 )

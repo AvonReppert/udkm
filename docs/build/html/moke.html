@@ -1,93 +1,258 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>moke &mdash; udkm 0.1</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-    <script src="_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>moke &#8212; udkm 0.0.1</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="tools" href="tools.html" />
-    <link rel="prev" title="pxs" href="pxs.html" /> 
-</head>
+    <link rel="prev" title="pxs" href="pxs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> udkm
-          </a>
-              <div class="version">
-                0.1
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference external" href="https://github.com/AleksUDKM/udkm">github project page</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pxs.html">    pxs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.functions">functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.rsm">rsm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pxs.html#rss">rss</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pxs.html#module-udkm.pxs.pxshelpers">pxshelpers</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">    moke</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">    tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.functions"><code class="docutils literal notranslate"><span class="pre">functions</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.colors"><code class="docutils literal notranslate"><span class="pre">colors</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.plot"><code class="docutils literal notranslate"><span class="pre">plot</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="tools.html#module-udkm.tools.fit"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a></li>
-</ul>
-</li>
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">udkm 0.0.1</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/AleksUDKM/udkm">
+   github project page
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pxs.html">
+   pxs
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   moke
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   tools
+  </a>
+ </li>
 </ul>
 
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
         </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">udkm</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">moke</span></code></li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/moke.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/moke.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>moke</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
   <section id="module-udkm.moke.functions_2">
-<span id="moke"></span><h1><code class="docutils literal notranslate"><span class="pre">moke</span></code><a class="headerlink" href="#module-udkm.moke.functions_2" title="Permalink to this headline"></a></h1>
+<span id="moke"></span><h1><code class="docutils literal notranslate"><span class="pre">moke</span></code><a class="headerlink" href="#module-udkm.moke.functions_2" title="Permalink to this headline">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.export_raw_data">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">export_raw_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#export_raw_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.export_raw_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">export_raw_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#export_raw_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.export_raw_data" title="Permalink to this definition">#</a></dt>
 <dd><p>This function reads in the raw data from the ‘data_path’ given by the function ‘get_export_information’
 and plot the loopise voltage change between pumped and unpumped for both field directions as well as their
 difference and the respective averages. With ‘bad_field’ it is possible to manually set the field directions
@@ -113,7 +278,7 @@ measurement and single ‘bad_loops’ entry this list is used to exclude bad lo
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.get_export_information">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">get_export_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#get_export_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.get_export_information" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">get_export_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scan_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#get_export_information"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.get_export_information" title="Permalink to this definition">#</a></dt>
 <dd><p>This function creates a dictionary containing export information like plot title, export folder and file name,
 which consist of the ‘date’, ‘time’, ‘rotation’ and ‘voltage’ of the measurement.</p>
 <dl class="field-list simple">
@@ -145,7 +310,7 @@ and ‘voltage’, ‘identification’: same information but separated with whi
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.get_scan_parameter">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">get_scan_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#get_scan_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.get_scan_parameter" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">get_scan_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#get_scan_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.get_scan_parameter" title="Permalink to this definition">#</a></dt>
 <dd><p>This function creates a dictionary from the information of a measurement noted in a reference file named
 ‘ref_file_name’ in the folder ‘reference_data’. Information that are not stated in the reference file are
 set by default. The reference file contains at least the ‘date’, ‘time’ and ‘power’ of the measurement.</p>
@@ -200,7 +365,7 @@ voltage of the electromagnet [V] - 5.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.load_scan">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">load_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#load_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.load_scan" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">load_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#load_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.load_scan" title="Permalink to this definition">#</a></dt>
 <dd><p>This function creates a dictionary containing the parameters of the measurement and the loopwise averaged and
 analysed measurement results given by the voltage change for each field direction and their difference and sum.
 If these measurements are not already exported or ‘force_recalc’ is set True these results are created from the
@@ -268,7 +433,7 @@ directions, ‘field_up’: voltage change for field up and ‘field_down’: vo
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.load_series">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">load_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#load_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.load_series" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">load_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#load_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.load_series" title="Permalink to this definition">#</a></dt>
 <dd><p>This function creates a dictionary containing the parameters of all measurements and their loopwise averaged and
 analysed measurement results given by the voltage change for each field direction and their difference and sum.
 This function uses the functions ‘load_scan’ and ‘plot_overview’ and iterates over all lines in the reference_file.
@@ -337,7 +502,7 @@ directions, ‘field_up’: voltage change for field up and ‘field_down’: vo
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.plot_overview">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">plot_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#plot_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.plot_overview" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">plot_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analysis_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#plot_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.plot_overview" title="Permalink to this definition">#</a></dt>
 <dd><p>This function plots and saves the exported results in the dictionary ‘scan’ for a certain measurement in the
 line. of the reference file.</p>
 <dl class="field-list simple">
@@ -358,7 +523,7 @@ line. of the reference file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="udkm.moke.functions_2.set_analysis_params">
-<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">set_analysis_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#set_analysis_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.set_analysis_params" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">udkm.moke.functions_2.</span></span><span class="sig-name descname"><span class="pre">set_analysis_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/udkm/moke/functions_2.html#set_analysis_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#udkm.moke.functions_2.set_analysis_params" title="Permalink to this definition">#</a></dt>
 <dd><p>This function creates a dictionary of the analysis parameters, which can be changed in the main script. The
 dictionary contains the relevant folder names and the ‘sample_name’. Furthermore, it is possible to force a
 recalculation of the loop averages, to exclude ‘bad_loops’, to manuelly sort the raw data into field up and
@@ -407,34 +572,50 @@ printed and can be copied to the reference file.</p>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pxs.html" class="btn btn-neutral float-left" title="pxs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tools.html" class="btn btn-neutral float-right" title="tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2022, Alexander von Reppert.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="pxs.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">pxs</span></code></p>
         </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class='right-next' id="next-link" href="tools.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">tools</span></code></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander von Reppert<br/>
+  
+      &copy; Copyright 2022, Alexander von Reppert.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
-</body>
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
 </html>
