@@ -10,6 +10,7 @@ general functions and definitions for data analysis, which includes:
 - ```tools```:  general functions, fits, constants and plot layouts 
 - ```kmc3```:  data evaluation using the h5 files that come out of the xpp endstation at kmc3
 - ```sim```: material database and example for udkm1dsim code
+- ```calc```: collection of more or less frequently used calculation scripts
 
 ## installation of the code
 
