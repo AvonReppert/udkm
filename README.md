@@ -1,15 +1,15 @@
 # udkm
 a collection of python commands for data analysis in udkm group
 
-The documentation of this project can be found here: https://udkm-2.readthedocs.io/en/latest/index.html
+The beginning of the documentation can be found here: https://udkm-2.readthedocs.io/en/latest/index.html
 
 ## modules
 general functions and definitions for data analysis, which includes:
 - ```pxs``` : library for the X-ray diffraction setup using the Plasma X-ray source
 - ```moke```: routines for the MOKE setup in the femto-magnetism lab
-- ```tools```: frequently used general functions, fits, constants and plot layouts, 
-- ```constants```: frequently used constants
-
+- ```tools```:  general functions, fits, constants and plot layouts 
+- ```kmc3```:  data evaluation using the h5 files that come out of the xpp endstation at kmc3
+- ```sim```: material database and example for udkm1dsim code
 
 ## installation of the code
 
