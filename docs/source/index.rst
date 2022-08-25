@@ -1,7 +1,8 @@
 Welcome to udkm's documentation!
 ===================================
 
-**udkm** is a collection of python commands for data analysis in udkm group
+**udkm** is a collection of python commands for data analysis in udkm group. 
+On the long run it aims to bundle data analysis functions for the setups in the labs at the university of Potsdam.
 
 
 .. note::
@@ -18,6 +19,7 @@ Contents
 	pxs <pxs>
 	moke <moke>
 	tools <tools>
+	kmc3 <kmc3>
 
 
 Indices and tables

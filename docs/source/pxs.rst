@@ -3,6 +3,7 @@
 
 functions
 -----------------
+A collection of functions for the data analysis at the PXS lab.
 .. automodule:: udkm.pxs.functions
     :show-inheritance:
     :members:    
@@ -11,6 +12,7 @@ functions
 
 rsm
 -----------------
+A collection of functions for full reciprocal space mapping
 .. automodule:: udkm.pxs.rsm
     :show-inheritance:
     :members:    
@@ -18,6 +20,7 @@ rsm
 
 rss
 -----------------
+A collection of functions for  reciprocal space slicing
 .. automodule:: udkm.pxs.rss
     :show-inheritance:
     :members:    
@@ -25,6 +28,7 @@ rss
 
 pxshelpers
 -----------------
+small routines that are frequently used
 .. automodule:: udkm.pxs.pxshelpers
     :show-inheritance:
     :members:    
