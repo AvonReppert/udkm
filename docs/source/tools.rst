@@ -4,6 +4,7 @@
 ``functions``
 -------------
 small routines that are frequently used
+
 .. automodule:: udkm.tools.functions
     :show-inheritance:
     :members:    
@@ -12,6 +13,7 @@ small routines that are frequently used
 ``colors``
 -------------
 frequently used colors
+
 .. automodule:: udkm.tools.colors
     :show-inheritance:
     :members:    
@@ -20,6 +22,7 @@ frequently used colors
 ``plot``
 -------------
 some default plot setups
+
 .. automodule:: udkm.tools.plot
     :show-inheritance:
     :members:    
@@ -28,6 +31,7 @@ some default plot setups
 ``fit``
 -------------
 more elaborate fit functions for peak analysis
+
 .. automodule:: udkm.tools.fit
     :show-inheritance:
     :members:    

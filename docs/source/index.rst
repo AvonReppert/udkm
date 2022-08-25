@@ -10,7 +10,8 @@ On the long run it aims to bundle data analysis functions for the setups in the 
    This project is under active development.
    
 Contents
---------
+---------
+
 .. toctree::
     :maxdepth: 5
    
@@ -24,6 +25,7 @@ Contents
 
 Indices and tables
 -------------------
+
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
