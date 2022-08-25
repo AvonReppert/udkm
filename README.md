@@ -1,25 +1,20 @@
 # udkm
 a collection of python commands for data analysis in udkm group
 
-## tools
+The beginning of the documentation can be found here: https://udkm-2.readthedocs.io/en/latest/index.html
+
+## modules
 general functions and definitions for data analysis, which includes:
-- ```helpers```: general data analysis routines
-- ```colors``` : frequently used colors and colormaps
-- ```plot```: frequently used plot layouts
-- ```constants```: frequently used constants
-- ```testing```: a sandbox file for testing git
+- ```pxs``` : library for the X-ray diffraction setup using the Plasma X-ray source
+- ```moke```: routines for the MOKE setup in the femto-magnetism lab
+- ```tools```:  general functions, fits, constants and plot layouts 
+- ```kmc3```:  data evaluation using the h5 files that come out of the xpp endstation at kmc3
+- ```sim```: material database and example for udkm1dsim code
+- ```calc```: collection of more or less frequently used calculation scripts
 
-## moke
-library for the MOKE setup in the femto-magnetism lab, which includes:
-- ```functions```: data analysis functions
+## installation of the code
 
-## pxs
-library for the X-ray diffraction setup using the Plasma X-ray source
-- ```functions```: data analysis functions
-
-# installation of the code
-
-## option 1: download the code repository via git:
+### option 1: download the code repository via git:
 This allows you to have editable source file that you can add to the pyhton search path. 
 
 1. install git that is available from ```https://git-scm.com/downloads```
@@ -37,18 +32,18 @@ This allows you to have editable source file that you can add to the pyhton sear
 
 To see if your installation works try:
 ```
-import udkm.tools.helpers as helpers
-print(helpers.teststring)
+import udkm.tools.functions as tools
+print(tools.teststring)
 ```
-which should yield: "Successfully loaded udkm.tools.helpers"
+which should yield: "Successfully loaded udkm.tools.functions"
 
 
-## option 2: via pip using git:
+### option 2: via pip using git:
 Allows usage of the code without the option of changing it
 
 ```pip install git+https://github.com/AleksUDKM/udkm.git ```
 
-# contributing to the repository:
+## contributing to the repository:
 
 To contribute code to the repository you need a GitHub account. 
 Once you have that let me know and then I will add you as contributor. 
@@ -62,7 +57,7 @@ For testing purposes I recommend modifications of the "udkm/tools/testing" file
 6. commit your changes via ```git commit -m  "short description of the commit" ```
 7. push your commits into the online repository via ```git push``` 
 
-# usage of the matplotlib style file
+## usage of the matplotlib style file
 
 In udkm.tools you find the file ```udkm_base.mplstyle``` that we use as a default in matplotlib.
 To add it to the preinstalled matplotlib styles follow these steps:
