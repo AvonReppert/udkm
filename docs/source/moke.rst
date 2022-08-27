@@ -13,7 +13,6 @@ example code
 functions
 -----------------
 
-
 .. automodule:: udkm.moke.functions_2
     :show-inheritance:
     :members:    

@@ -81,7 +81,7 @@ exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
-
+autodoc_member_order = 'bysource'
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -123,5 +123,3 @@ html_theme_options = {
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'udkmdoc'
-
-
