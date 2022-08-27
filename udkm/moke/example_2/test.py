@@ -1,18 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 15 10:51:31 2022
-
-@author: matte
-"""
-
 import matplotlib.pyplot as plt
-import numpy as np
 
 import udkm.tools.colors as colors
 import udkm.moke.functions_2 as moke
 import udkm.tools.plot as plot
 
-# %% Set parameters of the analysis
+# %% Set parameters for the analysis
 
 sample_name = 'P28b'
 reference_file = 'fluence_series_2.txt'
@@ -33,10 +25,7 @@ if analyze_series:
     plt.ylabel("moke (V)")
 
     plt.axhline(y=0, ls="--", color=colors.grey_3)
-    plt.tick_params(axis='both', which='both', direction="in")
-    plt.tick_params(axis='y', left=True, right=True)
-    plt.tick_params(axis='x', top=True, bottom=True)
-    plt.legend(fontsize=7, loc=4,
+    plt.legend(fontsize=8, loc=4,
                title=r"Fluence F $\left(\,\mathrm{\frac{mJ}{\,cm^2}}\right)$", handlelength=1, ncol=3)
     plt.savefig("exported_figures/"+str(sample_name)+"_1T_fluence.png")
     plt.show()

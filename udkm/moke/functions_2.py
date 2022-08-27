@@ -3,24 +3,21 @@
 import numpy as np
 import os as os
 import pandas as pd
-import lmfit as lm
 import udkm.tools.functions as tools
-import matplotlib
 import shutil
 
 
 import udkm.tools.colors as colors
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-from matplotlib.patches import Rectangle
-import pickle
 
 
 def get_scan_parameter(ref_file_name, line):
-    '''This function creates a dictionary from the information of a measurement noted in a reference file named
-    'ref_file_name' in the folder 'reference_data'. Information that are not stated in the reference file are
-    set by default. The reference file contains at least the 'date', 'time' and 'power' of the measurement.
+    '''creates a dictionary from the information on a measurement noted in a reference file
+
+    Reads in 'ref_file_name.txt' in the folder 'reference_data/'. Information that are not stated in that file are
+    set by default. The reference file needs to contain the columns 'date', 'time' and 'power' for each
+    measurement.
 
 
     Parameters
@@ -33,40 +30,47 @@ def get_scan_parameter(ref_file_name, line):
     Returns
     -------
     params : dictionary
-        Contains the parameters of the measurement. Always given keys are: 'date': date of measurement,
-        'time': time of measurement and  'power': laser power without chopper [mW]. If not given the function
-        set default values for: 'time_zero': delay of pump-probe overlap in [ps] - 0, 'temperature': start
-        temperature of measurement [K] - 300, 'pump_angle': angle between surface normal and pump beam [deg]
-        - 0, 'field_angle': angle of teh external field in respect to surface normal [deg] - 0, double_pulse':
-        first (0), second (1) or both pulses (2) in double pulse experiment - 0, 'frontside': whether (1) or not (0)
-        the excitation happens at the surface - 1, 'field': external magnetic field strength [mT] - -1,
-        'fwhm_x': horizontal pump width [müm] - 1000, 'fwhm_y': vertical pump width [müm] - 1000,
-        'wavelength': wavelength of pumppulse [nm] - 800, 'pulse_length': duration of pump pulse [fs] - 120 and
-        'fluence': excitation density calculated from 'power', 'fwhm_x' and 'fwhm_y' in top-hat approximation [mJ/cm2].
-        Furthermore, information of the data structure are setted by default but could be wrong and should be
-        given in the reference_file: 'rotation': value of rotable stage (power or field angle) - -1 and 'voltage':
-        voltage of the electromagnet [V] - 5.
+        - 'date': (str) date of measurement using the format yyyymmdd,
+        - 'time': (str) time of measurement using the format hhmmss
+        - 'power': (float) laser power without chopper [mW]
+        - 'time_zero': (float, optional) delay of pump-probe overlap in [ps] - default 0
+        - 'temperature': (float, optional) start temperature of measurement [K] - default 300
+        - 'pump_angle': (float, optional) angle between surface normal and pump beam [deg] - default 0
+        - 'field_angle': (float, optional) angle of the external field in respect to surface normal [deg] - default 0
+        - 'double_pulse': (int, optional) first (0), second (1) or both pulses (2) in double pulse experiment -default 0
+        - 'frontside': (int, optional) whether (1) or not (0) the excitation happens at from the surface - default 1
+        - 'field': (float, optional) external magnetic field strength [mT] - default -1
+        - 'fwhm_x': (float, optional) horizontal pump width [microns] - default 1000
+        - 'fwhm_y': (float, optional) vertical pump width [microns] - default 1000
+        - 'wavelength': (float, optional) wavelength of pumppulse [nm] - default 800
+        - 'pulse_length': (float, optional) duration of pump pulse [fs] - default 120
+        - 'fluence': (float, optional) calculated from 'power', 'fwhm_x' and 'fwhm_y' in top-hat approximation [mJ/cm^2]
+        - 'voltage': (float, optional) set voltage that equals current in the electromagnet [A] default - 5
+        - 'rotation': (float, optional) position of rotatable stage (power or field angle) - default -1
 
     Example
     -------
-    >>> get_scan_parameter('reference.txt', 1) = {'date': '20220813',
-                                                  'time': '181818',
-                                                  'id': 20220813_181818
-                                                  'rotation': -1.0,
-                                                  'voltage': 5.0,
-                                                  'power': 50,
-                                                  'fwhm_x': 1100,
-                                                  'fwhm_y': 1100,
-                                                  'temperature': 300,
-                                                  'field': 525,
-                                                  'pump_angle': 0,
-                                                  'field_angle': 0,
-                                                  'time_zero': 0,
-                                                  'double_pulse': 0,
-                                                  'frontside': 0,
-                                                  'wavelength': 800,
-                                                  'pulse_length': 120,
-                                                  'fluence': 5.32}
+    The following code creates the parameter dictionary corresponding to line 1 in the reference file
+
+    >>> params = get_scan_parameter('reference.txt', 1)
+    {'date': '20220813',
+     'time': '181818',
+     'id': 20220813_181818
+     'rotation': -1.0,
+     'voltage': 5.0,
+     'power': 50,
+     'fwhm_x': 1100,
+     'fwhm_y': 1100,
+     'temperature': 300,
+     'field': 525,
+     'pump_angle': 0,
+     'field_angle': 0,
+     'time_zero': 0,
+     'double_pulse': 0,
+     'frontside': 0,
+     'wavelength': 800,
+     'pulse_length': 120,
+     'fluence': 5.32}
 
     '''
     params = {'line': line}
@@ -129,11 +133,14 @@ def get_scan_parameter(ref_file_name, line):
 
 
 def set_analysis_params(sample_name, **params):
-    '''This function creates a dictionary of the analysis parameters, which can be changed in the main script. The
-    dictionary contains the relevant folder names and the 'sample_name'. Furthermore, it is possible to force a
-    recalculation of the loop averages, to exclude 'bad_loops', to manuelly sort the raw data into field up and
-    field down and to calculate time zero from the measurement results as delay of larges change. Additionally, there
-    is teh option to copy the raw data from the measurement folder into the respective sample folder in the main script.
+    '''initializes a dictionary of parameters for the data analysis that can be set in the main script
+
+    The resulting dictionary always contains the relevant folder names and the 'sample_name'.
+    Additionally it allows to set the option to:
+        - force a recalculation of the loop averages, to exclude 'bad_loops',
+        - to manually sort the raw data into field up and field down
+        - calculate time zero from the measurement results as delay of largest change.
+        - copy the raw data from the measurement folder into a specified sample folder
 
 
     Parameters
@@ -143,35 +150,38 @@ def set_analysis_params(sample_name, **params):
     import_path : str
         Folder path of the raw data in the measurement folder. If given the raw data is copied to the samples folder.
     column_calc_t0 : str
-        Results 'moke' or 'sum' which is used to caculate time zero. If given it is caculated and printed.
+        Results 'moke' or 'sum' which is used to caculate time zero. If given it is caculasted and printed.
 
     Returns
     -------
     analysis_params : dictionary
-        Contains the parameters of the analysis with their default values, which could be adapted in the main script.
-        Always given keys are: 'data_folder': folder of measured data - raw_data, 'export_folder': folder of final
-        analysis results - exported_results, 'export_dict_folder': folder of the exported dictionarys containing
-        analysis results and measurement parameters - exported_analysis, 'sample_name': name of the sample,
-        'force_recalc': if there are already exported analysis results, should it be again calculated - False,
-        'bad_field': is there a problem with the separation into field up and field down - False, 'bad_loops': list of
-        list containing the excluded loops in the final average as analysis result - [[]].
-        Optinal key stated in the parameters of the function: 'import_path': path from which the measurement results
-        should be copied to 'data_folder'. If this input parameter is given, the 'bool_import_data' is set True and the
-        data is copied. 'column_calc_t0': which data is used for time zero determination 'moke' or 'sum' - 'moke'.
-        If this input parameter is given, the 'bool_calc_t0': is set True and the calculated t0 as maximum slope is
-        printed and can be copied to the reference file.
+        - 'data_folder': (str) folder of measured data - default "raw_data"
+        - 'export_folder': (str) folder of final analysis results - default "exported_results"
+        - 'export_dict_folder': (str) folder of the exported dictionarys  - default "exported_analysis"
+        - 'sample_name': (str) name of the sample as used for plot headlines and labeling
+        - 'force_recalc': (bool) recalculate analysis if it already exists - default False
+        - 'bad_field': (bool) is there a problem with the separation into field up and field down - default False
+        - 'bad_loops': (list) list of lists of loops to exclude in the averaged as analysis result - default [[]].
+        - 'import_path': (str, optional) path from which the measurement results should be copied to 'data_folder'
+        - 'bool_import_data' (str, optional) set to True if 'import_path' exists
+        - 'column_calc_t0': (str, optional) column name for time zero determination 'moke' or 'sum' - default 'moke'
+        - 'bool_calc_t0': (bool, optional) True if 'column_calc_t0 exists' and forces automatic t0 determination
 
     Example
     -------
-    >>> set_analysis_params('P28b') = {'data_folder': 'raw_data',
-                                       'export_folder': 'exported_results',
-                                       'export_dict_folder': 'exported_analysis'
-                                       'sample_name': 'P28b',
-                                       'force_recalc': False,
-                                       'bad_field': False,
-                                       'bad_loops': [[]],
-                                       'bool_calc_t0': False,
-                                       'bool_import_data': False}
+    initializes an analysis parameter dictionary with the sample name "P28b"
+
+    >>> analysis_params =  set_analysis_params('P28b')
+    {'data_folder': 'raw_data',
+    'export_folder': 'exported_results',
+    'export_dict_folder': 'exported_analysis'
+    'sample_name': 'P28b',
+    'force_recalc': False,
+    'bad_field': False,
+    'bad_loops': [[]],
+    'bool_calc_t0': False,
+    'bool_import_data': False}
+
     '''
     analysis_params = {}
     analysis_params['data_folder'] = 'raw_data'
@@ -198,8 +208,13 @@ def set_analysis_params(sample_name, **params):
 
 
 def get_export_information(scan_params, analysis_params):
-    '''This function creates a dictionary containing export information like plot title, export folder and file name,
-    which consist of the 'date', 'time', 'rotation' and 'voltage' of the measurement.
+    '''creates a dictionary with with export parameters
+
+    The resulting dictionary contains:
+        - plot_title
+        - export_folder
+        - file_name
+    the results are made of  'date', 'time', 'rotation' and 'voltage' of the measurement.
 
 
     Parameters
@@ -212,18 +227,19 @@ def get_export_information(scan_params, analysis_params):
     Returns
     -------
     export_params : dictionary
-        Contains the parameters for export and plot the measurement results that consist of the information of the
-        measurement: 'data_path': folder structure of the loctaion of the raw data given by 'date', 'time', 'rotation'
-        and 'voltage', 'identification': same information but separated with whitespace used for printing the progress,
-        'file_name': name of the exported overview file consiisting of the same information separated by underline,
-        'plot_title': additionally contains teh sample name and is used astitle for each plot for identification.
+        - 'data_path': folder structure  of the raw data
+        - 'identification': same information but separated with whitespace used for printing the progress,
+        - 'file_name': name of the exported overview file consiisting of the same information separated by underline
+        - 'plot_title': additionally contains the sample name and is used as title for each plot for identification
 
     Example
     -------
-    >>> get_export_information(scan, analysis) = {'data_path': '20220818_181818/Fluence/-1.0/5.0',
-                                                  'identification': '20220818 181818 -1.0 5.0',
-                                                  'file_name': '20200818_181818_-1.0_5.0'
-                                                  'plot_title': 'P28b  20220818  181818  -1.0  5.0V'}
+
+    >>> export_params =  get_export_information(scan, analysis)
+    {'data_path': '20220818_181818/Fluence/-1.0/5.0',
+    'identification': '20220818 181818 -1.0 5.0',
+    'file_name': '20200818_181818_-1.0_5.0'
+    'plot_title': 'P28b  20220818  181818  -1.0  5.0V'}
     '''
     export_params = {}
     export_params['data_path'] = scan_params['date'] + '_' + scan_params['time'] + \
@@ -238,12 +254,18 @@ def get_export_information(scan_params, analysis_params):
 
 
 def load_scan(ref_file_name, analysis_params, line):
-    '''This function creates a dictionary containing the parameters of the measurement and the loopwise averaged and
-    analysed measurement results given by the voltage change for each field direction and their difference and sum.
-    If these measurements are not already exported or 'force_recalc' is set True these results are created from the
-    'raw_data' by the function 'export_raw_data' that also creates a loopwise plot and enables the possibility to
-    exclude 'bad_loops'. If given in 'analysis_params' created by the function 'set_analysis_params' it is possible to
-    automatically copy the raw data from the measurement folder to the respective sample folder.
+    ''' loads the data of a measurement scan into a dictionary
+
+    The resulting scan dictionary contains the parameters of the measurement and the loopwise averaged and
+    analysed measurement results.
+    The resulting dictionary contains:
+        - voltage change for each field direction
+        - their difference
+        - ther sum
+    If this scan is not already exported or 'force_recalc' is set True these results are created from the
+    'raw_data' by calling the function 'export_raw_data' that also creates a loopwise overview plot and
+    enables the possibility to exclude 'bad_loops'. If 'bool_import_data' is True in 'analysis_params' it
+    automatically copies of the raw data from the measurement folder to the sample folder.
 
     Parameters
     ----------
@@ -258,49 +280,57 @@ def load_scan(ref_file_name, analysis_params, line):
     Returns
     -------
     scan : dictionary
-        Contains the final measurement results and the parameters of the measurement stated in the reference file.
-        Always given keys are: 'date': date of measurement, 'time': time of measurement and  'power': laser power
-        without chopper [mW]. If not given the function set default values for: 'time_zero': delay of pump-probe
-        overlap in [ps] - 0, 'temperature': start temperature of measurement [K] - 300, 'pump_angle': angle between
-        surface normal and pump beam [deg] - 0, 'field_angle': angle of teh external field in respect to surface normal
-        [deg] - 0, double_pulse': first (0), second (1) or both pulses (2) in double pulse experiment - 0, 'frontside':
-        whether (1) or not (0) the excitation happens at the surface - 1, 'field': external magnetic field strength
-        [mT] - -1, 'fwhm_x': horizontal pump width [müm] - 1000, 'fwhm_y': vertical pump width [müm] - 1000,
-        'wavelength': wavelength of pumppulse [nm] - 800, 'pulse_length': duration of pump pulse [fs] - 120 and
-        'fluence': excitation density calculated from 'power', 'fwhm_x' and 'fwhm_y' in top-hat approximation [mJ/cm2].
-        Furthermore, information of the data structure are setted by default but could be wrong and should be
-        given in the reference_file: 'rotation': value of rotable stage (power or field angle) - -1 and 'voltage':
-        voltage of the electromagnet [V] - 5. Keys for the measurement results: 'raw_delay': delay axis as measured
-        without time zero correction, 'delay': delays with time zero correction in reference file, 'sum': sum of the
-        voltage change for opposite field directions, 'moke': difference of the voltage change for opposite field
-        directions, 'field_up': voltage change for field up and 'field_down': voltage change of field down.
+        - 'date': (str) date of measurement
+        - 'time': (str) time of measurement
+        - 'power': (float) laser power without chopper [mW].
+        - 'time_zero': (float) delay of pump-probe overlap in [ps] - default 0
+        - 'temperature': (float) start temperature of measurement [K] - default 300
+        - 'pump_angle': (float) angle between surface normal and pump beam [deg] - default 0
+        - 'field_angle': (float) angle of the external field in respect to surface normal [deg] - default 0
+        - 'double_pulse':  (int) first (0), second (1) or both pulses (2) in double pulse experiment - default 0
+        - 'frontside': (int) whether (1) or not (0) the excitation happens at from the surface - default 1
+        - 'field': (float) external magnetic field strength [mT] - default -1
+        - 'fwhm_x': (float) horizontal pump width [microns] - default 1000
+        - 'fwhm_y': (float) vertical pump width [microns] - default 1000
+        - 'wavelength': (float) wavelength of pumppulse [nm] - default 800
+        - 'pulse_length': (float) duration of pump pulse [fs] - default 120
+        - 'fluence': (float) calculated from 'power', 'fwhm_x' and 'fwhm_y' in top-hat approximation [mJ/cm^2].
+        - 'voltage': (float) set voltage that equals current in the electromagnet [A] default - 5
+        - 'rotation': (float) position of rotatable stage (power or field angle) - default -1
+        - 'raw_delay': (numpy array) delay axis as measured without time zero correction
+        - 'delay': (numpy array) delays with time zero correction in reference file
+        - 'sum': (numpy array) sum of the voltage change for opposite field directions
+        - 'moke': (numpy array) difference of the voltage change for opposite field directions,
+        - 'field_up': (numpy array) voltage change for field up
+        - 'field_down': (numpy array) voltage change of field down
 
     Example
     -------
-    >>> load_scan('reference.txt', analysis, 1) = {'date': '20220813',
-                                                   'time': '181818',
-                                                   'id': '20220813_181818',
-                                                   'rotation': -1.0,
-                                                   'voltage': 5.0,
-                                                   'power': 50,
-                                                   'fwhm_x': 1100,
-                                                   'fwhm_y': 1100,
-                                                   'temperature': 300,
-                                                   'field': 525,
-                                                   'pump_angle': 0,
-                                                   'field_angle': 0,
-                                                   'time_zero': 0,
-                                                   'double_pulse': 0,
-                                                   'frontside': 0,
-                                                   'wavelength': 800,
-                                                   'pulse_length': 120,
-                                                   'fluence': 5.32,
-                                                   'raw_delay': np.array([110,112,114]),
-                                                   'delay': np.array([-2,0,2]),
-                                                   'sum': np.array([0,0.02,-0.02]),
-                                                   'moke': np.array([0,0.2,0.4]),
-                                                   'field_up': np.array([0,0.11,0.19]),
-                                                   'field_down': np.array([0,-0.09,-0.21])}
+    >>> scan = load_scan('reference.txt', analysis, 1)
+    {'date': '20220813',
+    'time': '181818',
+    'id': '20220813_181818',
+    'rotation': -1.0,
+    'voltage': 5.0,
+    'power': 50,
+    'fwhm_x': 1100,
+    'fwhm_y': 1100,
+    'temperature': 300,
+    'field': 525,
+    'pump_angle': 0,
+    'field_angle': 0,
+    'time_zero': 0,
+    'double_pulse': 0,
+    'frontside': 0,
+    'wavelength': 800,
+    'pulse_length': 120,
+    'fluence': 5.32,
+    'raw_delay': np.array([110,112,114]),
+    'delay': np.array([-2,0,2]),
+    'sum': np.array([0,0.02,-0.02]),
+    'moke': np.array([0,0.2,0.4]),
+    'field_up': np.array([0,0.11,0.19]),
+    'field_down': np.array([0,-0.09,-0.21])}
     '''
     scan_params = get_scan_parameter(ref_file_name, line)
     export_params = get_export_information(scan_params, analysis_params)
@@ -347,27 +377,31 @@ def load_scan(ref_file_name, analysis_params, line):
 
 
 def export_raw_data(scan_params, analysis_params, export_params, line):
-    '''This function reads in the raw data from the 'data_path' given by the function 'get_export_information'
-    and plot the loopise voltage change between pumped and unpumped for both field directions as well as their
-    difference and the respective averages. With 'bad_field' it is possible to manually set the field directions
-    if this infomation is not given by teh raw data file. Afterwards an average excluding 'bad_loops' is calculated
+    '''reads in the raw data from the 'data_path' and plots an overview of for each measurement loop
+
+    This function reads in the raw data from the ‘data_path’ as given by the function ‘get_export_information’
+    and plots the loopise voltage change between pumped and unpumped for both field directions as well as
+    their difference, their sum and loopwise aver . With 'bad_field' it is possible to manually set the field directions
+    if this infomation is not given by the raw data file. Afterwards an average excluding 'bad_loops' is calculated
     and the delay axis is shifted according to the time zero given in the refernence file. The results are exported
     in an overview file.
 
     Parameters
     ----------
     scan_params : dictionary
-        Parameters of the measurement used to shift the delay axis.
+        Parameters of the measurement
     analysis_params : dictionary
-        Set and potentially adjusted analysis paramaters including 'bool_calc_t0' and 'bad_loops'.
+        Analysis paramaters including 'bool_calc_t0' and 'bad_loops'.
     export_params : dictionary
-        Folder names and plot title to export and save teh generated results.
+        Folder names and plot title
     line : int
         Number of the measurement in reference file is used as entry of the 'bad_loops' list. For single
         measurement and single 'bad_loops' entry this list is used to exclude bad loops.
 
     Example
     -------
+    This line exports the measurement number 3 in the reference file and thereby excludes loop 1
+
     >>> export_raw_data(scan_params, {'bad_loops': [[1]], ...}, export_params, 3)
     '''
 
@@ -499,15 +533,17 @@ def export_raw_data(scan_params, analysis_params, export_params, line):
 
 
 def plot_overview(ref_file_name, scan, analysis_params, line):
-    '''This function plots and saves the exported results in the dictionary 'scan' for a certain measurement in the
-    line. of the reference file.
+    '''Plots an overview of a measurement for a specified line in the reference file
+
+    This function plots and saves the exported results in the dictionary 'scan' for a certain measurement
+    in the given line of the reference file.
 
     Parameters
     ----------
     ref_file_name : str
-        Name of the reference file containing the measurement parameters.
+        Name of the reference file containing the measurement parameters
     scan : dictionary
-        Contating the paramerts and teh result sof teh measurement that are finally plotted.
+        Contains the parameters and the result of the measurement that are plotted
     analysis_params : dictionary
         Contains the parameters of the data analysis including the 'sample_name'
     line : int
@@ -515,7 +551,7 @@ def plot_overview(ref_file_name, scan, analysis_params, line):
 
     Example
     -------
-    >>> plot_overview('reference-txt', scan, analysis_params, 3)
+    >>> plot_overview('reference.txt', scan, analysis_params, 3)
     '''
     scan_params = get_scan_parameter(ref_file_name, line)
     export_params = get_export_information(scan_params, analysis_params)
@@ -550,13 +586,15 @@ def plot_overview(ref_file_name, scan, analysis_params, line):
 
 
 def load_series(ref_file_name, analysis_params):
-    '''This function creates a dictionary containing the parameters of all measurements and their loopwise averaged and
-    analysed measurement results given by the voltage change for each field direction and their difference and sum.
-    This function uses the functions 'load_scan' and 'plot_overview' and iterates over all lines in the reference_file.
-    If these measurements are not already exported or 'force_recalc' is set True these results are created from the
-    'raw_data' by the function 'export_raw_data' that also creates a loopwise plot and enables the possibility to
-    exclude 'bad_loops'. If given in 'analysis_params' created by the function 'set_analysis_params' it is possible to
-    automatically copy the raw data from the measurement folder to the respective sample folder.
+    '''creates a dictionary that contains the parameters, data and analysis of a series as lists
+
+    This function creates a dictionary containing the parameters of all measurements and their loopwise averaged
+    and analysed measurement results given by the voltage change for each field direction, their difference and sum.
+    This function uses the functions ‘load_scan’ and ‘plot_overview’ and iterates over all lines in the reference_file.
+    If these measurements are not already exported or ‘force_recalc’ is set True these results are created from the
+    ‘raw_data’ by the function ‘export_raw_data’. This alsoo creates a loopwise plot and enables the possibility to
+    exclude ‘bad_loops’. If given in ‘analysis_params’ created by the function ‘set_analysis_params’ it  automatically
+    copies the raw data from the measurement folder to the respective sample folder.
 
     Parameters
     ----------
@@ -568,50 +606,58 @@ def load_series(ref_file_name, analysis_params):
 
     Returns
     -------
-    scan : dictionary
-        Contains the final measurement results and the parameters of all measurements as list stated in the reference
-        file. Always given keys are: 'date': date of measurement, 'time': time of measurement and  'power': laser power
-        without chopper [mW]. If not given the function set default values for: 'time_zero': delay of pump-probe
-        overlap in [ps] - 0, 'temperature': start temperature of measurement [K] - 300, 'pump_angle': angle between
-        surface normal and pump beam [deg] - 0, 'field_angle': angle of teh external field in respect to surface normal
-        [deg] - 0, double_pulse': first (0), second (1) or both pulses (2) in double pulse experiment - 0, 'frontside':
-        whether (1) or not (0) the excitation happens at the surface - 1, 'field': external magnetic field strength
-        [mT] - -1, 'fwhm_x': horizontal pump width [müm] - 1000, 'fwhm_y': vertical pump width [müm] - 1000,
-        'wavelength': wavelength of pumppulse [nm] - 800, 'pulse_length': duration of pump pulse [fs] - 120 and
-        'fluence': excitation density calculated from 'power', 'fwhm_x' and 'fwhm_y' in top-hat approximation [mJ/cm2].
-        Furthermore, information of the data structure are setted by default but could be wrong and should be
-        given in the reference_file: 'rotation': value of rotable stage (power or field angle) - -1 and 'voltage':
-        voltage of the electromagnet [V] - 5. Keys for the measurement results: 'raw_delay': delay axis as measured
-        without time zero correction, 'delay': delays with time zero correction in reference file, 'sum': sum of the
-        voltage change for opposite field directions, 'moke': difference of the voltage change for opposite field
-        directions, 'field_up': voltage change for field up and 'field_down': voltage change of field down.
+    series : dictionary
+        - 'date': (list of str) date of measurement
+        - 'time': (list of str) time of measurement
+        - 'power': (list of float) laser power without chopper [mW].
+        - 'time_zero': (list of float) delay of pump-probe overlap in [ps] - default 0
+        - 'temperature': (list of float) start temperature of measurement [K] - default 300
+        - 'pump_angle': (list float) angle between surface normal and pump beam [deg] - default 0
+        - 'field_angle': (list float) angle of the external field in respect to surface normal [deg] - default 0
+        - 'double_pulse': (list of int) first (0), second (1) or both pulses (2) in double pulse experiment - default 0
+        - 'frontside': (list of int) whether (1) or not (0) the excitation happens at from the surface - default 1
+        - 'field': (list of float) external magnetic field strength [mT] - default -1
+        - 'fwhm_x': (list of float) horizontal pump width [microns] - default 1000
+        - 'fwhm_y': (list of float) vertical pump width [microns] - default 1000
+        - 'wavelength': (list of float) wavelength of pumppulse [nm] - default 800
+        - 'pulse_length': (list of float) duration of pump pulse [fs] - default 120
+        - 'fluence': (list of float) calculated from 'power', 'fwhm_x' and 'fwhm_y' in top-hat approximation [mJ/cm^2].
+        - 'voltage': (list of float) set voltage that equals current in the electromagnet [A] default - 5
+        - 'rotation': (list of float) position of rotatable stage (power or field angle) - default -1
+        - 'raw_delay': (list of numpy array) delay axis as measured without time zero correction
+        - 'delay': (list of numpy array) delays with time zero correction in reference file
+        - 'sum': (list of numpy array) sum of the voltage change for opposite field directions
+        - 'moke': (list of numpy array) difference of the voltage change for opposite field directions,
+        - 'field_up': (list of numpy array) voltage change for field up
+        - 'field_down': (lisft of numpy array) voltage change of field down
 
     Example
     -------
-    >>> load_series('reference.txt', analysis) = {'date': ['20220813', 20220813'],
-                                                   'time': ['181818', '191919'],
-                                                   'id': ['20220813_181818', '20220813_191919'],
-                                                   'rotation': [-1.0, 0.0],
-                                                   'voltage': [5, 5],
-                                                   'power': [50, 50],
-                                                   'fwhm_x': [1100, 1100],
-                                                   'fwhm_y': [1100, 1100],
-                                                   'temperature': [300, 300],
-                                                   'field': [525, 525],
-                                                   'pump_angle': [0, 0],
-                                                   'field_angle': [0, 0],
-                                                   'time_zero': [0, 0],
-                                                   'double_pulse': [0, 0],
-                                                   'frontside': [0, 0],
-                                                   'wavelength': [800, 800],
-                                                   'pulse_length': [120, 120],
-                                                   'fluence': [5.32, 5.32],
-                                                   'raw_delay': [np.array([110,112,114]), np.array([110,112,114])],
-                                                   'delay': [np.array([-2,0,2]), np.array([-2,0,2])],
-                                                   'sum': [np.array([0,0.02,-0.02]), np.array([0,-0.02,0.02])],
-                                                   'moke': [np.array([0,0.2,0.4]), np.array([0,0.4,0.8])],
-                                                   'field_up': [np.array([0,0.11,0.19]), np.array([0,0.19,0.41])],
-                                                   'field_down': [np.array([0,-0.09,-0.21]), np.array([0,-0.21,-0.39])]}
+    >>> series = load_series('reference.txt', analysis)
+    {'date': ['20220813', 20220813'],
+    'time': ['181818', '191919'],
+    'id': ['20220813_181818', '20220813_191919'],
+    'rotation': [-1.0, 0.0],
+    'voltage': [5, 5],
+    'power': [50, 50],
+    'fwhm_x': [1100, 1100],
+    'fwhm_y': [1100, 1100],
+    'temperature': [300, 300],
+    'field': [525, 525],
+    'pump_angle': [0, 0],
+    'field_angle': [0, 0],
+    'time_zero': [0, 0],
+    'double_pulse': [0, 0],
+    'frontside': [0, 0],
+    'wavelength': [800, 800],
+    'pulse_length': [120, 120],
+    'fluence': [5.32, 5.32],
+    'raw_delay': [np.array([110,112,114]), np.array([110,112,114])],
+    'delay': [np.array([-2,0,2]), np.array([-2,0,2])],
+    'sum': [np.array([0,0.02,-0.02]), np.array([0,-0.02,0.02])],
+    'moke': [np.array([0,0.2,0.4]), np.array([0,0.4,0.8])],
+    'field_up': [np.array([0,0.11,0.19]), np.array([0,0.19,0.41])],
+    'field_down': [np.array([0,-0.09,-0.21]), np.array([0,-0.21,-0.39])]}
     '''
     ref_file = pd.read_csv('reference_data/' + ref_file_name, delimiter="\t", header=0, comment="#")
     measurements = len(ref_file['date'])
