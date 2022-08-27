@@ -1,7 +1,7 @@
 # udkm
 a collection of python commands for data analysis in udkm group
 
-The beginning of the documentation can be found here: https://udkm-2.readthedocs.io/en/latest/index.html
+The beginning of the documentation can be found here: https://udkm.readthedocs.io/en/latest/index.html
 
 ## modules
 general functions and definitions for data analysis, which includes:
