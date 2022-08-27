@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 19 21:29:02 2021
-@author: Aleks
-"""
 
 import matplotlib
 
 
 teststring = "Successfully loaded udkm.tools.colors"
 
-# definitions of frequently used colors
+##########################
+# frequently used colors #
+##########################
+
 grey_1 = '#4b4b4bff'
 grey_2 = '#7c7c7cff'
 grey_3 = '#bfbfbfff'
@@ -38,15 +37,54 @@ darkred = '#800000'
 
 
 def hex_to_rgb(hx):
-    """ returns an rgb tuple from a hexadecimal input """
+    """ returns an rgb tuple from a hexadecimal rgba input
+
+    Parameters
+    ----------
+    hex : str
+        hexadecimal code for the color usually extracted using the inkscape color picker format #0048ccff""
+
+    Returns
+    -------
+    tuple : tuple of rgb values
+
+    Example
+    -------
+    This example returns the rgb tuple of the hex code for the predefined blue_1
+
+    >>> blue_1 = hex_to_rgb('#0048ccff')
+    (0.0, 0.28125, 0.796875)
+
+    """
     hx = hx.lstrip('#')
     return tuple(int(hx[i:i+2], 16)/256 for i in (0, 2, 4))
 
 
 def make_colormap(seq):
-    """Return a LinearSegmentedColormap
-    seq: a sequence of floats and RGB-tuples.
-    The floats should be increasing and in the interval (0,1).
+    """ returns a matplotlib LinearSegmentedColormap from a sequence of rgb-tuples
+
+    The floats that define the color spacing need to be strictly increasing and within the interval [0,1].
+
+    Parameters
+    ----------
+    seq : list of tuples
+        hexadecimal code for the color usually extracted using the inkscape color picker format #0048ccff""
+
+    Returns
+    -------
+    tuple : tuple of rgb values
+
+    Example
+    -------
+    This example shows how the cmap_blue_red_1 is created
+
+    >>> make_colormap([hex_to_rgb(white), hex_to_rgb(blue_2), 0.15,
+                       hex_to_rgb(blue_2), hex_to_rgb(blue_1), 0.4,
+                       hex_to_rgb(blue_1), hex_to_rgb(blue_3), 0.6,
+                       hex_to_rgb(blue_3), hex_to_rgb(grey_1), 0.8,
+                       hex_to_rgb(grey_1), hex_to_rgb(grey_3)
+                       ])
+
     """
     seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
     cdict = {'red': [], 'green': [], 'blue': []}
@@ -60,8 +98,28 @@ def make_colormap(seq):
     return matplotlib.colors.LinearSegmentedColormap('CustomMap', cdict)
 
 
+########################
+# multicolor colormaps #
+########################
+
+cmap_1 = make_colormap([hex_to_rgb(blue_2), hex_to_rgb(blue_1), 0.2,
+                        hex_to_rgb(blue_1), hex_to_rgb(orange_1), 0.5,
+                        hex_to_rgb(orange_1), hex_to_rgb(red_1)
+                        ])
+
+cmap_2 = make_colormap([hex_to_rgb(yellow), hex_to_rgb(red_1), 0.1,
+                        hex_to_rgb(red_1), hex_to_rgb(orange_1), 0.4,
+                        hex_to_rgb(orange_1), hex_to_rgb(blue_1), 0.8,
+                        hex_to_rgb(blue_1), hex_to_rgb(blue_2)
+                        ])
+
+cmap_3 = make_colormap([(170/256, 204/256, 255/256), (0/256, 72/256, 204/256), 0.2,
+                        (0/256, 72/256, 204/256), (220/256, 23/256, 0/256), 0.5,
+                        (220/256, 23/256, 0/256), (255/256, 215/256, 0/256)])
+
+
 def fireice():
-    """Returns a self-defined analogue of the colormap fireice"""
+    """Returns a self-defined analogue of the colormap fireice that can be called via colors.fireice()"""
     cdict = {'red':    ((0.0,  0.75, 0.75),
                         (1/6,  0, 0),
                         (2/6,  0, 0),
@@ -88,27 +146,11 @@ def fireice():
     fireice = matplotlib.colors.LinearSegmentedColormap('fireice', cdict)
     return(fireice)
 
-
-""" general multicolor colormaps """
-
-
-cmap_1 = make_colormap([hex_to_rgb(blue_2), hex_to_rgb(blue_1), 0.2,
-                        hex_to_rgb(blue_1), hex_to_rgb(orange_1), 0.5,
-                        hex_to_rgb(orange_1), hex_to_rgb(red_1)
-                        ])
-
-cmap_2 = make_colormap([hex_to_rgb(yellow), hex_to_rgb(red_1), 0.1,
-                        hex_to_rgb(red_1), hex_to_rgb(orange_1), 0.4,
-                        hex_to_rgb(orange_1), hex_to_rgb(blue_1), 0.8,
-                        hex_to_rgb(blue_1), hex_to_rgb(blue_2)
-                        ])
-
-cmap_3 = make_colormap([(170/256, 204/256, 255/256), (0/256, 72/256, 204/256), 0.2,
-                        (0/256, 72/256, 204/256), (220/256, 23/256, 0/256), 0.5,
-                        (220/256, 23/256, 0/256), (255/256, 215/256, 0/256)])
+##################
+# blue colormaps #
+##################
 
 
-""" blue colormaps """
 cmap_blue_1 = make_colormap([hex_to_rgb(white), hex_to_rgb(blue_2), 0.15,
                              hex_to_rgb(blue_2), hex_to_rgb(blue_1), 0.4,
                              hex_to_rgb(blue_1), hex_to_rgb(blue_3), 0.6,
@@ -134,7 +176,10 @@ cmap_blue_5 = make_colormap([hex_to_rgb(white), hex_to_rgb(blue_2),
                              0.33, hex_to_rgb(blue_2), hex_to_rgb(blue_1), 0.66,
                              hex_to_rgb(blue_1), hex_to_rgb(orange_2)])
 
-""" yellow-orange-red colormaps """
+###############################
+# yellow-orange-red colormaps #
+###############################
+
 cmap_gold_1 = make_colormap([hex_to_rgb(white), hex_to_rgb(yellow), 0.15,
                              hex_to_rgb(yellow), hex_to_rgb(orange_1), 0.25,
                              hex_to_rgb(orange_1), hex_to_rgb(orange_2), 0.4,
@@ -157,7 +202,10 @@ cmap_gold_4 = make_colormap([hex_to_rgb(orange_1), hex_to_rgb(orange_2), 0.33,
                              hex_to_rgb(orange_3), hex_to_rgb(red_1)
                              ])
 
-""" red colormaps """
+#################
+# red colormaps #
+#################
+
 cmap_red_1 = make_colormap([hex_to_rgb(white), hex_to_rgb(orange_4), 0.2,
                             hex_to_rgb(orange_4), hex_to_rgb(orange_2), 0.6,
                             hex_to_rgb(orange_2), hex_to_rgb(red_1)
@@ -181,8 +229,10 @@ cmap_red_4 = make_colormap([hex_to_rgb(white), hex_to_rgb(red_2), 0.4,
                             hex_to_rgb(red_1),  hex_to_rgb(orange_2)
                             ])
 
+#################################
+# bipolar red to blue colormaps #
+#################################
 
-""" bipolar red to blue colormaps """
 cmap_blue_red_1 = make_colormap([hex_to_rgb(blue_1), hex_to_rgb(blue_2), 1/3,
                                  hex_to_rgb(blue_2), hex_to_rgb(white), 1/2,
                                  hex_to_rgb(white), hex_to_rgb(red_2), 2/3,

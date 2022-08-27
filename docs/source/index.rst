@@ -7,21 +7,26 @@ On the long run it aims to bundle data analysis functions for the setups in the 
 
 .. note::
 
-   This project is under active development.
+   This project is under active development. 
+   The corresponding Github project page can be found at https://github.com/AleksUDKM/udkm
    
-Contents
+Modules
 ---------
 
 .. toctree::
     :maxdepth: 5
-   
-    github project page <https://github.com/AleksUDKM/udkm>
-    
+       
 	pxs <pxs>
 	moke <moke>
 	tools <tools>
 	kmc3 <kmc3>
 
+Code examples
+--------------
+.. toctree::
+   
+    moke examples <examples/moke_example.ipynb>
+	colors examples <examples/color_example.ipynb>
 
 Indices and tables
 -------------------

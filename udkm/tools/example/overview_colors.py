@@ -36,7 +36,6 @@ def plot_color_gradients(category, cmap_list):
     # Turn off *all* ticks & spines, not just the ones with colormaps.
     for ax in axs:
         ax.set_axis_off()
-    plt.savefig(category+".png", dpi=300, bbox_inches="tight")
 
 
 """ multicolor lists """
