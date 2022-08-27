@@ -70,7 +70,8 @@ def get_scan_parameter(ref_file_name, line):
      'frontside': 0,
      'wavelength': 800,
      'pulse_length': 120,
-     'fluence': 5.32}
+     'fluence': 5.32
+     }
 
     '''
     params = {'line': line}
@@ -136,6 +137,7 @@ def set_analysis_params(sample_name, **params):
     '''initializes a dictionary of parameters for the data analysis that can be set in the main script
 
     The resulting dictionary always contains the relevant folder names and the 'sample_name'.
+
     Additionally it allows to set the option to:
         - force a recalculation of the loop averages, to exclude 'bad_loops',
         - to manually sort the raw data into field up and field down
@@ -166,6 +168,7 @@ def set_analysis_params(sample_name, **params):
         - 'bool_import_data' (str, optional) set to True if 'import_path' exists
         - 'column_calc_t0': (str, optional) column name for time zero determination 'moke' or 'sum' - default 'moke'
         - 'bool_calc_t0': (bool, optional) True if 'column_calc_t0 exists' and forces automatic t0 determination
+        - 'bool_plot_overview': (bool, optional) set True if overview plot is shown after analysis - default True
 
     Example
     -------
@@ -180,7 +183,8 @@ def set_analysis_params(sample_name, **params):
     'bad_field': False,
     'bad_loops': [[]],
     'bool_calc_t0': False,
-    'bool_import_data': False}
+    'bool_import_data': False,
+    'bool_plot_overview': True}
 
     '''
     analysis_params = {}
@@ -191,6 +195,7 @@ def set_analysis_params(sample_name, **params):
     analysis_params['force_recalc'] = False
     analysis_params['bad_field'] = False
     analysis_params['bad_loops'] = [[]]
+    analysis_params['bool_plot_overview'] = True
 
     if 'import_path' in params:
         analysis_params['import_path'] = params['import_path']
@@ -214,8 +219,8 @@ def get_export_information(scan_params, analysis_params):
         - plot_title
         - export_folder
         - file_name
-    the results are made of  'date', 'time', 'rotation' and 'voltage' of the measurement.
 
+    the results are made of  'date', 'time', 'rotation' and 'voltage' of the measurement.
 
     Parameters
     ----------
@@ -234,12 +239,13 @@ def get_export_information(scan_params, analysis_params):
 
     Example
     -------
-
     >>> export_params =  get_export_information(scan, analysis)
     {'data_path': '20220818_181818/Fluence/-1.0/5.0',
     'identification': '20220818 181818 -1.0 5.0',
     'file_name': '20200818_181818_-1.0_5.0'
-    'plot_title': 'P28b  20220818  181818  -1.0  5.0V'}
+    'plot_title': 'P28b  20220818  181818  -1.0  5.0V'
+    }
+
     '''
     export_params = {}
     export_params['data_path'] = scan_params['date'] + '_' + scan_params['time'] + \
@@ -258,10 +264,12 @@ def load_scan(ref_file_name, analysis_params, line):
 
     The resulting scan dictionary contains the parameters of the measurement and the loopwise averaged and
     analysed measurement results.
+
     The resulting dictionary contains:
-        - voltage change for each field direction
-        - their difference
-        - ther sum
+      - voltage change for each field direction
+      - their difference
+      - their sum
+
     If this scan is not already exported or 'force_recalc' is set True these results are created from the
     'raw_data' by calling the function 'export_raw_data' that also creates a loopwise overview plot and
     enables the possibility to exclude 'bad_loops'. If 'bool_import_data' is True in 'analysis_params' it
@@ -331,6 +339,7 @@ def load_scan(ref_file_name, analysis_params, line):
     'moke': np.array([0,0.2,0.4]),
     'field_up': np.array([0,0.11,0.19]),
     'field_down': np.array([0,-0.09,-0.21])}
+
     '''
     scan_params = get_scan_parameter(ref_file_name, line)
     export_params = get_export_information(scan_params, analysis_params)
@@ -552,6 +561,7 @@ def plot_overview(ref_file_name, scan, analysis_params, line):
     Example
     -------
     >>> plot_overview('reference.txt', scan, analysis_params, 3)
+
     '''
     scan_params = get_scan_parameter(ref_file_name, line)
     export_params = get_export_information(scan_params, analysis_params)
@@ -657,7 +667,9 @@ def load_series(ref_file_name, analysis_params):
     'sum': [np.array([0,0.02,-0.02]), np.array([0,-0.02,0.02])],
     'moke': [np.array([0,0.2,0.4]), np.array([0,0.4,0.8])],
     'field_up': [np.array([0,0.11,0.19]), np.array([0,0.19,0.41])],
-    'field_down': [np.array([0,-0.09,-0.21]), np.array([0,-0.21,-0.39])]}
+    'field_down': [np.array([0,-0.09,-0.21]), np.array([0,-0.21,-0.39])]
+    }
+
     '''
     ref_file = pd.read_csv('reference_data/' + ref_file_name, delimiter="\t", header=0, comment="#")
     measurements = len(ref_file['date'])
@@ -677,7 +689,8 @@ def load_series(ref_file_name, analysis_params):
     print('Analyze results of all measurements...')
     for line in range(measurements):
         scan = load_scan(ref_file_name, analysis_params, line)
-        plot_overview(ref_file_name, scan, analysis_params, line)
+        if analysis_params["bool_plot_overview"]:
+            plot_overview(ref_file_name, scan, analysis_params, line)
         for key in series:
             series[key].append(scan[key])
 
