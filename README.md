@@ -1,16 +1,16 @@
 # udkm
-a collection of python commands for data analysis in udkm group
+a collection of python modules for data analysis in udkm group
 
-The beginning of the documentation can be found here: https://udkm.readthedocs.io/en/latest/index.html
+The documentation including code examples can be found here: https://udkm.readthedocs.io/en/latest/index.html
 
 ## modules
-general functions and definitions for data analysis, which includes:
+This library is subdivided into modules that are adapted to the different experimental setups and 
 - ```pxs``` : library for the X-ray diffraction setup using the Plasma X-ray source
-- ```moke```: routines for the MOKE setup in the femto-magnetism lab
-- ```tools```:  general functions, fits, constants and plot layouts 
+- ```moke```: routines for the trMOKE setup in the femto-magnetism lab
 - ```kmc3```:  data evaluation using the h5 files that come out of the xpp endstation at kmc3
-- ```sim```: material database and example for udkm1dsim code
-- ```calc```: collection of more or less frequently used calculation scripts
+- ```tools```:  general functions, fits, constants and plot layouts 
+- ```sim```: general material database and example for udkm1dsim code
+- ```calc```: general collection of more or less frequently used calculation scripts
 
 ## installation of the code
 
@@ -46,8 +46,7 @@ Allows usage of the code without the option of changing it
 ## contributing to the repository:
 
 To contribute code to the repository you need a GitHub account. 
-Once you have that let me know and then I will add you as contributor. 
-For testing purposes I recommend modifications of the "udkm/tools/testing" file
+Once you have that let me know and I will add you as contributor after a brief intro into our concept. 
 
 1. open a command window in the directory of the repository (for example: ```C:\Users\Aleks\Documents\Code\udkm``` )
 2. check that you have no conflicts by typing ``` git status``` 
@@ -57,21 +56,3 @@ For testing purposes I recommend modifications of the "udkm/tools/testing" file
 6. commit your changes via ```git commit -m  "short description of the commit" ```
 7. push your commits into the online repository via ```git push``` 
 
-## usage of the matplotlib style file
-
-In udkm.tools you find the file ```udkm_base.mplstyle``` that we use as a default in matplotlib.
-To add it to the preinstalled matplotlib styles follow these steps:
-
-1. Look for the function path of matplotlib using
-```
-import matplotlib
-matplotlib.matplotlib_fname()
-```
-2. There you will find a folder called ```stylelib``` to which you copy the file ```udkm_base.mplstyle``` 
-3. After restarting your kernel you should be able to use the new plotstyle via:
-```
-import matplolitb.pyplot as plt
-plt.style.use("udkm_base")
-``` 
-Alternatively you can import the plotstyle file into your runtime using the absolute or relative path
-to the style file via ```plt.style.use(path_to_file+"/udkm_base.mplstyle")```, potentially also in the startup routine.

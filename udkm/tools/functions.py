@@ -51,12 +51,12 @@ def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
         repetition rate of the used laser
 
     Returns
-    ------
+    --------
         fluence : float
           calculated fluence in mJ/cm^2
 
     Example
-    ------
+    --------
         >>> calc_fluence(50,500*1e-4,400*1e-4,45,1000) """
     # Umrechung von Grad in Bogenmaß
     angle_rad = np.radians(angle)
@@ -72,14 +72,14 @@ def calc_moments(x_axis, y_values):
     """ calculates the center of mass, standard deviation and integral of a given distribution
 
     Parameters
-    ----------
+    -----------
         x_axis : 1D numpy array
             numpy array containing the x Axis
         y_values : 1D numpy array
             numpy array containing the according y Values
 
     Returns
-    ------
+    --------
     in that order
         com : float
             xValue of the Center of Mass of the data
@@ -91,7 +91,7 @@ def calc_moments(x_axis, y_values):
             integral of the data
 
     Example
-    -------
+    --------
         >>> com,std,integral = calcMoments([1,2,3],[1,1,1])
             sould give a com of 2, a std of 1 and an integral of 3 """
 
@@ -111,7 +111,7 @@ def calc_grid_boxes(grid):
        vector : 1D numpy array
                 numpy array containing a monotonous grid with points
    Returns
-   ------
+   --------
    in that order
        delta : 1D numpy array of same length as vector
                the distance to the left and right neighbor devided by 2
@@ -120,7 +120,7 @@ def calc_grid_boxes(grid):
        right : 1D numpy array of same length as vector
            right boundaries of the grid cell
    Example
-   -------
+   ---------
        >>> delta,right,left = calc_grid_boxes([0,1,2,4])
            (array([ 1. ,  1. ,  1.5,  2. ]),
             array([-0.5,  0.5,  1.5,  3. ]),
@@ -155,12 +155,12 @@ def find(array, key):
     key :   float value
             The value that one looks for in the array
     Returns
-    ------
+    --------
     index :     integer
                 index of the array value closest to the key
 
     Example
-    -------
+    ---------
     >>> index = find(np.array([1,2,3]),3)
     will return 2"""
     index = (np.abs(array-key)).argmin()
@@ -179,11 +179,11 @@ def rel_change(data_array, fixpoint):
         Quantity to which the relative change is calculated
 
     Returns
-    ------
+    --------
         rel_change_array : 1D numpy array with same length as data_array
         contains (data_array-fixpoint)/fixpoint
     Example
-    -------
+    --------
         >>> change = relChange(cAxisDy,cAxisDy[T==300])"""
     rel_change_array = (data_array-fixpoint)/fixpoint
     return(rel_change_array)

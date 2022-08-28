@@ -26,6 +26,7 @@ Code examples
 .. toctree::
    
     moke examples <examples/moke_example.ipynb>
+	plot examples <examples/plot_example.ipynb>
 	colors examples <examples/color_example.ipynb>
 
 Indices and tables
