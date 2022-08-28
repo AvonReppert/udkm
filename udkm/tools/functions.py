@@ -10,6 +10,28 @@ import zipfile as zipfile
 teststring = "Successfully loaded udkm.tools.functions"
 
 
+def find(array, key):
+    """returns the index of the entry of a numpy array where the value is closest to the key
+
+    Parameters
+    ----------
+    array : 1D numpy array
+            numpy array with values
+    key :   float value
+            The value that one looks for in the array
+    Returns
+    --------
+    index :     integer
+                index of the array value closest to the key
+
+    Example
+    ---------
+    >>> index = find(np.array([1,2,3]),3)
+    will return 2"""
+    index = (np.abs(array-key)).argmin()
+    return index
+
+
 def fft(x_data, y_data):
     """ returns fft of the y_data and  the corresponding frequency axis"""
     length = len(x_data)
@@ -108,11 +130,11 @@ def calc_grid_boxes(grid):
 
    Parameters
    ----------
-       vector : 1D numpy array
+       grid : 1D numpy array
                 numpy array containing a monotonous grid with points
    Returns
    --------
-   in that order
+   tuple : (delta, left, right)
        delta : 1D numpy array of same length as vector
                the distance to the left and right neighbor devided by 2
        left : 1D numpy array of same length as vector
@@ -143,28 +165,6 @@ def calc_grid_boxes(grid):
             right[n] = np.mean([grid[n], grid[n+1]])
             delta[n] = np.abs(right[n]-left[n])
     return delta, left, right
-
-
-def find(array, key):
-    """This little function returns the index of the array where the array value is closest to the key
-
-    Parameters
-    ----------
-    array : 1D numpy array
-            numpy array with values
-    key :   float value
-            The value that one looks for in the array
-    Returns
-    --------
-    index :     integer
-                index of the array value closest to the key
-
-    Example
-    ---------
-    >>> index = find(np.array([1,2,3]),3)
-    will return 2"""
-    index = (np.abs(array-key)).argmin()
-    return index
 
 
 def rel_change(data_array, fixpoint):
