@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 19 21:29:02 2021
-@author: Aleks
-"""
 
 import numpy as np
 import os as os
@@ -15,7 +11,7 @@ teststring = "Successfully loaded udkm.tools.functions"
 
 
 def fft(x_data, y_data):
-    """ returns fft of the y_data and frequency  axis"""
+    """ returns fft of the y_data and  the corresponding frequency axis"""
     length = len(x_data)
 
     if length != len(y_data):
@@ -36,17 +32,18 @@ def fft(x_data, y_data):
 
 
 def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
-    """returns the fluence
+    """returns the fluence using a top hat approximation with the 1/e_x and 1/e_y as the radii of the ellipses
+
     Parameters
     ----------
     power : float
-        incident power in mW
+        incident power in mW (without chopper, in case your asking ;-)
     fwhm_x : float
         Full Width at Half Maximum of the (gaussian) pump beam in x-direction in microns
     fwhm_y : float
         Full Width at Half Maximum of the (gaussian) pump beam in y-direction in microns
     angle : float
-        angle of incidence of the pump beam in degree relative to surface normal
+        angle of incidence of the pump beam in degree relative to surface normal (optics convention)
     rep_rate : float
         repetition rate of the used laser
 
@@ -57,7 +54,9 @@ def calc_fluence(power, fwhm_x, fwhm_y, angle, rep_rate):
 
     Example
     --------
-        >>> calc_fluence(50,500*1e-4,400*1e-4,45,1000) """
+        >>> calc_fluence(50,500,400,45,1000)
+        15.6
+    """
     # Umrechung von Grad in Bogenmaß
     angle_rad = np.radians(angle)
     # Berechnung der Fluenz
@@ -92,8 +91,9 @@ def calc_moments(x_axis, y_values):
 
     Example
     --------
-        >>> com,std,integral = calcMoments([1,2,3],[1,1,1])
-            sould give a com of 2, a std of 1 and an integral of 3 """
+        >>> com,std,integral = calc_moments([1,2,3],[1,1,1])
+           (2.0, 0.816496580927726, 3.0)
+    """
 
     com = np.average(x_axis, axis=0, weights=y_values)
     std = np.sqrt(np.average((x_axis-com)**2, weights=y_values))
@@ -184,7 +184,7 @@ def rel_change(data_array, fixpoint):
         contains (data_array-fixpoint)/fixpoint
     Example
     --------
-        >>> change = relChange(cAxisDy,cAxisDy[T==300])"""
+        >>> change = rel_change(cAxisDy,cAxisDy[T==300])"""
     rel_change_array = (data_array-fixpoint)/fixpoint
     return(rel_change_array)
 
@@ -212,7 +212,7 @@ def set_roi_1d(x_axis, values, x_min, x_max):
 
     Example
     -------
-        >>> qz_cut,roi = setroimatrix(qzgrid,RockingQz,2.1,2.2)"""
+        >>> qz_cut,roi = set_roi_1d(qz_grid,rocking_qz,2.1,2.2)"""
 
     select_x = np.logical_and(x_axis >= x_min, x_axis <= x_max)
     x_roi = x_axis[select_x]
@@ -250,7 +250,7 @@ def set_roi_2d(x_axis, y_axis, matrix, x_min, x_max, y_min, y_max):
 
     Example
     -------
-        >>> qz_cut,qx_cut,roi,x_integral,y_integral = setroimatrix(qzgrid,qxgrid,rsm_q,2.1,2.2,-0.5,0.5)"""
+        >>> qz_cut,qx_cut,roi,x_integral,y_integral = set_roi_2d(qz_grid,qx_grid,rsm_q,2.1,2.2,-0.5,0.5)"""
 
     select_x = np.logical_and(x_axis >= x_min, x_axis <= x_max)
     select_y = np.logical_and(y_axis >= y_min, y_axis <= y_max)
@@ -365,6 +365,7 @@ def smooth(x, window_len, window):
     >>> y=smooth(x)
 
     see also:
+    ----------
     numpy.hanning, numpy.hamming, numpy.bartlett, numpy.blackman, numpy.convolve
     scipy.signal.lfilter
     the window parameter could be the window itself as an array instead of a string """
@@ -599,10 +600,12 @@ def append_single_line_to_file(file_name, line):
 
 
 def save_dictionary(dictionary, file_name):
+    "saves a given python dict to a specified file_name using pickle"
     pickle.dump(dictionary, open(file_name, "wb"))
 
 
 def load_dictionary(file_name):
+    "loads python dict from a specified file using pickle"
     return pickle.load(open(file_name, "rb"))
 
 
@@ -723,8 +726,9 @@ def get_files(data_directory, pattern=''):
 
 def reduce_file_size(filename, decimals, filename_suffix='_compressed'):
     """
-    Reduce number of decimal places for all entries in a data file. If filename_suffix equals ''
-    the existing file will be overwritten.
+    Reduces the number of decimal places for all entries in a data file.
+
+    If filename_suffix equals '' the existing file will be overwritten.
 
     Parameters
     ----------
