@@ -11,7 +11,7 @@ teststring = "Successfully loaded udkm.tools.functions"
 
 
 def find(array, key):
-    """returns the index of the entry of a numpy array where the value is closest to the key
+    """returns the index of the first occurence of the entry in the given array where the value is closest to the key
 
     Parameters
     ----------
@@ -22,12 +22,12 @@ def find(array, key):
     Returns
     --------
     index :     integer
-                index of the array value closest to the key
+                index of the array value closest to the key (first occurence only)
 
     Example
     ---------
-    >>> index = find(np.array([1,2,3]),3)
-    will return 2"""
+    >>> index = find(np.array([1,2,3,4]),2.9)
+    2"""
     index = (np.abs(array-key)).argmin()
     return index
 
