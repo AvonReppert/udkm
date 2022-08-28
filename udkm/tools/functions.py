@@ -79,7 +79,7 @@ def calc_moments(x_axis, y_values):
 
     Returns
     --------
-    in that order
+        tuple : (com,std,integral)
         com : float
             xValue of the Center of Mass of the data
 
