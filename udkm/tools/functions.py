@@ -102,14 +102,12 @@ def calc_moments(x_axis, y_values):
     Returns
     --------
         tuple : (com,std,integral)
-        com : float
-            xValue of the Center of Mass of the data
-
-        std : float
-            xValue for the standard deviation of the data around the center of mass
-
-        integral :
-            integral of the data
+            com : float
+                xValue of the Center of Mass of the data
+            std : float
+                xValue for the standard deviation of the data around the center of mass
+            integral : float
+                integral of the data
 
     Example
     --------
