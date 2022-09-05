@@ -19,7 +19,7 @@ Modules
 	pxs <pxs>
 	moke <moke>
 	tools <tools>
-	kmc3 <kmc3>
+	kmc3-xpp <kmc3_xpp>
 
 Code examples
 --------------

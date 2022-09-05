@@ -1,7 +1,7 @@
 # udkm
-a collection of python modules for data analysis in udkm group
+a collection of python modules for data analysis in [udkm group](https://www.uni-potsdam.de/en/udkm)
 
-The documentation including code examples can be found here: https://udkm.readthedocs.io/en/latest/index.html
+The documentation including code examples can be found here: https://udkm.readthedocs.io
 
 ## modules
 This library is subdivided into modules that are adapted to the different experimental setups and 
