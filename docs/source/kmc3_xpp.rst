@@ -4,6 +4,7 @@
 xpp
 -----------------
 A few functions for data analsis at the xpp beamline starting from exported .h5 files
+This is just a legacy class for data analyis of previous beamtimes
 
 .. automodule:: udkm.kmc3.functions
     :show-inheritance:
