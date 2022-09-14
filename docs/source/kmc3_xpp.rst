@@ -5,7 +5,7 @@ xpp
 -----------------
 A few functions for data analsis at the xpp beamline starting from exported .h5 files
 
-test if it works with moke functions in kmc3
+test if it works in kmc3
 
 functions
 -----------------
