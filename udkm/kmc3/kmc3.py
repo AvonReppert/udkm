@@ -5,7 +5,8 @@ import os as os
 import pandas as pd
 import udkm.tools.functions as tools
 import shutil
-
+import lmfit as lm
+from matplotlib.colors import LogNorm
 
 import udkm.tools.colors as colors
 import matplotlib.pyplot as plt
@@ -60,6 +61,222 @@ def initialize_series():
     series["c_min_lin"] = 1
     series["c_min_lin"] = 1000
     return series
+
+
+def append_scan(series, scan, scan_number):
+    '''appends a "scan" to an existing dictionary of scans ("series") using the appropriate scan number
+
+    Example
+    -------
+    the following line appends "scan_data" to "series"
+    >>> series = append_scan(series, scan_data, scan_number)
+
+    '''
+    series["scan"].append(scan_number)
+    series["temperature"].append(scan['temperature'])
+    series["delay"].append(scan['delay_measured'])
+
+    series["qz"].append(scan['qz'])
+    series["qx"].append(scan['qx'])
+    series["rsm"].append(np.transpose(np.sum(scan['intensity'], 1)))
+
+    series["intensity_qz"].append(scan['intensity_qz'])
+    series["intensity_qx"].append(scan['intensity_qx'])
+
+    com_qz, std_qz, integral_qz = tools.calc_moments(scan['qz'], scan['intensity_qz'])
+    com_qx, std_qx, integral_qx = tools.calc_moments(scan['qx'], scan['intensity_qx'])
+
+    series["com_qx"].append(com_qx)
+    series["std_qx"].append(std_qx)
+    series["integral_qx"].append(integral_qx)
+
+    series["com_qz"].append(com_qz)
+    series["std_qz"].append(std_qz)
+    series["integral_qz"].append(integral_qz)
+    return series
+
+
+def fit_scan_qz(series, model, parameters_qz, scan_number):
+    '''fits a series qz peaks using a simple lmfit model (gaussian + linear background)  and adds fitresult to "series"
+
+    Suitable for a delay series or temperature series alike.
+    If scan_number is "0" then it uses the provided parameters_qx otherwise it uses the best fit values from the
+    previous fit.
+
+    Example
+    -------
+    >>> series = fit_scan_qz(series, model, parameters_qx, i)
+
+    '''
+
+    if scan_number == 0:
+        fit_qz = model.fit(series["intensity_qz"][scan_number], parameters_qz, x=series["qz"][scan_number])
+    else:
+        parameters_qz = lm.Parameters()
+        parameters_qz.add_many(('center', series["position_qz"][scan_number-1], True),
+                               ('sigma', series["width_qz"][scan_number-1], True, 0),
+                               ('amplitude', series["area_qz"][scan_number-1], True, 0),
+                               ('slope', series["slope_qz"][scan_number-1], False),
+                               ('intercept', series["offset_qz"][scan_number-1], True))
+        fit_qz = model.fit(series["intensity_qz"][scan_number], parameters_qz, x=series["qz"][scan_number])
+
+    series["fit_qz"].append(fit_qz)
+    series["position_qz"].append(fit_qz.best_values["center"])
+    series["width_qz"].append(fit_qz.best_values["sigma"])
+    series["area_qz"].append(fit_qz.best_values["amplitude"])
+    series["slope_qz"].append(fit_qz.best_values["sigma"])
+    series["offset_qz"].append(fit_qz.best_values["intercept"])
+    return series
+
+
+def fit_scan_qx(series, model, parameters_qx, scan_number):
+    '''fits a series qx peaks using a simple lmfit model (gaussian + linear background)  and adds fitresult to "series"
+
+    Suitable for a delay series or temperature series alike.
+    If scan_number is "0" then it uses the provided parameters_qx otherwise it uses the best fit values from the
+    previous fit.
+
+    Example
+    -------
+    >>> series = fit_scan_qx(series, model, parameters_qx, i)
+
+    '''
+
+    if scan_number == 0:
+        fit_qx = model.fit(series["intensity_qx"][scan_number], parameters_qx, x=series["qx"][scan_number])
+    else:
+        parameters_qx = lm.Parameters()
+        parameters_qx.add_many(('center', series["position_qx"][scan_number-1], True),
+                               ('sigma', series["width_qx"][scan_number-1], True, 0),
+                               ('amplitude', series["area_qx"][scan_number-1], True, 0),
+                               ('slope', series["slope_qx"][scan_number-1], False),
+                               ('intercept', series["offset_qx"][scan_number-1], True))
+        fit_qx = model.fit(series["intensity_qx"][scan_number], parameters_qx, x=series["qx"][scan_number])
+
+    series["fit_qx"].append(fit_qx)
+    series["position_qx"].append(fit_qx.best_values["center"])
+    series["width_qx"].append(fit_qx.best_values["sigma"])
+    series["area_qx"].append(fit_qx.best_values["amplitude"])
+    series["slope_qx"].append(fit_qx.best_values["sigma"])
+    series["offset_qx"].append(fit_qx.best_values["intercept"])
+    return series
+
+
+def calc_strain(qz, reference_point):
+    ''' returns the strain in 10^(-3) of a vector of q_z positions relative to a reference value '''
+    strain = tools.rel_change(1/np.array(qz), 1/reference_point)
+    return strain*1e3
+
+
+def calc_changes_qz(series, index):
+    ''' calculates the q_z strain (10^-3), rel. width and area change (%) relative to a reference scan given by index
+
+    The returned dictionary then inclues the additional keys
+        - "qz_strain_fit"
+        - "qz_width_change_fit"
+        - "qz_area_change_fit"
+        - "qz_strain_com"
+        - "qz_width_change_com"
+        - "qz_area_change_com"
+
+    Example
+    -------
+    >>> series = calc_changes_qz(series, i_ref)
+
+    '''
+
+    series["qz_strain_fit"] = calc_strain(series["position_qz"], series["position_qz"][index])
+    series["qz_width_change_fit"] = tools.rel_change(series["width_qz"], series["width_qz"][index])*100
+    series["qz_area_change_fit"] = tools.rel_change(series["area_qz"], series["area_qz"][index])*100
+
+    series["qz_strain_com"] = calc_strain(series["com_qz"], series["com_qz"][index])
+    series["qz_width_change_com"] = tools.rel_change(series["std_qz"], series["std_qz"][index])*100
+    series["qz_area_change_com"] = tools.rel_change(series["integral_qz"], series["integral_qz"][index])*100
+    return series
+
+
+def calc_changes_qx(series, index):
+    ''' calculates the q_x strain (10^-3), rel. width and area change (%) relative to a reference scan given by index
+
+    The returned dictionary then inclues the additional keys
+        - "qx_strain_fit"
+        - "qx_width_change_fit"
+        - "qx_area_change_fit"
+        - "qx_strain_com"
+        - "qx_width_change_com"
+        - "qx_area_change_com"
+
+    Example
+    -------
+    >>> series = calc_changes_qx(series, i_ref)
+
+    '''
+    series["qx_strain_fit"] = calc_strain(series["position_qx"], series["position_qx"][index])
+    series["qx_width_change_fit"] = tools.rel_change(series["width_qx"], series["width_qx"][index])*100
+    series["qx_area_change_fit"] = tools.rel_change(series["area_qx"], series["area_qx"][index])*100
+
+    series["qx_strain_com"] = calc_strain(series["com_qx"], series["com_qx"][index])
+    series["qx_width_change_com"] = tools.rel_change(series["std_qx"], series["std_qx"][index])*100
+    series["qx_area_change_com"] = tools.rel_change(series["integral_qx"], series["integral_qx"][index])*100
+    return series
+
+
+def plot_rsm_overview(series, index, plot_log, i_ref):
+    ''' returns an overview plot of the reciprocal spacemap including the projection on the qx and qz axis
+
+    standard plot layout, where a reference fit of the scan with the number "i_ref" is added in grey.
+    it is required that  fit_scan_qx and fit_scan_qz have been executed befor
+
+    Example
+    -------
+    >>> f, ax0, ax1, ax2 = plot_rsm_overview(series, i, plot_log, i_ref)
+
+    '''
+
+    f = plt.figure(figsize=(5.2, 5.2))
+    gs = gridspec.GridSpec(2, 2, width_ratios=[1, 0.32], height_ratios=[0.5, 1], wspace=0.0, hspace=0.0)
+    ax0 = plt.subplot(gs[0])
+    ax1 = plt.subplot(gs[2])
+    ax2 = plt.subplot(gs[3])
+
+    X, Y = np.meshgrid(series["qx"][index], series["qz"][index])
+
+    if plot_log:
+        plotted = ax1.pcolormesh(X, Y,  series["rsm"][index], cmap=colors.cmap_1,
+                                 norm=LogNorm(vmin=series["c_min_log"], vmax=series["c_max_log"]), shading="auto")
+    else:
+        plotted = ax1.pcolormesh(X, Y,  series["rsm"][index], cmap=colors.cmap_1,
+                                 vmin=series["c_min_lin"], vmax=series["c_max_lin"], shading="auto")
+
+    ax0.plot(series["qx"][i_ref], series["intensity_qx"][i_ref],  'o', color=colors.grey_3,
+             label=str(int(np.round(series["temperature"][i_ref], 0)))+r"$\,$K")
+    ax0.plot(series["qx"][i_ref], series["fit_qx"][i_ref].best_fit, '-', color=colors.grey_1, label="fit", lw=2)
+
+    ax0.plot(series["qx"][index], series["intensity_qx"][index], 'o', color=colors.blue_1, label="sum")
+    ax0.plot(series["qx"][index], series["fit_qx"][index].best_fit, '-', color=colors.red_1, label="fit", lw=2)
+
+    ax2.plot(series["intensity_qz"][i_ref], series["qz"][i_ref], 'o', color=colors.grey_3)
+    ax2.plot(series["fit_qz"][i_ref].best_fit, series["qz"][i_ref], '-', color=colors.grey_1, label="fit", lw=2)
+
+    ax2.plot(series["intensity_qz"][index], series["qz"][index], 'o', color=colors.blue_1, label="sum")
+    ax2.plot(series["fit_qz"][index].best_fit, series["qz"][index], '-', color=colors.red_1, label="fit", lw=2)
+
+    ax1.set_xlabel(r'$q_\mathrm{x} \,\,\mathrm{\left(\frac{1}{\AA}\right)}$')
+    ax1.set_ylabel(r'$q_\mathrm{z} \,\,\mathrm{\left(\frac{1}{\AA}\right)}$')
+    cbaxes = f.add_axes([0.5, 0.21, 0.18, 0.027])
+    cbar = plt.colorbar(plotted, cax=cbaxes, orientation='horizontal')
+    cbar.set_label(r'I (cts)', fontsize=8)
+    cbar.ax.tick_params(labelsize=8, direction='in')
+    ax0.legend(bbox_to_anchor=(1, 1), loc="upper left")
+
+    ax0.xaxis.tick_top()
+    ax2.yaxis.tick_right()
+    ax0.axes.xaxis.set_ticklabels([])
+    ax2.axes.yaxis.set_ticklabels([])
+    ax0.tick_params(axis='x', which='both', bottom='on', top='on', labelbottom='off')
+    ax1.tick_params(axis='x', which='both', bottom='on', top='on', labelbottom='on')
+    ax2.tick_params(axis='y', which='both', left='on', right='on', labelright='off')
+    return f, ax0, ax1, ax2
 
 
 def get_scan_parameter(ref_file_name, line):
