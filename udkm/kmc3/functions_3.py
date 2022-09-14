@@ -10,9 +10,10 @@ from matplotlib.colors import LogNorm
 
 
 def get_q_data(h5_file, scan_nr, tau_offset=300.4):
-    '''
+    '''loads data from a .h5 file into a scan dictionary
+
     Parameters
-    ----------
+    -----------
     h5_file : str
         name of the h5 file to load
     scan_nr : integer
@@ -21,7 +22,7 @@ def get_q_data(h5_file, scan_nr, tau_offset=300.4):
         offset value of tau_APD
 
     Returns
-    -------
+    --------
     scan : dictionary
         - 'qx': (numpy array) qx grid
         - 'intensity_qx': (numpy array) intensity projected on the qx grid
@@ -36,7 +37,7 @@ def get_q_data(h5_file, scan_nr, tau_offset=300.4):
         - 'intensity': (numpy array) projection on the user defined grid
 
     Example
-    -------
+    --------
     initializes an analysis parameter dictionary with the sample name "P28b"
 
     >>> get_q_data()
