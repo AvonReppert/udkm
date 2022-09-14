@@ -9,72 +9,51 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 
 
-def get_q_data(h5_file, scan_nr, tau_offset=300.4):
-    '''
-    Parameters
-    ----------
-    h5_file : str
-        name of the h5 file to load
-    scan_nr : integer
-        number of the scan to extract from the file
-    tau_offset : str
-        offset value of tau_APD
+def initialize_series():
+    '''initializes an empty dictionary that can be filled with data from a series of similar scans
 
     Returns
     -------
-    scan : dictionary
-        - 'qx': (numpy array) qx grid
-        - 'intensity_qx': (numpy array) intensity projected on the qx grid
-        - 'qy': (numpy array) qy grid
-        - 'intensity_qy': (numpy array) intensity projected on the qy grid
-        - 'qz': (numpy array) qz grid
-        - 'intensity_qz': (numpy array) intensity projected on the qz grid
-        - 'delay_measured': (numpy array) measured delay
-        - 'delay_set': (numpy array) set delay
-        - 'temperature' (numpy array) temperature
-        - 'q_grid': (numpy array) user definded grid
-        - 'intensity': (numpy array) projection on the user defined grid
+    series : dictionary
+        - 'qx': (list of numpy arrays) list of qx grids
+        - 'qy': (list of numpy array) list of qy grids
+        - 'qz': (list of numpy array) list of qz grids
+        - 'intensity_qx': (list of numpy arrays) list of qx intensities
+        - 'intensity_qy': (list of numpy array) list of qy intensities
+        - 'intensity_qz': (list of numpy array) list of qz intensities
+        - 'scan': (list of integers) scan numbers
+        - 'temperature': (list of numpy array) temperatures for each scan
+        - 'delay': (list of numpy array) delays for each scan
+        - 'com_qz': (list of numpy array) list of evaluated com
+        - 'std_qz': (list of numpy array) list of evaluated standard deviation
+        - 'integral_qz' (list of numpy array) list of evaluated integral values
+        - 'fit_qz': (numpy array) list of evaluated fit positions
+        - 'width_qz': (numpy array) list of evaluated fit widths
+        - 'area_qz' (list of numpy array) list of evaluated areas
+        - 'slope_qz': (numpy array) list of evaluated slopes
+        - 'offset_qz': (numpy array) list of evaluated offset
+        - 'c_min_lin': (float) colormap minimum for linear scaling - default 0
+        - 'c_max_lin':  (float) colormap maximum for linear scaling - default 1000
+        - 'c_min_log': (float) colormap minimum for logarithmic scaling - default 1
+        - 'c_max_log':  (float) colormap maximum for logarithmic scaling - default 1000
 
     Example
     -------
-    Loads scan number 1196 from the given .h5 file
 
-    >>> scan = get_q_data('au_mgo_333_static_temp_scans1196_1294_2.h5', 1196)
-
+    >>> series = initialize_series()
     '''
-
-    h5_file = h5_file
-    h5_data = h5py.File(h5_file, 'r')
-    spec_name_key = list(h5_data.keys())[0]  # get key (aka spec filename) of the HDF5 file
-
-    file_name_qx = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/IntQx'
-    file_name_qy = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/IntQy'
-    file_name_qz = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/IntQz'
-    file_name_grid = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/grid'
-    file_name_intensity = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/QMapData'
-    file_name_qx_x = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/qx'
-    file_name_qx_y = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/qy'
-    file_name_qx_z = spec_name_key + '/scan_' + str(scan_nr) + '/ReducedData/qz'
-    spec_data = spec_name_key + '/scan_' + str(scan_nr) + '/data'
-
-    qx = np.array(h5_data[file_name_qx_x])
-    qy = np.array(h5_data[file_name_qx_y])
-    qz = np.array(h5_data[file_name_qx_z])
-
-    intensity_qx = np.array(h5_data[file_name_qx])
-    intensity_qy = np.array(h5_data[file_name_qy])
-    intensity_qz = np.array(h5_data[file_name_qz])
-
-    intensity = np.array(h5_data[file_name_intensity])
-    grid = np.array(h5_data[file_name_grid])
-
-    temperature = np.mean(h5_data[spec_data]['ls_t1'][0])
-    delay_measured = -np.mean(h5_data[spec_data]['PH_average'][1:]) + \
-        tau_offset  # measured delay corrected for tau_apd_0
-    delay_set = h5_data[spec_data]['delay'][1]  # set delay
-
-    scan = {'qx': qx, 'intensity_qx': intensity_qx, 'qy': qy, 'intensity_qy': intensity_qy,
-            'qz': qz, 'intensity_qz': intensity_qz, 'delay_measured': delay_measured,
-            'delay_set': delay_set, 'temperature': temperature, 'q_grid': grid, 'intensity': intensity}
-
-    return scan
+    key = ["qx", "qy", "qz", "rsm",
+           "intensity_qx", "intensity_qy", "intensity_qz",
+           "scan", "temperature", "delay",
+           "com_qz", "std_qz", "integral_qz",
+           "fit_qz", "position_qz", "width_qz", "area_qz", "slope_qz", "offset_qz",
+           "com_qy", "std_qy", "integral_qy",
+           "fit_qy", "position_qy", "width_qy", "area_qy", "slope_qy", "offset_qy",
+           "com_qx", "std_qx", "integral_qx",
+           "fit_qx", "position_qx", "width_qx", "area_qx", "slope_qx", "offset_qx"]
+    series = {k: [] for k in key}
+    series["c_min_log"] = 1
+    series["c_max_log"] = 1000
+    series["c_min_lin"] = 1
+    series["c_min_lin"] = 1000
+    return series
