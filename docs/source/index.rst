@@ -20,6 +20,7 @@ Modules
 	moke <moke>
 	tools <tools>
 	kmc3-xpp <kmc3_xpp>
+	tg <tg>
 
 Code examples
 --------------
@@ -29,6 +30,7 @@ Code examples
 	kmc3-xpp examples <examples/xpp_example.ipynb>
 	plot examples <examples/plot_example.ipynb>
 	colors examples <examples/color_example.ipynb>
+	tg examples <examples/tg_example.ipynb>
 
 Indices and tables
 -------------------

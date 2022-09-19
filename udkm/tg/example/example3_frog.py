@@ -5,15 +5,16 @@ parameter_file_name = "parameters/parameters_example_1.txt"
 
 line = 0
 
-params = tg.get_scan_parameter(parameter_file_name, line)
+params = moke.get_scan_parameter(parameter_file_name, line)
 params["bool_t0_shift"] = False
+params["t0_column_name"] = "moke"
 params["t_max"] = 1000
 params["scan_path"] = "scan_export//"
 
 
-scan = tg.load_data(params)
+scan = moke.load_data(params)
 
-tg.plot_overview(scan, t_max=1000)
+moke.plot_overview(scan, t_max=1000)
 plt.show()
 # # %%
 # # Save scan dictionary into a pickle file.
