@@ -1,7 +1,0 @@
-date	time	fwhm_x	fwhm_y	power	sample
-#0date	1time	2fwhmx(µm)	3fwhmy(µm)	4power(mW)	5name
-20211119	092027	410	457	30	NiCuPt
-20211210	234455	400	400	10	Ni 20 MBI
-20211209	143819	400	400	10	Ni 20 Hehn
-20211210	092019	400	400	10	Co 20 Hehn
-20211210	210924	400	400	10	CoFeB 20 Hehn

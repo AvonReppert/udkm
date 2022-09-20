@@ -1,0 +1,2 @@
+date	time	fwhm_x	fwhm_y	power	sample
+date	time	fwhmx(µm)	fwhmy(µm)	power(mW)	name

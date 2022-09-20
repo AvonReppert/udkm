@@ -1,0 +1,5 @@
+date	time	fwhm_x	fwhm_y	power	sample
+date	time	fwhmx(µm)	fwhmy(µm)	power(mW)	name
+20220816	143026	830	60	10	LiNbO3
+20220816	165807	830	60	10	LiNbO3
+20220816	133813	830	60	10	LiNbO3
