@@ -15,7 +15,7 @@ This library is subdivided into modules that are adapted to the different experi
 ## installation of the code
 
 ### option 1: download the code repository via git:
-This allows you to have editable source file that you can add to the pyhton search path. 
+This allows you to have editable source file that you can add to the python search path. 
 
 1. install git that is available from ```https://git-scm.com/downloads```
 2. run git and initialize your name and e-mail adress via:
