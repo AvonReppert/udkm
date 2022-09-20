@@ -56,3 +56,22 @@ Once you have that let me know and I will add you as contributor after a brief i
 6. commit your changes via ```git commit -m  "short description of the commit" ```
 7. push your commits into the online repository via ```git push``` 
 
+# usage of the matplotlib style file
+
+In udkm.tools you find the file ```udkm_base.mplstyle``` that we use as a default for plotting with matplotlib.
+To add it to the preinstalled matplotlib styles follow these steps:
+
+1. Look for the function path of matplotlib using
+```
+import matplolitb
+matplotlib.matplotlib_fname()
+```
+2. There you will find a folder called ```stylelib``` to which you copy the file ```udkm_base.mplstyle``` 
+3. After restarting your kernel you should be able to use the new plotstyle via:
+```
+import matplolitb.pyplot as plt
+plt.style.use("udkm_base")
+``` 
+Alternatively you can import the plotstyle file into your runtime using the absolute or relative path
+to the style file via ```plt.style.use(path_to_file+"/udkm_base.mplstyle")```, potentially also in the startup routine.
+
