@@ -30,7 +30,7 @@ Code examples
 	kmc3-xpp examples <examples/xpp_example.ipynb>
 	plot examples <examples/plot_example.ipynb>
 	colors examples <examples/color_example.ipynb>
-	beamprofile examples <examples/beamprofile_example.ipynb>
+	beamprofile examples <examples/beam_example.ipynb>
 	tg examples <examples/tg_example.ipynb>
 
 
