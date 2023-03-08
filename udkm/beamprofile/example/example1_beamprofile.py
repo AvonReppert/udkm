@@ -16,7 +16,7 @@ params["x_max"] = 4000
 
 params["y_min"] = 2100
 params["y_max"] = 3000
-
+params["good"] = True
 scan = beam.load_data(params)
 
 beam.plot_overview(scan)

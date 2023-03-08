@@ -21,6 +21,7 @@ Modules
 	tools <tools>
 	kmc3-xpp <kmc3_xpp>
 	tg <tg>
+	opp <opp>
 
 Code examples
 --------------
