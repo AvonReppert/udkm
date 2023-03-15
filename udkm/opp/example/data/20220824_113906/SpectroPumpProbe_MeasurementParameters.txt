@@ -1,0 +1,22 @@
+Name: NbO2 JB1336 
+
+Comment: NbO2 JB1336 with 800nm pump and 1150/2250nm probe  
+
+Loops: 10 
+Repeats: 10 
+Fluence: 16.0 mJ/cm^2 
+Waveplate Angle: -1 
+Power: 500.0 mW
+TimeZero: -2008.8 ps
+Wavelength Range: 1050.0 nm - 2500.0 nm
+Background: True
+Dark Current: False 
+Integration Time: 2.6 ms
+
+Stage Velocity: 500 
+Stage Acceleration: 2000 
+StartPoint: -2010.0 ps
+End Point: -2005.0 ps
+Stepwidth: 0.05 ps
+
+NbO2 JB1336 with 800nm pump and 1150/2250nm probe  

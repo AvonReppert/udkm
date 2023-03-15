@@ -1,7 +1,5 @@
-date	time	power	name
-#0date	1time	2power(mW)	3name
-20210428	145659	0.1	probe_1
-20210428	155303	10	pump_1
-20210428	164749	10	pump_2
-20210428	171357	10	pump_3
+date	time	power	name	FWHMx	FWHMy	pumpWL
+#0date	1time	2power(mW)	3name	4FWHMx	5FWHMy	pumpWL(nm)
+20220824	113906	500	probe_1	850	650	800
+20220824	134331	50	probe_2	850	650	800
 
