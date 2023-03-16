@@ -289,3 +289,6 @@ def plot_overview(scan):
 
     ax1.set_xlim([0, delta_x])
     ax4.set_ylim([0, delta_y])
+
+
+plt.show()
