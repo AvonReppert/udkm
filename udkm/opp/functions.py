@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pickle as pickle
+import dill as pickle
 import pandas as pd
 import matplotlib
 
