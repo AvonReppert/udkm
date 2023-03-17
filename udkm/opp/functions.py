@@ -54,28 +54,37 @@ def get_scan_parameter(parameter_file_name, line):
     return params
 
 
-def load_data_average(params):
-    '''Loads the average data for a given parameter set into a scan dictionary and returns overview plot'''
-
+def initialize_scan(params):
+    '''initializes the scan dictionary'''
     scan = {}
+
+    # required parameters
+
     scan["date"] = params["date"]
     scan["time"] = params["time"]
     scan["id"] = params["id"]
     scan["name"] = params["name"]
     scan["parameters_missing"] = False
-
     scan["filename_averaged"] = params["filename_averaged"]
-
     scan["data_directory"] = params["data_directory"] + "\\" + scan["id"] + "\\"
+    scan["scan_directory"] = params["scan_directory"]
 
-    entry_list = ["power", "rep_rate", "pump_angle", "T",
-                  "fwhm_x", "fwhm_y", "pump_wl", "probe_method", "scan_directory", "t0", "slice_wl", "slice_wl_width"]
+    # important parameters for title
+    entry_list = ["power", "rep_rate", "pump_angle", "T", "symmetric_colormap",
+                  "fwhm_x", "fwhm_y", "pump_wl", "probe_method", "filename_pump", "filename_probe"]
     for entry in entry_list:
         if entry in params:
             scan[entry] = params[entry]
         else:
             print("Warning: " + str(entry) + " is missing in parameter file")
             scan["parameters_missing"] = True
+
+    # optional user defined parameters
+    entry_list = ["t0", "slice_wl", "slice_wl_width", "slice_delay",
+                  "slice_delay_width", "delay_min", "delay_max", "wl_min", "wl_max"]
+    for entry in entry_list:
+        if entry in params:
+            scan[entry] = params[entry]
 
     scan["fluence"] = tools.calc_fluence(scan["power"], scan["fwhm_x"],
                                          scan["fwhm_y"], scan["pump_angle"], scan["rep_rate"])
@@ -86,6 +95,13 @@ def load_data_average(params):
         scan["title_text"] = scan["name"] + "  " + scan["date"] + " " + scan["time"] + " " + \
             str(scan["T"]) + r"$\,$K " + " " + str(scan["pump_wl"]) + r"$\,$nm  " + str(np.round(scan["fluence"], 1)) + \
             r"$\,\mathrm{\frac{mJ}{\,cm^2}}$ "
+    return scan
+
+
+def load_data_average(params):
+    '''Loads the average data for a given parameter set into a scan dictionary and returns overview plot'''
+
+    scan = initialize_scan(params)
 
     # load data into scan dictionary
     scan["data_averaged"] = np.genfromtxt(scan["data_directory"]+scan["filename_averaged"], comments="#")
@@ -97,7 +113,7 @@ def load_data_average(params):
     # overview plot of the data
     print("overview plot " + scan["name"] + " " + scan["date"] + " " +
           scan["time"]+" " + str(scan["T"])+"K " + str(scan["fluence"])+"mJ/cm^2 ")
-    if params["symmetric_colormap"]:
+    if scan["symmetric_colormap"]:
         c_min = -1*np.max(np.abs(scan["data_averaged"]))
         c_max = 1*np.max(np.abs(scan["data_averaged"]))
     else:
@@ -125,43 +141,12 @@ def load_data_average(params):
 
 
 def load_data(params):
-    '''Loads the average data for a given parameter set into a scan dictionary and returns overview plot'''
+    '''Loads all data given parameter set into a scan dictionary and returns overview plot'''
 
     if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
         print("load data from : " + params["data_directory"]+params["id"])
         # initialize scan dictionary
-        scan = {}
-        scan["date"] = params["date"]
-        scan["time"] = params["time"]
-        scan["id"] = params["id"]
-        scan["name"] = params["name"]
-        scan["parameters_missing"] = False
-
-        scan["filename_pump"] = params["filename_pump"]
-        scan["filename_probe"] = params["filename_probe"]
-        scan["filename_averaged"] = params["filename_averaged"]
-
-        scan["data_directory"] = params["data_directory"] + "\\" + scan["id"] + "\\"
-
-        entry_list = ["power", "rep_rate", "pump_angle", "T",
-                      "fwhm_x", "fwhm_y", "pump_wl", "probe_method", "scan_directory", "t0", "slice_wl",
-                      "slice_wl_width", "slice_time", "slice_time_width"]
-        for entry in entry_list:
-            if entry in params:
-                scan[entry] = params[entry]
-            else:
-                print("Warning: " + str(entry) + " is missing in parameter file")
-                scan["parameters_missing"] = True
-
-        scan["fluence"] = tools.calc_fluence(scan["power"], scan["fwhm_x"],
-                                             scan["fwhm_y"], scan["pump_angle"], scan["rep_rate"])
-
-        if scan["parameters_missing"]:
-            scan["title_text"] = scan["id"]
-        else:
-            scan["title_text"] = scan["name"] + "  " + scan["date"] + " " + scan["time"] + " " + \
-                str(scan["T"]) + r"$\,$K " + " " + str(scan["pump_wl"]) + r"$\,$nm  " + str(np.round(scan["fluence"], 1)) + \
-                r"$\,\mathrm{\frac{mJ}{\,cm^2}}$ "
+        scan = initialize_scan(params)
 
         # load data into scan dictionary
         scan["data_averaged"] = np.genfromtxt(scan["data_directory"]+scan["filename_averaged"], comments="#")
@@ -187,7 +172,7 @@ def load_data(params):
     # overview plot of the data
     print("overview plot " + scan["name"] + " " + scan["date"] + " " +
           scan["time"]+" " + str(scan["T"])+"K " + str(scan["fluence"])+"mJ/cm^2 ")
-    if params["symmetric_colormap"]:
+    if scan["symmetric_colormap"]:
         c_min = -1*np.max(np.abs(scan["data_averaged"]))
         c_max = 1*np.max(np.abs(scan["data_averaged"]))
     else:
@@ -211,6 +196,85 @@ def load_data(params):
     else:
         cb.ax.set_title(r'$\Delta R/R$ (%)')
 
+    # %% clean data from errors where the spectrometer gave values smaller <=0
+    pump_signal_errors = np.sum(scan["data_pump"], axis=0) <= 0
+    probe_signal_errors = np.sum(scan["data_probe"], axis=0) <= 0
+    errors = np.logical_or(pump_signal_errors, probe_signal_errors)
+    select_data = np.logical_not(errors)
+
+    scan["delay_raw_set"] = scan["delay_raw_set"][select_data]
+    scan["delay_raw_real"] = scan["delay_raw_real"][select_data]
+    scan["loop_array"] = scan["loop_array"][select_data]
+
+    scan["data_pump"] = scan["data_pump"][:, select_data]
+    scan["data_probe"] = scan["data_probe"][:, select_data]
+
+    scan["data_raw"] = (scan["data_pump"] - scan["data_probe"])/scan["data_probe"]
+
+    scan["data"] = np.zeros((len(scan["wavelength"]), len(scan["delay_raw_unique"])))
+
+    for i, t in enumerate(scan["delay_raw_unique"]):
+        select_time = scan["delay_raw_set"] == t
+        scan["data"][:, i] = np.mean(scan["data_raw"][:, select_time], axis=1)
+
+    # shift t0
+    scan["delay_set"] = scan["delay_raw_set"] - scan["t0"]
+    scan["delay_real"] = scan["delay_raw_real"] - scan["t0"]
+    scan["delay_unique"] = scan["delay_raw_unique"] - scan["t0"]
+
+    scan["wl_min"] = np.min(scan["wavelength"])
+    scan["wl_max"] = np.max(scan["wavelength"])
+
+    scan["delay_min"] = np.min(scan["delay_unique"])
+    scan["delay_max"] = np.max(scan["delay_unique"])
+
+    entry_list = ["delay_min", "delay_max", "wl_min", "wl_max"]
+    for entry in entry_list:
+        if entry in params:
+            scan[entry] = params[entry]
+
+    # generate wl slices
+    wl_slices = len(scan["slice_wl"])
+    scan["wl_labels"] = list()
+    if wl_slices > 0:
+        scan["wl_slices"] = np.zeros((wl_slices, len(scan["delay_unique"])))
+
+        for i, wl in enumerate(scan["slice_wl"]):
+
+            wl_min = scan["slice_wl"][i] - scan["slice_wl_width"][i]
+            wl_max = scan["slice_wl"][i] + scan["slice_wl_width"][i]
+            t_min = np.min(scan["delay_unique"])
+            t_max = np.max(scan["delay_unique"])
+            _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
+                                                    t_min, t_max, wl_min, wl_max)
+            scan["wl_slices"][i, :] = np.mean(data_cut, axis=0)
+            scan["wl_labels"].append(str(int(scan["slice_wl"][i])))
+
+    else:
+        scan["wl_slices"] = np.zeros((wl_slices, 1))
+        scan["wl_slices"][0, :] = np.sum(scan["data"], axis=0)
+        scan["wl_labels"].append("integral")
+
+    # generate delay slices
+    t_slices = len(scan["slice_delay"])
+    scan["delay_labels"] = list()
+    if t_slices > 0:
+        scan["delay_slices"] = np.zeros((t_slices, len(scan["wavelength"])))
+        for i, t in enumerate(scan["slice_delay"]):
+
+            wl_min = np.min(scan["wavelength"])
+            wl_max = np.max(scan["wavelength"])
+            t_min = scan["slice_delay"][i] - scan["slice_delay_width"][i]
+            t_max = scan["slice_delay"][i] + scan["slice_delay_width"][i]
+            _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
+                                                    t_min, t_max, wl_min, wl_max)
+            scan["delay_slices"][i, :] = np.mean(data_cut, axis=1)
+            scan["delay_labels"].append(str(int(scan["slice_delay"][i])))
+
+    else:
+        scan["delay_slices"] = np.zeros((t_slices, 1))
+        scan["delay_slices"][0, :] = np.sum(scan["data"], axis=1)
+        scan["delay_labels"].append("integral")
     return scan
 
 
@@ -226,28 +290,11 @@ def load_scan(date, time, scan_directory):
 
 
 def plot_overview(scan):
-
-    # integral_result_text = str(int(round(scan["fwhm_x"]))) + r'$\,\mathrm{\mu{}}$m' + " x " + str(
-    #   int(round(scan["fwhm_y"]))) + r'$\,\mathrm{\mu{}}$m'
-
-    X, Y = np.meshgrid(scan["delay_raw_unique"], scan["wavelength"])
-
-    delta_x = np.max(np.abs(scan["delay_raw_unique"]))-np.min(np.abs(scan["delay_raw_unique"]))
-    delta_y = np.max(scan["wavelength"])-np.min(scan["wavelength"])
-
-    mean_id = data_id.mean(axis=1)  # wird nach Reihen gemittelt - also für einen Stage Delay über die alle Wellenlängen
-    mean_sig = data_sig.mean(axis=1)
-
-    min_id = min(mean_id)
-    min_sig = min(mean_sig)
-
-    norm_id = -(mean_id / min_id)
-    norm_sig = -(mean_sig / min_sig)
-
-    plt.figure(2, figsize=(5.2, 5.2*np.max(scan["wavelength"])/np.max(np.abs(scan["delay_raw_unique"]))), linewidth=2)
+    '''yields an overview plot of the data with selected lineouts'''
+    fig = plt.figure(figsize=(12, 12*0.68))
     gs = gridspec.GridSpec(2, 2,
                            width_ratios=[3, 1],
-                           height_ratios=[1, 3],
+                           height_ratios=[1, 2],
                            wspace=0.0, hspace=0.0)
 
     ax1 = plt.subplot(gs[0])
@@ -255,122 +302,80 @@ def plot_overview(scan):
     ax3 = plt.subplot(gs[2])
     ax4 = plt.subplot(gs[3])
 
-    # (ax1) Horizontal Profile ##
+    ## Plot 1) Top Left: Horizontal Profile #####################
+
+    for i, intensity in enumerate(scan["wl_slices"]):
+        plotted = ax1.plot(scan["delay_unique"], intensity, lw=1,  label=str(scan["wl_labels"][i]) + r'$\,$nm')
+        if not(scan["wl_labels"][i] == "integral"):
+            ax3.axhline(y=scan["slice_wl"][i], lw=1, ls='--', color=plotted[0].get_color())
+        #ax1.axvline(x=0, ls="--", lw=0.5, color=colors.grey_3)
+
+    ax1.axhline(y=0, ls="--", lw=0.5, color=colors.grey_2)
+
+    ax1.set_xlabel(r' ')
+
+    # ax1.set_ylim(signalStrengthSliceMin, signalStrengthSliceMax)
+
+    ax1.set_xlim(scan["delay_min"], scan["delay_max"])
+
+    ax1.legend(loc=1, bbox_to_anchor=(1.175, 1.05))
+
     ax1.xaxis.tick_top()
     ax1.xaxis.set_label_position("top")
 
-    ax1.plot(scan["delay_raw_unique"], scan["x_integral"]/np.max(scan["x_integral"]),
-             '-', color=colors.grey_1, lw=2, label='integral')
-    ax1.plot(scan["delay_raw_unique"], scan["slice_y"]/np.max(scan["slice_y"]),
-             '-', color=colors.blue_1, lw=1, label='slice')
+    ## Plot 3) Bottom Left: Colormap of the Profile#############
 
-    ax1.set_ylabel('I (a.u.)')
-    ax1.set_xlabel(r'x ($\mathrm{\mu{}}$m)')
-    ax1.set_ylim([0, 1.05])
-    ax1.set_yticks(np.arange(0.25, 1.25, .25))
-
-    # (ax 3) Colormap of the Profile #############
-    if scan["plot_logarithmic"]:
-        pl = ax3.pcolormesh(X, Y, 100*np.transpose(scan["data_averaged"]), cmap=colors.fireice(),
-                            norm=matplotlib.colors.LogNorm(vmin=1, vmax=np.max(100*np.transpose(scan["data_averaged"]))))
+    if scan["symmetric_colormap"]:
+        c_min = -1*np.max(np.abs(scan["data_averaged"]))
+        c_max = 1*np.max(np.abs(scan["data_averaged"]))
     else:
-        pl = ax3.pcolormesh(X, Y, 100*np.transpose(scan["data_averaged"]),
-                            vmin=0, vmax=np.max(100*np.transpose(scan["data_averaged"])))
+        c_min = np.min(scan["data_averaged"])
+        c_max = np.max(scan["data_averaged"])
 
-    ax3.axis([0, scan["x_max"]-scan["x_min"], 0, scan["y_max"]-scan["y_min"]])
-    ax3.set_xlabel(r'x ($\mathrm{\mu{}}$m)')
-    ax3.set_ylabel(r'y ($\mathrm{\mu{}}$m)')
+    X, Y = np.meshgrid(scan["delay_unique"], scan["wavelength"])
+    plotted = ax3.pcolormesh(X, Y, 100*scan["data"], cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max)
 
-    ax3.axvline(x=scan["distance_x_cut"][scan["index_max_x"]], ls="--", color=colors.blue_1, lw=0.5)
-    ax3.axhline(y=scan["distance_y_cut"][scan["index_max_y"]], ls="--", color=colors.blue_1, lw=0.5)
+    ax3.axis([scan["delay_min"], scan["delay_max"], scan["wl_min"], scan["wl_max"]])
 
-    # colorbar placement #############
-    axins3 = inset_axes(ax3,
-                        width="60%",  # width = 10% of parent_bbox width
-                        height="3%",  # height : 50%                   )
-                        loc=4)
-    ax3.add_patch(Rectangle((0.35, 0.018), 0.65, 0.18, edgecolor="none",
-                  facecolor="white", alpha=0.75, transform=ax3.transAxes))
-    cbar = plt.colorbar(pl, cax=axins3, orientation="horizontal")
-    cbar.ax.tick_params(labelsize=8)
+    ax3.set_xlabel(r'delay $t$ (ps)')
+    ax3.set_ylabel(r'wavelength $\mathrm{\lambda}$ (nm)')
 
-    cbar.ax.set_title('$I$ (cts)', fontsize=10, pad=-2)
+    cbaxes3 = fig.add_axes([0.47, 0.65, 0.22, 0.015])
+    cbar = plt.colorbar(plotted, cax=cbaxes3, orientation='horizontal')
 
-    axins3.xaxis.set_ticks_position("top")
-    axins3.xaxis.set_label_position("top")
+    if scan["probe_method"] == "transmission":
+        cbar.ax.set_title(r'$\Delta T/T$ (%)')
+        ax1.set_ylabel(r'$\Delta T/T$ (%)')
+        ax4.set_xlabel(r'$\Delta T/T$ (%)')
+
+    else:
+        cbar.ax.set_title(r'$\Delta R/R$ (%)')
+        ax1.set_ylabel(r'$\Delta R/R$ (%)')
+        ax4.set_xlabel(r'$\Delta R/R$ (%)')
+
+    cbar.ax.tick_params('both', length=5, width=0.5, which='major', direction='in')
     cl = plt.getp(cbar.ax, 'xmajorticklabels')
-
-    plt.setp(cl, color="black")
+    cbaxes3.xaxis.set_ticks_position("top")
+    cbaxes3.xaxis.set_label_position("top")
 
     ax2.axis('off')
 
-    # Plot 4) Bottom Right Vertical Profile
+    ## Plot 4) Bottom Right Slice at t = 0 #####################
 
-    ax4.plot(scan["y_integral"]/np.max(scan["y_integral"]), scan["distance_y_cut"],
-             '-', color=colors.grey_3, lw=2, label='integral')
-    ax4.plot(scan["fit_result_y"].best_fit, scan["distance_y_cut"], '-',
-             color=colors.grey_1, lw=1, label="fit " + integral_result_text)
-    ax4.plot(scan["slice_x"]/np.max(scan["slice_x"]), scan["distance_y_cut"],
-             '-', color=colors.blue_2, lw=1, label='slice')
-    ax4.plot(scan["fit_result_x_slice"].best_fit, scan["distance_y_cut"],  '--',
-             color=colors.blue_1, lw=1, label="fit " + slice_result_text)
+    for i, intensity in enumerate(scan["delay_slices"]):
+        ax4.plot(intensity, scan["wavelength"],  lw=1,  label=str(scan["delay_labels"][i]) + r'$\,$ps')
+        if not(scan["delay_labels"][i] == "integral"):
+            ax3.axvline(x=scan["slice_delay"][i], lw=1, ls='--')
 
-    ax4.set_ylabel(r'y ($\mathrm{\mu{}}$m)')
-    ax4.set_xlabel('I (a.u.)')
+    ax4.axvline(x=0, ls="--", lw=0.5, color=colors.grey_3)
+
+    ax4.set_ylim([scan["wl_min"], scan["wl_max"]])
+    ax4.set_ylabel(r'$\mathrm{\lambda}$ (nm)')
+
     ax4.yaxis.tick_right()
     ax4.yaxis.set_label_position("right")
-    ax4.legend(loc=(0.05, 1.05), frameon=False, fontsize=8, title=scan["name"])
 
-    ax4.set_ylim(0, 1.05)
-    ax4.set_ylim(0, delta_y)
+    ax4.legend(loc=1,  bbox_to_anchor=(1.05, 1.5))
+    ax4.axvline(x=0, lw=1, ls='--', color='grey')
 
-    ax4.set_xticks([0, 1])
-    ax1.set_yticks([0, 1])
-
-    ax1.set_xlim([0, delta_x])
-    ax4.set_ylim([0, delta_y])
-
-
-plt.show()
-
-# %% Clear and averaging Data
-
-
-def clear_data(probe, pump, **bad_loops):
-
-    probe = probe.drop(bad_loops)
-    pump = pump.drop(bad_loops)
-
-    probe = probe[~(probe == 0).any(axis=1)]
-    pump = pump[~(pump == 0).any(axis=1)]
-    # variable null
-    clear_probe = probe[~probe.lt(0).all(axis=1)]
-    clear_pump = pump[~pump.lt(0).all(axis=1)]
-
-    return clear_probe, clear_pump
-
-
-def averaging(clear_probe, clear_pump):
-
-    u_delays = np.unique(clear_probe.iloc[:, 0])
-    y = len(clear_probe.columns) - 1  # Spalte der Dealys noch rausrechnen, damit man nur die Steps der Wellenlänge hat
-
-    avr_probe = np.zeros((len(u_delays), y))
-    avr_pump = np.zeros((len(u_delays), y))
-
-    clear_probe = clear_probe.to_numpy()
-    clear_pump = clear_pump.to_numpy()
-
-    for i in range(len(u_delays)):
-        select_delays_probe = clear_probe[:, 0] == u_delays[i]
-        select_delays_pump = clear_pump[:, 0] == u_delays[i]
-
-        data_avr_probe = np.mean(clear_probe[select_delays_probe, 1:], axis=0)
-        data_avr_pump = np.mean(clear_pump[select_delays_pump, 1:], axis=0)
-
-        avr_probe[i, :] = data_avr_probe
-        avr_pump[i, :] = data_avr_pump
-
-        i += 1
-
-    return avr_probe, avr_pump, u_delays
+    fig.suptitle(scan["title_text"])
