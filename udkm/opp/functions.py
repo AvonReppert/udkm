@@ -54,8 +54,78 @@ def get_scan_parameter(parameter_file_name, line):
     return params
 
 
+def load_data_average(params):
+    '''Loads the average data for a given parameter set into a scan dictionary and returns overview plot'''
+
+    scan = {}
+    scan["date"] = params["date"]
+    scan["time"] = params["time"]
+    scan["id"] = params["id"]
+    scan["name"] = params["name"]
+    scan["parameters_missing"] = False
+
+    scan["filename_averaged"] = params["filename_averaged"]
+
+    scan["data_directory"] = params["data_directory"] + "\\" + scan["id"] + "\\"
+
+    entry_list = ["power", "rep_rate", "pump_angle", "T",
+                  "fwhm_x", "fwhm_y", "pump_wl", "probe_method", "scan_directory", "t0", "slice_wl", "slice_wl_width"]
+    for entry in entry_list:
+        if entry in params:
+            scan[entry] = params[entry]
+        else:
+            print("Warning: " + str(entry) + " is missing in parameter file")
+            scan["parameters_missing"] = True
+
+    scan["fluence"] = tools.calc_fluence(scan["power"], scan["fwhm_x"],
+                                         scan["fwhm_y"], scan["pump_angle"], scan["rep_rate"])
+
+    if scan["parameters_missing"]:
+        scan["title_text"] = scan["id"]
+    else:
+        scan["title_text"] = scan["name"] + "  " + scan["date"] + " " + scan["time"] + " " + \
+            str(scan["T"]) + r"$\,$K " + " " + str(scan["pump_wl"]) + r"$\,$nm  " + str(np.round(scan["fluence"], 1)) + \
+            r"$\,\mathrm{\frac{mJ}{\,cm^2}}$ "
+
+    # load data into scan dictionary
+    scan["data_averaged"] = np.genfromtxt(scan["data_directory"]+scan["filename_averaged"], comments="#")
+
+    scan["wavelength"] = scan["data_averaged"][0, 1:]
+    scan["delay_raw_unique"] = scan["data_averaged"][1:, 0]
+    scan["data_averaged"] = np.transpose(scan["data_averaged"][1:, 1:])
+
+    # overview plot of the data
+    print("overview plot " + scan["name"] + " " + scan["date"] + " " +
+          scan["time"]+" " + str(scan["T"])+"K " + str(scan["fluence"])+"mJ/cm^2 ")
+    if params["symmetric_colormap"]:
+        c_min = -1*np.max(np.abs(scan["data_averaged"]))
+        c_max = 1*np.max(np.abs(scan["data_averaged"]))
+    else:
+        c_min = np.min(scan["data_averaged"])
+        c_max = np.max(scan["data_averaged"])
+
+    X, Y = np.meshgrid(scan["delay_raw_unique"], scan["wavelength"])
+
+    plt.figure(1, figsize=(5.2/0.68, 5.2))
+    plt.pcolormesh(X, Y, 100*scan["data_averaged"],
+                   cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max, shading='nearest')
+    plt.xlabel(r'delay (ps)')
+    plt.ylabel(r'wavelength (nm)')
+
+    plt.title(scan["title_text"])
+
+    cb = plt.colorbar()
+
+    if scan["probe_method"] == "transmission":
+        cb.ax.set_title(r'$\Delta T/T$ (%)')
+    else:
+        cb.ax.set_title(r'$\Delta R/R$ (%)')
+
+    return scan
+
+
 def load_data(params):
-    '''Loads the data for a given parameter set into a scan dictionary and returns overview plot'''
+    '''Loads the average data for a given parameter set into a scan dictionary and returns overview plot'''
 
     if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
         print("load data from : " + params["data_directory"]+params["id"])
@@ -74,7 +144,8 @@ def load_data(params):
         scan["data_directory"] = params["data_directory"] + "\\" + scan["id"] + "\\"
 
         entry_list = ["power", "rep_rate", "pump_angle", "T",
-                      "fwhm_x", "fwhm_y", "pump_wl", "probe_method", "scan_directory"]
+                      "fwhm_x", "fwhm_y", "pump_wl", "probe_method", "scan_directory", "t0", "slice_wl",
+                      "slice_wl_width", "slice_time", "slice_time_width"]
         for entry in entry_list:
             if entry in params:
                 scan[entry] = params[entry]
@@ -98,8 +169,17 @@ def load_data(params):
         scan["data_probe"] = np.genfromtxt(scan["data_directory"]+scan["filename_probe"], comments="#")
 
         scan["wavelength"] = scan["data_averaged"][0, 1:]
-        scan["delay_raw"] = scan["data_averaged"][1:, 0]
-        scan["data_averaged"] = scan["data_averaged"][1:, 1:]
+        scan["delay_raw_unique"] = scan["data_averaged"][1:, 0]
+
+        scan["data_averaged"] = np.transpose(scan["data_averaged"][1:, 1:])
+        scan["loop_array"] = scan["data_pump"][1:, 0]
+        scan["delay_raw_set"] = scan["data_pump"][1:, 1]
+        scan["delay_raw_real"] = scan["data_pump"][1:, 2]
+
+        scan["data_pump"] = np.transpose(scan["data_pump"][1:, 3:])
+        scan["data_probe"] = np.transpose(scan["data_probe"][1:, 3:])
+        # clean data
+
     else:
         print("reload scan from: " + params["scan_directory"]+params["id"]+".pickle")
         scan = load_scan(params["date"], params["time"], params["scan_directory"])
@@ -114,10 +194,10 @@ def load_data(params):
         c_min = np.min(scan["data_averaged"])
         c_max = np.max(scan["data_averaged"])
 
-    X, Y = np.meshgrid(scan["delay_raw"], scan["wavelength"])
+    X, Y = np.meshgrid(scan["delay_raw_unique"], scan["wavelength"])
 
     plt.figure(1, figsize=(5.2/0.68, 5.2))
-    plt.pcolormesh(X, Y, 100*np.transpose(scan["data_averaged"]),
+    plt.pcolormesh(X, Y, 100*scan["data_averaged"],
                    cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max, shading='nearest')
     plt.xlabel(r'delay (ps)')
     plt.ylabel(r'wavelength (nm)')
@@ -150,9 +230,9 @@ def plot_overview(scan):
     # integral_result_text = str(int(round(scan["fwhm_x"]))) + r'$\,\mathrm{\mu{}}$m' + " x " + str(
     #   int(round(scan["fwhm_y"]))) + r'$\,\mathrm{\mu{}}$m'
 
-    X, Y = np.meshgrid(scan["delay_raw"], scan["wavelength"])
+    X, Y = np.meshgrid(scan["delay_raw_unique"], scan["wavelength"])
 
-    delta_x = np.max(np.abs(scan["delay_raw"]))-np.min(np.abs(scan["delay_raw"]))
+    delta_x = np.max(np.abs(scan["delay_raw_unique"]))-np.min(np.abs(scan["delay_raw_unique"]))
     delta_y = np.max(scan["wavelength"])-np.min(scan["wavelength"])
 
     mean_id = data_id.mean(axis=1)  # wird nach Reihen gemittelt - also für einen Stage Delay über die alle Wellenlängen
@@ -164,7 +244,7 @@ def plot_overview(scan):
     norm_id = -(mean_id / min_id)
     norm_sig = -(mean_sig / min_sig)
 
-    plt.figure(2, figsize=(5.2, 5.2*np.max(scan["wavelength"])/np.max(np.abs(scan["delay_raw"]))), linewidth=2)
+    plt.figure(2, figsize=(5.2, 5.2*np.max(scan["wavelength"])/np.max(np.abs(scan["delay_raw_unique"]))), linewidth=2)
     gs = gridspec.GridSpec(2, 2,
                            width_ratios=[3, 1],
                            height_ratios=[1, 3],
@@ -179,9 +259,9 @@ def plot_overview(scan):
     ax1.xaxis.tick_top()
     ax1.xaxis.set_label_position("top")
 
-    ax1.plot(scan["delay_raw"], scan["x_integral"]/np.max(scan["x_integral"]),
+    ax1.plot(scan["delay_raw_unique"], scan["x_integral"]/np.max(scan["x_integral"]),
              '-', color=colors.grey_1, lw=2, label='integral')
-    ax1.plot(scan["delay_raw"], scan["slice_y"]/np.max(scan["slice_y"]),
+    ax1.plot(scan["delay_raw_unique"], scan["slice_y"]/np.max(scan["slice_y"]),
              '-', color=colors.blue_1, lw=1, label='slice')
 
     ax1.set_ylabel('I (a.u.)')
