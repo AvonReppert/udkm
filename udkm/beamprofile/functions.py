@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-
-import lmfit as lm
-import udkm.tools.functions as tools
-import matplotlib
-
-import pandas as pd
-import udkm.tools.colors as colors
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+
+import dill as pickle
+import pandas as pd
+import os as os
+
+
+import udkm.tools.functions as tools
+import udkm.tools.colors as colors
+
+import lmfit as lm
+import matplotlib.colors as matplotlib_colors
 from matplotlib.patches import Rectangle
-import os
 
 teststring = "Successfully loaded udkm.beamprofile.functions"
 
 
 def get_scan_parameter(parameter_file_name, line):
+    '''Loads the measurement parameters of the given line in the parmeter file to the parameter dictionary'''
+
     params = {'line': line}
     param_file = pd.read_csv(parameter_file_name, delimiter="\t", header=0, comment="#")
     header = list(param_file.columns.values)
@@ -56,133 +61,147 @@ def get_scan_parameter(parameter_file_name, line):
 
     params["measurements"] = len(param_file[entry])
 
+    params["scan_directory"] = "scan_export\\"
+    params["data_directory"] = "data\\"
+
+    params["bool_force_reload"] = False
+
     return params
 
 
 def load_data(params):
-    scan = {}
-    scan["date"] = params["date"]
-    scan["time"] = params["time"]
-    scan["filename"] = scan["date"] + "_" + scan["time"] + params["suffix"] + ".txt"
-    scan["path"] = params["data_directory"] + "\\" + scan["date"] + "\\"
+    '''Loads the data for a given parameter set into a scan dictionary and returns overview plot. 
+       Makes a peak fit for the slice through max intensity and the integral of the picture.'''
+    if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
+        print("load data from : " + params["data_directory"]+params["id"])
+        scan = {}
+        scan["date"] = params["date"]
+        scan["time"] = params["time"]
+        scan["id"] = params["id"]
+        scan["filename"] = scan["date"] + "_" + scan["time"] + params["suffix"] + ".txt"
 
-    print("load data from file " + scan["path"]+scan["filename"]+"\n")
+        scan["path"] = params["data_directory"] + "\\" + scan["date"] + "\\"
 
-    scan["rep_rate"] = params["rep_rate"]
-    scan["angle"] = params["angle"]
+        print("load data from file " + scan["path"]+scan["filename"]+"\n")
 
-    scan["data"] = np.genfromtxt(scan["path"]+scan["filename"])
-    scan["pixel_x"] = np.arange(0, np.shape(scan["data"])[1]+1, 1)
-    scan["pixel_y"] = np.arange(0, np.shape(scan["data"])[0]+1, 1)
+        scan["rep_rate"] = params["rep_rate"]
+        scan["angle"] = params["angle"]
 
-    scan["distances_x"] = scan["pixel_x"]*params["pixelsize_x"]  # pixel in µm
-    scan["distances_y"] = scan["pixel_y"]*params["pixelsize_y"]  # pixel in µm
+        scan["data"] = np.genfromtxt(scan["path"]+scan["filename"])
+        scan["pixel_x"] = np.arange(0, np.shape(scan["data"])[1]+1, 1)
+        scan["pixel_y"] = np.arange(0, np.shape(scan["data"])[0]+1, 1)
 
-    entry_list = ["x_min", "x_max", "y_min", "y_max", "name", "power", "rep_rate", "angle", "plot_logarithmic",
-                  "pixelsize_x", "pixelsize_y"]
-    for entry in entry_list:
-        if entry in params:
-            scan[entry] = params[entry]
+        scan["distances_x"] = scan["pixel_x"]*params["pixelsize_x"]  # pixel in µm
+        scan["distances_y"] = scan["pixel_y"]*params["pixelsize_y"]  # pixel in µm
 
-    # %% #Overview plot to define the ROI
+        entry_list = ["x_min", "x_max", "y_min", "y_max", "name", "power", "rep_rate", "angle", "plot_logarithmic",
+                      "pixelsize_x", "pixelsize_y", "scan_directory", "id"]
+        for entry in entry_list:
+            if entry in params:
+                scan[entry] = params[entry]
 
-    if not("x_min" in params):
-        scan["x_min"] = 0
-    if not("x_max" in params):
-        scan["x_max"] = len(scan["pixel_x"])*scan["pixelsize_x"]
+        # %% #Overview plot to define the ROI
 
-    if not("y_min" in params):
-        scan["y_min"] = 0
-    if not("y_max" in params):
-        scan["y_max"] = len(scan["pixel_y"])*scan["pixelsize_y"]
+        if not("x_min" in params):
+            scan["x_min"] = 0
+        if not("x_max" in params):
+            scan["x_max"] = len(scan["pixel_x"])*scan["pixelsize_x"]
 
-    X, Y = np.meshgrid(scan["distances_x"], scan["distances_y"])
+        if not("y_min" in params):
+            scan["y_min"] = 0
+        if not("y_max" in params):
+            scan["y_max"] = len(scan["pixel_y"])*scan["pixelsize_y"]
 
-    plt.figure(1, figsize=(5.2, 5.2*scan["x_max"]/scan["y_max"]))
-    if params["plot_logarithmic"]:
-        plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(),
-                       norm=matplotlib.colors.LogNorm(vmin=1, vmax=np.max(scan["data"])))
+        X, Y = np.meshgrid(scan["distances_x"], scan["distances_y"])
+
+        plt.figure(1, figsize=(5.2, 5.2*scan["x_max"]/scan["y_max"]))
+        if params["plot_logarithmic"]:
+            plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(),
+                           norm=matplotlib_colors.LogNorm(vmin=1, vmax=np.max(scan["data"])))
+        else:
+            plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
+        plt.axis([0, X.max(), 0, Y.max()])
+        plt.xlabel(r'x ($\mathrm{\mu{}}$m)')
+        plt.ylabel(r'y ($\mathrm{\mu{}}$m)')
+        plt.title(scan["date"] + "  " + scan["time"] + "  " + scan["name"])
+        cb = plt.colorbar()
+        cb.ax.set_title('$I$ (cts)')
+
+        scan["x_roi"], scan["y_roi"], scan["data_roi"], scan["x_integral"], scan["y_integral"] = tools.set_roi_2d(
+            scan["distances_x"][1:], scan["distances_y"][1:], scan["data"], scan["x_min"], scan["x_max"],
+            scan["y_min"], scan["y_max"])
+
+        scan["distance_x_cut"] = scan["x_roi"]-scan["x_min"]
+        scan["distance_y_cut"] = scan["y_roi"]-scan["y_min"]
+
+        scan["index_max_y"] = tools.find(scan["y_integral"], np.max(scan["y_integral"]))
+        scan["slice_y"] = scan["data_roi"][scan["index_max_y"], :]
+
+        scan["index_max_x"] = tools.find(scan["x_integral"], np.max(scan["x_integral"]))
+        scan["slice_x"] = scan["data_roi"][:, scan["index_max_x"]]
+
+        # %% Fitting the resulting params
+        model = lm.models.GaussianModel() + lm.models.LinearModel()
+        fit_params_x = lm.Parameters()
+        fit_params_y = lm.Parameters()
+
+        com_x, std_x, Ix = tools.calc_moments(scan["distance_x_cut"], scan["x_integral"])
+        com_y, std_y, Iy = tools.calc_moments(scan["distance_y_cut"], scan["y_integral"])
+
+        # Here you can set the initial values and possible boundaries on the fitting params
+        # Name       Value                 Vary     Min                   Max
+
+        fit_params_x.add_many(('center',    com_x,    True),
+                              ('sigma',     std_x,     True),
+                              ('amplitude', params["initial_amplitude_fit_x"], params["bool_fit_amplitude_x"]),
+                              ('slope',     params["initial_slope_fit_x"],  params["bool_fit_slope_x"]),
+                              ('intercept', params["initial_offset_fit_x"], params["bool_fit_intercept_x"]))
+
+        # Name       Value                 Vary     Min                   Max
+        fit_params_y.add_many(('center',    com_y,    True),
+                              ('sigma',    std_y,     True),
+                              ('amplitude', params["initial_amplitude_fit_y"], params["bool_fit_amplitude_y"]),
+                              ('slope',     params["initial_slope_fit_y"],  params["bool_fit_slope_y"]),
+                              ('intercept', params["initial_offset_fit_y"], params["bool_fit_intercept_y"]))
+
+        # Fitting takes place here
+        scan["fit_result_x"] = model.fit(scan["x_integral"]/np.max(scan["x_integral"]),
+                                         fit_params_x, x=scan["distance_x_cut"])
+        scan["fit_result_y"] = model.fit(scan["y_integral"]/np.max(scan["y_integral"]),
+                                         fit_params_y, x=scan["distance_y_cut"])
+
+        scan["fit_result_x_slice"] = model.fit(scan["slice_x"]/np.max(scan["slice_x"]),
+                                               fit_params_x, x=scan["distance_y_cut"])
+        scan["fit_result_y_slice"] = model.fit(scan["slice_y"]/np.max(scan["slice_y"]),
+                                               fit_params_y, x=scan["x_roi"]-scan["x_min"])
+
+        # Writing the results into the peaks dictionary takes place here
+        scan["fwhm_x"] = 2.35482 * scan["fit_result_x"].values["sigma"]  # in micron
+        scan["fwhm_y"] = 2.35482 * scan["fit_result_y"].values["sigma"]  # in micron
+
+        scan["fwhm_x_slice"] = 2.35482 * scan["fit_result_x_slice"].values["sigma"]  # in micron
+        scan["fwhm_y_slice"] = 2.35482 * scan["fit_result_y_slice"].values["sigma"]  # in micron
+
+        scan["fluence"] = tools.calc_fluence(scan["power"], scan["fwhm_x"],
+                                             scan["fwhm_y"], scan["angle"], scan["rep_rate"])
+        scan["fluence_slice"] = tools.calc_fluence(
+            scan["power"], scan["fwhm_x_slice"], scan["fwhm_y_slice"], scan["angle"], scan["rep_rate"])
+
+        print(str(int(round(scan["fwhm_x"]))) + " x " +
+              str(int(round(scan["fwhm_y"]))) + str(" integral FWHM in microns"))
+        print("power_in  = " + str(np.round(scan["power"], 1)) + " mW (without chopper)\n->  F at " +
+              str(int(scan["angle"]))+"° = " + str(np.round(scan["fluence"], 1)) + " mJ/cm^2\n")
+
+        print(str(int(round(scan["fwhm_x_slice"]))) + " x " +
+              str(int(round(scan["fwhm_y_slice"]))) + str(" slice FWHM in microns"))
+
+        print("power_in  = " + str(np.round(scan["power"], 1)) + " mW (without chopper)\n->  F at " +
+              str(int(scan["angle"]))+"° = " + str(np.round(scan["fluence_slice"], 1)) + " mJ/cm^2 for slice \n")
+
+        scan["plot_logarithmic"] = params["plot_logarithmic"]
     else:
-        plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
-    plt.axis([0, X.max(), 0, Y.max()])
-    plt.xlabel(r'x ($\mathrm{\mu{}}$m)')
-    plt.ylabel(r'y ($\mathrm{\mu{}}$m)')
-    plt.title(scan["date"] + "  " + scan["time"] + "  " + scan["name"])
-    cb = plt.colorbar()
-    cb.ax.set_title('$I$ (cts)')
-
-    scan["x_roi"], scan["y_roi"], scan["data_roi"], scan["x_integral"], scan["y_integral"] = tools.set_roi_2d(
-        scan["distances_x"][1:], scan["distances_y"][1:], scan["data"], scan["x_min"], scan["x_max"],
-        scan["y_min"], scan["y_max"])
-
-    scan["distance_x_cut"] = scan["x_roi"]-scan["x_min"]
-    scan["distance_y_cut"] = scan["y_roi"]-scan["y_min"]
-
-    scan["index_max_y"] = tools.find(scan["y_integral"], np.max(scan["y_integral"]))
-    scan["slice_y"] = scan["data_roi"][scan["index_max_y"], :]
-
-    scan["index_max_x"] = tools.find(scan["x_integral"], np.max(scan["x_integral"]))
-    scan["slice_x"] = scan["data_roi"][:, scan["index_max_x"]]
-
-    # %% Fitting the resulting params
-    model = lm.models.GaussianModel() + lm.models.LinearModel()
-    fit_params_x = lm.Parameters()
-    fit_params_y = lm.Parameters()
-
-    com_x, std_x, Ix = tools.calc_moments(scan["distance_x_cut"], scan["x_integral"])
-    com_y, std_y, Iy = tools.calc_moments(scan["distance_y_cut"], scan["y_integral"])
-
-    # Here you can set the initial values and possible boundaries on the fitting params
-    # Name       Value                 Vary     Min                   Max
-
-    fit_params_x.add_many(('center',    com_x,    True),
-                          ('sigma',     std_x,     True),
-                          ('amplitude', params["initial_amplitude_fit_x"], params["bool_fit_amplitude_x"]),
-                          ('slope',     params["initial_slope_fit_x"],  params["bool_fit_slope_x"]),
-                          ('intercept', params["initial_offset_fit_x"], params["bool_fit_intercept_x"]))
-
-    # Name       Value                 Vary     Min                   Max
-    fit_params_y.add_many(('center',    com_y,    True),
-                          ('sigma',    std_y,     True),
-                          ('amplitude', params["initial_amplitude_fit_y"], params["bool_fit_amplitude_y"]),
-                          ('slope',     params["initial_slope_fit_y"],  params["bool_fit_slope_y"]),
-                          ('intercept', params["initial_offset_fit_y"], params["bool_fit_intercept_y"]))
-
-    # Fitting takes place here
-    scan["fit_result_x"] = model.fit(scan["x_integral"]/np.max(scan["x_integral"]),
-                                     fit_params_x, x=scan["distance_x_cut"])
-    scan["fit_result_y"] = model.fit(scan["y_integral"]/np.max(scan["y_integral"]),
-                                     fit_params_y, x=scan["distance_y_cut"])
-
-    scan["fit_result_x_slice"] = model.fit(scan["slice_x"]/np.max(scan["slice_x"]),
-                                           fit_params_x, x=scan["distance_y_cut"])
-    scan["fit_result_y_slice"] = model.fit(scan["slice_y"]/np.max(scan["slice_y"]),
-                                           fit_params_y, x=scan["x_roi"]-scan["x_min"])
-
-    # Writing the results into the peaks dictionary takes place here
-    scan["fwhm_x"] = 2.35482 * scan["fit_result_x"].values["sigma"]  # in micron
-    scan["fwhm_y"] = 2.35482 * scan["fit_result_y"].values["sigma"]  # in micron
-
-    scan["fwhm_x_slice"] = 2.35482 * scan["fit_result_x_slice"].values["sigma"]  # in micron
-    scan["fwhm_y_slice"] = 2.35482 * scan["fit_result_y_slice"].values["sigma"]  # in micron
-
-    scan["fluence"] = tools.calc_fluence(scan["power"], scan["fwhm_x"],
-                                         scan["fwhm_y"], scan["angle"], scan["rep_rate"])
-    scan["fluence_slice"] = tools.calc_fluence(
-        scan["power"], scan["fwhm_x_slice"], scan["fwhm_y_slice"], scan["angle"], scan["rep_rate"])
-
-    print(str(int(round(scan["fwhm_x"]))) + " x " +
-          str(int(round(scan["fwhm_y"]))) + str(" integral FWHM in microns"))
-    print("power_in  = " + str(np.round(scan["power"], 1)) + " mW (without chopper)\n->  F at " +
-          str(int(scan["angle"]))+"° = " + str(np.round(scan["fluence"], 1)) + " mJ/cm^2\n")
-
-    print(str(int(round(scan["fwhm_x_slice"]))) + " x " +
-          str(int(round(scan["fwhm_y_slice"]))) + str(" slice FWHM in microns"))
-
-    print("power_in  = " + str(np.round(scan["power"], 1)) + " mW (without chopper)\n->  F at " +
-          str(int(scan["angle"]))+"° = " + str(np.round(scan["fluence_slice"], 1)) + " mJ/cm^2 for slice \n")
-
-    scan["plot_logarithmic"] = params["plot_logarithmic"]
+        print("reload scan from: " + params["scan_directory"]+params["id"]+".pickle")
+        scan = load_scan(params["date"], params["time"], params["scan_directory"])
 
     return scan
 
@@ -190,6 +209,7 @@ def load_data(params):
 
 
 def plot_overview(scan):
+    ''' returns an overview plot of the beamprofile for a given ROI'''
 
     integral_result_text = str(
         int(round(scan["fwhm_x"]))) + r'$\,\mathrm{\mu{}}$m' + " x " + str(int(round(scan["fwhm_y"]))) + r'$\,\mathrm{\mu{}}$m'
@@ -233,7 +253,7 @@ def plot_overview(scan):
     # (ax 3) Colormap of the Profile #############
     if scan["plot_logarithmic"]:
         pl = ax3.pcolormesh(x_grid, y_grid, scan["data_roi"], cmap=colors.fireice(),
-                            norm=matplotlib.colors.LogNorm(vmin=1, vmax=np.max(scan["data_roi"])))
+                            norm=matplotlib_colors.LogNorm(vmin=1, vmax=np.max(scan["data_roi"])))
     else:
         pl = ax3.pcolormesh(x_grid, y_grid, scan["data_roi"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
 
@@ -279,7 +299,7 @@ def plot_overview(scan):
     ax4.set_xlabel('I (a.u.)')
     ax4.yaxis.tick_right()
     ax4.yaxis.set_label_position("right")
-    ax4.legend(loc=(0.05, 1.05), frameon=False, fontsize=8, title=scan["name"])
+    ax4.legend(loc=(0.05, 1.05), frameon=False, fontsize=8, title=scan["name"]+u"\n"+scan["id"], title_fontsize=8)
 
     ax4.set_ylim(0, 1.05)
     ax4.set_ylim(0, delta_y)
@@ -292,3 +312,14 @@ def plot_overview(scan):
 
 
 plt.show()
+
+
+def save_scan(scan):
+    '''Saves a scan dictionary to the scan_directory, given in scan, as python pickle'''
+    pickle.dump(scan, open(scan["scan_directory"] + scan["id"] + ".pickle", "wb"))
+
+
+def load_scan(date, time, scan_directory):
+    '''Loads a scan from a python pickle into a scan dictionary'''
+    path_string = scan_directory + tools.timestring(date)+"_"+tools.timestring(time)+".pickle"
+    return pickle.load(open(path_string, "rb"))

@@ -20,7 +20,7 @@ setup(
     version='0.1.0',
     packages=find_packages(),
     url='https://github.com/AleksUDKM/udkm',  # Optional
-    install_requires=['numpy', 'matplotlib', 'lmfit', 'pandas'],  # Optional
+    install_requires=['numpy', 'matplotlib', 'lmfit', 'pandas', 'dill'],  # Optional
     extras_require={
         'documentation': ['sphinx', 'nbsphinx', 'sphinxcontrib-napoleon'],
     },
@@ -30,6 +30,5 @@ setup(
     description='Collection of frequently used functions in udkm group',  # Required
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
-	python_requires='>=3.5',
+    python_requires='>=3.5',
 )
-
