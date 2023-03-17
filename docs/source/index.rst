@@ -32,6 +32,7 @@ Code examples
 	plot examples <examples/plot_example.ipynb>
 	colors examples <examples/color_example.ipynb>
 	beamprofile examples <examples/beam_example.ipynb>
+	opp examples <examples/opp_example.ipynb>
 	tg examples <examples/tg_example.ipynb>
 
 

@@ -17,6 +17,8 @@ teststring = "Successfully loaded udkm.opp.functions"
 
 
 def get_scan_parameter(parameter_file_name, line):
+    '''Loads the measurement parameters of the given line in the parmeter file to the parameter dictionary'''
+
     params = {'line': line}
     param_file = pd.read_csv(parameter_file_name, delimiter="\t", header=0, comment="#")
     header = list(param_file.columns.values)
@@ -52,9 +54,10 @@ def get_scan_parameter(parameter_file_name, line):
 
 
 def load_data(params):
+    '''Loads the data for a given parameter set into a scan dictionary and returns overview plot'''
 
     if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
-        print("load data from file " + params["data_directory"]+params["id"])
+        print("load data from : " + params["data_directory"]+params["id"])
         # initialize scan dictionary
         scan = {}
         scan["date"] = params["date"]
@@ -97,7 +100,7 @@ def load_data(params):
         scan["delay_raw"] = scan["data_averaged"][1:, 0]
         scan["data_averaged"] = scan["data_averaged"][1:, 1:]
     else:
-        print("reload scan from" + params["scan_directory"]+params["id"]+".pickle")
+        print("reload scan from: " + params["scan_directory"]+params["id"]+".pickle")
         scan = load_scan(params["date"], params["time"], params["scan_directory"])
 
     # overview plot of the data
@@ -131,9 +134,11 @@ def load_data(params):
 
 
 def save_scan(scan):
+    '''Saves a scan dictionary to the scan_directory, given in scan, as python pickle'''
     pickle.dump(scan, open(scan["scan_directory"] + scan["id"] + ".pickle", "wb"))
 
 
-def load_scan(date, time, path):
-    path_string = path + tools.timestring(date)+"_"+tools.timestring(time)+".pickle"
+def load_scan(date, time, scan_directory):
+    '''Loads a scan from a python pickle into a scan dictionary'''
+    path_string = scan_directory + tools.timestring(date)+"_"+tools.timestring(time)+".pickle"
     return pickle.load(open(path_string, "rb"))
