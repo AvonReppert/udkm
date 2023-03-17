@@ -10,10 +10,17 @@ params = opp.get_scan_parameter(parameter_file_name, line)
 
 params["data_directory"] = "data\\"
 params["probe_method"] = "transmission"
+
+params["slice_wl"] = [1200, 2300]
+params["slice_wl_width"] = [200, 200]
+params["t0"] = -2008
+params["exclude_loops"] = []
+params["symmetric_colormap"] = False
+
 scan = opp.load_data(params)
 plt.savefig("plot_overview\\" + str(scan["id"]+".png"))
 
 opp.save_scan(scan)
 
-# beam.plot_overview(scan)
-# plt.show()
+opp.plot_overview(scan)
+plt.show()

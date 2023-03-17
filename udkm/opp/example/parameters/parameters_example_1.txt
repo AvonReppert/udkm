@@ -1,4 +1,4 @@
 date	time	T	power	fwhm_x	fwhm_y	pump_angle	pump_wl	name
 #0date	1time	2T(K)	3power(mW)	4fwhm_x(µm)	5fwhm_y(µm)	6pump_angle(AOI in deg)	7pumpWL(nm)	 8name
-20220824	113906	300	500	850	650	45	800	probe_1
-20220824	134331	300	50	850	650	45	800	probe_2
+20220824	113906	300	500	850	650	8	800	probe_1
+20220824	134331	300	50	850	650	8	800	probe_2
