@@ -1,4 +1,6 @@
-date	time	T	power	fwhm_x	fwhm_y	pump_angle	pump_wl	name
-#0date	1time	2T(K)	3power(mW)	4fwhm_x(µm)	5fwhm_y(µm)	6pump_angle(AOI in deg)	7pumpWL(nm)	 8name
-20220824	113906	300	500	850	650	8	800	probe_1
-20220824	134331	300	50	850	650	8	800	probe_2
+date	time	T	power	fwhm_x	fwhm_y	pump_angle	pump_wl	t0	name
+#0date	1time	2T(K)	3power(mW)	4fwhm_x(µm)	5fwhm_y(µm)	6pump_angle(AOI in deg)	7pumpWL(nm)	 8t0 (ps)	9name
+20220824	113906	300	500	850	650	8	800	-2008.75	probe_1
+20220824	134331	300	50	850	650	8	800	-2008.75	probe_2
+20230111	172721	300	16.5	438.72	404.36	8	400	-2117	Au NR pure
+20230116	124744	300	31.5	408.6	425.21	8	400	-2117	Au NR pure

@@ -1,0 +1,28 @@
+PGEN 215
+SRO cont. film
+800 nm pump
+pump p-pol (0 deg)
+inc. angle ~45 deg
+reflection
+Date Time: 03.09.2019 14:09:15
+
+Selected Stage: Cryo Stage
+Stage Unit: ps
+Start Position: 2449.000000
+End Position: 2649.000000
+Step Width: 0.100000
+# of Loops: 100
+Velocity: 200.000000
+Acceleration: 600.000000
+
+CorrectDarkCurrent: TRUE
+IntTime: 1.299999
+NrOfAVG: 1
+SelectedWLMin: 400.000000
+SelectedWLMax: 800.000000
+
+Filename: 20190903_140915
+Tmp Path: C:\data\TmpMeasurement\AvantanesMC\2019\09\03\20190903_140915
+Data Path: C:\data\Measurement\AvantanesMC\2019\09\03\20190903_140915
+
+Repeats: 50

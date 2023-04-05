@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import dill as pickle
 import pandas as pd
-import matplotlib
+import h5py as h5
 
 
 import udkm.tools.functions as tools
@@ -114,8 +114,12 @@ def load_data_average(params):
     print("overview plot " + scan["name"] + " " + scan["date"] + " " +
           scan["time"]+" " + str(scan["T"])+"K " + str(scan["fluence"])+"mJ/cm^2 ")
     if scan["symmetric_colormap"]:
-        c_min = -1*np.max(np.abs(scan["data_averaged"]))
-        c_max = 1*np.max(np.abs(scan["data_averaged"]))
+        if "signal_level" in params:
+            c_min = -1*params["signal_level"]
+            c_max = params["signal_level"]
+        else:
+            c_min = -1*np.max(np.abs(scan["data_averaged"]))
+            c_max = 1*np.max(np.abs(scan["data_averaged"]))
     else:
         c_min = np.min(scan["data_averaged"])
         c_max = np.max(scan["data_averaged"])
@@ -143,7 +147,7 @@ def load_data_average(params):
 def load_data(params):
     '''Loads all data given parameter set into a scan dictionary and returns overview plot'''
 
-    if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
+    if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".h5"))):
         print("load data from : " + params["data_directory"]+params["id"])
         # initialize scan dictionary
         scan = initialize_scan(params)
@@ -166,15 +170,20 @@ def load_data(params):
         # clean data
 
     else:
-        print("reload scan from: " + params["scan_directory"]+params["id"]+".pickle")
+        print("reload scan from: " + params["scan_directory"]+params["id"]+".h5")
         scan = load_scan(params["date"], params["time"], params["scan_directory"])
 
     # overview plot of the data
     print("overview plot " + scan["name"] + " " + scan["date"] + " " +
           scan["time"]+" " + str(scan["T"])+"K " + str(scan["fluence"])+"mJ/cm^2 ")
+
     if scan["symmetric_colormap"]:
-        c_min = -1*np.max(np.abs(scan["data_averaged"]))
-        c_max = 1*np.max(np.abs(scan["data_averaged"]))
+        if "signal_level" in params:
+            c_min = -1*params["signal_level"]
+            c_max = params["signal_level"]
+        else:
+            c_min = -1*np.max(np.abs(scan["data_averaged"]))
+            c_max = 1*np.max(np.abs(scan["data_averaged"]))
     else:
         c_min = np.min(scan["data_averaged"])
         c_max = np.max(scan["data_averaged"])
@@ -228,7 +237,7 @@ def load_data(params):
     scan["delay_min"] = np.min(scan["delay_unique"])
     scan["delay_max"] = np.max(scan["delay_unique"])
 
-    entry_list = ["delay_min", "delay_max", "wl_min", "wl_max"]
+    entry_list = ["delay_min", "delay_max", "wl_min", "wl_max", "signal_level"]
     for entry in entry_list:
         if entry in params:
             scan[entry] = params[entry]
@@ -278,15 +287,76 @@ def load_data(params):
     return scan
 
 
-def save_scan(scan):
-    '''Saves a scan dictionary to the scan_directory, given in scan, as python pickle'''
-    pickle.dump(scan, open(scan["scan_directory"] + scan["id"] + ".pickle", "wb"))
+def save_scan(scan: dict) -> None:
+    """
+    Saves a scan dictionary to an H5 file in the specified scan directory.
+
+    Parameters
+    ----------
+    scan : dict
+        A dictionary containing the scan data, including the scan directory and ID.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    KeyError
+        If the `scan` dictionary does not contain the keys `"scan_directory"` and `"id"`.
+    """
+    try:
+        filename = scan["scan_directory"] + scan["id"] + ".h5"
+    except KeyError:
+        raise KeyError("The `scan` dictionary must contain the keys `scan_directory` and `id`.")
+
+    with h5.File(filename, "w") as hfile:
+        for key, value in scan.items():
+            hfile[key] = value
 
 
-def load_scan(date, time, scan_directory):
-    '''Loads a scan from a python pickle into a scan dictionary'''
-    path_string = scan_directory + tools.timestring(date)+"_"+tools.timestring(time)+".pickle"
-    return pickle.load(open(path_string, "rb"))
+def load_scan(date: str, time: str, scan_directory: str) -> dict:
+    """
+    Load a scan from an H5 file into a dictionary.
+
+    Parameters
+    ----------
+    date : str
+        A string encoding the date of the scan in the format "YYYYMMDD".
+    time : str
+        A string encoding the time of the scan in the format "HHMMSS".
+    scan_directory : str
+        The path to the directory containing the H5 files.
+
+    Returns
+    -------
+    dict
+        A dictionary containing the scan data.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the specified H5 file cannot be found.
+    """
+    filename = scan_directory + date + "_" + time + ".h5"
+    scan = {}
+    with h5.File(filename, 'r') as f:
+        for key in f.keys():
+            if isinstance(f[key], h5.Dataset):
+                value = f[key][()]
+                if isinstance(value, bytes):
+                    value = value.decode('utf-8')
+                scan[key] = value
+            elif isinstance(f[key], h5.Group):
+                scan[key] = load_scan(date, time, filename + '/' + key)
+
+    return scan
+
+
+# def load_scan(date, time, scan_directory):
+#     '''Loads a scan from a python pickle into a scan dictionary'''
+#     path_string = scan_directory + tools.timestring(date)+"_"+tools.timestring(time)+".pickle"
+#     return pickle.load(open(path_string, "rb"))
 
 
 def plot_overview(scan):
@@ -305,7 +375,7 @@ def plot_overview(scan):
     ## Plot 1) Top Left: Horizontal Profile #####################
 
     for i, intensity in enumerate(scan["wl_slices"]):
-        plotted = ax1.plot(scan["delay_unique"], intensity, lw=1,  label=str(scan["wl_labels"][i]) + r'$\,$nm')
+        plotted = ax1.plot(scan["delay_unique"], 100*intensity, lw=1,  label=str(scan["wl_labels"][i]) + r'$\,$nm')
         if not(scan["wl_labels"][i] == "integral"):
             ax3.axhline(y=scan["slice_wl"][i], lw=1, ls='--', color=plotted[0].get_color())
         #ax1.axvline(x=0, ls="--", lw=0.5, color=colors.grey_3)
@@ -326,8 +396,12 @@ def plot_overview(scan):
     ## Plot 3) Bottom Left: Colormap of the Profile#############
 
     if scan["symmetric_colormap"]:
-        c_min = -1*np.max(np.abs(scan["data_averaged"]))
-        c_max = 1*np.max(np.abs(scan["data_averaged"]))
+        if "signal_level" in scan:
+            c_min = -1*scan["signal_level"]
+            c_max = scan["signal_level"]
+        else:
+            c_min = -1*np.max(np.abs(scan["data_averaged"]))
+            c_max = 1*np.max(np.abs(scan["data_averaged"]))
     else:
         c_min = np.min(scan["data_averaged"])
         c_max = np.max(scan["data_averaged"])
@@ -363,13 +437,17 @@ def plot_overview(scan):
     ## Plot 4) Bottom Right Slice at t = 0 #####################
 
     for i, intensity in enumerate(scan["delay_slices"]):
-        ax4.plot(intensity, scan["wavelength"],  lw=1,  label=str(scan["delay_labels"][i]) + r'$\,$ps')
+        plotted = ax4.plot(100*intensity, scan["wavelength"],  lw=1,  label=str(scan["delay_labels"][i]) + r'$\,$ps')
         if not(scan["delay_labels"][i] == "integral"):
-            ax3.axvline(x=scan["slice_delay"][i], lw=1, ls='--')
+            ax3.axvline(x=scan["slice_delay"][i], lw=1, ls='--', color=plotted[0].get_color())
 
     ax4.axvline(x=0, ls="--", lw=0.5, color=colors.grey_3)
 
     ax4.set_ylim([scan["wl_min"], scan["wl_max"]])
+    if "signal_level" in scan:
+        ax1.set_ylim([-100*scan["signal_level"], 100*scan["signal_level"]])
+        ax4.set_xlim([-100*scan["signal_level"], 100*scan["signal_level"]])
+
     ax4.set_ylabel(r'$\mathrm{\lambda}$ (nm)')
 
     ax4.yaxis.tick_right()

@@ -18,10 +18,10 @@ params = opp.get_scan_parameter(parameter_file_name, line)
 params["data_directory"] = "data\\"
 params["probe_method"] = "transmission"
 
-params["bool_force_reload"] = True
+params["bool_force_reload"] = False
 
-params["slice_wl"] = [1200, 2300]
-params["slice_wl_width"] = [200, 200]
+params["slice_wl"] = [1240, 2290]
+params["slice_wl_width"] = [100, 100]
 
 params["slice_delay"] = [1]
 params["slice_delay_width"] = [0.5]

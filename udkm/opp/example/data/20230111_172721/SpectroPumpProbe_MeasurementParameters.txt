@@ -1,0 +1,22 @@
+Name: Au NR pure 
+
+Comment: 400-WL 
+
+Loops: 4 
+Repeats: 50 
+Fluence: 1.57 mJ/cm^2 
+Waveplate Angle: -1 
+Power: 16.5 mW
+TimeZero: -2117.0 ps
+Wavelength Range: 400.0 nm - 800.0 nm
+Background: True
+Dark Current: False 
+Integration Time: 2.6 ms
+
+Stage Velocity: 500 
+Stage Acceleration: 2000 
+StartPoint: -2150.0 ps
+End Point: -2000.0 ps
+Stepwidth: 0.1 ps
+
+400-WL 
