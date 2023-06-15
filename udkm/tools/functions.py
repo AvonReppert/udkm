@@ -27,7 +27,7 @@ def find(array, key):
     Example
     ---------
     >>> index = find(np.array([1,2,3,4]),2.9)
-    2"""
+    """
     index = (np.abs(array-key)).argmin()
     return index
 
