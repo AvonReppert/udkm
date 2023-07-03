@@ -1,0 +1,22 @@
+Name: HfN_TF_15_2022 
+
+Comment: 800-WL 
+
+Loops: 20 
+Repeats: 50 
+Fluence: 5.0 mJ/cm^2 
+Waveplate Angle: -1 
+Power: 138.0 mW
+TimeZero: -2675.5 ps
+Wavelength Range: 400.0 nm - 800.0 nm
+Background: False
+Dark Current: False 
+Integration Time: 2.6 ms
+
+Stage Velocity: 500 
+Stage Acceleration: 2000 
+StartPoint: -2677.0 ps
+End Point: -2670.0 ps
+Stepwidth: 0.02 ps
+
+800-WL 

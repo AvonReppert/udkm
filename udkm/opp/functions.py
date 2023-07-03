@@ -12,6 +12,8 @@ import lmfit as lm
 import matplotlib.gridspec as gridspec
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from matplotlib.patches import Rectangle
+from scipy.interpolate import interp1d
+from scipy.optimize import curve_fit
 import os
 
 teststring = "Successfully loaded udkm.opp.functions"
@@ -68,6 +70,11 @@ def initialize_scan(params):
     scan["filename_averaged"] = params["filename_averaged"]
     scan["data_directory"] = params["data_directory"] + "\\" + scan["id"] + "\\"
     scan["scan_directory"] = params["scan_directory"]
+    # values for frog fit
+    scan["method"] = params["method"]
+    scan["range_wl"] = params["range_wl"]
+    scan["degree"] = params["degree"]
+    scan["file"] = params["file"]
 
     # important parameters for title
     entry_list = ["power", "rep_rate", "pump_angle", "T", "symmetric_colormap",
@@ -192,7 +199,7 @@ def load_data(params):
 
     plt.figure(1, figsize=(5.2/0.68, 5.2))
     plt.pcolormesh(X, Y, 100*scan["data_averaged"],
-                   cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max, shading='nearest')
+                   cmap=colors.fireice(), vmin=c_min, vmax=c_max, shading='nearest')
     plt.xlabel(r'delay (ps)')
     plt.ylabel(r'wavelength (nm)')
 
@@ -205,7 +212,7 @@ def load_data(params):
     else:
         cb.ax.set_title(r'$\Delta R/R$ (%)')
 
-    # %% clean data from errors where the spectrometer gave values smaller <=0
+    # %% clean data from errors where the spectrometer gave values smaller <= 5
     pump_signal_errors = np.sum(scan["data_pump"], axis=0) <= 0
     probe_signal_errors = np.sum(scan["data_probe"], axis=0) <= 0
     errors = np.logical_or(pump_signal_errors, probe_signal_errors)
@@ -243,47 +250,50 @@ def load_data(params):
             scan[entry] = params[entry]
 
     # generate wl slices
-    wl_slices = len(scan["slice_wl"])
-    scan["wl_labels"] = list()
-    if wl_slices > 0:
-        scan["wl_slices"] = np.zeros((wl_slices, len(scan["delay_unique"])))
+    if "wl_slices" in scan:
+        wl_slices = len(scan["slice_wl"])
+        scan["wl_labels"] = list()
+        if wl_slices > 0:
+            scan["wl_slices"] = np.zeros((wl_slices, len(scan["delay_unique"])))
 
-        for i, wl in enumerate(scan["slice_wl"]):
+            for i, wl in enumerate(scan["slice_wl"]):
 
-            wl_min = scan["slice_wl"][i] - scan["slice_wl_width"][i]
-            wl_max = scan["slice_wl"][i] + scan["slice_wl_width"][i]
-            t_min = np.min(scan["delay_unique"])
-            t_max = np.max(scan["delay_unique"])
-            _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
-                                                    t_min, t_max, wl_min, wl_max)
-            scan["wl_slices"][i, :] = np.mean(data_cut, axis=0)
-            scan["wl_labels"].append(str(int(scan["slice_wl"][i])))
+                wl_min = scan["slice_wl"][i] - scan["slice_wl_width"][i]
+                wl_max = scan["slice_wl"][i] + scan["slice_wl_width"][i]
+                t_min = np.min(scan["delay_unique"])
+                t_max = np.max(scan["delay_unique"])
+                _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
+                                                        t_min, t_max, wl_min, wl_max)
+                scan["wl_slices"][i, :] = np.mean(data_cut, axis=0)
+                scan["wl_labels"].append(str(int(scan["slice_wl"][i])))
 
-    else:
-        scan["wl_slices"] = np.zeros((wl_slices, 1))
-        scan["wl_slices"][0, :] = np.sum(scan["data"], axis=0)
-        scan["wl_labels"].append("integral")
+        else:
+            scan["wl_slices"] = np.zeros((wl_slices, 1))
+            scan["wl_slices"][0, :] = np.sum(scan["data"], axis=0)
+            scan["wl_labels"].append("integral")
 
     # generate delay slices
-    t_slices = len(scan["slice_delay"])
-    scan["delay_labels"] = list()
-    if t_slices > 0:
-        scan["delay_slices"] = np.zeros((t_slices, len(scan["wavelength"])))
-        for i, t in enumerate(scan["slice_delay"]):
+    if "slice_delay" in scan:
+        t_slices = len(scan["slice_delay"])
+        scan["delay_labels"] = list()
+        if t_slices > 0:
+            scan["delay_slices"] = np.zeros((t_slices, len(scan["wavelength"])))
+            for i, t in enumerate(scan["slice_delay"]):
 
-            wl_min = np.min(scan["wavelength"])
-            wl_max = np.max(scan["wavelength"])
-            t_min = scan["slice_delay"][i] - scan["slice_delay_width"][i]
-            t_max = scan["slice_delay"][i] + scan["slice_delay_width"][i]
-            _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
-                                                    t_min, t_max, wl_min, wl_max)
-            scan["delay_slices"][i, :] = np.mean(data_cut, axis=1)
-            scan["delay_labels"].append(str(int(scan["slice_delay"][i])))
+                wl_min = np.min(scan["wavelength"])
+                wl_max = np.max(scan["wavelength"])
+                t_min = scan["slice_delay"][i] - scan["slice_delay_width"][i]
+                t_max = scan["slice_delay"][i] + scan["slice_delay_width"][i]
+                _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
+                                                        t_min, t_max, wl_min, wl_max)
+                scan["delay_slices"][i, :] = np.mean(data_cut, axis=1)
+                scan["delay_labels"].append(str(int(scan["slice_delay"][i])))
 
-    else:
-        scan["delay_slices"] = np.zeros((t_slices, 1))
-        scan["delay_slices"][0, :] = np.sum(scan["data"], axis=1)
-        scan["delay_labels"].append("integral")
+        else:
+            scan["delay_slices"] = np.zeros((t_slices, 1))
+            scan["delay_slices"][0, :] = np.sum(scan["data"], axis=1)
+            scan["delay_labels"].append("integral")
+
     return scan
 
 
@@ -457,3 +467,123 @@ def plot_overview(scan):
     ax4.axvline(x=0, lw=1, ls='--', color='grey')
 
     fig.suptitle(scan["title_text"])
+
+
+def frog_fit(scan):
+    '''calculates the fit function for the data and plots it'''
+
+    delays = scan["delay_unique"]
+    wl = scan["wavelength"]
+    data = pd.DataFrame(scan["data"])
+    method = scan["method"]
+    range_wl = scan["range_wl"]
+    degree = scan["degree"]
+    file = scan["file"]
+    ww = np.arange(400, 801)
+
+    if file is None:
+        if method == 'maxSlope':
+            I0 = np.argmax(np.diff(data, axis=1), axis=1)
+        elif method == 'minSlope':
+            I0 = np.argmin(np.diff(data, axis=1), axis=1)
+        elif method == 'max':
+            I0 = np.argmax(data.values, axis=1)
+        elif method == 'min':
+            I0 = np.argmin(data.values, axis=1)
+        elif method == 'absMaxSlope':
+            I0 = np.argmax(np.diff(np.abs(data), axis=1), axis=1)
+        elif method == 'absMax':
+            I0 = np.argmax(np.abs(data.values), axis=1)
+        else:
+            print('No valid method for FROG determination!')
+            return
+        delOffset = delays[I0]
+
+        if len(range_wl) == 2:
+            indexRange = np.where((wl >= range_wl[0]) & (wl <= range_wl[1]))[0]
+        else:
+            indexList = []
+            for i in range(len(range_wl)):
+                indexList.append(np.where((wl >= range_wl[i][0]) & (wl <= range_wl[i][1]))[0])
+                indexRange = np.concatenate(indexList)
+
+        x = wl[indexRange]
+        y = delOffset[indexRange]
+
+        coefficients = np.polyfit(x, y, deg=degree)
+        ff = np.poly1d(coefficients)
+
+        plt.figure(2, figsize=(5.2/0.68, 5.2))
+        # plt.figure(dpi=180)
+        plt.clf()
+        plt.plot(delOffset, wl, 'k', label=r'FROG trace', lw=0.5)
+        plt.plot(delOffset[indexRange], wl[indexRange], '.r', label=r'fit range', markersize=2)
+        plt.plot(ff(ww), ww, '-b', label=r'fit')
+        plt.axis([np.min(delays)-1.5, np.max(delays)-1, np.min(wl), np.max(wl)])
+        plt.xlabel(r'delay (ps)')
+        plt.ylabel(r'wavelength (nm)')
+        plt.grid(True)
+        plt.legend(loc='best')
+        plt.title('Frog Fit')
+
+    else:
+        if not os.path.isfile(file):
+            print('Entered FROG file does not exist!')
+        else:
+            ffLoaded = np.load(file)
+
+            plt.figure(2, figsize=(5.2/0.68, 5.2))
+            # plt.figure(dpi=180)
+            plt.clf()
+            plt.plot(ffLoaded['ff'](ww), ww, '-b', label=r'fit')
+            plt.axis([np.min(delays)-1.5, np.max(delays)-1, np.min(wl), np.max(wl)])
+            plt.xlabel(r'delay (ps)')
+            plt.ylabel(r'wavelength (nm)')
+            plt.grid(True)
+            plt.legend(loc='upper left')
+            plt.title('Frog Fit')
+
+            ff = ffLoaded['ff']
+            print('FROG file loaded:', file)
+
+    scan["ff"] = ff
+
+    return scan
+
+
+def frog_corr(scan):
+    '''interpolates the fit function on the data, saves the frog corrected data and plots it'''
+
+    delays = scan["delay_unique"]
+    wl = scan["wavelength"]
+    data = pd.DataFrame(scan["data"])
+    ff = scan["ff"]
+
+    dataFROGcorrected = np.zeros((len(delays), len(wl)))
+
+    for i in range(len(wl)):
+        interp_func = interp1d(delays, data.iloc[i, :], bounds_error=False, fill_value=0.0)
+        dataFROGcorrected[:, i] = interp_func(delays + ff(wl[i]))
+
+    scan["frog_data"] = dataFROGcorrected.T
+
+    X, Y = np.meshgrid(scan["delay_unique"], scan["wavelength"])
+
+    plt.figure(3, figsize=(5.2/0.68, 5.2))
+    plt.gcf().clear()
+    plt.pcolormesh(X, Y, 100*scan["frog_data"],
+                   cmap=colors.fireice(), vmin=100*np.min(scan["frog_data"]), vmax=100*np.max(scan["frog_data"]),
+                   shading='nearest')
+
+    plt.title('Frog correction data')
+    plt.xlabel(r'delay (ps)')
+    plt.ylabel(r'wavelength (nm)')
+
+    cb = plt.colorbar()
+
+    if scan["probe_method"] == "transmission":
+        cb.ax.set_title(r'$\Delta T/T$ (%)')
+    else:
+        cb.ax.set_title(r'$\Delta R/R$ (%)')
+
+    return scan
