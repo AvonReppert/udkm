@@ -24,13 +24,15 @@ params["bool_force_reload"] = True
 params["t0"] = -2675.5
 params["exclude_loops"] = []
 params["symmetric_colormap"] = True
-params["signal_level"] = 0.05
+params["signal_level"] = 0.03
 
-params["delay_min"] = -1
-params["delay_max"] = 5.5
 
-params["wl_min"] = 1100
-params["wl_max"] = 2500
+# parameters for overview plot
+params["slice_wl"] = [500, 600,  700]
+params["slice_wl_width"] = [10, 10, 10]
+params["slice_delay"] = [2]
+params["slice_delay_width"] = [0.5]
+
 
 # values for dispersion correction
 params["method"] = "max"
@@ -42,7 +44,10 @@ params["file"] = False
 scan = opp.load_data(params)
 plt.savefig("plot_standard\\" + scan["id"]+".png")
 
+
 opp.plot_overview(scan)
+plt.show()
+
 
 opp.frog_fit(scan)
 plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
