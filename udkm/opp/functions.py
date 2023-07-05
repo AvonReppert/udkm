@@ -36,9 +36,15 @@ def get_scan_parameter(parameter_file_name, line):
     params["bool_force_reload"] = False
 
     params["rep_rate"] = 5000
-    params["pump_angle"] = 8  # Wert aus dem Lab Book
+    params["pump_angle"] = 8  # Value from labbook
     params["probe_method"] = "transmission"
     params["symmetric_colormap"] = True
+
+    # default values for dispersion correciton
+    params["method"] = "max"
+    params["range_wl"] = [450, 740]
+    params["degree"] = 3
+    params["file"] = False
 
     params["prefix"] = "Spectro1_"
 
@@ -122,20 +128,20 @@ def load_data_average(params):
           scan["time"]+" " + str(scan["T"])+"K " + str(scan["fluence"])+"mJ/cm^2 ")
     if scan["symmetric_colormap"]:
         if "signal_level" in params:
-            c_min = -1*params["signal_level"]
-            c_max = params["signal_level"]
+            scan["c_min"] = -1*params["signal_level"]
+            scan["c_max"] = params["signal_level"]
         else:
-            c_min = -1*np.max(np.abs(scan["data_averaged"]))
-            c_max = 1*np.max(np.abs(scan["data_averaged"]))
+            scan["c_min"] = -1*np.max(np.abs(scan["data_averaged"]))
+            scan["c_max"] = 1*np.max(np.abs(scan["data_averaged"]))
     else:
-        c_min = np.min(scan["data_averaged"])
-        c_max = np.max(scan["data_averaged"])
+        scan["c_min"] = np.min(scan["data_averaged"])
+        scan["c_max"] = np.max(scan["data_averaged"])
 
     X, Y = np.meshgrid(scan["delay_raw_unique"], scan["wavelength"])
 
     plt.figure(1, figsize=(5.2/0.68, 5.2))
     plt.pcolormesh(X, Y, 100*scan["data_averaged"],
-                   cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max, shading='nearest')
+                   cmap=colors.fireice(), vmin=100*scan["c_min"], vmax=100*scan["c_max"], shading='nearest')
     plt.xlabel(r'delay (ps)')
     plt.ylabel(r'wavelength (nm)')
 
@@ -186,20 +192,20 @@ def load_data(params):
 
     if scan["symmetric_colormap"]:
         if "signal_level" in params:
-            c_min = -1*params["signal_level"]
-            c_max = params["signal_level"]
+            scan["c_min"] = -1*params["signal_level"]
+            scan["c_max"] = params["signal_level"]
         else:
-            c_min = -1*np.max(np.abs(scan["data_averaged"]))
-            c_max = 1*np.max(np.abs(scan["data_averaged"]))
+            scan["c_min"] = -1*np.max(np.abs(scan["data_averaged"]))
+            scan["c_max"] = 1*np.max(np.abs(scan["data_averaged"]))
     else:
-        c_min = np.min(scan["data_averaged"])
-        c_max = np.max(scan["data_averaged"])
+        scan["c_min"] = np.min(scan["data_averaged"])
+        scan["c_max"] = np.max(scan["data_averaged"])
 
     X, Y = np.meshgrid(scan["delay_raw_unique"], scan["wavelength"])
 
     plt.figure(1, figsize=(5.2/0.68, 5.2))
     plt.pcolormesh(X, Y, 100*scan["data_averaged"],
-                   cmap=colors.fireice(), vmin=c_min, vmax=c_max, shading='nearest')
+                   cmap=colors.fireice(), vmin=100*scan["c_min"], vmax=100*scan["c_max"], shading='nearest')
     plt.xlabel(r'delay (ps)')
     plt.ylabel(r'wavelength (nm)')
 
@@ -250,7 +256,7 @@ def load_data(params):
             scan[entry] = params[entry]
 
     # generate wl slices
-    if "wl_slices" in scan:
+    if "slice_wl" in scan:
         wl_slices = len(scan["slice_wl"])
         scan["wl_labels"] = list()
         if wl_slices > 0:
@@ -481,7 +487,7 @@ def frog_fit(scan):
     file = scan["file"]
     ww = np.arange(400, 801)
 
-    if file is None:
+    if file is False:
         if method == 'maxSlope':
             I0 = np.argmax(np.diff(data, axis=1), axis=1)
         elif method == 'minSlope':
@@ -541,10 +547,10 @@ def frog_fit(scan):
             plt.ylabel(r'wavelength (nm)')
             plt.grid(True)
             plt.legend(loc='upper left')
-            plt.title('Frog Fit')
+            plt.title('Fit of dispersion correction')
 
             ff = ffLoaded['ff']
-            print('FROG file loaded:', file)
+            print('Dispersion correction loaded:', file)
 
     scan["ff"] = ff
 
@@ -572,10 +578,10 @@ def frog_corr(scan):
     plt.figure(3, figsize=(5.2/0.68, 5.2))
     plt.gcf().clear()
     plt.pcolormesh(X, Y, 100*scan["frog_data"],
-                   cmap=colors.fireice(), vmin=100*np.min(scan["frog_data"]), vmax=100*np.max(scan["frog_data"]),
+                   cmap=colors.fireice(), vmin=100*scan["c_min"], vmax=100*scan["c_max"],
                    shading='nearest')
 
-    plt.title('Frog correction data')
+    plt.title('Dispersion corrected data')
     plt.xlabel(r'delay (ps)')
     plt.ylabel(r'wavelength (nm)')
 

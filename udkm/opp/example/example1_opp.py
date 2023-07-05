@@ -29,7 +29,7 @@ params["slice_delay_width"] = [0.5]
 
 params["t0"] = -2008.75
 params["exclude_loops"] = []
-params["symmetric_colormap"] = False
+params["symmetric_colormap"] = True
 
 params["delay_min"] = -1
 params["delay_max"] = 4

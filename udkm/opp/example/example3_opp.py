@@ -24,6 +24,7 @@ params["bool_force_reload"] = True
 params["t0"] = -2675.5
 params["exclude_loops"] = []
 params["symmetric_colormap"] = True
+params["signal_level"] = 0.05
 
 params["delay_min"] = -1
 params["delay_max"] = 5.5
@@ -31,22 +32,25 @@ params["delay_max"] = 5.5
 params["wl_min"] = 1100
 params["wl_max"] = 2500
 
-# values for frog_fit
+# values for dispersion correction
 params["method"] = "max"
 params["range_wl"] = [450, 740]
 params["degree"] = 5
-params["file"] = None
+params["file"] = False
 
 
 scan = opp.load_data(params)
 plt.savefig("plot_standard\\" + scan["id"]+".png")
-# opp.save_scan(scan)
+
+opp.plot_overview(scan)
 
 opp.frog_fit(scan)
 plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
 
 opp.frog_corr(scan)
 plt.savefig("plot_frogcorr\\" + scan["id"]+".png")
+
+opp.save_scan(scan)
 
 # opp.plot_overview(scan)
 #plt.savefig("plot_overview\\" + scan["id"]+".png")

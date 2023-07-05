@@ -13,7 +13,7 @@ params = opp.get_scan_parameter(parameter_file_name, line)
 params["data_directory"] = "data\\"
 params["probe_method"] = "transmission"
 
-params["bool_force_reload"] = False
+params["bool_force_reload"] = True
 
 params["slice_wl"] = [475, 525, 600,  725]
 params["slice_wl_width"] = [10, 10,  10, 10]
@@ -31,12 +31,25 @@ params["delay_max"] = 100
 #params["wl_min"] = 1100
 #params["wl_max"] = 2500
 
-tst = 2
-scan = opp.load_data(params)
 
+# values for dispersion correction
+params["method"] = "max"
+params["range_wl"] = [[455, 466], [520, 550], [675, 745]]
+params["degree"] = 3
+params["file"] = False
+
+
+scan = opp.load_data(params)
+plt.savefig("plot_standard\\" + scan["id"]+".png")
 
 opp.plot_overview(scan)
 plt.savefig("plot_overview\\" + scan["id"]+".png")
 
+
+opp.frog_fit(scan)
+plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
+
+opp.frog_corr(scan)
+plt.savefig("plot_frogcorr\\" + scan["id"]+".png")
+
 opp.save_scan(scan)
-scan2 = opp.load_scan(params["date"], params["time"], params["scan_directory"])
