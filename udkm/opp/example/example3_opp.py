@@ -49,11 +49,17 @@ opp.plot_overview(scan)
 plt.show()
 
 
-opp.frog_fit(scan)
+scan = opp.frog_fit(scan)
 plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
+plt.show()
 
-opp.frog_corr(scan)
+scan = opp.frog_corr(scan)
 plt.savefig("plot_frogcorr\\" + scan["id"]+".png")
+plt.show()
+
+# %%
+opp.plot_overview(scan, data_key="frog_data")
+
 
 opp.save_scan(scan)
 

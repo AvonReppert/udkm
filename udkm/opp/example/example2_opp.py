@@ -6,7 +6,7 @@ import h5py as h5
 parameter_file_name = "parameters/parameters_example_2.txt"
 
 
-line = 1  # choose dataset
+line = 0  # choose dataset
 
 params = opp.get_scan_parameter(parameter_file_name, line)
 
@@ -25,16 +25,16 @@ params["signal_level"] = 0.07
 params["exclude_loops"] = []
 params["symmetric_colormap"] = True
 
-params["delay_min"] = -3
-params["delay_max"] = 100
+#params["delay_min"] = -3
+#params["delay_max"] = 100
 
 #params["wl_min"] = 1100
 #params["wl_max"] = 2500
 
 
 # values for dispersion correction
-params["method"] = "max"
-params["range_wl"] = [[455, 466], [520, 550], [675, 745]]
+params["method"] = "absMax"
+params["range_wl"] = [[455, 480], [520, 550], [675, 745]]
 params["degree"] = 3
 params["file"] = False
 
@@ -46,10 +46,15 @@ opp.plot_overview(scan)
 plt.savefig("plot_overview\\" + scan["id"]+".png")
 
 
-opp.frog_fit(scan)
+scan = opp.frog_fit(scan)
 plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
 
-opp.frog_corr(scan)
+scan = opp.frog_corr(scan)
 plt.savefig("plot_frogcorr\\" + scan["id"]+".png")
 
 opp.save_scan(scan)
+
+# %%
+opp.plot_overview(scan, data_key="frog_data")
+plt.title("data with dispersion correction")
+plt.show()

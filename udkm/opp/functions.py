@@ -255,6 +255,11 @@ def load_data(params):
         if entry in params:
             scan[entry] = params[entry]
 
+    scan = generate_slices(scan, data_key="data")
+    return scan
+
+
+def generate_slices(scan, data_key="data"):
     # generate wl slices
     if "slice_wl" in scan:
         wl_slices = len(scan["slice_wl"])
@@ -268,14 +273,14 @@ def load_data(params):
                 wl_max = scan["slice_wl"][i] + scan["slice_wl_width"][i]
                 t_min = np.min(scan["delay_unique"])
                 t_max = np.max(scan["delay_unique"])
-                _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan["data"],
+                _, _, data_cut, _, _ = tools.set_roi_2d(scan["delay_unique"], scan["wavelength"], scan[data_key],
                                                         t_min, t_max, wl_min, wl_max)
                 scan["wl_slices"][i, :] = np.mean(data_cut, axis=0)
                 scan["wl_labels"].append(str(int(scan["slice_wl"][i])))
 
         else:
             scan["wl_slices"] = np.zeros((wl_slices, 1))
-            scan["wl_slices"][0, :] = np.sum(scan["data"], axis=0)
+            scan["wl_slices"][0, :] = np.sum(scan[data_key], axis=0)
             scan["wl_labels"].append("integral")
 
     # generate delay slices
@@ -297,9 +302,8 @@ def load_data(params):
 
         else:
             scan["delay_slices"] = np.zeros((t_slices, 1))
-            scan["delay_slices"][0, :] = np.sum(scan["data"], axis=1)
+            scan["delay_slices"][0, :] = np.sum(scan[data_key], axis=1)
             scan["delay_labels"].append("integral")
-
     return scan
 
 
@@ -375,7 +379,10 @@ def load_scan(date: str, time: str, scan_directory: str) -> dict:
 #     return pickle.load(open(path_string, "rb"))
 
 
-def plot_overview(scan):
+def plot_overview(scan, data_key="data"):
+
+    scan = generate_slices(scan, data_key=data_key)
+
     '''yields an overview plot of the data with selected lineouts'''
     fig = plt.figure(figsize=(12, 12*0.68))
     gs = gridspec.GridSpec(2, 2,
@@ -423,7 +430,7 @@ def plot_overview(scan):
         c_max = np.max(scan["data_averaged"])
 
     X, Y = np.meshgrid(scan["delay_unique"], scan["wavelength"])
-    plotted = ax3.pcolormesh(X, Y, 100*scan["data"], cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max)
+    plotted = ax3.pcolormesh(X, Y, 100*scan[data_key], cmap=colors.fireice(), vmin=100*c_min, vmax=100*c_max)
 
     ax3.axis([scan["delay_min"], scan["delay_max"], scan["wl_min"], scan["wl_max"]])
 
@@ -530,7 +537,7 @@ def frog_fit(scan):
         plt.ylabel(r'wavelength (nm)')
         plt.grid(True)
         plt.legend(loc='best')
-        plt.title('Frog Fit')
+        plt.title('Fitted Dispersion correction function')
 
     else:
         if not os.path.isfile(file):
