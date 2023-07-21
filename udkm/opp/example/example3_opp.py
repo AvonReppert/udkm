@@ -11,7 +11,7 @@ from matplotlib.patches import Rectangle
 
 parameter_file_name = "parameters/parameters_example_3.txt"
 
-line = 0  # welchen Datensatz man auswerten möchte
+line = 1  # welchen Datensatz man auswerten möchte
 
 params = opp.get_scan_parameter(parameter_file_name, line)
 
@@ -21,7 +21,7 @@ params["probe_method"] = "transmission"
 params["bool_force_reload"] = True
 
 
-params["t0"] = -2675.5
+params["t0"] = -2174.0
 params["exclude_loops"] = []
 params["symmetric_colormap"] = True
 params["signal_level"] = 0.03
@@ -38,7 +38,8 @@ params["slice_delay_width"] = [0.5]
 params["method"] = "max"
 params["range_wl"] = [450, 740]
 params["degree"] = 5
-params["file"] = False
+# params["file"] = False
+params["file"] = "scan_export/20230525_105618.h5"
 
 
 scan = opp.load_data(params)
@@ -49,16 +50,16 @@ opp.plot_overview(scan)
 plt.show()
 
 
-scan = opp.frog_fit(scan)
+scan = opp.dispersion_fit(scan)
 plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
 plt.show()
 
-scan = opp.frog_corr(scan)
-plt.savefig("plot_frogcorr\\" + scan["id"]+".png")
+scan = opp.dispersion_corr(scan)
+plt.savefig("plot_dispersioncorr\\" + scan["id"]+".png")
 plt.show()
 
 # %%
-opp.plot_overview(scan, data_key="frog_data")
+opp.plot_overview(scan, data_key="dispersion_data")
 
 
 opp.save_scan(scan)

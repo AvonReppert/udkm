@@ -482,8 +482,32 @@ def plot_overview(scan, data_key="data"):
     fig.suptitle(scan["title_text"])
 
 
-def frog_fit(scan):
-    '''calculates the fit function for the data and plots it'''
+def dispersion_fit(scan):
+    """
+    Calculates the fit function for the data and plots it.
+
+    Parameters
+    ----------
+    scan : dict
+        A dictionary containing the following keys:
+        - "delay_unique" (array-like): Array of unique delay values.
+        - "wavelength" (array-like): Array of wavelength values.
+        - "data" (array-like): 2D array of data.
+        - "method" (str): Method for Dispersion determination.
+        - "range_wl" (list): List of wavelength ranges.
+        - "degree" (int): Degree of polynomial fit.
+        - "file" (str or bool): File name or False if no file.
+
+    Returns
+    ----------
+    dict
+        Updated scan dictionary with the "fit_function" key.
+
+    Raises
+    ----------
+    ValueError
+        If an invalid method for FROG determination is provided.
+    """
 
     delays = scan["delay_unique"]
     wl = scan["wavelength"]
@@ -492,7 +516,7 @@ def frog_fit(scan):
     range_wl = scan["range_wl"]
     degree = scan["degree"]
     file = scan["file"]
-    ww = np.arange(400, 801)
+    fit_wl = np.arange(scan["wl_min"], scan["wl_max"]+1)
 
     if file is False:
         if method == 'maxSlope':
@@ -524,14 +548,14 @@ def frog_fit(scan):
         y = delOffset[indexRange]
 
         coefficients = np.polyfit(x, y, deg=degree)
-        ff = np.poly1d(coefficients)
+        fit_function = np.poly1d(coefficients)
 
         plt.figure(2, figsize=(5.2/0.68, 5.2))
         # plt.figure(dpi=180)
         plt.clf()
         plt.plot(delOffset, wl, 'k', label=r'FROG trace', lw=0.5)
         plt.plot(delOffset[indexRange], wl[indexRange], '.r', label=r'fit range', markersize=2)
-        plt.plot(ff(ww), ww, '-b', label=r'fit')
+        plt.plot(fit_function(fit_wl), fit_wl, '-b', label=r'fit')
         plt.axis([np.min(delays)-1.5, np.max(delays)-1, np.min(wl), np.max(wl)])
         plt.xlabel(r'delay (ps)')
         plt.ylabel(r'wavelength (nm)')
@@ -543,12 +567,15 @@ def frog_fit(scan):
         if not os.path.isfile(file):
             print('Entered FROG file does not exist!')
         else:
-            ffLoaded = np.load(file)
+            file_loaded = h5.File(file, 'r')
+            fit_function_read = file_loaded["fit_function"]
+            fit_function_coefficients = fit_function_read[()]
+            fit_function_loaded = np.poly1d(fit_function_coefficients)
 
             plt.figure(2, figsize=(5.2/0.68, 5.2))
             # plt.figure(dpi=180)
             plt.clf()
-            plt.plot(ffLoaded['ff'](ww), ww, '-b', label=r'fit')
+            plt.plot(fit_function_loaded(fit_wl), fit_wl, '-b', label=r'fit')
             plt.axis([np.min(delays)-1.5, np.max(delays)-1, np.min(wl), np.max(wl)])
             plt.xlabel(r'delay (ps)')
             plt.ylabel(r'wavelength (nm)')
@@ -556,35 +583,54 @@ def frog_fit(scan):
             plt.legend(loc='upper left')
             plt.title('Fit of dispersion correction')
 
-            ff = ffLoaded['ff']
+            fit_function = fit_function_loaded
             print('Dispersion correction loaded:', file)
 
-    scan["ff"] = ff
+    scan["fit_function"] = fit_function
 
     return scan
 
 
-def frog_corr(scan):
-    '''interpolates the fit function on the data, saves the frog corrected data and plots it'''
+def dispersion_corr(scan):
+    """
+    Interpolates the fit function on the data, saves the FROG-corrected data, and plots it.
+
+    Parameters
+    ----------
+    scan : dict
+        A dictionary containing the following keys:
+        - "delay_unique" (array-like): Array of unique delay values.
+        - "wavelength" (array-like): Array of wavelength values.
+        - "data" (array-like): 2D array of data.
+        - "fit_function" (callable): Fit function for dispersion correction.
+        - "c_min" (float): Minimum value for color scale.
+        - "c_max" (float): Maximum value for color scale.
+        - "probe_method" (str): Probe method for color bar label.
+
+    Returns
+    ----------
+    dict
+        Updated scan dictionary with the "dispersion_data" key.
+    """
 
     delays = scan["delay_unique"]
     wl = scan["wavelength"]
     data = pd.DataFrame(scan["data"])
-    ff = scan["ff"]
+    fit_function = scan["fit_function"]
 
-    dataFROGcorrected = np.zeros((len(delays), len(wl)))
+    data_dispersion_corrected = np.zeros((len(delays), len(wl)))
 
     for i in range(len(wl)):
         interp_func = interp1d(delays, data.iloc[i, :], bounds_error=False, fill_value=0.0)
-        dataFROGcorrected[:, i] = interp_func(delays + ff(wl[i]))
+        data_dispersion_corrected[:, i] = interp_func(delays + fit_function(wl[i]))
 
-    scan["frog_data"] = dataFROGcorrected.T
+    scan["dispersion_data"] = data_dispersion_corrected.T
 
     X, Y = np.meshgrid(scan["delay_unique"], scan["wavelength"])
 
     plt.figure(3, figsize=(5.2/0.68, 5.2))
     plt.gcf().clear()
-    plt.pcolormesh(X, Y, 100*scan["frog_data"],
+    plt.pcolormesh(X, Y, 100*scan["dispersion_data"],
                    cmap=colors.fireice(), vmin=100*scan["c_min"], vmax=100*scan["c_max"],
                    shading='nearest')
 

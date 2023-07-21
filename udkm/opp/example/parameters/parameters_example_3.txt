@@ -1,3 +1,4 @@
 date	time	T	power	fwhm_x	fwhm_y	pump_angle	pump_wl	t0	name
 #0date	1time	2T(K)	3power(mW)	4fwhm_x(µm)	5fwhm_y(µm)	6pump_angle(AOI in deg)	7pumpWL(nm)	 8t0 (ps)	9name
 20230525	105618	300	138	750	650	8	800	-2675.5	HfN TF 15 2022
+20220406	124208	300	103.5	750	650	15	800	-2174.0	HfN 15 nm on Sapphir

@@ -1,0 +1,22 @@
+Name: HfN_1 
+
+Comment: HfN 15 nm on Sapphir, 800-WL, approx. 15 deg incidence angle 
+
+Loops: 20 
+Repeats: 50 
+Fluence: 3.8 mJ/cm^2 
+Waveplate Angle: -1 
+Power: 103.5 mW
+TimeZero: -2174.0 ps
+Wavelength Range: 400.0 nm - 800.0 nm
+Background: False
+Dark Current: True 
+Integration Time: 2.6 ms
+
+Stage Velocity: 500 
+Stage Acceleration: 2000 
+StartPoint: -2180.0 ps
+End Point: -2155.0 ps
+Stepwidth: 0.1 ps
+
+HfN 15 nm on Sapphir, 800-WL, approx. 15 deg incidence angle 
