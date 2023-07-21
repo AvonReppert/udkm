@@ -7,8 +7,8 @@ On the long run it aims to bundle data analysis functions for the setups in the 
 
 .. note::
 
-   This project is under active development. 
-   The corresponding Github project page can be found at https://github.com/AleksUDKM/udkm
+   This project is under development. 
+   The corresponding Github project page can be found at https://github.com/AvonReppert/udkm
    
 Modules
 ---------
@@ -22,6 +22,7 @@ Modules
 	kmc3-xpp <kmc3_xpp>
 	tg <tg>
 	opp <opp>
+	beamprofile <beam>
 
 Code examples
 --------------
