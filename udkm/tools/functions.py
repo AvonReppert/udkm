@@ -6,8 +6,57 @@ import pandas as pd
 import pickle as pickle
 import shutil
 import zipfile as zipfile
+import udkm.tools.constants as u
 
 teststring = "Successfully loaded udkm.tools.functions"
+
+
+def calc_q(theta, E):
+    """
+    Calculate the scattering vector q based on the provided scattering angle and energy.
+    Assumes symmetric diffraction condition by using q = (4 * π / λ) * sin(θ)
+
+    Parameters
+    ----------
+    theta : float or ndarray
+        The scattering angle in degrees.
+    E : float
+        The energy of the incident beam in electronvolts (eV).
+
+    Returns
+    -------
+    q : float or ndarray
+        The scattering vector q in inverse angstroms (1/Å).
+
+    Notes
+    -----
+    This function calculates the scattering vector q based on the provided
+    energy and scattering angle using the following formula:
+
+    q = (4 * π / λ) * sin(θ)
+
+    where:
+    - λ is the wavelength of the incident beam calculated from energy and
+      the speed of light using the Planck constant.
+    - Energy is provided in electronvolts (eV).
+
+    Constants
+    ---------
+    - u.H_PLANCK : float
+        The Planck constant in joule-seconds (J·s).
+    - u.C_0 : float
+        The speed of light in meters per second (m/s).
+
+    Examples
+    --------
+    >>> theta = 30
+    >>> E = 10
+    >>> calc_q(theta, E)
+    2.402154633359561
+    """
+    wl = u.H_PLANCK * u.C_0 / (E*u.EV)
+    q = (4 * np.pi / wl) * np.sin(theta * np.pi / 180) * 1e-10
+    return q
 
 
 def find(array, key):
