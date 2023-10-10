@@ -19,7 +19,7 @@ def calc_q(theta, E):
     Parameters
     ----------
     theta : float or ndarray
-        The scattering angle in degrees.
+        Half of the scattering angle in TwoTheta in degrees.
     E : float
         The energy of the incident beam in electronvolts (eV).
 

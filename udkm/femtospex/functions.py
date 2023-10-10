@@ -18,7 +18,7 @@ def get_q(data):
     data : dict or DataFrame
         A data container that should have at least the following keys:
         - "Energy": The energy of the incident beam in electronvolts (eV).
-        - "Theta": The scattering angle in degrees.
+        - "TwoTheta": The scattering angle (2θ) in degrees.
 
     Returns
     -------
@@ -28,9 +28,9 @@ def get_q(data):
     Notes
     -----
     This function calculates the scattering vector q based on the provided
-    energy and scattering angle using the following formula:
+    energy and scattering angle (2θ) using the following formula:
 
-    q = (4 * π / λ) * sin(θ)
+    q = (4 * π / λ) * sin(2θ/2)
 
     where:
     - λ is the wavelength of the incident beam calculated from energy and
@@ -48,11 +48,11 @@ def get_q(data):
 
     Examples
     --------
-    >>> data = {"Energy": 10, "Theta": 30}
+    >>> data = {"Energy": 10, "TwoTheta": 60}
     >>> get_q(data)
-    2.402154633359561
+    1.2010773166797805
     """
     E = np.mean(data["Energy"]) * u.EV
     wl = u.H_PLANCK * u.C_0 / E
-    q = (4 * np.pi / wl) * np.sin(data["Theta"] * np.pi / 180) * 1e-10
+    q = (4 * np.pi / wl) * np.sin(data["TwoTheta"] / 2 * np.pi / 180) * 1e-10
     return q
