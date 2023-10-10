@@ -56,3 +56,45 @@ def get_q(data):
     wl = u.H_PLANCK * u.C_0 / E
     q = (4 * np.pi / wl) * np.sin(data["TwoTheta"] / 2 * np.pi / 180) * 1e-10
     return q
+
+
+def get_turn_angle_dy(q_pos):
+    """
+    Calculate the interlayer turn angle (in degrees) for the magnetic moment in the Dysprosium spin spiral(Dy) 
+    based on the provided q-position of the resonant scattering peak given in (1/Å).
+
+    Parameters
+    ----------
+    q_pos : float or ndarray
+        The q-position (scattering vector) in inverse angstroms (1/Å).
+
+    Returns
+    -------
+    phi : float or ndarray
+        The interlayer turn angle
+
+    Notes
+    -----
+    This function calculates the interlayer turn angle of the spin spiral for Dysprosium (Dy) using the provided
+    q-position of the scattering peak using the following formula:
+
+    angle = (180 * c_Dy * q_pos) / (2 * π)
+
+    where:
+    - `c_Dy` is the lattice constant for Dysprosium in angstroms (Å).
+    - The scattering angle is given in degrees.
+
+    Constants
+    ---------
+    - c_Dy : float
+        The lattice constant for Dysprosium (Dy) in angstroms (Å).
+
+    Examples
+    --------
+    >>> q_pos = 0.18
+    >>> get_turn_angle_dy(q_pos)
+    29.1534677149646
+    """
+    c_Dy = 5.6536  # Lattice constant for Dysprosium (Dy) in angstroms (Å)
+    phi = (180 * c_Dy * q_pos) / (2 * np.pi)
+    return phi
