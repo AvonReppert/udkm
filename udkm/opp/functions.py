@@ -1,20 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import dill as pickle
 import pandas as pd
 import h5py as h5
-
-
+from scipy.interpolate import interp1d
 import udkm.tools.functions as tools
 import udkm.tools.colors as colors
-
-import lmfit as lm
-import matplotlib.gridspec as gridspec
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-from matplotlib.patches import Rectangle
-from scipy.interpolate import interp1d
-from scipy.optimize import curve_fit
 import os
+import matplotlib.gridspec as gridspec
+
 
 teststring = "Successfully loaded udkm.opp.functions"
 
@@ -646,3 +639,42 @@ def dispersion_corr(scan):
         cb.ax.set_title(r'$\Delta R/R$ (%)')
 
     return scan
+
+
+def save_time_explicit_format(filename, delays, wavelengths, data, comment1, comment2):
+    """
+    Save data in time-explicit format to a .ascii file.
+
+    Parameters:
+    - filename (str): Name of the file to save the data with .ascii extension.
+    - delays (list): List of time delays.
+    - wavelengths (list): List of wavelengths.
+    - data (list or numpy array): 2D list or numpy array containing the spectroscopy data.
+    - comment1 (str): Heading line 1 - A comment for the first line in the file.
+    - comment2 (str): Heading line 2 - A comment for the second line in the file.
+
+    Example:
+    save_time_explicit_format("output_time_explicit", [1.0, 2.0, 3.0], [500, 600, 700],
+                              [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6], [0.7, 0.8, 0.9]],
+                              "Experiment Title", "Data recorded on 2024-02-03")
+    """
+
+    # Open the file in write mode with .ascii extension
+    output_filename = "scan_export\\" + filename + ".ascii"
+    with open(output_filename, 'w') as file:
+        # Write comments
+        file.write("#" + comment1 + "\n")
+        file.write("#" + comment2 + "\n")
+
+        # Write the format indicator
+        file.write("Time explicit\n")
+
+        # Write the number of time points and the delays
+        file.write(f"Intervalnr {len(delays)}\n")
+        file.write(" ".join(map(str, delays)) + "\n")
+
+        # Write the data
+        for i in range(len(wavelengths)):
+            row_data = " ".join(map(str, data[i]))
+            file.write(f"{wavelengths[i]} {row_data}\n")
+        print("data exported to time explicit format in " + output_filename)

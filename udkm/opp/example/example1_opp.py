@@ -1,12 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import udkm.opp.functions as opp
-import udkm.tools.functions as tools
-import udkm.tools.colors as colors
-
-import matplotlib.gridspec as gridspec
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-from matplotlib.patches import Rectangle
 
 
 parameter_file_name = "parameters/parameters_example_1.txt"
