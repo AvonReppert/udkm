@@ -25,6 +25,9 @@ params["signal_level"] = 0.07
 params["exclude_loops"] = []
 params["symmetric_colormap"] = True
 
+params["wl_min"] = 450
+params["wl_max"] = 800
+
 #params["delay_min"] = -3
 #params["delay_max"] = 100
 
@@ -46,15 +49,21 @@ opp.plot_overview(scan)
 plt.savefig("plot_overview\\" + scan["id"]+".png")
 
 
-scan = opp.frog_fit(scan)
+scan = opp.dispersion_fit(scan)
 plt.savefig("plot_fitfunction\\" + scan["id"]+".png")
-
-scan = opp.frog_corr(scan)
-plt.savefig("plot_frogcorr\\" + scan["id"]+".png")
-
-opp.save_scan(scan)
-
-# %%
-opp.plot_overview(scan, data_key="frog_data")
-plt.title("data with dispersion correction")
 plt.show()
+
+scan = opp.dispersion_corr(scan)
+plt.savefig("plot_dispersioncorr\\" + scan["id"]+".png")
+plt.show()
+opp.save_scan(scan)
+# %%
+opp.plot_overview(scan, data_key="dispersion_data")
+
+
+# This section exports the data to the time explicit format used for import into glotaran
+opp.save_time_explicit_format("AuNr_raw", scan["delay_unique"], scan["wavelength"],
+                              scan["data"], scan["title_text"], scan["id"])
+
+opp.save_time_explicit_format("AuNr_dispersion_corr", scan["delay_unique"], scan["wavelength"],
+                              scan["dispersion_data"], scan["title_text"], scan["id"])

@@ -461,7 +461,7 @@ def export_raw_data(scan_params, analysis_params, export_params, line):
 
     This function reads in the raw data from the ‘data_path’ as given by the function ‘get_export_information’
     and plots the loopise voltage change between pumped and unpumped for both field directions as well as
-    their difference, their sum and loopwise aver . With 'bad_field' it is possible to manually set the field directions
+    their difference, their sum and loopwise average. With 'bad_field' it is possible to manually set the field directions
     if this infomation is not given by the raw data file. Afterwards an average excluding 'bad_loops' is calculated
     and the delay axis is shifted according to the time zero given in the refernence file. The results are exported
     in an overview file.
