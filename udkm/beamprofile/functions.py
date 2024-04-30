@@ -70,9 +70,9 @@ def get_scan_parameter(parameter_file_name, line):
 
 
 def load_data(params):
-    '''Loads the data for a given parameter set into a scan dictionary and returns overview plot. 
+    '''Loads the data for a given parameter set into a scan dictionary and returns overview plot.
        Makes a peak fit for the slice through max intensity and the integral of the picture.'''
-    if (params["bool_force_reload"] or not(os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
+    if (params["bool_force_reload"] or not (os.path.isfile(params["scan_directory"]+params["id"]+".pickle"))):
         print("load data from : " + params["data_directory"]+params["id"])
         scan = {}
         scan["date"] = params["date"]
@@ -102,19 +102,18 @@ def load_data(params):
 
         # %% #Overview plot to define the ROI
 
-        if not("x_min" in params):
+        if not ("x_min" in params):
             scan["x_min"] = 0
-        if not("x_max" in params):
+        if not ("x_max" in params):
             scan["x_max"] = len(scan["pixel_x"])*scan["pixelsize_x"]
 
-        if not("y_min" in params):
+        if not ("y_min" in params):
             scan["y_min"] = 0
-        if not("y_max" in params):
+        if not ("y_max" in params):
             scan["y_max"] = len(scan["pixel_y"])*scan["pixelsize_y"]
 
         X, Y = np.meshgrid(scan["distances_x"], scan["distances_y"])
-
-        plt.figure(1, figsize=(5.2, 5.2*scan["x_max"]/scan["y_max"]))
+        plt.figure(1, figsize=(5.2, 5.2*(scan["y_max"]-scan["y_min"])/(scan["x_max"]-scan["x_min"])))
         if params["plot_logarithmic"]:
             plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(),
                            norm=matplotlib_colors.LogNorm(vmin=1, vmax=np.max(scan["data"])))
@@ -221,7 +220,7 @@ def plot_overview(scan):
     delta_x = scan["x_max"]-scan["x_min"]
     delta_y = scan["y_max"]-scan["y_min"]
 
-    plt.figure(2, figsize=(5.2, 5.2*scan["y_max"]/scan["x_max"]), linewidth=2)
+    plt.figure(2, figsize=(5.2, 5.2*delta_y/delta_x), linewidth=2)
     gs = gridspec.GridSpec(2, 2,
                            width_ratios=[3, 1],
                            height_ratios=[1, 3],
