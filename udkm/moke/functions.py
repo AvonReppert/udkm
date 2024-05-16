@@ -74,8 +74,9 @@ def get_scan_parameter(parameter_file_name, line):
     params["rep_rate"] = 1000
     params["id"] = params["date"] + "_" + params["time"]
     params["measurements"] = len(param_file[entry])
+    params.setdefault("kappa")  # parameter for outlier rejection
 
-    if not('fluence') in header:
+    if not ('fluence') in header:
         params['fluence'] = -1.0
 
     return params
@@ -129,29 +130,36 @@ def load_scan(date, time, path):
     return pickle.load(open(path_string, "rb"))
 
 
-def load_data(params,kappa=None):
-    if not("raw_data_directory" in params):
+def load_data(params):
+    if not ("raw_data_directory" in params):
         params["raw_data_directory"] = "data\\"
-    if not("overview_data_directory" in params):
+    if not ("overview_data_directory" in params):
         params["overview_data_directory"] = "data_overview\\"
-    if not("clipped_data_directory" in params):
+    if not ("clipped_data_directory" in params):
         params["clipped_data_directory"] = "data_clipped\\"
 
     overview_file = params["overview_data_directory"] + "overview_data_"+params["date"] + "_" +\
         params["time"] + "_" + str(params["fluence"]) + "_" + str(params["voltage"]) + ".txt"
     clipped_file = params["clipped_data_directory"] + "overview_data_"+params["date"] + "_" +\
-        params["time"] + "_" + str(params["fluence"]) + "_" + str(params["voltage"]) + ".txt"
+        params["time"] + "_" + str(params["fluence"]) + "_" + str(params["voltage"]) + \
+        "_" + str(params["kappa"]) + ".txt"
 
-    if os.path.isfile(overview_file) and kappa==None:
+    if os.path.isfile(overview_file) and params["kappa"] == None:
         print("read in overview data")
         data = np.genfromtxt(overview_file, comments="#", skip_footer=1)
-    elif kappa!=None:
-        print("exporting data to overview file")
-        export_raw_data(params,kappa=kappa)
-        data = np.genfromtxt(clipped_file, comments="#", skip_footer=1)        
+    elif params["kappa"] != None:
+        try:
+            data = np.genfromtxt(clipped_file, comments="#", skip_footer=1)
+        except:
+            print("exporting clipped data to overview file")
+            export_raw_data(params)
+            data = np.genfromtxt(clipped_file, comments="#", skip_footer=1)
+        else:
+            print("read in clipped data")
+
     else:
         print("exporting data to overview file")
-        export_raw_data(params,kappa=kappa)
+        export_raw_data(params)
         data = np.genfromtxt(overview_file, comments="#", skip_footer=1)
 
     scan = {}
@@ -224,7 +232,7 @@ def get_measurements(params):
     return measurement_list
 
 
-def export_raw_data(params,kappa=None):
+def export_raw_data(params):
     if not ("export_directory" in params):
         params["export_directory"] = ""
     if not ("raw_data_directory" in params):
@@ -298,7 +306,7 @@ def export_raw_data(params,kappa=None):
                 s_field_down_pumped = s_delay & s_field_down & s_pumped
                 s_field_down_not_pumped = s_delay & s_field_down & s_not_pumped
 
-                if kappa == None: #no outlier rejection
+                if params["kappa"] == None:  # no outlier rejection
                     for column in [col_diff_signal, col_diode_a, col_diode_b]:
                         data_avg_field_up[i, column] = np.mean(data_raw[s_field_up_pumped, column]) - \
                             np.mean(data_raw[s_field_up_not_pumped, column])
@@ -307,11 +315,11 @@ def export_raw_data(params,kappa=None):
                             np.mean(data_raw[s_field_down_not_pumped, column])
                 else:
                     for column in [col_diff_signal, col_diode_a, col_diode_b]:
-                        data_avg_field_up[i, column] = np.mean(sigmaclip(data_raw[s_field_up_pumped, column] - \
-                            data_raw[s_field_up_not_pumped, column],kappa,kappa)[0])
+                        data_avg_field_up[i, column] = np.mean(sigmaclip(data_raw[s_field_up_pumped, column] -
+                                                                         data_raw[s_field_up_not_pumped, column], params["kappa"], params["kappa"])[0])
 
-                        data_avg_field_down[i, column] = np.mean(sigmaclip(data_raw[s_field_down_pumped, column] - \
-                            data_raw[s_field_down_not_pumped, column],kappa,kappa)[0])                    
+                        data_avg_field_down[i, column] = np.mean(sigmaclip(data_raw[s_field_down_pumped, column] -
+                                                                           data_raw[s_field_down_not_pumped, column], params["kappa"], params["kappa"])[0])
 
             for array in [data_avg_field_up, data_avg_field_down]:
                 array[:, 4] = array[:, col_diode_a] + array[:, col_diode_b]
@@ -322,15 +330,14 @@ def export_raw_data(params,kappa=None):
             data_avg_result[:, 3] = data_avg_field_up[:, col_diff_signal]
             data_avg_result[:, 4] = data_avg_field_down[:, col_diff_signal]
 
-            if kappa == None:
+            if params["kappa"] == None:
                 tools.write_list_to_file(result_overview_path + "overview_data_" + result_file_name + ".txt",
-                                        u"time (ps)\t sum signal (V)\t MOKE (V)\t field up signal (V)"
-                                        + " \t field down signal (V)", data_avg_result)
+                                         u"time (ps)\t sum signal (V)\t MOKE (V)\t field up signal (V)"
+                                         + " \t field down signal (V)", data_avg_result)
             else:
-                tools.write_list_to_file(result_clipped_path + "overview_data_" + result_file_name + ".txt",
-                                        u"time (ps)\t sum signal (V)\t MOKE (V)\t field up signal (V)"
-                                        + " \t field down signal (V)", data_avg_result)
-
+                tools.write_list_to_file(result_clipped_path + "overview_data_" + result_file_name + "_"+str(params["kappa"])+".txt",
+                                         u"time (ps)\t sum signal (V)\t MOKE (V)\t field up signal (V)"
+                                         + " \t field down signal (V)", data_avg_result)
 
             # Plot results
             t_min = np.min(unique_delays)
