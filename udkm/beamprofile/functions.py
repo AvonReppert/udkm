@@ -37,8 +37,6 @@ def get_scan_parameter(parameter_file_name, line):
     params["bool_force_reload"] = False
     params["angle"] = 0
     params["rep_rate"] = 1000
-    params["pixelsize_x"] = 5.2  # in microns default for thorlabs cameras
-    params["pixelsize_y"] = 5.2  # in microns default for thorlabs cameras
     params["suffix"] = "_image"
 
     params["initial_amplitude_fit_x"] = 200
@@ -119,6 +117,7 @@ def load_data(params):
                            norm=matplotlib_colors.LogNorm(vmin=1, vmax=np.max(scan["data"])))
         else:
             plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
+    
         plt.axis([0, X.max(), 0, Y.max()])
         plt.xlabel(r'x ($\mathrm{\mu{}}$m)')
         plt.ylabel(r'y ($\mathrm{\mu{}}$m)')
