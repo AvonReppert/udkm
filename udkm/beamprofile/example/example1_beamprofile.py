@@ -14,6 +14,8 @@ params["suffix"] = "_image"
 params["plot_logarithmic"] = False
 params["bool_force_reload"] = False
 params["data_directory"] = "data\\"
+params["pixelsize_x"] = 5.3  # in microns 5.2 default for thorlabs cameras
+params["pixelsize_y"] = 5.3  # in microns 5.2 default for thorlabs cameras
 
 params["x_min"] = 2200
 params["x_max"] = 3300
