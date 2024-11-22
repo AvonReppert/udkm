@@ -36,7 +36,6 @@ def get_scan_parameter(parameter_file_name, line):
     # set default params
     params["bool_force_reload"] = False
     params["angle"] = 0
-    params["rep_rate"] = 1000
     params["suffix"] = "_image"
 
     params["initial_amplitude_fit_x"] = 200
@@ -56,6 +55,7 @@ def get_scan_parameter(parameter_file_name, line):
     params["bool_fit_intercept_y"] = True
 
     params["id"] = params["date"] + "_" + params["time"]
+    print(params["id"])
 
     params["measurements"] = len(param_file[entry])
 
@@ -117,7 +117,7 @@ def load_data(params):
                            norm=matplotlib_colors.LogNorm(vmin=1, vmax=np.max(scan["data"])))
         else:
             plt.pcolormesh(X, Y, scan["data"], cmap=colors.fireice(), vmin=0, vmax=np.max(scan["data"]))
-    
+
         plt.axis([0, X.max(), 0, Y.max()])
         plt.xlabel(r'x ($\mathrm{\mu{}}$m)')
         plt.ylabel(r'y ($\mathrm{\mu{}}$m)')
@@ -133,10 +133,10 @@ def load_data(params):
         scan["distance_y_cut"] = scan["y_roi"]-scan["y_min"]
 
         scan["index_max_y"] = tools.find(scan["y_integral"], np.max(scan["y_integral"]))
-        scan["slice_y"] = scan["data_roi"][scan["index_max_y"], :]
+        scan["slice_x"] = scan["data_roi"][scan["index_max_y"], :]
 
         scan["index_max_x"] = tools.find(scan["x_integral"], np.max(scan["x_integral"]))
-        scan["slice_x"] = scan["data_roi"][:, scan["index_max_x"]]
+        scan["slice_y"] = scan["data_roi"][:, scan["index_max_x"]]
 
         # %% Fitting the resulting params
         model = lm.models.GaussianModel() + lm.models.LinearModel()
@@ -169,9 +169,9 @@ def load_data(params):
                                          fit_params_y, x=scan["distance_y_cut"])
 
         scan["fit_result_x_slice"] = model.fit(scan["slice_x"]/np.max(scan["slice_x"]),
-                                               fit_params_x, x=scan["distance_y_cut"])
+                                               fit_params_x, x=scan["distance_x_cut"])
         scan["fit_result_y_slice"] = model.fit(scan["slice_y"]/np.max(scan["slice_y"]),
-                                               fit_params_y, x=scan["x_roi"]-scan["x_min"])
+                                               fit_params_y, x=scan["distance_y_cut"])
 
         # Writing the results into the peaks dictionary takes place here
         scan["fwhm_x"] = 2.35482 * scan["fit_result_x"].values["sigma"]  # in micron
@@ -238,9 +238,9 @@ def plot_overview(scan):
              '-', color=colors.grey_3, lw=2, label='integral')
     ax1.plot(scan["distance_x_cut"],  scan["fit_result_x"].best_fit, '-',
              color=colors.grey_1, lw=1, label="fit " + integral_result_text)
-    ax1.plot(scan["distance_x_cut"], scan["slice_y"]/np.max(scan["slice_y"]),
+    ax1.plot(scan["distance_x_cut"], scan["slice_x"]/np.max(scan["slice_x"]),
              '-', color=colors.blue_2, lw=1, label='slice')
-    ax1.plot(scan["distance_x_cut"],  scan["fit_result_y_slice"].best_fit, '--',
+    ax1.plot(scan["distance_x_cut"],  scan["fit_result_x_slice"].best_fit, '--',
              color=colors.blue_1, lw=1, label="fit" + slice_result_text)
 
     ax1.set_ylabel('I (a.u.)')
@@ -288,9 +288,9 @@ def plot_overview(scan):
              '-', color=colors.grey_3, lw=2, label='integral')
     ax4.plot(scan["fit_result_y"].best_fit, scan["distance_y_cut"], '-',
              color=colors.grey_1, lw=1, label="fit " + integral_result_text)
-    ax4.plot(scan["slice_x"]/np.max(scan["slice_x"]), scan["distance_y_cut"],
+    ax4.plot(scan["slice_y"]/np.max(scan["slice_y"]), scan["distance_y_cut"],
              '-', color=colors.blue_2, lw=1, label='slice')
-    ax4.plot(scan["fit_result_x_slice"].best_fit, scan["distance_y_cut"],  '--',
+    ax4.plot(scan["fit_result_y_slice"].best_fit, scan["distance_y_cut"],  '--',
              color=colors.blue_1, lw=1, label="fit " + slice_result_text)
 
     ax4.set_ylabel(r'y ($\mathrm{\mu{}}$m)')
